@@ -138,27 +138,26 @@ export function HeroSection() {
 
       {/* Content */}
       <div className="relative z-10 flex-1 flex flex-col justify-center items-center container-wide text-center px-6 pb-32 pt-28">
-        <h1 className="font-display font-bold max-w-[700px] mx-auto mb-10">
+        <h1 className="font-display font-bold max-w-[800px] mx-auto mb-6">
           <RevealLine delay={0.4}>
-            <span className="block text-[34px] sm:text-[44px] md:text-[54px] lg:text-[62px] leading-[1.08] tracking-[-0.03em] text-white">
-              We build digital
-            </span>
-          </RevealLine>
-          <RevealLine delay={0.6}>
-            <span className="block text-[34px] sm:text-[44px] md:text-[54px] lg:text-[62px] leading-[1.08] tracking-[-0.03em] gradient-text italic">
-              experiences.
+            <span className="block text-[36px] sm:text-[46px] md:text-[56px] lg:text-[66px] leading-[1.05] tracking-[-0.03em] text-white text-center">
+              We build digital <span className="gradient-text italic">experiences.</span>
             </span>
           </RevealLine>
         </h1>
 
-        <motion.p
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 1.1 }}
-          className="text-[15px] md:text-[16px] text-violet/70 max-w-[380px] mx-auto mb-12"
+          transition={{ duration: 0.6, delay: 1.0 }}
+          className="flex items-center gap-3 mb-12"
         >
-          Where code meets craft. Where brands become unforgettable.
-        </motion.p>
+          <div className="h-px w-8 bg-violet/40" />
+          <p className="text-[14px] md:text-[15px] text-white/40 tracking-wide">
+            Code &middot; Craft &middot; Conversion
+          </p>
+          <div className="h-px w-8 bg-cyan/40" />
+        </motion.div>
 
         <motion.div
           initial={{ opacity: 0 }}

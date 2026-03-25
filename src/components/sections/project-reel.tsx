@@ -86,18 +86,18 @@ export function ProjectReel() {
         Design Previews
       </p>
 
-      <div className="relative">
-        <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#080810] to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#0A0A0A] to-transparent z-10 pointer-events-none" />
+      <div className="relative overflow-hidden">
+        <div className="absolute left-0 top-0 bottom-0 w-16 md:w-24 bg-gradient-to-r from-[#080810] to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-16 md:w-24 bg-gradient-to-l from-[#0A0A0A] to-transparent z-10 pointer-events-none" />
 
-        <div className="flex gap-6 animate-reel hover:[animation-play-state:paused]">
+        <div className="flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide md:animate-reel md:hover:[animation-play-state:paused]">
           {reelItems.map((demo, i) => {
             const cc = getCategoryColor(demo.category, i);
             return (
               <Link
                 key={`${demo.slug}-${i}`}
                 href={`/demos/${demo.slug}`}
-                className="group shrink-0 w-[380px] md:w-[480px]"
+                className="group shrink-0 w-[300px] md:w-[480px] snap-start"
               >
                 <div className="rounded-xl overflow-hidden bg-[#111] border border-[#1A1A1A] group-hover:border-[#2A2A2A] transition-all duration-500 group-hover:shadow-[0_12px_40px_rgba(124,58,237,0.08)] group-hover:-translate-y-2">
                   {/* Browser chrome */}
