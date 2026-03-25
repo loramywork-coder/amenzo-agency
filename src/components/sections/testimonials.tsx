@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight, Star, Quote } from "lucide-react";
+import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 import { AnimateIn } from "@/components/ui/motion";
 import { SectionHeader } from "@/components/ui/section";
 import { TESTIMONIALS } from "@/lib/constants";
@@ -46,21 +46,19 @@ export function TestimonialsSection() {
           <AnimatePresence mode="wait">
             <motion.div
               key={current}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
               transition={{ duration: 0.5 }}
               className="text-center"
             >
-              {/* Quote icon */}
-              <div className="mb-8 flex justify-center">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-violet to-cyan flex items-center justify-center">
-                  <Quote size={28} className="text-white" />
-                </div>
+              {/* Quote mark */}
+              <div className="relative mb-8">
+                <span className="text-[100px] leading-none gradient-text font-display absolute -top-8 left-1/2 -translate-x-1/2 opacity-30 select-none">&ldquo;</span>
               </div>
 
               {/* Quote text */}
-              <blockquote className="font-display text-xl sm:text-2xl md:text-3xl font-medium text-text-primary leading-relaxed mb-8 px-4">
+              <blockquote className="font-body text-[22px] italic font-normal text-text-primary leading-relaxed mb-8 px-4">
                 &ldquo;{testimonial.quote}&rdquo;
               </blockquote>
 
@@ -76,13 +74,13 @@ export function TestimonialsSection() {
               </div>
 
               {/* Attribution */}
-              <p className="text-text-primary font-medium">
+              <p className="text-[13px] uppercase tracking-[0.15em] text-text-muted">
                 {testimonial.name}
               </p>
-              <p className="text-text-muted text-sm">
+              <p className="text-[13px] uppercase tracking-[0.15em] text-text-muted">
                 {testimonial.title}, {testimonial.company}
               </p>
-              <p className="text-text-muted text-xs mt-1">
+              <p className="text-[13px] uppercase tracking-[0.15em] text-text-muted mt-1">
                 {testimonial.location}
               </p>
             </motion.div>

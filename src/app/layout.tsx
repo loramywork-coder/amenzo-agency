@@ -3,6 +3,7 @@ import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
 import { SITE_NAME, SITE_DESCRIPTION, SITE_URL } from "@/lib/constants";
 import { Navigation } from "@/components/layout/navigation";
 import { Footer } from "@/components/layout/footer";
+import { ScrollProgress } from "@/components/ui/scroll-progress";
 import { Toaster } from "sonner";
 import "./globals.css";
 
@@ -61,7 +62,8 @@ export default function RootLayout({
       lang="en"
       className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable}`}
     >
-      <body className="min-h-screen bg-bg text-text-primary font-body antialiased">
+      <body className="min-h-screen bg-bg text-text-body font-body antialiased">
+        <ScrollProgress />
         <Navigation />
         <main>{children}</main>
         <Footer />
@@ -69,9 +71,9 @@ export default function RootLayout({
           position="bottom-right"
           toastOptions={{
             style: {
-              background: "#1A1A1A",
-              border: "1px solid #2A2A2A",
-              color: "#F5F5F5",
+              background: "#141414",
+              border: "1px solid #1E1E1E",
+              color: "#F0F0F0",
             },
           }}
         />

@@ -1,212 +1,147 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
-import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import { TextReveal } from "@/components/ui/motion";
+import { useEffect, useState } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 
-const tickerItems = [
-  "Web Design",
-  "Development",
-  "Branding",
-  "E-Commerce",
+const capabilities = [
+  "DEVELOPMENT",
+  "BRANDING",
+  "E-COMMERCE",
   "SEO",
   "UI/UX",
-  "Hotels",
-  "Restaurants",
-  "Enterprise",
-  "Startups",
-  "Apps",
-  "Strategy",
+  "STRATEGY",
 ];
 
-function GradientMesh() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const mouseRef = useRef({ x: 0.5, y: 0.5 });
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    let animationId: number;
-    let time = 0;
-
-    const resize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
-
-    resize();
-    window.addEventListener("resize", resize);
-
-    const handleMouseMove = (e: MouseEvent) => {
-      mouseRef.current = {
-        x: e.clientX / window.innerWidth,
-        y: e.clientY / window.innerHeight,
-      };
-    };
-    window.addEventListener("mousemove", handleMouseMove);
-
-    const draw = () => {
-      time += 0.005;
-      const { width, height } = canvas;
-      ctx.clearRect(0, 0, width, height);
-
-      const mx = mouseRef.current.x;
-      const my = mouseRef.current.y;
-
-      // Gradient orbs
-      const orbs = [
-        {
-          x: width * (0.3 + Math.sin(time * 0.7) * 0.1 + (mx - 0.5) * 0.15),
-          y: height * (0.4 + Math.cos(time * 0.5) * 0.1 + (my - 0.5) * 0.1),
-          r: Math.min(width, height) * 0.35,
-          color: "rgba(124, 58, 237, 0.08)",
-        },
-        {
-          x: width * (0.7 + Math.cos(time * 0.6) * 0.1 + (mx - 0.5) * 0.1),
-          y: height * (0.6 + Math.sin(time * 0.4) * 0.1 + (my - 0.5) * 0.15),
-          r: Math.min(width, height) * 0.3,
-          color: "rgba(6, 182, 212, 0.06)",
-        },
-        {
-          x: width * (0.5 + Math.sin(time * 0.3) * 0.15),
-          y: height * (0.3 + Math.cos(time * 0.7) * 0.1),
-          r: Math.min(width, height) * 0.25,
-          color: "rgba(124, 58, 237, 0.04)",
-        },
-      ];
-
-      orbs.forEach((orb) => {
-        const gradient = ctx.createRadialGradient(
-          orb.x,
-          orb.y,
-          0,
-          orb.x,
-          orb.y,
-          orb.r
-        );
-        gradient.addColorStop(0, orb.color);
-        gradient.addColorStop(1, "transparent");
-        ctx.fillStyle = gradient;
-        ctx.fillRect(0, 0, width, height);
-      });
-
-      animationId = requestAnimationFrame(draw);
-    };
-
-    draw();
-
-    return () => {
-      cancelAnimationFrame(animationId);
-      window.removeEventListener("resize", resize);
-      window.removeEventListener("mousemove", handleMouseMove);
-    };
-  }, []);
-
+function RevealLine({
+  children,
+  delay = 0,
+}: {
+  children: React.ReactNode;
+  delay?: number;
+}) {
   return (
-    <canvas
-      ref={canvasRef}
-      className="absolute inset-0 w-full h-full pointer-events-none"
-      aria-hidden="true"
-    />
+    <span className="block overflow-hidden">
+      <motion.span
+        className="block"
+        initial={{ y: "110%" }}
+        animate={{ y: 0 }}
+        transition={{
+          duration: 0.8,
+          delay,
+          ease: [0.25, 0.1, 0.25, 1],
+        }}
+      >
+        {children}
+      </motion.span>
+    </span>
   );
 }
 
 export function HeroSection() {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const { scrollY } = useScroll();
+  const indicatorOpacity = useTransform(scrollY, [0, 100], [1, 0]);
 
   return (
-    <section className="relative min-h-screen flex flex-col justify-center items-center bg-bg overflow-hidden">
-      {/* Background gradient mesh */}
-      {mounted && <GradientMesh />}
+    <section className="relative min-h-screen flex flex-col overflow-hidden bg-bg">
+      {/* Gradient mesh — pure CSS, GPU accelerated */}
+      <div className="hero-mesh" aria-hidden="true">
+        <div className="hero-blob hero-blob-1" />
+        <div className="hero-blob hero-blob-2" />
+        <div className="hero-blob hero-blob-3" />
+        <div className="hero-blob hero-blob-4" />
+      </div>
 
-      {/* Subtle grid overlay */}
-      <div
-        className="absolute inset-0 opacity-[0.03]"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)",
-          backgroundSize: "64px 64px",
-        }}
-        aria-hidden="true"
-      />
+      {/* Main content — vertically centered in available space */}
+      <div className="relative z-10 flex-1 flex flex-col justify-center items-center container-wide text-center pb-32 pt-24">
+        {/* Headline */}
+        <h1 className="font-display font-bold max-w-[900px] mx-auto mb-8">
+          <RevealLine delay={0.4}>
+            <span className="block text-[36px] sm:text-[48px] md:text-[60px] lg:text-[72px] leading-[1.05] tracking-[-0.02em] text-text-primary">
+              We design websites
+            </span>
+          </RevealLine>
+          <RevealLine delay={0.55}>
+            <span className="block text-[36px] sm:text-[48px] md:text-[60px] lg:text-[72px] leading-[1.05] tracking-[-0.02em] text-text-primary">
+              that make businesses
+            </span>
+          </RevealLine>
+          <RevealLine delay={0.7}>
+            <span className="block text-[36px] sm:text-[48px] md:text-[60px] lg:text-[72px] leading-[1.05] tracking-[-0.02em] gradient-text">
+              impossible to ignore.
+            </span>
+          </RevealLine>
+        </h1>
 
-      {/* Content */}
-      <div className="relative z-10 container-wide text-center pt-20">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-        >
-          <h1 className="font-display font-bold text-text-primary mb-8">
-            <TextReveal delay={0.3}>
-              <span className="block text-4xl sm:text-5xl md:text-6xl lg:text-[80px] leading-tight">
-                We design websites
-              </span>
-            </TextReveal>
-            <TextReveal delay={0.5}>
-              <span className="block text-4xl sm:text-5xl md:text-6xl lg:text-[80px] leading-tight">
-                that make businesses
-              </span>
-            </TextReveal>
-            <TextReveal delay={0.7}>
-              <span className="block text-4xl sm:text-5xl md:text-6xl lg:text-[80px] leading-tight gradient-text">
-                impossible to ignore.
-              </span>
-            </TextReveal>
-          </h1>
-        </motion.div>
-
+        {/* Subtitle */}
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 1.1 }}
-          className="text-text-secondary text-lg md:text-xl max-w-2xl mx-auto mb-10"
+          transition={{ duration: 0.6, delay: 1.2, ease: [0.25, 0.1, 0.25, 1] }}
+          className="text-[16px] md:text-[17px] text-text-secondary max-w-[520px] mx-auto mb-10 leading-[1.7]"
         >
           Premium web design, development & digital agency based in Malta.
           From startups to enterprises — we build digital experiences that
           drive results.
         </motion.p>
 
+        {/* Buttons */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 1.3 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
+          transition={{ duration: 0.6, delay: 1.4, ease: [0.25, 0.1, 0.25, 1] }}
+          className="flex flex-col sm:flex-row items-center gap-5"
         >
-          <Button href="/work" variant="outline" size="lg" magnetic>
+          <Link
+            href="/work"
+            className="px-9 py-4 border border-white/15 text-text-primary text-[13px] uppercase tracking-[0.15em] font-medium hover:border-white/40 hover:bg-white/[0.03] transition-all duration-300"
+          >
             See Our Work
-            <ArrowRight size={18} />
-          </Button>
-          <Button href="/start-project" size="lg" magnetic>
-            Start a Project
-            <ArrowRight size={18} />
-          </Button>
+          </Link>
+          <Link
+            href="/start-project"
+            className="group relative px-9 py-4 text-white text-[13px] uppercase tracking-[0.15em] font-medium overflow-hidden transition-shadow duration-300 hover:shadow-[0_0_30px_rgba(124,58,237,0.2)]"
+            style={{ background: "linear-gradient(135deg, #7C3AED, #06B6D4)" }}
+          >
+            <span className="relative z-10 flex items-center gap-2">
+              Start a Project
+              <ArrowRight size={14} className="transition-transform group-hover:translate-x-0.5" />
+            </span>
+          </Link>
         </motion.div>
       </div>
 
-      {/* Ticker */}
-      <div className="absolute bottom-0 left-0 right-0 py-6 border-t border-border/50 overflow-hidden">
-        <div className="animate-ticker flex whitespace-nowrap">
-          {[...tickerItems, ...tickerItems].map((item, i) => (
-            <span
-              key={i}
-              className="mx-6 text-sm font-medium text-text-muted uppercase tracking-widest flex items-center gap-6"
-            >
-              {item}
-              <span className="w-1.5 h-1.5 rounded-full bg-violet/50" />
-            </span>
-          ))}
-        </div>
+      {/* Bottom area — capability strip + scroll indicator, pinned to bottom */}
+      <div className="relative z-10 pb-8">
+        {/* Capability strip */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 1.8 }}
+          className="mb-8"
+        >
+          <div className="flex items-center justify-center gap-0 flex-wrap">
+            {capabilities.map((cap, i) => (
+              <span key={cap} className="flex items-center">
+                {i > 0 && (
+                  <span className="text-[8px] text-[#333] px-4 select-none">·</span>
+                )}
+                <span className="text-[11px] uppercase tracking-[0.3em] text-text-muted hover:text-text-primary transition-colors duration-300">
+                  {cap}
+                </span>
+              </span>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Scroll indicator */}
+        <motion.div
+          style={{ opacity: indicatorOpacity }}
+          className="flex justify-center"
+        >
+          <div className="scroll-indicator-line" />
+        </motion.div>
       </div>
     </section>
   );

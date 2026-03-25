@@ -18,7 +18,7 @@ export function SelectedWork() {
         subtitle="A selection of our recent work across industries"
       />
 
-      <div className="space-y-24 md:space-y-32">
+      <div className="space-y-28 md:space-y-36">
         {featured.map((project, index) => {
           const isEven = index % 2 === 0;
           return (
@@ -63,19 +63,19 @@ export function SelectedWork() {
                     !isEven ? "lg:order-1" : ""
                   }`}
                 >
-                  <span className="caption text-violet">
+                  <span className="text-[11px] uppercase tracking-[0.15em] gradient-text">
                     {project.categoryTag}
                   </span>
-                  <h3 className="font-display text-3xl md:text-4xl font-bold text-text-primary mt-3 mb-4">
+                  <h3 className="font-display text-3xl md:text-[28px] font-bold text-text-primary tracking-[-0.02em] leading-[1.08] mt-3 mb-4">
                     {project.title}
                   </h3>
-                  <p className="text-text-secondary mb-6 leading-relaxed">
+                  <p className="text-[16px] text-text-secondary mb-6 leading-relaxed">
                     {project.description}
                   </p>
 
                   {/* Result highlight */}
                   <div className="mb-6">
-                    <span className="inline-block px-4 py-2 rounded-full bg-violet/10 text-violet text-sm font-semibold">
+                    <span className="text-[20px] font-bold gradient-text">
                       {project.resultHighlight}
                     </span>
                   </div>
@@ -85,14 +85,14 @@ export function SelectedWork() {
                     {project.techStack.map((tech) => (
                       <span
                         key={tech}
-                        className="px-3 py-1 text-xs font-mono text-text-muted bg-surface rounded-full border border-border"
+                        className="px-3 py-1 text-[10px] uppercase font-mono text-text-muted bg-surface rounded-full border border-border"
                       >
                         {tech}
                       </span>
                     ))}
                   </div>
 
-                  <span className="inline-flex items-center gap-2 text-sm font-medium text-text-primary group-hover:text-violet transition-colors">
+                  <span className="inline-flex items-center gap-2 text-sm font-medium text-text-primary group-hover:text-violet transition-colors link-underline">
                     View Project
                     <ArrowRight
                       size={16}

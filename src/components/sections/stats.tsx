@@ -12,19 +12,13 @@ const stats = [
 export function StatsSection() {
   return (
     <section className="relative py-24 md:py-32 overflow-hidden">
-      {/* Gradient background */}
+      {/* Background with subtle gradient overlay */}
+      <div className="absolute inset-0 bg-bg" />
       <div
-        className="absolute inset-0"
+        className="absolute inset-0 opacity-[0.15]"
         style={{
           background:
             "linear-gradient(135deg, #7C3AED 0%, #06B6D4 100%)",
-        }}
-      />
-      <div
-        className="absolute inset-0 opacity-10"
-        style={{
-          backgroundImage:
-            "radial-gradient(circle at 25% 25%, rgba(255,255,255,0.2) 0%, transparent 50%), radial-gradient(circle at 75% 75%, rgba(255,255,255,0.1) 0%, transparent 50%)",
         }}
       />
 
@@ -36,14 +30,14 @@ export function StatsSection() {
               delay={index * 0.1}
               className="text-center"
             >
-              <div className="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-3">
+              <div className="font-display text-[56px] md:text-[56px] font-bold text-text-primary mb-3">
                 <Counter
                   target={stat.target}
                   suffix={stat.suffix}
-                  duration={2}
+                  duration={1.5}
                 />
               </div>
-              <p className="text-white/70 text-sm md:text-base font-medium">
+              <p className="text-[13px] uppercase tracking-[0.15em] text-text-secondary font-medium">
                 {stat.label}
               </p>
             </AnimateIn>
@@ -51,7 +45,7 @@ export function StatsSection() {
         </div>
 
         <AnimateIn delay={0.5} className="text-center mt-16">
-          <p className="font-display text-xl md:text-2xl text-white/90 font-medium">
+          <p className="font-display text-xl md:text-2xl text-text-body font-medium">
             We don&apos;t just build websites. We build businesses.
           </p>
         </AnimateIn>

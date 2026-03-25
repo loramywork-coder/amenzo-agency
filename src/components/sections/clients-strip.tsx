@@ -17,10 +17,10 @@ const clients = [
 
 export function ClientsStrip() {
   return (
-    <section className="py-16 bg-surface border-y border-border">
+    <section className="py-16 bg-bg">
       <div className="container-wide">
         <AnimateIn animation="fadeIn">
-          <p className="caption text-center mb-10">Trusted By</p>
+          <p className="text-[11px] uppercase tracking-[0.15em] text-text-muted text-center mb-10">TRUSTED BY LEADING BUSINESSES ACROSS MALTA</p>
         </AnimateIn>
         <StaggerContainer
           className="flex flex-wrap items-center justify-center gap-x-12 gap-y-6"
@@ -28,7 +28,7 @@ export function ClientsStrip() {
         >
           {clients.map((client) => (
             <StaggerItem key={client}>
-              <span className="text-lg font-display font-semibold text-text-muted/40 hover:text-text-muted/70 transition-colors duration-300 whitespace-nowrap">
+              <span className="text-lg font-display font-semibold text-text-primary opacity-40 hover:opacity-80 transition-opacity duration-300 whitespace-nowrap h-10 flex items-center">
                 {client}
               </span>
             </StaggerItem>

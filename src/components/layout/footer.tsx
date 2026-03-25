@@ -8,7 +8,7 @@ import {
   NAV_LINKS,
   SERVICES,
 } from "@/lib/constants";
-import { Globe, ExternalLink, Palette, ArrowUpRight } from "lucide-react";
+import { Globe, ExternalLink, Palette } from "lucide-react";
 
 const serviceLinks = SERVICES.slice(0, 6).map((s) => ({
   label: s.title,
@@ -16,12 +16,12 @@ const serviceLinks = SERVICES.slice(0, 6).map((s) => ({
 }));
 
 const industryLinks = [
-  { label: "Hotels & Resorts", href: "/work?category=Hospitality" },
-  { label: "Restaurants & Bars", href: "/work?category=F%26B" },
-  { label: "Real Estate", href: "/work?category=Real+Estate" },
-  { label: "E-Commerce", href: "/work?category=E-Commerce" },
-  { label: "Technology", href: "/work?category=Technology" },
-  { label: "Non-Profits", href: "/work?category=Non-Profit" },
+  { label: "Hotels & Resorts", href: "/work" },
+  { label: "Restaurants & Bars", href: "/work" },
+  { label: "Real Estate", href: "/work" },
+  { label: "E-Commerce", href: "/work" },
+  { label: "Technology", href: "/work" },
+  { label: "Non-Profits", href: "/work" },
 ];
 
 const socialLinks = [
@@ -32,26 +32,26 @@ const socialLinks = [
 
 export function Footer() {
   return (
-    <footer className="bg-bg border-t border-border">
+    <footer className="bg-[#080808] border-t border-[#1A1A1A]">
       <div className="container-wide py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <Logo />
-            <p className="mt-4 text-sm text-text-secondary max-w-xs">
+            <Logo color="white" showGradientAccent={false} />
+            <p className="mt-5 text-[13px] text-[#555] max-w-xs leading-relaxed">
               Premium web design, development & digital agency based in
               Malta. We build websites that make businesses impossible to
               ignore.
             </p>
-            <div className="flex gap-4 mt-6">
+            <div className="flex gap-3 mt-6">
               {socialLinks.map((social) => (
                 <a
                   key={social.label}
                   href={social.href}
-                  className="w-10 h-10 rounded-full bg-surface flex items-center justify-center text-text-muted hover:text-text-primary hover:bg-surface-elevated transition-colors"
+                  className="w-9 h-9 rounded-full flex items-center justify-center text-[#555] hover:text-text-primary transition-colors duration-300"
                   aria-label={social.label}
                 >
-                  <social.icon size={18} />
+                  <social.icon size={16} />
                 </a>
               ))}
             </div>
@@ -59,7 +59,7 @@ export function Footer() {
 
           {/* Navigation */}
           <div>
-            <h4 className="font-display font-semibold text-sm uppercase tracking-wider text-text-primary mb-4">
+            <h4 className="text-[11px] uppercase tracking-[0.15em] text-[#555] mb-5">
               Navigation
             </h4>
             <ul className="space-y-3">
@@ -67,7 +67,7 @@ export function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-text-secondary hover:text-text-primary transition-colors"
+                    className="text-[14px] text-[#777] hover:text-text-primary transition-colors duration-300"
                   >
                     {link.label}
                   </Link>
@@ -76,9 +76,9 @@ export function Footer() {
               <li>
                 <Link
                   href="/start-project"
-                  className="text-sm text-violet hover:text-cyan transition-colors inline-flex items-center gap-1"
+                  className="text-[14px] text-[#777] hover:text-text-primary transition-colors duration-300"
                 >
-                  Start a Project <ArrowUpRight size={14} />
+                  Start a Project
                 </Link>
               </li>
             </ul>
@@ -86,7 +86,7 @@ export function Footer() {
 
           {/* Services */}
           <div>
-            <h4 className="font-display font-semibold text-sm uppercase tracking-wider text-text-primary mb-4">
+            <h4 className="text-[11px] uppercase tracking-[0.15em] text-[#555] mb-5">
               Services
             </h4>
             <ul className="space-y-3">
@@ -94,7 +94,7 @@ export function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-text-secondary hover:text-text-primary transition-colors"
+                    className="text-[14px] text-[#777] hover:text-text-primary transition-colors duration-300"
                   >
                     {link.label}
                   </Link>
@@ -105,14 +105,14 @@ export function Footer() {
 
           {/* Contact */}
           <div>
-            <h4 className="font-display font-semibold text-sm uppercase tracking-wider text-text-primary mb-4">
+            <h4 className="text-[11px] uppercase tracking-[0.15em] text-[#555] mb-5">
               Contact
             </h4>
-            <ul className="space-y-3 text-sm text-text-secondary">
+            <ul className="space-y-3 text-[14px] text-[#777]">
               <li>
                 <a
                   href={`mailto:${CONTACT_EMAIL}`}
-                  className="hover:text-text-primary transition-colors"
+                  className="hover:text-text-primary transition-colors duration-300"
                 >
                   {CONTACT_EMAIL}
                 </a>
@@ -120,46 +120,46 @@ export function Footer() {
               <li>
                 <a
                   href={`tel:${CONTACT_PHONE}`}
-                  className="hover:text-text-primary transition-colors"
+                  className="hover:text-text-primary transition-colors duration-300"
                 >
                   {CONTACT_PHONE}
                 </a>
               </li>
               <li>{CONTACT_ADDRESS}</li>
-              <li className="text-text-muted">Mon-Fri: 9:00-18:00 CET</li>
+              <li className="text-[#555]">Mon-Fri: 9:00-18:00 CET</li>
             </ul>
           </div>
         </div>
       </div>
 
       {/* Bottom bar */}
-      <div className="border-t border-border">
+      <div className="border-t border-[#1A1A1A]">
         <div className="container-wide py-6 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-text-muted">
+          <p className="text-[12px] text-[#444]">
             &copy; {new Date().getFullYear()} {SITE_NAME}. All rights
             reserved.
           </p>
-          <div className="flex items-center gap-6 text-xs text-text-muted">
+          <div className="flex items-center gap-6 text-[12px] text-[#444]">
             <Link
               href="/privacy"
-              className="hover:text-text-secondary transition-colors"
+              className="hover:text-[#777] transition-colors duration-300"
             >
               Privacy Policy
             </Link>
             <Link
               href="/terms"
-              className="hover:text-text-secondary transition-colors"
+              className="hover:text-[#777] transition-colors duration-300"
             >
-              Terms of Service
+              Terms
             </Link>
             <Link
               href="/cookies"
-              className="hover:text-text-secondary transition-colors"
+              className="hover:text-[#777] transition-colors duration-300"
             >
               Cookies
             </Link>
           </div>
-          <p className="text-xs text-text-muted hidden md:block">
+          <p className="text-[11px] text-[#333] italic hidden md:block">
             Made with obsessive attention to detail by {SITE_NAME}
           </p>
         </div>

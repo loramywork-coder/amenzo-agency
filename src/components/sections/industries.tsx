@@ -50,18 +50,18 @@ export function IndustriesSection() {
             <StaggerItem key={industry.name}>
               <Link
                 href={`/work`}
-                className="group block p-6 rounded-xl bg-surface border border-border hover:border-violet/30 hover:bg-surface-elevated transition-all duration-300"
+                className="group block p-6 bg-surface border border-border rounded-lg hover:border-border-hover hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,0,0,0.3)] transition-all duration-[400ms] ease-[cubic-bezier(0.25,0.1,0.25,1)]"
               >
-                <div className="w-10 h-10 rounded-lg bg-violet/10 flex items-center justify-center mb-4 group-hover:bg-violet/20 transition-colors">
+                <div className="w-10 h-10 rounded-full bg-surface border border-border flex items-center justify-center mb-4">
                   <Icon
                     size={20}
                     className="text-violet"
                   />
                 </div>
-                <h3 className="font-display text-sm font-semibold text-text-primary mb-1">
+                <h3 className="font-display text-[13px] font-semibold text-text-primary mb-1">
                   {industry.name}
                 </h3>
-                <p className="text-xs text-text-muted leading-relaxed">
+                <p className="text-[12px] text-text-muted leading-relaxed">
                   {industry.desc}
                 </p>
               </Link>

@@ -26,14 +26,14 @@ const tiers = [
 export function PricingPreview() {
   return (
     <section className="relative py-24 md:py-32 overflow-hidden">
+      <div className="absolute inset-0 bg-bg" />
       <div
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(135deg, rgba(124,58,237,0.15) 0%, rgba(6,182,212,0.1) 100%)",
+            "radial-gradient(ellipse at center, rgba(124,58,237,0.08) 0%, transparent 70%)",
         }}
       />
-      <div className="absolute inset-0 bg-bg/80" />
 
       <div className="relative container-wide text-center">
         <AnimateIn>
@@ -50,10 +50,10 @@ export function PricingPreview() {
           {tiers.map((tier) => (
             <StaggerItem key={tier.name}>
               <div
-                className={`relative p-8 rounded-xl border transition-all duration-300 ${
+                className={`relative p-8 bg-surface border border-border rounded-lg hover:border-border-hover hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,0,0,0.3)] transition-all duration-[400ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] ${
                   tier.featured
-                    ? "bg-surface-elevated border-violet/50 shadow-lg shadow-violet/10"
-                    : "bg-surface border-border hover:border-violet/30"
+                    ? "border-violet/50 shadow-lg shadow-violet/10"
+                    : ""
                 }`}
               >
                 {tier.featured && (

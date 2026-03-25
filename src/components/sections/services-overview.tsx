@@ -50,7 +50,7 @@ export function ServicesOverview() {
           return (
             <StaggerItem key={service.slug}>
               <motion.div
-                className="group rounded-xl border border-border bg-surface hover:border-violet/30 transition-colors duration-300 overflow-hidden cursor-pointer"
+                className="group bg-surface border border-border rounded-lg hover:border-border-hover hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,0,0,0.3)] transition-all duration-[400ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] overflow-hidden cursor-pointer"
                 onClick={() =>
                   setOpenIndex(isOpen ? null : index)
                 }
@@ -59,14 +59,14 @@ export function ServicesOverview() {
                 <div className="p-6 md:p-8">
                   <div className="flex items-start justify-between gap-4">
                     <div className="flex items-start gap-4">
-                      <div className="w-12 h-12 rounded-lg bg-violet/10 flex items-center justify-center shrink-0">
-                        <Icon size={22} className="text-violet" />
+                      <div className="w-11 h-11 rounded-full bg-surface border border-border flex items-center justify-center shrink-0">
+                        <Icon size={20} className="text-violet" />
                       </div>
                       <div>
-                        <h3 className="font-display text-lg font-semibold text-text-primary mb-2">
+                        <h3 className="font-display text-[20px] font-semibold text-text-primary mb-2">
                           {service.title}
                         </h3>
-                        <p className="text-sm text-text-secondary leading-relaxed">
+                        <p className="text-[15px] text-text-secondary leading-relaxed">
                           {service.shortDesc}
                         </p>
                       </div>
@@ -100,7 +100,7 @@ export function ServicesOverview() {
                             {service.tags.map((tag) => (
                               <span
                                 key={tag}
-                                className="px-3 py-1 text-xs font-mono text-text-muted bg-bg rounded-full border border-border"
+                                className="px-3 py-1 text-[10px] uppercase font-mono text-text-muted bg-bg rounded-full border border-border"
                               >
                                 {tag}
                               </span>

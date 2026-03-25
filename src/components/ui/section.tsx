@@ -44,17 +44,20 @@ export function SectionHeader({
   return (
     <div
       className={cn(
-        "mb-16 max-w-3xl",
+        "mb-16",
         align === "center" && "mx-auto text-center",
         className
       )}
     >
       {caption && (
-        <p className="caption mb-4 text-violet">{caption}</p>
+        <p className="text-[11px] uppercase tracking-[0.15em] text-text-muted mb-5">
+          {caption}
+        </p>
       )}
       <h2
         className={cn(
-          "font-display text-4xl md:text-5xl font-bold leading-tight",
+          "font-display text-[36px] md:text-[44px] font-bold tracking-[-0.02em] leading-[1.08] max-w-[800px]",
+          align === "center" && "mx-auto",
           dark ? "text-text-primary" : "text-[#0A0A0A]"
         )}
       >
@@ -63,7 +66,8 @@ export function SectionHeader({
       {subtitle && (
         <p
           className={cn(
-            "mt-4 text-lg md:text-xl",
+            "mt-5 text-[17px] max-w-[640px] leading-relaxed",
+            align === "center" && "mx-auto",
             dark ? "text-text-secondary" : "text-[#666666]"
           )}
         >

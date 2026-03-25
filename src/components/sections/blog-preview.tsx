@@ -24,7 +24,7 @@ export function BlogPreview() {
           <StaggerItem key={post.slug}>
             <Link
               href={`/insights/${post.slug}`}
-              className="group block rounded-xl bg-surface border border-border hover:border-violet/30 overflow-hidden transition-all duration-300"
+              className="group block bg-surface border border-border rounded-lg hover:border-border-hover hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,0,0,0.3)] overflow-hidden transition-all duration-[400ms] ease-[cubic-bezier(0.25,0.1,0.25,1)]"
             >
               <div className="relative aspect-[16/10] overflow-hidden">
                 <Image
@@ -37,7 +37,7 @@ export function BlogPreview() {
               </div>
               <div className="p-6">
                 <div className="flex items-center gap-3 mb-3">
-                  <span className="px-2.5 py-0.5 text-xs font-medium text-violet bg-violet/10 rounded-full">
+                  <span className="px-2.5 py-0.5 text-[10px] uppercase tracking-[0.15em] font-medium text-violet bg-violet/10 rounded-full">
                     {post.category}
                   </span>
                   <span className="text-xs text-text-muted flex items-center gap-1">
@@ -45,13 +45,13 @@ export function BlogPreview() {
                     {post.readTime}
                   </span>
                 </div>
-                <h3 className="font-display text-lg font-semibold text-text-primary group-hover:text-violet transition-colors line-clamp-2 mb-2">
+                <h3 className="font-display text-[18px] font-semibold text-text-primary group-hover:text-violet transition-colors line-clamp-2 mb-2">
                   {post.title}
                 </h3>
                 <p className="text-sm text-text-secondary line-clamp-2">
                   {post.excerpt}
                 </p>
-                <p className="text-xs text-text-muted mt-4">
+                <p className="text-[12px] text-text-muted mt-4">
                   {format(new Date(post.date), "MMMM d, yyyy")}
                 </p>
               </div>
