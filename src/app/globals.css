@@ -179,6 +179,18 @@ p, li, span {
 }
 
 /* ================================================
+   PROJECT REEL — SMOOTH INFINITE SCROLL
+   ================================================ */
+
+@keyframes reel {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-reel {
+  animation: reel 60s linear infinite;
+}
+
+/* ================================================
    HERO GRADIENT MESH — PURE CSS, GPU ACCELERATED
    ================================================ */
 

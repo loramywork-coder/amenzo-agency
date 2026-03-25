@@ -1,39 +1,81 @@
 "use client";
 
-import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
-import {
-  Monitor,
-  ShoppingBag,
-  Palette,
-  Layers,
-  TrendingUp,
-  RefreshCw,
-  Server,
-  Compass,
-  ArrowRight,
-  Plus,
-  Minus,
-} from "lucide-react";
-import { AnimateIn, StaggerContainer, StaggerItem } from "@/components/ui/motion";
+import { ArrowRight } from "lucide-react";
+import { AnimateIn } from "@/components/ui/motion";
 import { Section, SectionHeader } from "@/components/ui/section";
-import { SERVICES } from "@/lib/constants";
 
-const iconMap: Record<string, React.ElementType> = {
-  Monitor,
-  ShoppingBag,
-  Palette,
-  Layers,
-  TrendingUp,
-  RefreshCw,
-  Server,
-  Compass,
-};
+const services = [
+  {
+    title: "Web Design & Development",
+    caption: "CUSTOM BUILD",
+    description:
+      "Custom websites built from scratch. No templates. No WordPress themes. Hand-crafted code that performs, converts, and scales with your business.",
+    tags: ["Next.js", "React", "Tailwind", "TypeScript", "Vercel"],
+    price: "1,500",
+    image:
+      "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&q=80",
+    href: "/services",
+  },
+  {
+    title: "Website Redesign",
+    caption: "TRANSFORMATION",
+    description:
+      "Your current site not cutting it? We take what you have and transform it into something extraordinary. Full audit, fresh design, zero downtime migration.",
+    tags: ["Audit", "Redesign", "Migration", "Optimisation"],
+    price: "1,200",
+    image:
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80",
+    href: "/services",
+  },
+  {
+    title: "E-Commerce",
+    caption: "ONLINE STORES",
+    description:
+      "Online stores that convert. From boutique shops to full-scale retail — beautiful product pages, seamless checkout, and built to sell.",
+    tags: ["Shopify", "WooCommerce", "Stripe", "Custom"],
+    price: "3,500",
+    image:
+      "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80",
+    href: "/services",
+  },
+  {
+    title: "Branding & Identity",
+    caption: "BRAND DESIGN",
+    description:
+      "Logos, colour systems, typography, brand guidelines — the foundation everything else is built on. We create identities that stick.",
+    tags: ["Logo Design", "Brand Strategy", "Visual Identity"],
+    price: "2,000",
+    image:
+      "https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=800&q=80",
+    href: "/services",
+  },
+  {
+    title: "SEO & Performance",
+    caption: "GROWTH",
+    description:
+      "Beautiful means nothing if nobody finds it. We build fast, accessible, and search-engine-optimised from day one. Page 1 or nothing.",
+    tags: ["Technical SEO", "Core Web Vitals", "Schema", "Analytics"],
+    price: "500/mo",
+    image:
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
+    href: "/services",
+  },
+  {
+    title: "Hosting & Maintenance",
+    caption: "ONGOING CARE",
+    description:
+      "Launch is just the beginning. We keep your site fast, secure, updated, and backed up. Zero downtime. Zero stress.",
+    tags: ["Vercel", "Monitoring", "Backups", "Updates"],
+    price: "80/mo",
+    image:
+      "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80",
+    href: "/services",
+  },
+];
 
 export function ServicesOverview() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
-
   return (
     <Section>
       <SectionHeader
@@ -42,96 +84,85 @@ export function ServicesOverview() {
         subtitle="From first sketch to final pixel — and everything after launch"
       />
 
-      <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {SERVICES.map((service, index) => {
-          const Icon = iconMap[service.icon] || Monitor;
-          const isOpen = openIndex === index;
-
+      <div className="space-y-20 md:space-y-28">
+        {services.map((service, index) => {
+          const isOdd = index % 2 === 0;
           return (
-            <StaggerItem key={service.slug}>
-              <motion.div
-                className="group bg-surface border border-border rounded-lg hover:border-border-hover hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,0,0,0.3)] transition-all duration-[400ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] overflow-hidden cursor-pointer"
-                onClick={() =>
-                  setOpenIndex(isOpen ? null : index)
-                }
-                layout
+            <AnimateIn
+              key={service.title}
+              animation={isOdd ? "slideLeft" : "slideRight"}
+              delay={0.1}
+            >
+              <div
+                className={`grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center ${
+                  !isOdd ? "lg:direction-rtl" : ""
+                }`}
               >
-                <div className="p-6 md:p-8">
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="flex items-start gap-4">
-                      <div className="w-11 h-11 rounded-full bg-surface border border-border flex items-center justify-center shrink-0">
-                        <Icon size={20} className="text-violet" />
-                      </div>
-                      <div>
-                        <h3 className="font-display text-[20px] font-semibold text-text-primary mb-2">
-                          {service.title}
-                        </h3>
-                        <p className="text-[15px] text-text-secondary leading-relaxed">
-                          {service.shortDesc}
-                        </p>
-                      </div>
-                    </div>
-                    <div className="shrink-0 mt-1">
-                      {isOpen ? (
-                        <Minus
-                          size={18}
-                          className="text-text-muted"
-                        />
-                      ) : (
-                        <Plus
-                          size={18}
-                          className="text-text-muted"
-                        />
-                      )}
-                    </div>
+                {/* Image side — 45% */}
+                <div
+                  className={`lg:col-span-5 ${!isOdd ? "lg:order-2" : ""}`}
+                >
+                  <div className="relative overflow-hidden rounded-xl aspect-[4/3] bg-[#141414]">
+                    <Image
+                      src={service.image}
+                      alt={service.title}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 1024px) 100vw, 45vw"
+                    />
+                    {/* Dark overlay */}
+                    <div className="absolute inset-0 bg-black/20" />
+                  </div>
+                </div>
+
+                {/* Text side — 55% */}
+                <div
+                  className={`lg:col-span-7 ${!isOdd ? "lg:order-1" : ""}`}
+                >
+                  <span className="text-[11px] uppercase tracking-[0.15em] gradient-text font-semibold">
+                    {service.caption}
+                  </span>
+                  <h3 className="font-display text-[24px] font-bold text-[#F0F0F0] tracking-[-0.02em] leading-[1.08] mt-3 mb-4">
+                    {service.title}
+                  </h3>
+                  <p className="text-[16px] text-[#B0B0B0] leading-relaxed mb-5 max-w-[520px]">
+                    {service.description}
+                  </p>
+
+                  {/* Tech tags */}
+                  <div className="flex flex-wrap gap-2 mb-5">
+                    {service.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="px-3 py-1 text-[10px] uppercase font-mono text-[#888888] bg-[#141414] rounded-full border border-[#1E1E1E]"
+                      >
+                        {tag}
+                      </span>
+                    ))}
                   </div>
 
-                  <AnimatePresence>
-                    {isOpen && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3 }}
-                        className="overflow-hidden"
-                      >
-                        <div className="pt-6 mt-6 border-t border-border">
-                          <div className="flex flex-wrap gap-2 mb-4">
-                            {service.tags.map((tag) => (
-                              <span
-                                key={tag}
-                                className="px-3 py-1 text-[10px] uppercase font-mono text-text-muted bg-bg rounded-full border border-border"
-                              >
-                                {tag}
-                              </span>
-                            ))}
-                          </div>
-                          <div className="flex items-center justify-between">
-                            <span className="text-sm text-text-muted">
-                              From{" "}
-                              <span className="text-text-primary font-semibold">
-                                EUR {service.price}
-                              </span>
-                            </span>
-                            <Link
-                              href="/services"
-                              className="inline-flex items-center gap-1 text-sm font-medium text-violet hover:text-cyan transition-colors"
-                              onClick={(e) => e.stopPropagation()}
-                            >
-                              Learn More
-                              <ArrowRight size={14} />
-                            </Link>
-                          </div>
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+                  {/* Price + Link */}
+                  <div className="flex items-center gap-6">
+                    <span className="text-sm text-[#555555]">
+                      From{" "}
+                      <span className="text-[#F0F0F0] font-semibold">
+                        EUR {service.price}
+                      </span>
+                    </span>
+                    <Link
+                      href={service.href}
+                      className="inline-flex items-center gap-1.5 text-sm font-medium text-[#F0F0F0] hover:text-violet transition-colors"
+                    >
+                      Learn More
+                      <ArrowRight size={14} className="transition-transform group-hover:translate-x-0.5" />
+                    </Link>
+                  </div>
                 </div>
-              </motion.div>
-            </StaggerItem>
+              </div>
+            </AnimateIn>
           );
         })}
-      </StaggerContainer>
+      </div>
     </Section>
   );
 }

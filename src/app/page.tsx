@@ -1,7 +1,9 @@
 "use client";
 
 import { HeroSection } from "@/components/sections/hero";
+import { ProjectReel } from "@/components/sections/project-reel";
 import { ClientsStrip } from "@/components/sections/clients-strip";
+import { AboutTeaser } from "@/components/sections/about-teaser";
 import { SelectedWork } from "@/components/sections/selected-work";
 import { ServicesOverview } from "@/components/sections/services-overview";
 import { StatsSection } from "@/components/sections/stats";
@@ -16,9 +18,11 @@ export default function HomePage() {
   return (
     <>
       <HeroSection />
+      <ProjectReel />
       <ClientsStrip />
-      <SelectedWork />
+      <AboutTeaser />
       <ServicesOverview />
+      <SelectedWork />
       <StatsSection />
       <ProcessSection />
       <TestimonialsSection />
