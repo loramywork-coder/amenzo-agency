@@ -72,7 +72,7 @@ export default function SaasDemo() {
     <div className="min-h-screen bg-[#09090F] text-[#E8E8F0]">
       {/* Demo Banner */}
       <div className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-[#7C3AED] to-[#06B6D4] text-white text-center py-2 text-sm">
-        This is an <strong>AMENZO</strong> demo.{" "}
+        This is an <strong>AMENZO</strong> design preview.{" "}
         <a href="/start-project" className="underline font-semibold">
           Want something like this? Get a Quote &rarr;
         </a>
@@ -110,7 +110,7 @@ export default function SaasDemo() {
       <section className="relative pt-32 pb-24 overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1600&q=80"
+            src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=3840&q=90"
             alt="CyberShield security visualization"
             fill
             className="object-cover opacity-15"

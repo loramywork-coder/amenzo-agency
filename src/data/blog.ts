@@ -19,7 +19,7 @@ export const blogPosts: BlogPost[] = [
     date: "2026-03-15",
     readTime: "6 min read",
     image:
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80",
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=3840&q=90",
     content: `The web moves fast. What looked modern in 2023 already feels dated. And in a world where your website is often the first interaction a potential customer has with your business, "dated" is a word you can't afford.
 
 ## The 3-Year Rule
@@ -75,7 +75,7 @@ The first consultation is free. Let's talk about what your website could become.
     date: "2026-03-08",
     readTime: "8 min read",
     image:
-      "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&q=80",
+      "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=3840&q=90",
     content: `Let's be honest about something the web industry hates to talk about: pricing.
 
 Every agency's pricing page says "from \u20AC1,500" or "contact for a quote." Nobody tells you what you actually get for your money, or why the same project can cost \u20AC500 from one person and \u20AC15,000 from another.
@@ -172,7 +172,7 @@ Buy the option where the agency clearly explains what they'll build, why, and ho
     date: "2026-02-28",
     readTime: "7 min read",
     image:
-      "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80",
+      "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=3840&q=90",
     content: `We have a confession to make: we used to build WordPress sites.
 
 They were fine. They worked. Clients could edit their content. Everyone was happy enough.
@@ -234,7 +234,7 @@ The web has moved on. We moved with it.`,
     date: "2026-02-20",
     readTime: "5 min read",
     image:
-      "https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?w=800&q=80",
+      "https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?w=3840&q=90",
     content: `You probably check your website once a month, think "looks fine," and move on. But your potential customers are telling a different story \u2014 they're just telling it by leaving.
 
 Here are 5 signs your website is actively losing you business.
@@ -288,7 +288,7 @@ If the results are concerning, it might be time for a conversation about what yo
     date: "2026-02-12",
     readTime: "7 min read",
     image:
-      "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80",
+      "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=3840&q=90",
     content: `When we tell potential clients we can deliver a premium website in 3 weeks, they look at us like we're lying. Other agencies quote 3 months for the same scope.
 
 So how do we do it? Here's the honest answer.
@@ -353,7 +353,7 @@ For complex projects, we scope individually. But even then, we're typically 50-6
     date: "2026-02-05",
     readTime: "8 min read",
     image:
-      "https://images.unsplash.com/photo-1571721795195-a2ca2d3370a9?w=800&q=80",
+      "https://images.unsplash.com/photo-1571721795195-a2ca2d3370a9?w=3840&q=90",
     content: `Malta's digital market is unique. It's small enough that ranking on Google is achievable for most businesses, but competitive enough that you can't just put up a website and hope for the best.
 
 Here's what actually works for local SEO in Malta.

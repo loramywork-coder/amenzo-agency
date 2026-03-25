@@ -9,7 +9,7 @@
   --color-border-hover: #2A2A2A;
 
   /* Text hierarchy - off-white, never pure white */
-  --color-text-primary: #F0F0F0;
+  --color-text-primary: #FAFAFA;
   --color-text-body: #CCCCCC;
   --color-text-secondary: #888888;
   --color-text-muted: #555555;
@@ -53,6 +53,38 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* ================================================
+   PERSISTENT NEURAL MESH — SITE-WIDE BACKGROUND
+   Subtle grid + dot pattern that flows through ALL sections
+   ================================================ */
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(ellipse at 15% 10%, rgba(124, 58, 237, 0.07) 0%, transparent 50%),
+    radial-gradient(ellipse at 85% 30%, rgba(6, 182, 212, 0.05) 0%, transparent 50%),
+    radial-gradient(ellipse at 40% 70%, rgba(30, 64, 175, 0.04) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 90%, rgba(124, 58, 237, 0.05) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    linear-gradient(rgba(124, 58, 237, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(124, 58, 237, 0.035) 1px, transparent 1px),
+    radial-gradient(circle, rgba(124, 58, 237, 0.06) 1px, transparent 1px);
+  background-size: 80px 80px, 80px 80px, 80px 80px;
+  background-position: 0 0, 0 0, 40px 40px;
+  pointer-events: none;
+}
+
 ::selection {
   background: rgba(124, 58, 237, 0.25);
   color: #F0F0F0;
@@ -76,7 +108,7 @@ h1, h2, h3, .font-display {
   font-family: var(--font-display);
   letter-spacing: -0.02em;
   line-height: 1.08;
-  color: var(--color-text-primary);
+  color: #FFFFFF;
 }
 
 /* Body text: normal tracking, generous leading */
@@ -189,6 +221,13 @@ p, li, span {
 .animate-reel {
   animation: reel 60s linear infinite;
 }
+@keyframes reelSlow {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-reel-slow {
+  animation: reelSlow 40s linear infinite;
+}
 
 /* ================================================
    HERO GRADIENT MESH — PURE CSS, GPU ACCELERATED
@@ -204,7 +243,7 @@ p, li, span {
 .hero-blob {
   position: absolute;
   border-radius: 50%;
-  filter: blur(120px);
+  filter: blur(150px);
   will-change: transform;
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
@@ -212,35 +251,35 @@ p, li, span {
 }
 
 .hero-blob-1 {
-  width: 600px;
-  height: 600px;
-  top: -10%;
-  right: -5%;
-  background: rgba(124, 58, 237, 0.08);
+  width: 800px;
+  height: 800px;
+  top: -20%;
+  right: -15%;
+  background: rgba(124, 58, 237, 0.15);
   animation: blob1 70s infinite alternate;
 }
 .hero-blob-2 {
-  width: 500px;
-  height: 500px;
-  bottom: -10%;
-  left: -5%;
-  background: rgba(6, 182, 212, 0.06);
+  width: 700px;
+  height: 700px;
+  bottom: -20%;
+  left: -15%;
+  background: rgba(6, 182, 212, 0.10);
   animation: blob2 80s infinite alternate;
 }
 .hero-blob-3 {
-  width: 400px;
-  height: 400px;
-  top: 30%;
-  left: 30%;
-  background: rgba(30, 64, 175, 0.05);
+  width: 600px;
+  height: 600px;
+  top: 20%;
+  left: 20%;
+  background: rgba(30, 64, 175, 0.08);
   animation: blob3 90s infinite alternate;
 }
 .hero-blob-4 {
-  width: 350px;
-  height: 350px;
-  top: 50%;
-  right: 20%;
-  background: rgba(168, 85, 247, 0.04);
+  width: 500px;
+  height: 500px;
+  top: 40%;
+  right: 10%;
+  background: rgba(168, 85, 247, 0.06);
   animation: blob4 60s infinite alternate;
 }
 

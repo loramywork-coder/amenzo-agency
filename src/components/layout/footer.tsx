@@ -32,7 +32,7 @@ const socialLinks = [
 
 export function Footer() {
   return (
-    <footer className="bg-[#080808] border-t border-[#1A1A1A]">
+    <footer className="bg-[#060610]/80 border-t border-[#1A1A1A] relative">
       <div className="container-wide py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
           {/* Brand */}
@@ -40,7 +40,7 @@ export function Footer() {
             <Logo color="white" showGradientAccent={false} />
             <p className="mt-5 text-[13px] text-[#555] max-w-xs leading-relaxed">
               Premium web design, development & digital agency based in
-              Malta. We build websites that make businesses impossible to
+              We build websites that make businesses impossible to
               ignore.
             </p>
             <div className="flex gap-3 mt-6">
@@ -157,6 +157,12 @@ export function Footer() {
               className="hover:text-[#777] transition-colors duration-300"
             >
               Cookies
+            </Link>
+            <Link
+              href="/impressum"
+              className="hover:text-[#777] transition-colors duration-300"
+            >
+              Impressum
             </Link>
           </div>
           <p className="text-[11px] text-[#333] italic hidden md:block">

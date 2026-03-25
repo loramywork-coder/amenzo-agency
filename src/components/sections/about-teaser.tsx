@@ -7,17 +7,18 @@ import { AnimateIn } from "@/components/ui/motion";
 
 export function AboutTeaser() {
   return (
-    <section className="bg-[#0F0F0F] section-padding">
+    <section className="bg-[#0A0A0A]/50 section-padding">
       <div className="container-wide">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Image */}
           <AnimateIn animation="slideLeft">
             <div className="relative aspect-[4/5] lg:aspect-[3/4] rounded-xl overflow-hidden">
               <Image
-                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80"
+                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=3840&q=90"
                 alt="Amenzo team collaborating on a project"
                 fill
                 className="object-cover"
+                quality={100}
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
               {/* Gradient fade on right edge */}
@@ -36,9 +37,9 @@ export function AboutTeaser() {
               </h2>
               <div className="space-y-5 text-[17px] text-[#B0B0B0] leading-[1.7]">
                 <p>
-                  Amenzo is a premium digital agency based in Malta. We design
-                  and develop custom websites that transform how businesses
-                  connect with their customers.
+                  Amenzo is a premium digital agency. We design and develop
+                  custom websites that transform how businesses connect
+                  with their customers.
                 </p>
                 <p>
                   We work with hotels, restaurants, startups, enterprises, and

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { AnimateIn } from "@/components/ui/motion";
 import { Section, SectionHeader } from "@/components/ui/section";
+import { getTagColor } from "@/lib/tag-colors";
 
 const services = [
   {
@@ -15,7 +16,7 @@ const services = [
     tags: ["Next.js", "React", "Tailwind", "TypeScript", "Vercel"],
     price: "1,500",
     image:
-      "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&q=80",
+      "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=3840&q=90",
     href: "/services",
   },
   {
@@ -26,7 +27,7 @@ const services = [
     tags: ["Audit", "Redesign", "Migration", "Optimisation"],
     price: "1,200",
     image:
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80",
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=3840&q=90",
     href: "/services",
   },
   {
@@ -37,7 +38,7 @@ const services = [
     tags: ["Shopify", "WooCommerce", "Stripe", "Custom"],
     price: "3,500",
     image:
-      "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80",
+      "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=3840&q=90",
     href: "/services",
   },
   {
@@ -48,7 +49,7 @@ const services = [
     tags: ["Logo Design", "Brand Strategy", "Visual Identity"],
     price: "2,000",
     image:
-      "https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=800&q=80",
+      "https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=3840&q=90",
     href: "/services",
   },
   {
@@ -59,7 +60,7 @@ const services = [
     tags: ["Technical SEO", "Core Web Vitals", "Schema", "Analytics"],
     price: "500/mo",
     image:
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=3840&q=90",
     href: "/services",
   },
   {
@@ -70,7 +71,7 @@ const services = [
     tags: ["Vercel", "Monitoring", "Backups", "Updates"],
     price: "80/mo",
     image:
-      "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80",
+      "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=3840&q=90",
     href: "/services",
   },
 ];
@@ -129,16 +130,20 @@ export function ServicesOverview() {
                     {service.description}
                   </p>
 
-                  {/* Tech tags */}
+                  {/* Tech tags — vibrant colors */}
                   <div className="flex flex-wrap gap-2 mb-5">
-                    {service.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="px-3 py-1 text-[10px] uppercase font-mono text-[#888888] bg-[#141414] rounded-full border border-[#1E1E1E]"
-                      >
-                        {tag}
-                      </span>
-                    ))}
+                    {service.tags.map((tag, tagIdx) => {
+                      const c = getTagColor(tag, tagIdx);
+                      return (
+                        <span
+                          key={tag}
+                          className="px-3 py-1 text-[10px] uppercase font-mono rounded-md"
+                          style={{ background: c.bg, color: c.text, border: `1px solid ${c.border}` }}
+                        >
+                          {tag}
+                        </span>
+                      );
+                    })}
                   </div>
 
                   {/* Price + Link */}

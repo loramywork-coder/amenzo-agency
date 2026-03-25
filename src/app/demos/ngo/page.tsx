@@ -17,19 +17,19 @@ const programs = [
     title: "Rural Health Clinics",
     description: "Establishing sustainable healthcare infrastructure in underserved communities across Sub-Saharan Africa and South Asia.",
     icon: Stethoscope,
-    image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&q=80",
+    image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=3840&q=90",
   },
   {
     title: "Clean Water Initiative",
     description: "Building wells and water purification systems to deliver safe drinking water to over 200,000 people annually.",
     icon: Shield,
-    image: "https://images.unsplash.com/photo-1541544537156-7627a7a4aa1c?w=600&q=80",
+    image: "https://images.unsplash.com/photo-1541544537156-7627a7a4aa1c?w=3840&q=90",
   },
   {
     title: "Health Education",
     description: "Training community health workers and delivering preventive health education programs in 18 languages.",
     icon: BookOpen,
-    image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=600&q=80",
+    image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=3840&q=90",
   },
 ];
 
@@ -38,7 +38,7 @@ export default function NgoDemo() {
     <div className="min-h-screen bg-[#FAFDF7] text-[#1A2E1A]">
       {/* Demo Banner */}
       <div className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-[#7C3AED] to-[#06B6D4] text-white text-center py-2 text-sm">
-        This is an <strong>AMENZO</strong> demo.{" "}
+        This is an <strong>AMENZO</strong> design preview.{" "}
         <a href="/start-project" className="underline font-semibold">
           Want something like this? Get a Quote &rarr;
         </a>
@@ -70,7 +70,7 @@ export default function NgoDemo() {
       {/* Hero */}
       <section className="relative min-h-[90vh] pt-10 flex items-center">
         <Image
-          src="https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?w=1600&q=80"
+          src="https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?w=3840&q=90"
           alt="Swiss Health Alliance outreach"
           fill
           className="object-cover"

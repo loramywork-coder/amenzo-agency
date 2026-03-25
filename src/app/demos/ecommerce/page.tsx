@@ -12,7 +12,7 @@ const products = [
     name: "Extra Virgin Olive Oil",
     description: "Cold-pressed from Maltese Bidni olives, first harvest 2025. Rich, peppery finish.",
     price: 24.90,
-    image: "https://images.unsplash.com/photo-1474979266404-7f28db3e3c2f?w=600&q=80",
+    image: "https://images.unsplash.com/photo-1474979266404-7f28db3e3c2f?w=3840&q=90",
     category: "Pantry",
   },
   {
@@ -20,7 +20,7 @@ const products = [
     name: "Wildflower Honey",
     description: "Raw, unfiltered honey from Gozo's wild thyme and borage fields. 340g glass jar.",
     price: 18.50,
-    image: "https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=600&q=80",
+    image: "https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=3840&q=90",
     category: "Pantry",
   },
   {
@@ -28,7 +28,7 @@ const products = [
     name: "Hand-Thrown Ceramic Bowl",
     description: "Artisan stoneware bowl in Mediterranean blue glaze. Handmade in Ta\u2019Qali crafts village.",
     price: 42.00,
-    image: "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=600&q=80",
+    image: "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=3840&q=90",
     category: "Homeware",
   },
   {
@@ -36,7 +36,7 @@ const products = [
     name: "Sea Salt Flakes",
     description: "Hand-harvested from the Marsaskala salt pans. Delicate, mineral-rich finishing salt. 200g.",
     price: 12.90,
-    image: "https://images.unsplash.com/photo-1518110925495-5fe2c8215c3e?w=600&q=80",
+    image: "https://images.unsplash.com/photo-1518110925495-5fe2c8215c3e?w=3840&q=90",
     category: "Pantry",
   },
   {
@@ -44,7 +44,7 @@ const products = [
     name: "Woven Linen Napkins (Set of 4)",
     description: "Stonewashed European linen in natural ecru. Pre-shrunk, softens with every wash.",
     price: 36.00,
-    image: "https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=600&q=80",
+    image: "https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=3840&q=90",
     category: "Homeware",
   },
   {
@@ -52,7 +52,7 @@ const products = [
     name: "Sundried Tomato Spread",
     description: "Slow-roasted cherry tomatoes with capers, garlic, and Maltese herbs. 180g jar.",
     price: 9.90,
-    image: "https://images.unsplash.com/photo-1472476443507-c7a5948772fc?w=600&q=80",
+    image: "https://images.unsplash.com/photo-1472476443507-c7a5948772fc?w=3840&q=90",
     category: "Pantry",
   },
 ];
@@ -84,7 +84,7 @@ export default function EcommerceDemo() {
     <div className="min-h-screen bg-[#FAF7F2] text-[#2C2416]">
       {/* Demo Banner */}
       <div className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-[#7C3AED] to-[#06B6D4] text-white text-center py-2 text-sm">
-        This is an <strong>AMENZO</strong> demo.{" "}
+        This is an <strong>AMENZO</strong> design preview.{" "}
         <a href="/start-project" className="underline font-semibold">
           Want something like this? Get a Quote &rarr;
         </a>

@@ -34,7 +34,7 @@ export function FinalCTA() {
         <AnimateIn delay={0.3}>
           <Link
             href="/start-project"
-            className="inline-flex items-center gap-2 px-14 py-5 text-white text-[15px] uppercase tracking-[0.12em] font-bold transition-all duration-300 hover:shadow-[0_0_40px_rgba(124,58,237,0.3)]"
+            className="inline-flex items-center gap-2 px-14 py-5 rounded-xl text-white text-[15px] uppercase tracking-[0.12em] font-bold transition-all duration-300 hover:shadow-[0_0_40px_rgba(124,58,237,0.3)]"
             style={{ background: "linear-gradient(135deg, #7C3AED, #06B6D4)" }}
           >
             Start a Project

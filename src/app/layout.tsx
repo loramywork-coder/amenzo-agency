@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Inter, JetBrains_Mono } from "next/font/google";
 import { SITE_NAME, SITE_DESCRIPTION, SITE_URL } from "@/lib/constants";
 import { Navigation } from "@/components/layout/navigation";
-import { Footer } from "@/components/layout/footer";
+import { FooterWrapper } from "@/components/layout/footer-wrapper";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
+import { ScrollToTop } from "@/components/ui/scroll-to-top";
 import { Toaster } from "sonner";
 import "./globals.css";
 
@@ -29,7 +30,7 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `${SITE_NAME} — Premium Web Design & Digital Agency | Malta`,
+    default: `${SITE_NAME} — Premium Web Design & Digital Agency`,
     template: `%s | ${SITE_NAME}`,
   },
   description: SITE_DESCRIPTION,
@@ -61,9 +62,10 @@ export default function RootLayout({
     >
       <body className="min-h-screen bg-bg text-text-body font-body antialiased">
         <ScrollProgress />
+        <ScrollToTop />
         <Navigation />
         <main>{children}</main>
-        <Footer />
+        <FooterWrapper />
         <Toaster
           position="bottom-right"
           toastOptions={{

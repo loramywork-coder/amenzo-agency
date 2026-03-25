@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /demos/
+Disallow: /start-project
+Disallow: /admin/
+
+Sitemap: https://amenzo.com/sitemap.xml

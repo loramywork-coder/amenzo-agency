@@ -14,7 +14,7 @@ import { cn } from "@/lib/utils";
 const categoryMap: Record<string, string> = {
   All: "All",
   Hospitality: "Hospitality",
-  "F&B": "Food & Beverage",
+  "Gastro": "Gastro",
   "Real Estate": "Real Estate",
   "E-Commerce": "E-Commerce",
   Technology: "Technology",
@@ -37,7 +37,7 @@ export default function WorkPage() {
       <section className="pt-40 pb-20 bg-bg">
         <div className="container-wide">
           <AnimateIn animation="fadeUp">
-            <p className="caption mb-4 text-violet">PORTFOLIO</p>
+            <p className="caption mb-4 text-violet">DESIGN PREVIEWS</p>
           </AnimateIn>
           <AnimateIn animation="fadeUp" delay={0.1}>
             <h1 className="font-display text-5xl md:text-7xl font-bold text-text-primary leading-tight">
@@ -46,8 +46,9 @@ export default function WorkPage() {
           </AnimateIn>
           <AnimateIn animation="fadeUp" delay={0.2}>
             <p className="mt-6 text-xl text-text-secondary max-w-2xl">
-              Real projects. Real results. Every case study below is a business
-              we helped transform through premium digital design and development.
+              Concept showcases built to demonstrate what we do. Client projects
+              remain confidential for privacy. These previews show exactly what
+              your site could look like.
             </p>
           </AnimateIn>
         </div>

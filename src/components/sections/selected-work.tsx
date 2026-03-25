@@ -6,6 +6,7 @@ import { ArrowRight } from "lucide-react";
 import { AnimateIn } from "@/components/ui/motion";
 import { Section, SectionHeader } from "@/components/ui/section";
 import { projects } from "@/data/projects";
+import { getCategoryColor } from "@/lib/tag-colors";
 
 export function SelectedWork() {
   const featured = projects.slice(0, 4);
@@ -13,9 +14,9 @@ export function SelectedWork() {
   return (
     <Section id="work">
       <SectionHeader
-        caption="SELECTED WORK"
-        title="Projects That Speak for Themselves"
-        subtitle="A selection of our recent work across industries"
+        caption="WHAT WE BUILD"
+        title="Concept Showcases"
+        subtitle="Design previews across industries. Actual client work is confidential under GDPR."
       />
 
       <div className="space-y-8">
@@ -42,9 +43,17 @@ export function SelectedWork() {
               <div className="absolute inset-0 flex items-end p-8 md:p-12 transition-transform duration-500 group-hover:-translate-y-2">
                 <div className="max-w-[640px]">
                   {/* Category pill */}
-                  <span className="inline-block px-3 py-1 text-[11px] uppercase tracking-[0.15em] font-semibold text-white bg-gradient-to-r from-violet to-cyan rounded-full mb-4">
-                    {project.categoryTag}
-                  </span>
+                  {(() => {
+                    const cc = getCategoryColor(project.categoryTag, index);
+                    return (
+                      <span
+                        className="inline-block px-3 py-1 text-[11px] uppercase tracking-[0.15em] font-semibold rounded-md mb-4"
+                        style={{ background: cc.bg, color: cc.text, border: `1px solid ${cc.border}` }}
+                      >
+                        {project.categoryTag}
+                      </span>
+                    );
+                  })()}
 
                   {/* Title */}
                   <h3 className="font-display text-[28px] md:text-[32px] font-bold text-white tracking-[-0.02em] leading-[1.08] mb-3">
@@ -63,7 +72,7 @@ export function SelectedWork() {
 
                   {/* CTA */}
                   <span className="inline-flex items-center gap-2 text-sm font-medium text-white group-hover:text-cyan transition-colors">
-                    View Case Study
+                    View Preview
                     <ArrowRight
                       size={16}
                       className="transition-transform group-hover:translate-x-1"
@@ -81,7 +90,7 @@ export function SelectedWork() {
           href="/work"
           className="inline-flex items-center gap-2 text-lg font-medium text-[#888888] hover:text-violet transition-colors"
         >
-          View All Projects
+          View All Previews
           <ArrowRight size={18} />
         </Link>
       </AnimateIn>

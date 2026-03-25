@@ -13,7 +13,7 @@ const stats = [
 export function StatsSection() {
   return (
     <section className="relative py-28 md:py-36 overflow-hidden">
-      <div className="absolute inset-0 bg-bg" />
+      <div className="absolute inset-0 bg-bg/40" />
       <div
         className="absolute inset-0 opacity-[0.12]"
         style={{ background: "linear-gradient(135deg, #7C3AED 0%, #06B6D4 100%)" }}

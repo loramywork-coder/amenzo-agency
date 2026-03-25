@@ -43,7 +43,7 @@ export default function FitnessDemo() {
     <div className="min-h-screen bg-[#0A0A0A] text-white">
       {/* Demo Banner */}
       <div className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-[#7C3AED] to-[#06B6D4] text-white text-center py-2 text-sm">
-        This is an <strong>AMENZO</strong> demo.{" "}
+        This is an <strong>AMENZO</strong> design preview.{" "}
         <a href="/start-project" className="underline font-semibold">
           Want something like this? Get a Quote &rarr;
         </a>
@@ -74,7 +74,7 @@ export default function FitnessDemo() {
       {/* Hero */}
       <section className="relative h-screen pt-10">
         <Image
-          src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1600&q=80"
+          src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=3840&q=90"
           alt="FitZone Malta gym"
           fill
           className="object-cover"

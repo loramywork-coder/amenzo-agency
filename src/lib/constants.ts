@@ -1,11 +1,11 @@
 export const SITE_NAME = "AMENZO";
 export const SITE_URL = "https://amenzo.com";
 export const SITE_DESCRIPTION =
-  "Premium web design, development & digital agency in Malta. Custom websites that make businesses impossible to ignore.";
+  "Premium web design, development & digital agency. Custom websites that make businesses impossible to ignore.";
 export const CONTACT_EMAIL = "hello@amenzo.com";
 export const CONTACT_PHONE = "+356 9999 0000";
 export const CONTACT_WHATSAPP = "35699990000";
-export const CONTACT_ADDRESS = "Valletta, Malta";
+export const CONTACT_ADDRESS = "Europe";
 
 export const NAV_LINKS = [
   { label: "Work", href: "/work" },

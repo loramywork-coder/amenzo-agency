@@ -9,21 +9,21 @@ const rooms = [
   {
     name: "Deluxe Room",
     price: 189,
-    image: "https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=3840&q=90",
     description: "Elegant 35m\u00B2 room with king bed, marble bathroom, and harbour views. Complimentary minibar and premium linens.",
     features: ["King Bed", "Harbour View", "Marble Bath"],
   },
   {
     name: "Executive Suite",
     price: 349,
-    image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=3840&q=90",
     description: "Spacious 55m\u00B2 suite featuring separate living area, rain shower, soaking tub, and panoramic sea views.",
     features: ["Living Area", "Sea View", "Soaking Tub"],
   },
   {
     name: "Presidential Suite",
     price: 699,
-    image: "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=3840&q=90",
     description: "Our finest 120m\u00B2 suite with private terrace, dining room, butler service, and breathtaking Mediterranean panorama.",
     features: ["Private Terrace", "Butler Service", "Dining Room"],
   },
@@ -41,7 +41,7 @@ export default function HotelDemo() {
     <div className="min-h-screen bg-[#0D0D0D] text-[#F5F0E8]">
       {/* Demo Banner */}
       <div className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-[#7C3AED] to-[#06B6D4] text-white text-center py-2 text-sm">
-        This is an <strong>AMENZO</strong> demo.{" "}
+        This is an <strong>AMENZO</strong> design preview.{" "}
         <a href="/start-project" className="underline font-semibold">
           Want something like this? Get a Quote &rarr;
         </a>
@@ -72,7 +72,7 @@ export default function HotelDemo() {
       {/* Hero */}
       <section id="home" className="relative h-screen pt-10">
         <Image
-          src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1600&q=80"
+          src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=3840&q=90"
           alt="Grand Harbour Hotel exterior"
           fill
           className="object-cover"
@@ -217,7 +217,7 @@ export default function HotelDemo() {
               className="relative h-[500px]"
             >
               <Image
-                src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80"
+                src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=3840&q=90"
                 alt="The Harbour Table dining room"
                 fill
                 className="object-cover"

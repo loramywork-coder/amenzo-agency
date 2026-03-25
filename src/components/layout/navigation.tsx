@@ -14,6 +14,9 @@ export function Navigation() {
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
 
+  // Hide main nav on demo pages — demos have their own nav
+  if (pathname.startsWith("/demos")) return null;
+
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -40,7 +43,16 @@ export function Navigation() {
         )}
       >
         <nav className="container-wide flex items-center justify-between h-20">
-          <Link href="/" className="relative z-50">
+          <Link
+            href="/"
+            className="relative z-50"
+            onClick={(e) => {
+              if (pathname === "/") {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }
+            }}
+          >
             <Logo color="white" />
           </Link>
 
@@ -53,8 +65,8 @@ export function Navigation() {
                 className={cn(
                   "text-[13px] uppercase tracking-[0.15em] font-medium transition-colors duration-300 link-underline",
                   pathname === link.href
-                    ? "text-text-primary"
-                    : "text-text-muted hover:text-text-primary"
+                    ? "text-white"
+                    : "text-white/40 hover:text-white"
                 )}
               >
                 {link.label}
@@ -65,7 +77,7 @@ export function Navigation() {
           <div className="hidden lg:block">
             <Link
               href="/start-project"
-              className="px-7 py-2.5 text-[12px] uppercase tracking-[0.15em] font-medium text-white transition-shadow duration-300 hover:shadow-[0_0_24px_rgba(124,58,237,0.2)]"
+              className="px-7 py-2.5 rounded-lg text-[12px] uppercase tracking-[0.15em] font-medium text-white transition-shadow duration-300 hover:shadow-[0_0_24px_rgba(124,58,237,0.2)]"
               style={{
                 background: "linear-gradient(135deg, #7C3AED, #06B6D4)",
               }}
@@ -124,7 +136,7 @@ export function Navigation() {
               >
                 <Link
                   href="/start-project"
-                  className="px-9 py-4 text-[13px] uppercase tracking-[0.15em] font-medium text-white"
+                  className="px-9 py-4 rounded-lg text-[13px] uppercase tracking-[0.15em] font-medium text-white"
                   style={{
                     background: "linear-gradient(135deg, #7C3AED, #06B6D4)",
                   }}

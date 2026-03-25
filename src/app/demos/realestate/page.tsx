@@ -14,7 +14,7 @@ const properties = [
     beds: 3,
     baths: 2,
     area: "185m\u00B2",
-    image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=3840&q=90",
     tag: "Featured",
   },
   {
@@ -25,7 +25,7 @@ const properties = [
     beds: 4,
     baths: 3,
     area: "280m\u00B2",
-    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=3840&q=90",
     tag: "New",
   },
   {
@@ -36,7 +36,7 @@ const properties = [
     beds: 2,
     baths: 1,
     area: "95m\u00B2",
-    image: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=3840&q=90",
     tag: null,
   },
   {
@@ -47,7 +47,7 @@ const properties = [
     beds: 5,
     baths: 3,
     area: "320m\u00B2",
-    image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=3840&q=90",
     tag: "Premium",
   },
 ];
@@ -64,7 +64,7 @@ export default function RealEstateDemo() {
     <div className="min-h-screen bg-[#F8F9FC] text-[#1A1D2B]">
       {/* Demo Banner */}
       <div className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-[#7C3AED] to-[#06B6D4] text-white text-center py-2 text-sm">
-        This is an <strong>AMENZO</strong> demo.{" "}
+        This is an <strong>AMENZO</strong> design preview.{" "}
         <a href="/start-project" className="underline font-semibold">
           Want something like this? Get a Quote &rarr;
         </a>

@@ -52,11 +52,11 @@ export const projects: Project[] = [
     },
     techStack: ["Next.js", "Tailwind CSS", "Vercel", "Sanity CMS", "i18n"],
     image:
-      "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200&q=80",
+      "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=3840&q=90",
     images: [
-      "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200&q=80",
-      "https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=1200&q=80",
-      "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=1200&q=80",
+      "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=3840&q=90",
+      "https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=3840&q=90",
+      "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=3840&q=90",
     ],
     demoSlug: "hotel",
     color: "#C9A96E",
@@ -65,8 +65,8 @@ export const projects: Project[] = [
     slug: "porto-valletta",
     title: "Porto Valletta",
     client: "Porto Valletta",
-    category: "Food & Beverage",
-    categoryTag: "F&B",
+    category: "Gastro",
+    categoryTag: "GASTRO",
     description:
       "A moody, atmospheric website for Valletta\u2019s newest fine dining destination. The site needed to feel like walking into the restaurant.",
     challenge:
@@ -90,11 +90,11 @@ export const projects: Project[] = [
     },
     techStack: ["Next.js", "Framer Motion", "Tailwind CSS", "Vercel"],
     image:
-      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200&q=80",
+      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=3840&q=90",
     images: [
-      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200&q=80",
-      "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=80",
-      "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=1200&q=80",
+      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=3840&q=90",
+      "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=3840&q=90",
+      "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=3840&q=90",
     ],
     demoSlug: "restaurant",
     color: "#8B4513",
@@ -128,11 +128,11 @@ export const projects: Project[] = [
       "Vercel",
     ],
     image:
-      "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1200&q=80",
+      "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=3840&q=90",
     images: [
-      "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1200&q=80",
-      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1200&q=80",
-      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&q=80",
+      "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=3840&q=90",
+      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=3840&q=90",
+      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=3840&q=90",
     ],
     demoSlug: "realestate",
     color: "#2563EB",
@@ -166,11 +166,11 @@ export const projects: Project[] = [
       "Vercel",
     ],
     image:
-      "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1200&q=80",
+      "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=3840&q=90",
     images: [
-      "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1200&q=80",
-      "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=1200&q=80",
-      "https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=1200&q=80",
+      "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=3840&q=90",
+      "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=3840&q=90",
+      "https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=3840&q=90",
     ],
     demoSlug: "fitness",
     color: "#EF4444",
@@ -204,11 +204,11 @@ export const projects: Project[] = [
       "Vercel",
     ],
     image:
-      "https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?w=1200&q=80",
+      "https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?w=3840&q=90",
     images: [
-      "https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?w=1200&q=80",
-      "https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=1200&q=80",
-      "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1200&q=80",
+      "https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?w=3840&q=90",
+      "https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=3840&q=90",
+      "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=3840&q=90",
     ],
     demoSlug: "ngo",
     color: "#059669",
@@ -242,11 +242,11 @@ export const projects: Project[] = [
       "Vercel",
     ],
     image:
-      "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1200&q=80",
+      "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=3840&q=90",
     images: [
-      "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1200&q=80",
-      "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=1200&q=80",
-      "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=1200&q=80",
+      "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=3840&q=90",
+      "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=3840&q=90",
+      "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=3840&q=90",
     ],
     demoSlug: "trades",
     color: "#D97706",
@@ -280,11 +280,11 @@ export const projects: Project[] = [
       "Vercel",
     ],
     image:
-      "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1200&q=80",
+      "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=3840&q=90",
     images: [
-      "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1200&q=80",
-      "https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=1200&q=80",
-      "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1200&q=80",
+      "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=3840&q=90",
+      "https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=3840&q=90",
+      "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=3840&q=90",
     ],
     demoSlug: "ecommerce",
     color: "#92400E",
@@ -324,11 +324,11 @@ export const projects: Project[] = [
       "Vercel",
     ],
     image:
-      "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1200&q=80",
+      "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=3840&q=90",
     images: [
-      "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1200&q=80",
-      "https://images.unsplash.com/photo-1563986768609-322da13575f2?w=1200&q=80",
-      "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&q=80",
+      "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=3840&q=90",
+      "https://images.unsplash.com/photo-1563986768609-322da13575f2?w=3840&q=90",
+      "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=3840&q=90",
     ],
     demoSlug: "saas",
     color: "#7C3AED",
@@ -338,7 +338,7 @@ export const projects: Project[] = [
 export const categories = [
   "All",
   "Hospitality",
-  "F&B",
+  "Gastro",
   "Real Estate",
   "E-Commerce",
   "Technology",

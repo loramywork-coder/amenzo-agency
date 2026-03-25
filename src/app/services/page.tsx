@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/motion";
 import { Button } from "@/components/ui/button";
 import { Section, SectionHeader } from "@/components/ui/section";
+import { getTagColor } from "@/lib/tag-colors";
 import {
   Monitor,
   ShoppingBag,
@@ -311,14 +312,18 @@ export default function ServicesPage() {
 
                   {/* Tags */}
                   <div className="flex flex-wrap gap-2 mb-8">
-                    {service.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="px-3 py-1 text-xs font-medium rounded-full bg-surface-elevated border border-border text-text-muted"
-                      >
-                        {tag}
-                      </span>
-                    ))}
+                    {service.tags.map((tag, tagIdx) => {
+                      const c = getTagColor(tag, tagIdx);
+                      return (
+                        <span
+                          key={tag}
+                          className="px-3 py-1 text-xs font-medium rounded-md"
+                          style={{ background: c.bg, color: c.text, border: `1px solid ${c.border}` }}
+                        >
+                          {tag}
+                        </span>
+                      );
+                    })}
                   </div>
 
                   <Button href="/start-project" magnetic>

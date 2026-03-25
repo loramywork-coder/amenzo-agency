@@ -11,48 +11,48 @@ const steps = [
     title: "Discovery",
     description: "We deep-dive into your business, your customers, and your goals. No assumptions.",
     icon: Search,
-    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&q=80",
+    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=3840&q=90",
   },
   {
     number: "02",
     title: "Strategy",
     description: "We define the sitemap, features, technology, and timeline. You approve before we start.",
     icon: Target,
-    image: "https://images.unsplash.com/photo-1507925921958-8a62f3d1a50d?w=400&q=80",
+    image: "https://images.unsplash.com/photo-1507925921958-8a62f3d1a50d?w=3840&q=90",
   },
   {
     number: "03",
     title: "Design",
     description: "We create high-fidelity mockups you'll want to frame. Revisions until you love it.",
     icon: PenTool,
-    image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=400&q=80",
+    image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=3840&q=90",
   },
   {
     number: "04",
     title: "Development",
     description: "Hand-crafted code. Every page, every interaction, every responsive breakpoint. Tested obsessively.",
     icon: Code2,
-    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400&q=80",
+    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=3840&q=90",
   },
   {
     number: "05",
     title: "Launch",
     description: "We deploy to blazing-fast hosting, verify everything works, and hand you the keys.",
     icon: Rocket,
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&q=80",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=3840&q=90",
   },
   {
     number: "06",
     title: "Growth",
     description: "Ongoing maintenance, SEO, and performance optimisation. We're your digital partner.",
     icon: TrendingUp,
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&q=80",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=3840&q=90",
   },
 ];
 
 export function ProcessSection() {
   return (
-    <section className="section-padding bg-[#0F0F0F]">
+    <section className="section-padding bg-[#0A0A0A]/50">
       <div className="container-wide">
         <SectionHeader
           caption="HOW WE WORK"

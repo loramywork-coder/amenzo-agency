@@ -40,7 +40,7 @@ export default function TradesDemo() {
     <div className="min-h-screen bg-[#F5F7FA] text-[#1A2332]">
       {/* Demo Banner */}
       <div className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-[#7C3AED] to-[#06B6D4] text-white text-center py-2 text-sm">
-        This is an <strong>AMENZO</strong> demo.{" "}
+        This is an <strong>AMENZO</strong> design preview.{" "}
         <a href="/start-project" className="underline font-semibold">
           Want something like this? Get a Quote &rarr;
         </a>
@@ -81,7 +81,7 @@ export default function TradesDemo() {
             <div className="flex flex-col md:flex-row gap-8 items-start">
               <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-2xl overflow-hidden shrink-0 border-4 border-[#2563EB]/10">
                 <Image
-                  src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&q=80"
+                  src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=3840&q=90"
                   alt="Daniel - Master Plumber"
                   fill
                   className="object-cover"

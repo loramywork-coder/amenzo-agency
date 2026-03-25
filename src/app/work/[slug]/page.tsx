@@ -13,6 +13,7 @@ import { SITE_NAME } from "@/lib/constants";
 import { Section } from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
 import { AnimateIn, StaggerContainer, StaggerItem } from "@/components/ui/motion";
+import { getTagColor } from "@/lib/tag-colors";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -92,14 +93,18 @@ export default async function CaseStudyPage({ params }: Props) {
           {/* Tech Stack */}
           <AnimateIn animation="fadeUp" delay={0.25}>
             <div className="mt-8 flex flex-wrap gap-2">
-              {project.techStack.map((tech) => (
-                <span
-                  key={tech}
-                  className="px-3 py-1.5 rounded-full text-xs font-medium bg-surface border border-border text-text-secondary"
-                >
-                  {tech}
-                </span>
-              ))}
+              {project.techStack.map((tech, idx) => {
+                const c = getTagColor(tech, idx);
+                return (
+                  <span
+                    key={tech}
+                    className="px-3 py-1.5 rounded-md text-xs font-medium"
+                    style={{ background: c.bg, color: c.text, border: `1px solid ${c.border}` }}
+                  >
+                    {tech}
+                  </span>
+                );
+              })}
             </div>
           </AnimateIn>
         </div>
