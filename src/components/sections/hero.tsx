@@ -17,6 +17,9 @@ function NeuralCanvas() {
 
     let animId: number;
     let nodes: { x: number; y: number; vx: number; vy: number }[] = [];
+    let lastTime = 0;
+    const TARGET_FPS = 60;
+    const FRAME_MS = 1000 / TARGET_FPS;
 
     const resize = () => {
       canvas.width = window.innerWidth;
@@ -25,23 +28,28 @@ function NeuralCanvas() {
 
     const init = () => {
       resize();
-      const count = Math.floor((canvas.width * canvas.height) / 8000);
+      const count = Math.min(Math.floor((canvas.width * canvas.height) / 10000), 120);
       nodes = Array.from({ length: count }, () => ({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.4,
-        vy: (Math.random() - 0.5) * 0.4,
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: (Math.random() - 0.5) * 0.3,
       }));
     };
 
-    const draw = () => {
+    const draw = (timestamp: number) => {
+      // Delta time: clamp to prevent big jumps after tab switch or scroll jank
+      const rawDelta = timestamp - lastTime;
+      const delta = Math.min(rawDelta, FRAME_MS * 3) / FRAME_MS; // normalize to 1.0 at 60fps, cap at 3 frames
+      lastTime = timestamp;
+
       const { width, height } = canvas;
       ctx.clearRect(0, 0, width, height);
 
-      // Move nodes
+      // Move nodes with delta time — consistent speed regardless of frame rate
       for (const n of nodes) {
-        n.x += n.vx;
-        n.y += n.vy;
+        n.x += n.vx * delta;
+        n.y += n.vy * delta;
         if (n.x < 0 || n.x > width) n.vx *= -1;
         if (n.y < 0 || n.y > height) n.vy *= -1;
       }
@@ -77,7 +85,8 @@ function NeuralCanvas() {
     };
 
     init();
-    draw();
+    lastTime = performance.now();
+    animId = requestAnimationFrame(draw);
     window.addEventListener("resize", () => { init(); });
 
     return () => {

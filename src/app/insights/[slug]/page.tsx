@@ -123,8 +123,22 @@ export default async function InsightDetailPage({ params }: Props) {
   return (
     <>
       {/* Hero */}
-      <section className="pt-32 pb-0 bg-bg">
-        <div className="container-wide max-w-4xl mx-auto">
+      <section className="pt-32 pb-0 bg-bg relative overflow-hidden">
+        {/* SVG decorative element */}
+        <svg className="absolute -top-10 -right-20 w-[500px] h-[500px] opacity-[0.03]" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="250" cy="250" r="200" stroke="url(#artGrad)" strokeWidth="0.5" />
+          <circle cx="250" cy="250" r="150" stroke="url(#artGrad)" strokeWidth="0.5" />
+          <circle cx="250" cy="250" r="100" stroke="url(#artGrad)" strokeWidth="0.5" />
+          <circle cx="250" cy="250" r="50" stroke="url(#artGrad)" strokeWidth="0.5" />
+          <defs>
+            <linearGradient id="artGrad" x1="0" y1="0" x2="500" y2="500">
+              <stop stopColor="#7C3AED" />
+              <stop offset="1" stopColor="#06B6D4" />
+            </linearGradient>
+          </defs>
+        </svg>
+
+        <div className="container-wide max-w-4xl mx-auto relative z-10">
           <AnimateIn animation="fadeUp">
             <Link
               href="/insights"
@@ -145,6 +159,16 @@ export default async function InsightDetailPage({ params }: Props) {
             <h1 className="font-display text-4xl md:text-6xl font-bold text-text-primary leading-tight">
               {post.title}
             </h1>
+            {/* SVG accent underline */}
+            <svg className="mt-6 w-16 h-1" viewBox="0 0 64 4" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="64" height="4" rx="2" fill="url(#titleLine)" />
+              <defs>
+                <linearGradient id="titleLine" x1="0" y1="2" x2="64" y2="2">
+                  <stop stopColor="#7C3AED" />
+                  <stop offset="1" stopColor="#06B6D4" />
+                </linearGradient>
+              </defs>
+            </svg>
           </AnimateIn>
 
           <AnimateIn animation="fadeUp" delay={0.2}>
