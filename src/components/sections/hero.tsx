@@ -147,26 +147,32 @@ export function HeroSection() {
 
       {/* Content */}
       <div className="relative z-10 flex-1 flex flex-col justify-center items-center container-wide text-center px-6 pb-32 pt-28">
-        <h1 className="font-display font-bold max-w-[800px] mx-auto mb-6">
-          <RevealLine delay={0.4}>
-            <span className="block text-[36px] sm:text-[46px] md:text-[56px] lg:text-[66px] leading-[1.05] tracking-[-0.03em] text-white text-center">
-              We build digital <span className="gradient-text italic">experiences.</span>
+        <h1 className="font-display font-bold max-w-[900px] mx-auto mb-8">
+          <RevealLine delay={0.3}>
+            <span className="block text-[32px] sm:text-[42px] md:text-[52px] lg:text-[64px] leading-[1.05] tracking-[-0.03em] text-white">
+              We design websites
+            </span>
+          </RevealLine>
+          <RevealLine delay={0.45}>
+            <span className="block text-[32px] sm:text-[42px] md:text-[52px] lg:text-[64px] leading-[1.05] tracking-[-0.03em] text-white">
+              that make businesses
+            </span>
+          </RevealLine>
+          <RevealLine delay={0.6}>
+            <span className="block text-[32px] sm:text-[42px] md:text-[52px] lg:text-[64px] leading-[1.05] tracking-[-0.03em] gradient-text italic">
+              impossible to ignore.
             </span>
           </RevealLine>
         </h1>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 1.0 }}
-          className="flex items-center gap-3 mb-12"
+          className="text-[16px] md:text-[17px] text-white/50 max-w-[520px] text-center mb-10 leading-relaxed"
         >
-          <div className="h-px w-8 bg-violet/40" />
-          <p className="text-[14px] md:text-[15px] text-white/40 tracking-wide">
-            Code &middot; Craft &middot; Conversion
-          </p>
-          <div className="h-px w-8 bg-cyan/40" />
-        </motion.div>
+          Premium web design, development &amp; digital agency. From startups to enterprises — we build sites that drive results.
+        </motion.p>
 
         <motion.div
           initial={{ opacity: 0 }}

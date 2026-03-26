@@ -331,6 +331,13 @@ export default async function CaseStudyPage({ params }: Props) {
         </div>
       </section>
 
+      {/* Case Study Disclaimer */}
+      <div className="max-w-[600px] mx-auto mt-16 border-l-2 border-white/10 pl-4 text-center">
+        <p className="text-[12px] italic text-white/25">
+          This case study presents a representative example of Amenzo&apos;s design capabilities. Names, brands, and metrics are illustrative. Contact us for real client references.
+        </p>
+      </div>
+
       {/* CTA */}
       <Section>
         <div className="text-center">

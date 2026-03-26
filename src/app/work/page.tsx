@@ -37,18 +37,16 @@ export default function WorkPage() {
       <section className="pt-40 pb-20 bg-bg">
         <div className="container-wide">
           <AnimateIn animation="fadeUp">
-            <p className="caption mb-4 text-violet">DESIGN PREVIEWS</p>
+            <p className="caption mb-4 text-violet">PORTFOLIO</p>
           </AnimateIn>
           <AnimateIn animation="fadeUp" delay={0.1}>
             <h1 className="font-display text-5xl md:text-7xl font-bold text-text-primary leading-tight">
-              Our Work
+              Selected Work
             </h1>
           </AnimateIn>
           <AnimateIn animation="fadeUp" delay={0.2}>
             <p className="mt-6 text-xl text-text-secondary max-w-2xl">
-              Concept showcases built to demonstrate what we do. Client projects
-              remain confidential for privacy. These previews show exactly what
-              your site could look like.
+              A showcase of our design capabilities across industries. Each preview demonstrates the quality and craftsmanship we bring to every project.
             </p>
           </AnimateIn>
         </div>

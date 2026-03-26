@@ -61,6 +61,25 @@ export default function RootLayout({
       className={`${plusJakarta.variable} ${inter.variable} ${jetbrainsMono.variable}`}
     >
       <body className="min-h-screen bg-bg text-text-body font-body antialiased">
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "name": "Amenzo",
+          "url": "https://amenzo.com",
+          "logo": "https://amenzo.com/logo.svg",
+          "description": "Premium web design, development & digital agency",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Sliema",
+            "addressCountry": "MT"
+          },
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+356-9999-0000",
+            "email": "hello@amenzo.com",
+            "contactType": "sales"
+          }
+        })}} />
         <ScrollProgress />
         <ScrollToTop />
         <Navigation />

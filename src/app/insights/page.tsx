@@ -11,6 +11,11 @@ export const metadata: Metadata = {
   title: "Insights — Blog & Articles",
   description:
     "Honest insights on web design, development, SEO, and digital strategy. Written by the team at AMENZO.",
+  openGraph: {
+    title: "Insights — Blog & Articles | Amenzo",
+    description:
+      "Honest insights on web design, development, SEO, and digital strategy. Written by the team at AMENZO.",
+  },
 };
 
 function formatDate(dateStr: string): string {

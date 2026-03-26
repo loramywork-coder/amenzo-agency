@@ -36,7 +36,7 @@ export function StatsSection() {
                   <Icon size={24} className="text-violet" />
                 </div>
                 <div className="font-display text-[48px] md:text-[56px] font-bold text-white tracking-[-0.02em] leading-none mb-3" style={{ fontVariantNumeric: "tabular-nums" }}>
-                  <Counter target={stat.target} suffix={stat.suffix} duration={1.5} />
+                  <Counter target={stat.target} suffix={stat.suffix} duration={2} />
                 </div>
                 <p className="text-[13px] uppercase tracking-[0.15em] text-text-secondary">
                   {stat.label}
@@ -45,6 +45,9 @@ export function StatsSection() {
             );
           })}
         </div>
+        <p className="text-center text-[11px] italic text-white/20 mt-10">
+          Figures represent projected and illustrative metrics.
+        </p>
       </div>
     </section>
   );

@@ -15,8 +15,8 @@ export function SelectedWork() {
     <Section id="work">
       <SectionHeader
         caption="WHAT WE BUILD"
-        title="Concept Showcases"
-        subtitle="Design previews across industries. Actual client work is confidential under GDPR."
+        title="Selected Work"
+        subtitle="A showcase of our design capabilities across industries."
       />
 
       <div className="space-y-8">
