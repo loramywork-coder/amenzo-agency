@@ -11,9 +11,19 @@ export const NAV_LINKS = [
   { label: "Work", href: "/work" },
   { label: "Services", href: "/services" },
   { label: "Pricing", href: "/pricing" },
+  { label: "Build", href: "/build" },
   { label: "About", href: "/about" },
   { label: "Insights", href: "/insights" },
   { label: "Contact", href: "/contact" },
+] as const;
+
+/** Slim header nav — only primary conversion links. Footer uses NAV_LINKS for everything. */
+export const HEADER_LINKS = [
+  { label: "Work", href: "/work" },
+  { label: "Services", href: "/services" },
+  { label: "Pricing", href: "/pricing" },
+  { label: "Build", href: "/build" },
+  { label: "About", href: "/about" },
 ] as const;
 
 export const SERVICES = [
@@ -23,7 +33,7 @@ export const SERVICES = [
     shortDesc:
       "Custom websites built from scratch. No templates. No WordPress themes. Hand-crafted code that performs.",
     tags: ["Next.js", "React", "Tailwind", "TypeScript", "Vercel"],
-    price: "1,500",
+    price: "750",
     icon: "Monitor",
   },
   {
@@ -32,7 +42,7 @@ export const SERVICES = [
     shortDesc:
       "Online stores that convert. From boutique shops to full-scale retail \u2014 beautiful and built to sell.",
     tags: ["Shopify", "WooCommerce", "Stripe", "Custom"],
-    price: "3,500",
+    price: "4,000",
     icon: "ShoppingBag",
   },
   {
@@ -41,7 +51,7 @@ export const SERVICES = [
     shortDesc:
       "Logos, colour systems, typography, brand guidelines \u2014 the foundation everything else is built on.",
     tags: ["Logo Design", "Brand Strategy", "Visual Identity"],
-    price: "2,000",
+    price: "800",
     icon: "Palette",
   },
   {
@@ -50,7 +60,7 @@ export const SERVICES = [
     shortDesc:
       "User-centred design that looks stunning and converts. Research, wireframes, prototypes, and pixel-perfect interfaces.",
     tags: ["Figma", "User Research", "Prototyping", "Design Systems"],
-    price: "2,500",
+    price: "2,000",
     icon: "Layers",
   },
   {
@@ -59,7 +69,7 @@ export const SERVICES = [
     shortDesc:
       "Beautiful means nothing if nobody finds it. We build fast, accessible, and search-engine-optimised from day one.",
     tags: ["Technical SEO", "Core Web Vitals", "Schema", "Analytics"],
-    price: "500/mo",
+    price: "300/mo",
     icon: "TrendingUp",
   },
   {
@@ -68,7 +78,7 @@ export const SERVICES = [
     shortDesc:
       "Your current site not cutting it? We take what you have and transform it into something extraordinary.",
     tags: ["Audit", "Redesign", "Migration", "Optimisation"],
-    price: "1,200",
+    price: "750",
     icon: "RefreshCw",
   },
   {
@@ -216,7 +226,7 @@ export const TESTIMONIALS = [
       "The maintenance package alone is worth it. Zero downtime in 18 months.",
     name: "Mark Zammit",
     title: "IT Manager",
-    company: "Sengha",
+    company: "Malta Financial Group",
     location: "Valletta",
   },
 ] as const;

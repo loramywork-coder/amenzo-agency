@@ -149,18 +149,13 @@ export function HeroSection() {
       <div className="relative z-10 flex-1 flex flex-col justify-center items-center container-wide text-center px-6 pb-32 pt-28">
         <h1 className="font-display font-bold max-w-[900px] mx-auto mb-8">
           <RevealLine delay={0.3}>
-            <span className="block text-[32px] sm:text-[42px] md:text-[52px] lg:text-[64px] leading-[1.05] tracking-[-0.03em] text-white">
-              We design websites
+            <span className="block text-[36px] sm:text-[48px] md:text-[60px] lg:text-[72px] leading-[1.02] tracking-[-0.03em] text-white">
+              Your website should
             </span>
           </RevealLine>
           <RevealLine delay={0.45}>
-            <span className="block text-[32px] sm:text-[42px] md:text-[52px] lg:text-[64px] leading-[1.05] tracking-[-0.03em] text-white">
-              that make businesses
-            </span>
-          </RevealLine>
-          <RevealLine delay={0.6}>
-            <span className="block text-[32px] sm:text-[42px] md:text-[52px] lg:text-[64px] leading-[1.05] tracking-[-0.03em] gradient-text italic">
-              impossible to ignore.
+            <span className="block text-[36px] sm:text-[48px] md:text-[60px] lg:text-[72px] leading-[1.02] tracking-[-0.03em] gradient-text italic">
+              sell while you sleep.
             </span>
           </RevealLine>
         </h1>
@@ -168,10 +163,10 @@ export function HeroSection() {
         <motion.p
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 1.0 }}
-          className="text-[16px] md:text-[17px] text-white/50 max-w-[520px] text-center mb-10 leading-relaxed"
+          transition={{ duration: 0.6, delay: 0.9 }}
+          className="text-[15px] md:text-[17px] text-white/45 max-w-[440px] text-center mb-10 leading-relaxed"
         >
-          Premium web design, development &amp; digital agency. From startups to enterprises — we build sites that drive results.
+          We design &amp; build high-performance websites for brands that refuse to blend in.
         </motion.p>
 
         <motion.div
@@ -200,8 +195,9 @@ export function HeroSection() {
       {/* Scroll indicator */}
       <motion.div
         style={{ opacity: indicatorOpacity }}
-        className="relative z-10 flex justify-center pb-8"
+        className="relative z-10 flex flex-col items-center pb-8 gap-3"
       >
+        <span className="text-[10px] uppercase tracking-[0.25em] text-white/25 font-medium">Scroll to explore</span>
         <div className="scroll-indicator-line" />
       </motion.div>
     </section>

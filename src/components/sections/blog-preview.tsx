@@ -14,9 +14,9 @@ export function BlogPreview() {
   return (
     <Section>
       <SectionHeader
-        caption="INSIGHTS"
-        title="From Our Journal"
-        subtitle="Thoughts on web design, development, and digital strategy"
+        caption="JOURNAL"
+        title="We write about what we know."
+        subtitle="No fluff. Just tactics that work."
       />
 
       <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-6">

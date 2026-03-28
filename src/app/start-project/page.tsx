@@ -1,16 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, Suspense, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import { toast } from "sonner";
+import { useSearchParams } from "next/navigation";
 import {
   ArrowLeft,
   ArrowRight,
   Check,
-  Upload,
   Globe,
   ShoppingBag,
   PenTool,
@@ -18,29 +14,28 @@ import {
   TrendingUp,
   RefreshCw,
   Server,
-  Compass,
   HelpCircle,
-  Calendar,
   CheckCircle2,
   Sparkles,
+  User,
+  FileText,
+  CreditCard,
+  MessageSquare,
+  Package,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { toast } from "sonner";
+import {
+  serviceOptions,
+  budgetOptions,
+  addOns,
+  SERVICE_BASE_PRICES,
+  PAGE_COUNT_MULTIPLIERS,
+} from "@/data/pricing";
 
-const TOTAL_STEPS = 7;
-
-const serviceOptions = [
-  { id: "new-website", label: "New Website", icon: Globe },
-  { id: "redesign", label: "Website Redesign", icon: RefreshCw },
-  { id: "ecommerce", label: "E-Commerce / Online Store", icon: ShoppingBag },
-  { id: "landing-page", label: "Landing Page / Microsite", icon: Layers },
-  { id: "branding", label: "Branding / Logo Design", icon: PenTool },
-  { id: "ui-ux", label: "UI/UX Design", icon: Layers },
-  { id: "seo", label: "SEO & Performance", icon: TrendingUp },
-  { id: "maintenance", label: "Ongoing Maintenance", icon: Server },
-  { id: "not-sure", label: "Not Sure — I Need Advice", icon: HelpCircle },
-];
+const TOTAL_STEPS = 8;
 
 const industryOptions = [
   "Hotels & Resorts",
@@ -58,10 +53,37 @@ const industryOptions = [
   "Other",
 ];
 
+const STEP_NAMES = [
+  { name: "About You", icon: User },
+  { name: "Services", icon: Layers },
+  { name: "Details", icon: FileText },
+  { name: "Inspiration", icon: Sparkles },
+  { name: "Budget", icon: CreditCard },
+  { name: "Package", icon: Package },
+  { name: "Notes", icon: MessageSquare },
+  { name: "Review", icon: CheckCircle2 },
+];
+
 export default function StartProjectPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-bg flex items-center justify-center pt-20">
+          <div className="text-text-muted">Loading...</div>
+        </div>
+      }
+    >
+      <StartProjectWizard />
+    </Suspense>
+  );
+}
+
+function StartProjectWizard() {
+  const searchParams = useSearchParams();
   const [step, setStep] = useState(1);
   const [submitted, setSubmitted] = useState(false);
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
+  const [selectedAddOns, setSelectedAddOns] = useState<string[]>([]);
   const [formData, setFormData] = useState({
     name: "",
     company: "",
@@ -94,6 +116,87 @@ export default function StartProjectPage() {
     );
   };
 
+  const toggleAddOn = (id: string) => {
+    setSelectedAddOns((prev) =>
+      prev.includes(id) ? prev.filter((a) => a !== id) : [...prev, id]
+    );
+  };
+
+  // Auto-fill from URL params (Build page or demo pages)
+  useEffect(() => {
+    const industry = searchParams.get("industry");
+    const service = searchParams.get("service");
+    const services = searchParams.get("services");
+    const pages = searchParams.get("pages");
+    const addonsParam = searchParams.get("addons");
+    const ref = searchParams.get("ref");
+
+    if (industry) updateField("industry", industry);
+    // Single service (from demo pages)
+    if (service) setSelectedServices([service]);
+    // Multiple services (from Build page)
+    if (services) setSelectedServices(services.split(","));
+    // Page count from Build page
+    if (pages) updateField("pageCount", pages);
+    // Add-ons from Build page
+    if (addonsParam) setSelectedAddOns(addonsParam.split(","));
+    if (ref)
+      updateField(
+        "inspirationNotes",
+        `Inspired by the ${ref} demo — I'd like something similar for my business.`
+      );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Estimate calculation
+  const estimate = useMemo(() => {
+    let baseMin = 0;
+    let baseMax = 0;
+
+    // From selected services
+    selectedServices.forEach((svc) => {
+      const price = SERVICE_BASE_PRICES[svc] || 2000;
+      baseMin += price * 0.8;
+      baseMax += price * 1.3;
+    });
+
+    // Page count multiplier
+    const pageMultiplier = PAGE_COUNT_MULTIPLIERS[formData.pageCount] || 1;
+    baseMin *= pageMultiplier;
+    baseMax *= pageMultiplier;
+
+    // Add-on one-time costs
+    let addOnOneTime = 0;
+    let addOnRecurring = 0;
+    selectedAddOns.forEach((id) => {
+      const addon = addOns.find((a) => a.id === id);
+      if (addon) {
+        if (addon.recurring) {
+          addOnRecurring += addon.price;
+        } else {
+          addOnOneTime += addon.price;
+        }
+      }
+    });
+
+    baseMin += addOnOneTime;
+    baseMax += addOnOneTime;
+
+    // If budget is selected, use that as a floor
+    const budgetOpt = budgetOptions.find((b) => b.label === formData.budget);
+    if (budgetOpt && budgetOpt.min > 0) {
+      baseMin = Math.max(baseMin, budgetOpt.min);
+      baseMax = Math.max(baseMax, budgetOpt.max);
+    }
+
+    return {
+      min: Math.round(baseMin / 100) * 100,
+      max: Math.round(baseMax / 100) * 100,
+      recurring: addOnRecurring,
+      hasEstimate: selectedServices.length > 0,
+    };
+  }, [selectedServices, selectedAddOns, formData.pageCount, formData.budget]);
+
   const canProceed = () => {
     switch (step) {
       case 1:
@@ -106,7 +209,9 @@ export default function StartProjectPage() {
   };
 
   const handleSubmit = () => {
-    toast.success("Project brief submitted! We'll be in touch within 24 hours.");
+    toast.success(
+      "Project brief submitted! We'll be in touch within 24 hours."
+    );
     setSubmitted(true);
   };
 
@@ -177,11 +282,50 @@ export default function StartProjectPage() {
         />
       </div>
 
-      {/* Step indicator */}
+      {/* Step indicator with icons */}
       <div className="container-wide py-6">
-        <p className="text-text-muted text-sm">
-          Step {step} of {TOTAL_STEPS}
-        </p>
+        <div className="flex items-center gap-1 sm:gap-2 overflow-x-auto pb-2">
+          {STEP_NAMES.map((s, i) => {
+            const StepIcon = s.icon;
+            const stepNum = i + 1;
+            const isCompleted = step > stepNum;
+            const isCurrent = step === stepNum;
+            return (
+              <button
+                key={i}
+                onClick={() => {
+                  if (isCompleted) setStep(stepNum);
+                }}
+                className={cn(
+                  "flex items-center gap-1.5 px-2 py-1.5 rounded-full text-xs font-medium transition-all duration-200 shrink-0",
+                  isCurrent &&
+                    "bg-violet/15 text-violet border border-violet/30",
+                  isCompleted &&
+                    "text-text-secondary hover:text-violet cursor-pointer",
+                  !isCurrent &&
+                    !isCompleted &&
+                    "text-text-muted cursor-default"
+                )}
+              >
+                <span
+                  className={cn(
+                    "w-6 h-6 rounded-full flex items-center justify-center shrink-0 transition-all duration-200",
+                    isCurrent && "bg-violet text-white",
+                    isCompleted && "bg-violet/20 text-violet",
+                    !isCurrent && !isCompleted && "bg-border text-text-muted"
+                  )}
+                >
+                  {isCompleted ? (
+                    <Check size={12} />
+                  ) : (
+                    <StepIcon size={12} />
+                  )}
+                </span>
+                <span className="hidden sm:inline">{s.name}</span>
+              </button>
+            );
+          })}
+        </div>
       </div>
 
       {/* Form content */}
@@ -198,12 +342,10 @@ export default function StartProjectPage() {
               {/* Step 1: About You */}
               {step === 1 && (
                 <div>
-                  <h2 className="font-display text-3xl md:text-4xl font-bold text-text-primary mb-2">
-                    Tell us about you
-                  </h2>
-                  <p className="text-text-secondary mb-10">
-                    So we know who we&apos;re talking to
-                  </p>
+                  <StepTitle
+                    title="Tell us about you"
+                    subtitle="So we know who we're talking to"
+                  />
                   <div className="space-y-6">
                     <FormField
                       label="Your Name *"
@@ -263,12 +405,10 @@ export default function StartProjectPage() {
               {/* Step 2: What Do You Need? */}
               {step === 2 && (
                 <div>
-                  <h2 className="font-display text-3xl md:text-4xl font-bold text-text-primary mb-2">
-                    What do you need?
-                  </h2>
-                  <p className="text-text-secondary mb-10">
-                    Select all that apply
-                  </p>
+                  <StepTitle
+                    title="What do you need?"
+                    subtitle="Select all that apply"
+                  />
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {serviceOptions.map((opt) => {
                       const Icon = opt.icon;
@@ -278,25 +418,29 @@ export default function StartProjectPage() {
                           key={opt.id}
                           onClick={() => toggleService(opt.id)}
                           className={cn(
-                            "flex items-center gap-3 p-4 rounded-xl border text-left transition-all duration-200",
+                            "flex items-center gap-3 p-4 rounded-xl border text-left transition-all duration-200 relative overflow-hidden",
                             selected
-                              ? "border-violet bg-violet/10 text-text-primary"
+                              ? "border-violet text-text-primary"
                               : "border-border bg-surface text-text-secondary hover:border-violet/30"
                           )}
                         >
+                          {selected && (
+                            <div className="absolute inset-0 bg-gradient-to-br from-violet/10 via-violet/5 to-cyan/10" />
+                          )}
                           <Icon
                             size={20}
-                            className={
+                            className={cn(
+                              "relative z-10",
                               selected ? "text-violet" : "text-text-muted"
-                            }
+                            )}
                           />
-                          <span className="text-sm font-medium">
+                          <span className="text-sm font-medium relative z-10">
                             {opt.label}
                           </span>
                           {selected && (
                             <Check
                               size={16}
-                              className="ml-auto text-violet"
+                              className="ml-auto text-violet relative z-10"
                             />
                           )}
                         </button>
@@ -309,16 +453,14 @@ export default function StartProjectPage() {
               {/* Step 3: Tell Us More */}
               {step === 3 && (
                 <div>
-                  <h2 className="font-display text-3xl md:text-4xl font-bold text-text-primary mb-2">
-                    Tell us more
-                  </h2>
-                  <p className="text-text-secondary mb-10">
-                    Help us understand the scope
-                  </p>
+                  <StepTitle
+                    title="Tell us more"
+                    subtitle="Help us understand the scope"
+                  />
                   <div className="space-y-6">
                     <RadioGroup
                       label="How many pages do you need?"
-                      options={["1-5", "5-15", "15+", "Not sure"]}
+                      options={["1-5", "5-10", "10-20", "20+", "Not sure"]}
                       value={formData.pageCount}
                       onChange={(v) => updateField("pageCount", v)}
                     />
@@ -357,12 +499,10 @@ export default function StartProjectPage() {
               {/* Step 4: Inspiration */}
               {step === 4 && (
                 <div>
-                  <h2 className="font-display text-3xl md:text-4xl font-bold text-text-primary mb-2">
-                    Inspiration
-                  </h2>
-                  <p className="text-text-secondary mb-10">
-                    Share websites you admire
-                  </p>
+                  <StepTitle
+                    title="Inspiration"
+                    subtitle="Share websites you admire"
+                  />
                   <div className="space-y-6">
                     <FormField
                       label="Website 1"
@@ -413,12 +553,10 @@ export default function StartProjectPage() {
               {/* Step 5: Timeline & Budget */}
               {step === 5 && (
                 <div>
-                  <h2 className="font-display text-3xl md:text-4xl font-bold text-text-primary mb-2">
-                    Timeline & Budget
-                  </h2>
-                  <p className="text-text-secondary mb-10">
-                    Help us plan the project
-                  </p>
+                  <StepTitle
+                    title="Timeline & Budget"
+                    subtitle="Help us plan the project"
+                  />
                   <div className="space-y-6">
                     <RadioGroup
                       label="When do you need this?"
@@ -431,19 +569,28 @@ export default function StartProjectPage() {
                       value={formData.timeline}
                       onChange={(v) => updateField("timeline", v)}
                     />
-                    <RadioGroup
-                      label="Budget range"
-                      options={[
-                        "Under EUR 2,000",
-                        "EUR 2,000 - 5,000",
-                        "EUR 5,000 - 10,000",
-                        "EUR 10,000 - 20,000",
-                        "EUR 20,000+",
-                        "Not sure yet",
-                      ]}
-                      value={formData.budget}
-                      onChange={(v) => updateField("budget", v)}
-                    />
+                    <div>
+                      <label className="block text-sm font-medium text-text-primary mb-3">
+                        Budget range
+                      </label>
+                      <div className="flex flex-wrap gap-2">
+                        {budgetOptions.map((opt) => (
+                          <button
+                            key={opt.label}
+                            onClick={() => updateField("budget", opt.label)}
+                            className={cn(
+                              "px-4 py-2 rounded-full text-sm font-medium border transition-all duration-200 flex items-center gap-2",
+                              formData.budget === opt.label
+                                ? "border-violet bg-violet/10 text-text-primary"
+                                : "border-border bg-surface text-text-secondary hover:border-violet/30"
+                            )}
+                          >
+                            <span>{opt.emoji}</span>
+                            {opt.label}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
                     <FormField
                       label="Any specific deadline? (optional)"
                       type="date"
@@ -454,16 +601,133 @@ export default function StartProjectPage() {
                 </div>
               )}
 
-              {/* Step 6: Anything Else */}
+              {/* Step 6: Build Your Package */}
               {step === 6 && (
                 <div>
-                  <h2 className="font-display text-3xl md:text-4xl font-bold text-text-primary mb-2">
-                    Anything else?
-                  </h2>
-                  <p className="text-text-secondary mb-10">
-                    Tell us anything about your project, goals, or
-                    concerns
-                  </p>
+                  <StepTitle
+                    title="Build Your Package"
+                    subtitle="Toggle add-ons to customize your project"
+                  />
+                  <div className="space-y-3 mb-6">
+                    {addOns.map((addon) => {
+                      const isSelected = selectedAddOns.includes(addon.id);
+                      return (
+                        <button
+                          key={addon.id}
+                          onClick={() => toggleAddOn(addon.id)}
+                          className={cn(
+                            "w-full flex items-center gap-4 p-4 rounded-xl border text-left transition-all duration-200 relative overflow-hidden",
+                            isSelected
+                              ? "border-l-4 border-l-violet border-t-violet/30 border-r-violet/30 border-b-violet/30"
+                              : "border-border bg-surface hover:border-violet/30"
+                          )}
+                        >
+                          {isSelected && (
+                            <div className="absolute inset-0 bg-violet/[0.04]" />
+                          )}
+                          <div className="flex-1 relative z-10">
+                            <div className="flex items-center gap-2">
+                              <span className="text-sm font-semibold text-text-primary">
+                                {addon.name}
+                              </span>
+                              {addon.recurring && (
+                                <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-cyan/10 text-cyan font-medium">
+                                  Monthly
+                                </span>
+                              )}
+                            </div>
+                            <p className="text-xs text-text-muted mt-0.5">
+                              {addon.description}
+                            </p>
+                          </div>
+                          <div className="text-right relative z-10 shrink-0">
+                            <span className="text-sm font-bold text-text-primary">
+                              &euro;{addon.price}
+                            </span>
+                            {addon.recurring && (
+                              <span className="text-xs text-text-muted">
+                                /mo
+                              </span>
+                            )}
+                          </div>
+                          <div
+                            className={cn(
+                              "w-10 h-6 rounded-full relative transition-colors duration-200 shrink-0",
+                              isSelected ? "bg-violet" : "bg-border"
+                            )}
+                          >
+                            <motion.div
+                              className="w-4 h-4 rounded-full bg-white absolute top-1 shadow-sm"
+                              animate={{ left: isSelected ? 21 : 3 }}
+                              transition={{ duration: 0.15 }}
+                            />
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </div>
+
+                  {/* Package summary */}
+                  {selectedAddOns.length > 0 && (
+                    <div className="rounded-xl border border-violet/20 bg-violet/[0.03] p-4 space-y-2">
+                      <p className="text-xs font-medium text-text-muted uppercase tracking-wider">
+                        Selected add-ons
+                      </p>
+                      {(() => {
+                        const oneTime = selectedAddOns
+                          .map((id) => addOns.find((a) => a.id === id)!)
+                          .filter((a) => !a.recurring);
+                        const recurring = selectedAddOns
+                          .map((id) => addOns.find((a) => a.id === id)!)
+                          .filter((a) => a.recurring);
+                        const oneTimeTotal = oneTime.reduce(
+                          (sum, a) => sum + a.price,
+                          0
+                        );
+                        const recurringTotal = recurring.reduce(
+                          (sum, a) => sum + a.price,
+                          0
+                        );
+                        return (
+                          <>
+                            {oneTime.length > 0 && (
+                              <div className="flex items-center justify-between text-sm">
+                                <span className="text-text-secondary">
+                                  One-time ({oneTime.length} items)
+                                </span>
+                                <span className="font-semibold text-text-primary">
+                                  &euro;
+                                  {oneTimeTotal.toLocaleString()}
+                                </span>
+                              </div>
+                            )}
+                            {recurring.length > 0 && (
+                              <div className="flex items-center justify-between text-sm">
+                                <span className="text-text-secondary">
+                                  Recurring ({recurring.length} items)
+                                </span>
+                                <span className="font-semibold text-text-primary">
+                                  &euro;
+                                  {recurringTotal.toLocaleString()}
+                                  /mo
+                                </span>
+                              </div>
+                            )}
+                          </>
+                        );
+                      })()}
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* Step 7: Anything Else */}
+              {step === 7 && (
+                <div>
+                  <StepTitle
+                    title="Anything else?"
+                    subtitle="Tell us anything about your project, goals, or concerns"
+                  />
                   <textarea
                     value={formData.additionalNotes}
                     onChange={(e) =>
@@ -476,15 +740,13 @@ export default function StartProjectPage() {
                 </div>
               )}
 
-              {/* Step 7: Review */}
-              {step === 7 && (
+              {/* Step 8: Review */}
+              {step === 8 && (
                 <div>
-                  <h2 className="font-display text-3xl md:text-4xl font-bold text-text-primary mb-2">
-                    Review your brief
-                  </h2>
-                  <p className="text-text-secondary mb-10">
-                    Make sure everything looks good
-                  </p>
+                  <StepTitle
+                    title="Review your brief"
+                    subtitle="Make sure everything looks good"
+                  />
                   <div className="space-y-4">
                     <ReviewItem
                       label="Name"
@@ -516,8 +778,7 @@ export default function StartProjectPage() {
                         selectedServices
                           .map(
                             (id) =>
-                              serviceOptions.find((s) => s.id === id)
-                                ?.label
+                              serviceOptions.find((s) => s.id === id)?.label
                           )
                           .join(", ") || "—"
                       }
@@ -542,6 +803,18 @@ export default function StartProjectPage() {
                       step={5}
                       onEdit={setStep}
                     />
+                    {selectedAddOns.length > 0 && (
+                      <ReviewItem
+                        label="Add-ons"
+                        value={selectedAddOns
+                          .map(
+                            (id) => addOns.find((a) => a.id === id)?.name
+                          )
+                          .join(", ")}
+                        step={6}
+                        onEdit={setStep}
+                      />
+                    )}
                   </div>
 
                   <div className="mt-8 p-4 rounded-lg bg-surface border border-border">
@@ -559,8 +832,8 @@ export default function StartProjectPage() {
                         >
                           Privacy Policy
                         </Link>
-                        . AMENZO will use this information to contact me
-                        about my project.
+                        . AMENZO will use this information to contact me about
+                        my project.
                       </span>
                     </label>
                   </div>
@@ -571,7 +844,7 @@ export default function StartProjectPage() {
         </div>
       </div>
 
-      {/* Navigation */}
+      {/* Navigation with estimate preview */}
       <div className="fixed bottom-0 left-0 right-0 bg-bg/80 backdrop-blur-xl border-t border-border py-4 z-30">
         <div className="container-wide flex items-center justify-between">
           <button
@@ -584,6 +857,21 @@ export default function StartProjectPage() {
             <ArrowLeft size={16} />
             Back
           </button>
+
+          {/* Floating estimate */}
+          {estimate.hasEstimate && (
+            <div className="hidden md:flex items-center gap-2 text-xs text-text-muted">
+              <span className="inline-block w-1.5 h-1.5 rounded-full bg-gradient-to-r from-violet to-cyan" />
+              Estimated: &euro;{estimate.min.toLocaleString()} &ndash; &euro;
+              {estimate.max.toLocaleString()}
+              {estimate.recurring > 0 && (
+                <span>
+                  {" "}
+                  + &euro;{estimate.recurring.toLocaleString()}/mo
+                </span>
+              )}
+            </div>
+          )}
 
           {step < TOTAL_STEPS ? (
             <Button
@@ -602,6 +890,24 @@ export default function StartProjectPage() {
           )}
         </div>
       </div>
+    </div>
+  );
+}
+
+function StepTitle({
+  title,
+  subtitle,
+}: {
+  title: string;
+  subtitle: string;
+}) {
+  return (
+    <div className="mb-10">
+      <h2 className="font-display text-3xl md:text-4xl font-bold text-text-primary mb-2">
+        {title}
+      </h2>
+      <div className="w-[60px] h-[3px] rounded-full bg-gradient-to-r from-violet to-cyan mb-3" />
+      <p className="text-text-secondary">{subtitle}</p>
     </div>
   );
 }

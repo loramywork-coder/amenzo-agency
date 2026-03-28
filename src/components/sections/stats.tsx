@@ -1,13 +1,14 @@
 "use client";
 
 import { Counter, AnimateIn } from "@/components/ui/motion";
-import { Layers, Heart, Star, TrendingUp } from "lucide-react";
+import { Layers, Heart, Star, TrendingUp, Languages } from "lucide-react";
 
 const stats = [
   { target: 150, suffix: "+", label: "Projects Delivered", icon: Layers },
   { target: 50, suffix: "+", label: "Happy Clients", icon: Heart },
   { target: 98, suffix: "%", label: "Client Satisfaction", icon: Star },
   { target: 3, suffix: "x", label: "Avg. Traffic Increase", icon: TrendingUp },
+  { target: 12, suffix: "+", label: "Languages Available", icon: Languages },
 ];
 
 export function StatsSection() {
@@ -27,7 +28,7 @@ export function StatsSection() {
       />
 
       <div className="relative container-wide">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-10 md:gap-12">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-10 md:gap-12">
           {stats.map((stat, index) => {
             const Icon = stat.icon;
             return (

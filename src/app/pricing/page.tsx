@@ -12,169 +12,249 @@ import { ArrowRight, Check, Minus, HelpCircle } from "lucide-react";
 import { PricingFAQ } from "./faq";
 
 export const metadata: Metadata = {
-  title: "Pricing — Transparent Investment, Real Results",
+  title: "Pricing — Transparent Packages, Real Results",
   description:
-    "Transparent pricing from AMENZO. Four tiers from EUR 1,500 to enterprise. No hidden fees, no hourly billing. You pay for results.",
+    "Web design packages for Malta businesses. Basic websites from EUR 750, custom builds up to EUR 8,000. Transparent pricing, no hidden fees. Free consultation.",
   openGraph: {
     title: `Pricing | ${SITE_NAME}`,
     description:
-      "Transparent pricing. Four tiers from EUR 1,500 to enterprise. No hidden fees, no hourly billing.",
+      "Web design packages from EUR 750. Basic, Standard, Premium, Custom. Transparent pricing, no hidden fees.",
   },
 };
 
 const TIERS = [
   {
-    name: "Starter",
-    price: "1,500",
+    name: "Basic",
+    price: "750",
     period: "one-time",
     description:
-      "Perfect for small businesses and startups that need a professional web presence without the enterprise price tag.",
+      "A clean, professional website built from your content. You provide the text, images, and logo — we handle everything else.",
     features: [
-      { text: "Up to 5 custom pages", included: true },
-      { text: "Responsive mobile design", included: true },
-      { text: "Basic SEO setup", included: true },
-      { text: "Contact form integration", included: true },
-      { text: "Google Analytics setup", included: true },
+      { text: "1-5 custom responsive pages", included: true },
+      { text: "Mobile-first design (desktop, tablet, phone)", included: true },
+      { text: "Contact form with email delivery", included: true },
+      { text: "Basic SEO setup (meta tags, sitemap)", included: true },
+      { text: "SSL certificate and hosting setup", included: true },
+      { text: "Google Analytics configuration", included: true },
       { text: "1 round of revisions", included: true },
-      { text: "2-week delivery", included: true },
-      { text: "30 days post-launch support", included: true },
-      { text: "CMS integration", included: false },
-      { text: "E-commerce functionality", included: false },
-      { text: "Custom animations", included: false },
-      { text: "Priority support", included: false },
+      { text: "1-2 week delivery", included: true },
+      { text: "Preview link before launch", included: false },
+      { text: "Content guidance", included: false },
+      { text: "Multilingual support", included: false },
+      { text: "Blog or dynamic sections", included: false },
     ],
     cta: "Get Started",
+    ctaHref: "/start-project",
     highlighted: false,
   },
   {
-    name: "Professional",
-    price: "5,000",
+    name: "Standard",
+    price: "2,000",
     period: "one-time",
     description:
-      "Our most popular tier. For businesses ready to invest in a website that actively drives growth and outperforms the competition.",
+      "A custom-designed website that stands out from your competitors. We help structure your content and deliver in 2-3 weeks.",
     features: [
-      { text: "Up to 15 custom pages", included: true },
-      { text: "Responsive mobile design", included: true },
-      { text: "Advanced SEO and schema markup", included: true },
-      { text: "CMS integration (headless)", included: true },
-      { text: "Custom animations and interactions", included: true },
-      { text: "Performance optimisation (95+ Lighthouse)", included: true },
-      { text: "Analytics dashboard setup", included: true },
-      { text: "3 rounds of revisions", included: true },
-      { text: "3-week delivery", included: true },
-      { text: "90 days post-launch support", included: true },
+      { text: "5-10 custom responsive pages", included: true },
+      { text: "Bespoke design tailored to your brand", included: true },
+      { text: "Full SEO setup (meta, schema, sitemap)", included: true },
+      { text: "2 languages included", included: true },
       { text: "Blog or news section", included: true },
-      { text: "Lead capture and CRM integration", included: true },
+      { text: "Social media integration", included: true },
+      { text: "Image sourcing (Unsplash)", included: true },
+      { text: "Content structuring guidance", included: true },
+      { text: "Preview link before launch", included: true },
+      { text: "2 rounds of revisions", included: true },
+      { text: "2-3 week delivery", included: true },
+      { text: "E-commerce or payments", included: false },
     ],
-    cta: "Start a Project",
+    cta: "Get a Quote",
+    ctaHref: "/start-project",
     highlighted: true,
   },
   {
     name: "Premium",
-    price: "10,000",
+    price: "4,000",
     period: "one-time",
     description:
-      "For established brands that demand the best. Full-service design, development, and strategy with white-glove treatment.",
+      "A premium website with advanced features, multilingual support, and polished animations. Built for competitive advantage.",
     features: [
-      { text: "Unlimited custom pages", included: true },
-      { text: "Bespoke UI/UX design process", included: true },
-      { text: "Full branding package included", included: true },
-      { text: "Advanced CMS with custom fields", included: true },
-      { text: "E-commerce ready (up to 100 products)", included: true },
-      { text: "Custom animations and micro-interactions", included: true },
-      { text: "Multi-language support", included: true },
-      { text: "A/B testing setup", included: true },
-      { text: "Unlimited revisions", included: true },
+      { text: "10-20 custom pages", included: true },
+      { text: "Premium design with animations", included: true },
+      { text: "3+ languages", included: true },
+      { text: "Full SEO with schema markup", included: true },
+      { text: "Galleries, booking forms, donations", included: true },
+      { text: "Lighthouse score 95+ guaranteed", included: true },
+      { text: "Professional stock imagery", included: true },
+      { text: "Content guidance and structuring", included: true },
+      { text: "Preview link + dedicated revision", included: true },
       { text: "3-4 week delivery", included: true },
-      { text: "6 months post-launch support", included: true },
-      { text: "Monthly performance reports", included: true },
+      { text: "E-commerce (see Custom)", included: false },
+      { text: "Custom web applications", included: false },
     ],
-    cta: "Start a Project",
+    cta: "Get a Quote",
+    ctaHref: "/start-project",
     highlighted: false,
   },
   {
-    name: "Enterprise",
-    price: "15,000+",
+    name: "Custom",
+    price: "5,000",
     period: "custom",
+    priceNote: "-8,000",
     description:
-      "For complex projects that need a tailored approach. Web applications, large-scale e-commerce, and multi-site platforms.",
+      "For complex projects. E-commerce, marketplace platforms, custom integrations — scoped and priced to your exact requirements.",
     features: [
-      { text: "Everything in Premium", included: true },
-      { text: "Custom web application development", included: true },
-      { text: "Advanced API integrations", included: true },
-      { text: "Authentication and user management", included: true },
-      { text: "Real-time features and dashboards", included: true },
-      { text: "Scalable database architecture", included: true },
-      { text: "CI/CD pipeline and staging environment", included: true },
-      { text: "Dedicated project manager", included: true },
-      { text: "Custom SLA and response times", included: true },
-      { text: "12 months post-launch support", included: true },
-      { text: "Quarterly strategy reviews", included: true },
-      { text: "Team training and documentation", included: true },
+      { text: "Unlimited pages", included: true },
+      { text: "Fully bespoke design and functionality", included: true },
+      { text: "E-commerce with Stripe / PayPal", included: true },
+      { text: "Custom integrations and APIs", included: true },
+      { text: "Multi-language, multi-region", included: true },
+      { text: "Full content collaboration", included: true },
+      { text: "Interactive demo before launch", included: true },
+      { text: "2 rounds of revisions", included: true },
+      { text: "4-6 week delivery", included: true },
+      { text: "Priority support during build", included: true },
     ],
-    cta: "Contact Us",
+    cta: "Book a Consultation",
+    ctaHref: "/contact",
     highlighted: false,
   },
 ] as const;
 
 const ADD_ONS = [
   {
-    name: "Logo & Brand Identity",
+    name: "Additional Language",
+    price: "250",
+    description: "Add an extra language to your website.",
+  },
+  {
+    name: "E-Commerce Setup",
+    price: "1,500",
+    description:
+      "Full online store with checkout, product management, and payment processing.",
+  },
+  {
+    name: "Logo & Branding",
     price: "800",
-    description: "Professional logo, colour palette, typography, and brand guidelines document.",
+    description:
+      "Professional logo, colour palette, typography, and brand guidelines.",
   },
   {
-    name: "Copywriting",
-    price: "500",
-    description: "Professional website copy for up to 10 pages, SEO-optimised and on-brand.",
+    name: "Copywriting (per page)",
+    price: "100",
+    description: "Professional website copy, SEO-optimised and on-brand.",
   },
   {
-    name: "Photography Direction",
+    name: "Professional Photography",
     price: "400",
-    description: "Art direction for a professional photo shoot, including moodboard and shot list.",
+    description:
+      "Art direction for a professional photo shoot, moodboard and shot list.",
   },
   {
-    name: "Monthly SEO Package",
-    price: "500/mo",
-    description: "Ongoing technical SEO, keyword tracking, monthly reports, and content recommendations.",
+    name: "Monthly SEO",
+    price: "300/mo",
+    description:
+      "Ongoing technical SEO, keyword tracking, monthly reports.",
   },
   {
     name: "Hosting & Maintenance",
     price: "80/mo",
-    description: "Managed hosting, daily backups, security monitoring, and monthly dependency updates.",
+    description:
+      "Managed hosting, SSL, backups, monitoring, updates, bug fixes.",
   },
   {
     name: "Priority Support",
     price: "200/mo",
-    description: "4-hour response time, dedicated Slack channel, and priority bug fixes.",
+    description:
+      "Weekly content updates (~8hrs/month), 12hr response, quarterly review.",
+  },
+  {
+    name: "Additional Work",
+    price: "120/hr",
+    description: "Extra development or design work billed hourly.",
   },
 ] as const;
+
+const MONTHLY_SERVICES = [
+  {
+    name: "Hosting & Maintenance",
+    price: "80",
+    period: "mo",
+    description:
+      "Managed hosting, SSL certificates, daily backups, uptime monitoring, dependency updates, and bug fixes. Everything you need to keep your site fast, secure, and online.",
+  },
+  {
+    name: "Priority Support",
+    price: "200",
+    period: "mo",
+    description:
+      "Weekly content updates (approximately 8 hours per month), 12-hour response time, and a quarterly strategy review. Perfect for businesses that need ongoing changes without the overhead of a full-time developer.",
+  },
+] as const;
+
+const COMPARISON_ROWS = [
+  { label: "Price", basic: "€750", standard: "€2,000", premium: "€4,000", custom: "€5,000-8,000" },
+  { label: "Pages", basic: "1-5", standard: "5-10", premium: "10-20", custom: "Unlimited" },
+  { label: "Delivery", basic: "1-2 weeks", standard: "2-3 weeks", premium: "3-4 weeks", custom: "4-6 weeks" },
+  { label: "Design", basic: "Clean & responsive", standard: "Custom branded", premium: "Premium + animations", custom: "Fully bespoke" },
+  { label: "Languages", basic: "1", standard: "2", premium: "3+", custom: "Unlimited" },
+  { label: "SEO", basic: "Basic", standard: "Full", premium: "Full + schema", custom: "Full + advanced" },
+  { label: "Blog / News", basic: null, standard: true, premium: true, custom: true },
+  { label: "E-commerce", basic: null, standard: null, premium: null, custom: true },
+  { label: "Booking / Donations", basic: null, standard: null, premium: true, custom: true },
+  { label: "Image sourcing", basic: null, standard: true, premium: true, custom: true },
+  { label: "Content guidance", basic: null, standard: true, premium: true, custom: "Full collaboration" },
+  { label: "Preview / Demo", basic: null, standard: "Preview link", premium: "Preview + revisions", custom: "Full demo + 2 rounds" },
+  { label: "Revisions", basic: "1 round", standard: "2 rounds", premium: "Dedicated round", custom: "2 dedicated rounds" },
+  { label: "Lighthouse 95+", basic: null, standard: null, premium: "Guaranteed", custom: "Guaranteed" },
+  { label: "Priority support", basic: null, standard: null, premium: null, custom: true },
+] as const;
+
+function ComparisonCell({ value }: { value: boolean | string | null }) {
+  if (value === null) {
+    return (
+      <div className="flex items-center justify-center">
+        <Minus className="w-4 h-4 text-text-muted" />
+      </div>
+    );
+  }
+  if (value === true) {
+    return (
+      <div className="flex items-center justify-center">
+        <div className="w-5 h-5 rounded-full bg-violet/10 flex items-center justify-center">
+          <Check className="w-3 h-3 text-violet" />
+        </div>
+      </div>
+    );
+  }
+  return (
+    <span className="text-sm text-text-secondary">{value}</span>
+  );
+}
 
 export default function PricingPage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative min-h-[60vh] flex items-center bg-bg overflow-hidden">
+      <section className="relative min-h-[60vh] flex items-center bg-bg overflow-x-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(124,58,237,0.08),transparent_60%)]" />
         <div className="container-wide relative z-10 pt-40 pb-24">
           <AnimateIn animation="fadeIn" delay={0.1}>
             <p className="caption mb-6 text-violet">Pricing</p>
           </AnimateIn>
-          <TextReveal>
+          <TextReveal className="pb-3">
             <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold text-text-primary leading-[0.95]">
-              Investment,
+              Transparent Packages,
             </h1>
           </TextReveal>
-          <TextReveal delay={0.15}>
+          <TextReveal delay={0.15} className="pb-3">
             <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.95] mt-2">
-              <span className="gradient-text">Not Cost</span>
+              <span className="gradient-text">Real Results</span>
             </h1>
           </TextReveal>
           <AnimateIn animation="fadeUp" delay={0.4}>
             <p className="mt-8 max-w-2xl text-lg md:text-xl text-text-secondary leading-relaxed">
-              Transparent pricing. No hidden fees. No hourly billing. You pay for
-              results, and you know exactly what you are getting before we write a
-              single line of code.
+              Transparent pricing. No hidden fees. No hourly billing. You know
+              exactly what you are getting before we write a single line of code.
             </p>
           </AnimateIn>
         </div>
@@ -191,8 +271,8 @@ export default function PricingPage() {
               <div
                 className={`relative flex flex-col h-full rounded-2xl border p-8 transition-all duration-500 ${
                   tier.highlighted
-                    ? "border-violet bg-surface-elevated shadow-xl shadow-violet/10 scale-[1.02] lg:scale-105"
-                    : "border-border bg-surface hover:border-violet/30"
+                    ? "border-violet bg-surface-elevated shadow-xl shadow-violet/10 ring-1 ring-violet/20"
+                    : "border-border bg-surface hover:border-violet/30 hover:-translate-y-1 hover:shadow-lg hover:shadow-black/20"
                 }`}
               >
                 {tier.highlighted && (
@@ -206,20 +286,27 @@ export default function PricingPage() {
                   <h3 className="font-display text-xl font-semibold text-text-primary mb-2">
                     {tier.name}
                   </h3>
-                  <div className="flex items-baseline gap-1 mb-3">
-                    <span className="text-sm text-text-muted">&euro;</span>
-                    <span className="font-display text-4xl md:text-5xl font-bold text-text-primary">
-                      {tier.price}
-                    </span>
-                    {tier.period === "one-time" && (
-                      <span className="text-sm text-text-muted ml-1">
-                        one-time
-                      </span>
-                    )}
-                    {tier.period === "custom" && (
-                      <span className="text-sm text-text-muted ml-1">
-                        custom
-                      </span>
+                  <div className="flex items-baseline gap-1 mb-3 flex-wrap">
+                    {"priceNote" in tier && tier.priceNote ? (
+                      <>
+                        <span className="font-display text-2xl md:text-3xl font-bold text-text-primary">
+                          &euro;{tier.price}{tier.priceNote}
+                        </span>
+                        <span className="text-sm text-text-muted ml-1">custom</span>
+                      </>
+                    ) : (
+                      <>
+                        <span className="text-sm text-text-muted">&euro;</span>
+                        <span className="font-display text-4xl md:text-5xl font-bold text-text-primary">
+                          {tier.price}
+                        </span>
+                        {tier.period === "one-time" && (
+                          <span className="text-sm text-text-muted ml-1">one-time</span>
+                        )}
+                        {tier.period === "custom" && (
+                          <span className="text-sm text-text-muted ml-1">custom</span>
+                        )}
+                      </>
                     )}
                   </div>
                   <p className="text-sm text-text-secondary leading-relaxed">
@@ -255,11 +342,7 @@ export default function PricingPage() {
 
                 {/* CTA */}
                 <Button
-                  href={
-                    tier.name === "Enterprise"
-                      ? `/contact`
-                      : "/start-project"
-                  }
+                  href={tier.ctaHref}
                   variant={tier.highlighted ? "primary" : "secondary"}
                   className="w-full justify-center"
                   magnetic
@@ -273,15 +356,76 @@ export default function PricingPage() {
 
         <AnimateIn animation="fadeUp" delay={0.3}>
           <p className="text-center text-text-muted text-sm mt-10 max-w-2xl mx-auto">
-            All prices are in EUR and exclude VAT where applicable. Payment plans
-            available on projects over &euro;3,000. 50% deposit required to begin
-            work, balance due on delivery.
+            All prices are in EUR and exclude VAT where applicable. Basic
+            package: full payment on signing. Standard and above: 50% deposit,
+            balance on launch.
           </p>
         </AnimateIn>
       </Section>
 
-      {/* Add-ons */}
+      {/* Feature Comparison Table */}
       <Section className="bg-surface">
+        <AnimateIn animation="fadeUp">
+          <SectionHeader
+            caption="Compare"
+            title="Feature Comparison"
+            subtitle="See exactly what is included in each package at a glance."
+            align="center"
+          />
+        </AnimateIn>
+        <AnimateIn animation="fadeUp" delay={0.2}>
+          <div className="overflow-x-auto -mx-4 px-4 md:mx-0 md:px-0">
+            <table className="w-full min-w-[640px] border-collapse">
+              <thead>
+                <tr className="border-b border-border">
+                  <th className="text-left py-4 px-4 text-sm font-semibold text-text-primary w-[180px]">
+                    Feature
+                  </th>
+                  <th className="text-center py-4 px-3 text-sm font-semibold text-text-primary">
+                    Basic
+                  </th>
+                  <th className="text-center py-4 px-3 text-sm font-semibold text-violet">
+                    Standard
+                  </th>
+                  <th className="text-center py-4 px-3 text-sm font-semibold text-text-primary">
+                    Premium
+                  </th>
+                  <th className="text-center py-4 px-3 text-sm font-semibold text-text-primary">
+                    Custom
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {COMPARISON_ROWS.map((row) => (
+                  <tr
+                    key={row.label}
+                    className="border-b border-border/50 hover:bg-surface-elevated/50 transition-colors"
+                  >
+                    <td className="py-3 px-4 text-sm font-medium text-text-primary">
+                      {row.label}
+                    </td>
+                    <td className="py-3 px-3 text-center">
+                      <ComparisonCell value={row.basic} />
+                    </td>
+                    <td className="py-3 px-3 text-center bg-violet/[0.03]">
+                      <ComparisonCell value={row.standard} />
+                    </td>
+                    <td className="py-3 px-3 text-center">
+                      <ComparisonCell value={row.premium} />
+                    </td>
+                    <td className="py-3 px-3 text-center">
+                      <ComparisonCell value={row.custom} />
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </AnimateIn>
+      </Section>
+
+      {/* Add-ons */}
+      <Section>
         <AnimateIn animation="fadeUp">
           <SectionHeader
             caption="Add-Ons"
@@ -296,7 +440,7 @@ export default function PricingPage() {
         >
           {ADD_ONS.map((addon) => (
             <StaggerItem key={addon.name}>
-              <div className="rounded-2xl border border-border bg-surface-elevated p-6 md:p-8 transition-all duration-300 hover:border-violet/30 h-full flex flex-col">
+              <div className="rounded-2xl border border-border bg-surface-elevated p-6 md:p-8 transition-all duration-500 hover:border-violet/30 hover:-translate-y-1 hover:shadow-lg hover:shadow-black/20 h-full flex flex-col">
                 <h3 className="font-display text-lg font-semibold text-text-primary mb-1">
                   {addon.name}
                 </h3>
@@ -305,6 +449,44 @@ export default function PricingPage() {
                 </p>
                 <p className="text-text-secondary text-sm leading-relaxed flex-1">
                   {addon.description}
+                </p>
+              </div>
+            </StaggerItem>
+          ))}
+        </StaggerContainer>
+      </Section>
+
+      {/* Monthly Services */}
+      <Section className="bg-surface">
+        <AnimateIn animation="fadeUp">
+          <SectionHeader
+            caption="Monthly Services"
+            title="Ongoing Support"
+            subtitle="Keep your site performing at its best with our monthly packages."
+            align="center"
+          />
+        </AnimateIn>
+        <StaggerContainer
+          className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto"
+          staggerDelay={0.1}
+        >
+          {MONTHLY_SERVICES.map((service) => (
+            <StaggerItem key={service.name}>
+              <div className="rounded-2xl border border-border bg-surface-elevated p-8 transition-all duration-500 hover:border-violet/30 hover:-translate-y-1 hover:shadow-lg hover:shadow-black/20 h-full flex flex-col">
+                <h3 className="font-display text-xl font-semibold text-text-primary mb-2">
+                  {service.name}
+                </h3>
+                <div className="flex items-baseline gap-1 mb-4">
+                  <span className="text-sm text-text-muted">&euro;</span>
+                  <span className="font-display text-3xl font-bold text-text-primary">
+                    {service.price}
+                  </span>
+                  <span className="text-sm text-text-muted">
+                    /{service.period}
+                  </span>
+                </div>
+                <p className="text-text-secondary text-sm leading-relaxed flex-1">
+                  {service.description}
                 </p>
               </div>
             </StaggerItem>
@@ -331,7 +513,9 @@ export default function PricingPage() {
       <Section className="bg-surface">
         <div className="text-center max-w-3xl mx-auto">
           <AnimateIn animation="fadeUp">
-            <p className="caption mb-4 text-violet">Ready to Invest in Growth?</p>
+            <p className="caption mb-4 text-violet">
+              Ready to Invest in Growth?
+            </p>
             <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-text-primary leading-tight mb-6">
               Let&apos;s Build Your{" "}
               <span className="gradient-text">Competitive Edge</span>

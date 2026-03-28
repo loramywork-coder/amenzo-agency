@@ -9,25 +9,25 @@ const industries = [
     name: "Hotels & Resorts",
     desc: "Luxury digital experiences for hospitality",
     image:
-      "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=3840&q=90",
+      "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=3840&q=90",
   },
   {
     name: "Restaurants & Bars",
     desc: "Websites as atmospheric as your venue",
     image:
-      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=3840&q=90",
+      "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=3840&q=90",
   },
   {
     name: "Real Estate",
     desc: "Property platforms that sell",
     image:
-      "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=3840&q=90",
+      "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=3840&q=90",
   },
   {
     name: "E-Commerce",
     desc: "Online stores that convert",
     image:
-      "https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=3840&q=90",
+      "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=3840&q=90",
   },
   {
     name: "Healthcare & Wellness",
@@ -39,43 +39,43 @@ const industries = [
     name: "NGOs & Non-Profits",
     desc: "Amplifying missions that matter",
     image:
-      "https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?w=3840&q=90",
+      "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=3840&q=90",
   },
   {
-    name: "Finance & Professional",
-    desc: "Credibility at first click",
+    name: "Entertainment",
+    desc: "Cinemas, bowling, events",
     image:
-      "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=3840&q=90",
+      "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=1920&q=85",
   },
   {
     name: "Fitness & Lifestyle",
     desc: "Energetic brands, high-performing sites",
     image:
-      "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=3840&q=90",
+      "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=3840&q=90",
   },
   {
-    name: "Education & Training",
-    desc: "Knowledge platforms that engage",
+    name: "Art & Culture",
+    desc: "Galleries, museums, exhibitions",
     image:
-      "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=3840&q=90",
+      "https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=1920&q=85",
   },
   {
     name: "Technology & SaaS",
     desc: "Products that scale",
     image:
-      "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=3840&q=90",
+      "https://images.unsplash.com/photo-1518770660439-4636190af475?w=3840&q=90",
   },
   {
     name: "Construction & Trades",
     desc: "Professional presence for skilled trades",
     image:
-      "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=3840&q=90",
+      "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=3840&q=90",
   },
   {
-    name: "Government & Public",
-    desc: "Accessible, compliant, trusted",
+    name: "Creative & Photography",
+    desc: "Studios, portfolios, agencies",
     image:
-      "https://images.unsplash.com/photo-1555848962-6e79363ec58f?w=3840&q=90",
+      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=1920&q=85",
   },
 ];
 
@@ -83,9 +83,9 @@ export function IndustriesSection() {
   return (
     <Section>
       <SectionHeader
-        caption="WHO WE WORK WITH"
-        title="Every Industry. Every Scale."
-        subtitle="We design for businesses of all kinds"
+        caption="INDUSTRIES"
+        title="If you serve customers, we serve you."
+        subtitle="Hotels to hospitals. Startups to scale-ups."
       />
 
       <StaggerContainer className="grid grid-cols-2 md:grid-cols-3 gap-4">

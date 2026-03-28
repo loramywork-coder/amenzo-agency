@@ -1,9 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import { Search, Target, PenTool, Code2, Rocket, TrendingUp } from "lucide-react";
-import { AnimateIn } from "@/components/ui/motion";
+import { StaggerContainer, StaggerItem } from "@/components/ui/motion";
 import { SectionHeader } from "@/components/ui/section";
+import { GradientDefs } from "@/components/ui/gradient-defs";
 
 const steps = [
   {
@@ -11,83 +11,96 @@ const steps = [
     title: "Discovery",
     description: "We deep-dive into your business, your customers, and your goals. No assumptions.",
     icon: Search,
-    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=3840&q=90",
   },
   {
     number: "02",
     title: "Strategy",
     description: "We define the sitemap, features, technology, and timeline. You approve before we start.",
     icon: Target,
-    image: "https://images.unsplash.com/photo-1507925921958-8a62f3d1a50d?w=3840&q=90",
   },
   {
     number: "03",
     title: "Design",
     description: "We create high-fidelity mockups you'll want to frame. Revisions until you love it.",
     icon: PenTool,
-    image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=3840&q=90",
   },
   {
     number: "04",
     title: "Development",
     description: "Hand-crafted code. Every page, every interaction, every responsive breakpoint. Tested obsessively.",
     icon: Code2,
-    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=3840&q=90",
   },
   {
     number: "05",
     title: "Launch",
     description: "We deploy to blazing-fast hosting, verify everything works, and hand you the keys.",
     icon: Rocket,
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=3840&q=90",
   },
   {
     number: "06",
     title: "Growth",
     description: "Ongoing maintenance, SEO, and performance optimisation. We're your digital partner.",
     icon: TrendingUp,
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=3840&q=90",
   },
+];
+
+// Each step gets a unique color for its radial glow
+const STEP_COLORS = [
+  { glow: "rgba(124,58,237,0.18)", fade: "rgba(124,58,237,0.04)", text: "#7C3AED" },   // Discovery — violet
+  { glow: "rgba(6,182,212,0.18)", fade: "rgba(6,182,212,0.04)", text: "#06B6D4" },      // Strategy — cyan
+  { glow: "rgba(245,158,11,0.16)", fade: "rgba(245,158,11,0.03)", text: "#F59E0B" },    // Design — amber
+  { glow: "rgba(34,197,94,0.16)", fade: "rgba(34,197,94,0.03)", text: "#22C55E" },      // Development — green
+  { glow: "rgba(249,112,104,0.16)", fade: "rgba(249,112,104,0.03)", text: "#F97068" },  // Launch — coral
+  { glow: "rgba(99,102,241,0.18)", fade: "rgba(99,102,241,0.04)", text: "#6366F1" },    // Growth — indigo
 ];
 
 export function ProcessSection() {
   return (
     <section className="section-padding bg-[#0A0A0A]/50">
       <div className="container-wide">
+        <GradientDefs />
         <SectionHeader
-          caption="HOW WE WORK"
-          title="From Brief to Launch in Weeks, Not Months"
-          subtitle="Six steps from idea to impact"
+          caption="PROCESS"
+          title="Six steps. Zero surprises."
+          subtitle="Transparent from kickoff to launch day."
         />
 
-        {/* Horizontal scroll on desktop, vertical on mobile */}
-        <div className="flex gap-6 overflow-x-auto pb-6 snap-x snap-mandatory scrollbar-hide lg:grid lg:grid-cols-3 lg:overflow-visible lg:pb-0">
+        <StaggerContainer
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          staggerDelay={0.08}
+        >
           {steps.map((step, index) => {
             const Icon = step.icon;
+            const color = STEP_COLORS[index];
             return (
-              <AnimateIn key={step.number} delay={index * 0.08}>
-                <div className="shrink-0 w-[280px] lg:w-auto snap-start bg-surface border border-border rounded-xl overflow-hidden hover:border-border-hover hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,0,0,0.3)] transition-all duration-[400ms]">
-                  {/* Step image */}
-                  <div className="relative h-40 overflow-hidden">
-                    <Image
-                      src={step.image}
-                      alt={step.title}
-                      fill
-                      className="object-cover"
-                      sizes="300px"
-                    />
-                    <div className="absolute inset-0 bg-black/40" />
-                    <div className="absolute top-4 left-4 flex items-center gap-2">
-                      <span className="font-display text-[32px] font-bold gradient-text leading-none">
-                        {step.number}
-                      </span>
-                    </div>
+              <StaggerItem key={step.number}>
+                <div className="glow-border rounded-xl overflow-hidden bg-surface border border-border hover:border-border-hover transition-all duration-500 group">
+                  {/* Color-coded radial glow top */}
+                  <div
+                    className="relative h-40 flex items-center justify-center overflow-hidden"
+                    style={{
+                      background: `radial-gradient(ellipse at 50% 80%, ${color.glow} 0%, ${color.fade} 50%, transparent 80%)`,
+                    }}
+                  >
+                    <span
+                      className="relative font-display text-[72px] font-bold select-none opacity-[0.08] group-hover:opacity-[0.15] transition-opacity duration-500"
+                      style={{ color: color.text }}
+                    >
+                      {step.number}
+                    </span>
                   </div>
-                  {/* Step content */}
+
+                  {/* Content */}
                   <div className="p-6">
                     <div className="flex items-center gap-3 mb-3">
-                      <div className="w-8 h-8 rounded-full bg-violet/10 flex items-center justify-center">
-                        <Icon size={16} className="text-violet" />
+                      <div
+                        className="w-8 h-8 rounded-full flex items-center justify-center"
+                        style={{ background: `${color.text}15` }}
+                      >
+                        <Icon
+                          size={16}
+                          style={{ color: color.text }}
+                        />
                       </div>
                       <h3 className="font-display text-[18px] font-semibold text-text-primary">
                         {step.title}
@@ -98,10 +111,10 @@ export function ProcessSection() {
                     </p>
                   </div>
                 </div>
-              </AnimateIn>
+              </StaggerItem>
             );
           })}
-        </div>
+        </StaggerContainer>
       </div>
     </section>
   );

@@ -4,23 +4,30 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Eye } from "lucide-react";
 import { projects, categories } from "@/data/projects";
 import { Section, SectionHeader } from "@/components/ui/section";
 import { AnimateIn, StaggerContainer, StaggerItem } from "@/components/ui/motion";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { getProjectLogo } from "@/components/ui/project-logos";
+import { PREVIEW_MAP } from "@/components/sections/project-reel";
+import { getCategoryColor } from "@/lib/tag-colors";
 
 const categoryMap: Record<string, string> = {
   All: "All",
   Hospitality: "Hospitality",
-  "Gastro": "Gastro",
+  Gastro: "Gastro",
   "Real Estate": "Real Estate",
   "E-Commerce": "E-Commerce",
   Technology: "Technology",
   "Non-Profit": "Non-Profit",
   Fitness: "Fitness",
-  Marketplace: "Marketplace",
+  Wellness: "Wellness",
+  Entertainment: "Entertainment",
+  Retail: "Retail",
+  Creative: "Creative",
+  "Art & Culture": "Art & Culture",
 };
 
 export default function WorkPage() {
@@ -92,46 +99,70 @@ export default function WorkPage() {
             >
               {filteredProjects.map((project) => (
                 <StaggerItem key={project.slug}>
-                  <Link
-                    href={`/work/${project.slug}`}
-                    className="group block"
-                  >
-                    <div className="relative overflow-hidden rounded-2xl bg-surface border border-border transition-all duration-500 hover:border-violet/40 hover:shadow-2xl hover:shadow-violet/5">
-                      {/* Image */}
-                      <div className="relative aspect-[16/10] overflow-hidden">
-                        <Image
-                          src={project.image}
-                          alt={project.title}
-                          width={800}
-                          height={500}
-                          className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-105"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-
-                        {/* Category Tag */}
-                        <div className="absolute top-4 left-4">
-                          <span className="px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider bg-black/50 backdrop-blur-sm text-white border border-white/10">
-                            {project.categoryTag}
-                          </span>
+                  <div className="group relative overflow-hidden rounded-2xl bg-surface border border-border transition-all duration-500 hover:border-violet/40 hover:shadow-2xl hover:shadow-violet/5">
+                      {/* Preview — mini homepage or image fallback */}
+                      <Link href={`/work/${project.slug}`} className="block">
+                        <div className="relative aspect-[16/10] overflow-hidden">
+                          {project.demoSlug && PREVIEW_MAP[project.demoSlug] ? (
+                            (() => {
+                              const Preview = PREVIEW_MAP[project.demoSlug!];
+                              return <Preview />;
+                            })()
+                          ) : (
+                            <>
+                              <Image
+                                src={project.image}
+                                alt={project.title}
+                                width={800}
+                                height={500}
+                                className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-105"
+                              />
+                              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                            </>
+                          )}
+                          {/* Tag removed from preview — shown in content area below */}
+                          <div className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/10 flex items-center justify-center opacity-0 translate-y-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0">
+                            <ArrowUpRight className="w-5 h-5 text-white" />
+                          </div>
                         </div>
-
-                        {/* Arrow */}
-                        <div className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/10 flex items-center justify-center opacity-0 translate-y-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0">
-                          <ArrowUpRight className="w-5 h-5 text-white" />
-                        </div>
-                      </div>
+                      </Link>
 
                       {/* Content */}
-                      <div className="p-6">
-                        <h3 className="font-display text-xl font-semibold text-text-primary group-hover:text-violet transition-colors duration-300">
-                          {project.client}
-                        </h3>
-                        <p className="mt-2 text-text-secondary text-sm">
-                          {project.resultHighlight}
-                        </p>
+                      <div className="px-5 py-4">
+                        {/* Tag + Preview button row */}
+                        <div className="flex items-center justify-between mb-3">
+                          {(() => {
+                            const cc = getCategoryColor(project.categoryTag, 0);
+                            return (
+                              <span
+                                className="px-2 py-0.5 rounded-sm text-[8px] font-bold uppercase tracking-[0.12em]"
+                                style={{ background: cc.bg, color: cc.text, border: `1px solid ${cc.border}` }}
+                              >
+                                {project.categoryTag}
+                              </span>
+                            );
+                          })()}
+                          {project.demoSlug && (
+                            <Link
+                              href={`/demos/${project.demoSlug}`}
+                              className="flex items-center gap-1.5 px-3 py-1 rounded-full text-[9px] font-semibold uppercase tracking-[0.08em] bg-gradient-to-r from-violet to-cyan text-white hover:shadow-[0_0_15px_rgba(124,58,237,0.25)] transition-all duration-300"
+                            >
+                              <Eye size={11} />
+                              Preview
+                            </Link>
+                          )}
+                        </div>
+                        {/* Title + metric */}
+                        <Link href={`/work/${project.slug}`} className="block">
+                          <h3 className="font-display text-lg font-semibold text-text-primary group-hover:text-violet transition-colors duration-300 leading-tight">
+                            {project.client}
+                          </h3>
+                          <p className="mt-1.5 text-text-secondary text-xs">
+                            {project.resultHighlight}
+                          </p>
+                        </Link>
                       </div>
                     </div>
-                  </Link>
                 </StaggerItem>
               ))}
             </StaggerContainer>

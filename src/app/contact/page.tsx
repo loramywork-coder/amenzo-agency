@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -64,8 +65,18 @@ export default function ContactPage() {
   return (
     <>
       {/* Hero */}
-      <section className="pt-40 pb-20 bg-bg">
-        <div className="container-wide">
+      <section className="relative pt-40 pb-20 bg-bg overflow-hidden">
+        <div className="absolute inset-0">
+          <Image
+            src="https://images.unsplash.com/photo-1423666639041-f56000c27a9a?w=1920&q=85"
+            alt="Contact us"
+            fill
+            className="object-cover"
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-bg/85" />
+        </div>
+        <div className="container-wide relative z-10">
           <AnimateIn animation="fadeUp">
             <p className="caption mb-4 text-violet">CONTACT</p>
           </AnimateIn>

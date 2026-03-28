@@ -20,6 +20,8 @@
   --color-coral: #F97068;
   --color-success: #22C55E;
   --color-warning: #F59E0B;
+  --color-amber: #F59E0B;
+  --color-amber-light: #FBBF24;
 
   /* Light surfaces */
   --color-light-bg: #FAFAFA;
@@ -211,6 +213,44 @@ p, li, span {
 }
 .link-underline:hover::after {
   transform: scaleX(1);
+}
+
+/* ================================================
+   GLOW EFFECTS — FUTURISTIC AMBIENT LIGHTING
+   ================================================ */
+
+.glow-border {
+  position: relative;
+  z-index: 0;
+}
+.glow-border::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: radial-gradient(ellipse at 50% 0%, rgba(124,58,237,0.25), transparent 70%);
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  filter: blur(20px);
+}
+.glow-border:hover::before {
+  opacity: 1;
+}
+
+.card-float {
+  box-shadow:
+    0 0 0 1px rgba(30,30,30,0.8),
+    0 20px 60px -15px rgba(0,0,0,0.5),
+    0 0 40px -10px rgba(124,58,237,0.08);
+  transition: box-shadow 0.4s ease, transform 0.4s ease;
+}
+.card-float:hover {
+  box-shadow:
+    0 0 0 1px rgba(60,60,60,0.8),
+    0 25px 70px -15px rgba(0,0,0,0.6),
+    0 0 60px -10px rgba(124,58,237,0.18);
+  transform: translateY(-6px);
 }
 
 /* ================================================

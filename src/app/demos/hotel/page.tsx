@@ -42,9 +42,7 @@ export default function HotelDemo() {
       {/* Demo Banner */}
       <div className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-[#7C3AED] to-[#06B6D4] text-white text-center py-2 text-sm">
         This is an <strong>AMENZO</strong> design preview.{" "}
-        <a href="/start-project" className="underline font-semibold">
-          Want something like this? Get a Quote &rarr;
-        </a>
+        <a href="/work" className="underline font-medium opacity-80 hover:opacity-100">View All Previews</a>{" · "}<a href="/start-project?industry=Hotels+%26+Resorts&service=new-website&ref=Grand+Harbour+Hotel" className="underline font-semibold">Get a Quote &rarr;</a>
       </div>
 
       {/* Navigation */}
@@ -217,7 +215,7 @@ export default function HotelDemo() {
               className="relative h-[500px]"
             >
               <Image
-                src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=3840&q=90"
+                src="https://images.unsplash.com/photo-1544025162-d76694265947?w=3840&q=90"
                 alt="The Harbour Table dining room"
                 fill
                 className="object-cover"
@@ -227,43 +225,105 @@ export default function HotelDemo() {
         </div>
       </section>
 
-      {/* Booking CTA */}
-      <section id="booking" className="py-24 text-center">
-        <div className="max-w-3xl mx-auto px-6">
+      {/* Book Your Stay */}
+      <section id="booking" className="py-24">
+        <div className="max-w-4xl mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <p className="text-[#C9A96E] tracking-[0.3em] uppercase text-sm mb-3">Your Stay Awaits</p>
-            <h2 className="text-4xl md:text-5xl font-light tracking-wide mb-6" style={{ fontFamily: "var(--font-display)" }}>
-              Book Your Experience
-            </h2>
-            <p className="text-[#F5F0E8]/60 mb-8 leading-relaxed">
-              Whether for a romantic getaway, a family holiday, or a business retreat, Grand Harbour Hotel
-              promises an experience that lingers in memory long after departure.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center bg-[#141414] border border-[#C9A96E]/20 p-6 max-w-2xl mx-auto">
-              <div className="flex items-center gap-2 text-sm text-[#F5F0E8]/60">
-                <Calendar size={16} className="text-[#C9A96E]" />
-                <input type="date" className="bg-transparent border border-[#C9A96E]/20 px-3 py-2 text-[#F5F0E8] text-sm" />
+            <div className="text-center mb-12">
+              <p className="text-[#C9A96E] tracking-[0.3em] uppercase text-sm mb-3">Your Stay Awaits</p>
+              <h2 className="text-4xl md:text-5xl font-light tracking-wide mb-4" style={{ fontFamily: "var(--font-display)" }}>
+                Book Your Stay
+              </h2>
+              <p className="text-[#F5F0E8]/60 leading-relaxed max-w-xl mx-auto">
+                Whether for a romantic getaway, a family holiday, or a business retreat, Grand Harbour Hotel
+                promises an experience that lingers in memory long after departure.
+              </p>
+            </div>
+
+            <div className="bg-[#141414] border border-[#C9A96E]/20 p-8 md:p-10">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div>
+                  <label className="block text-xs tracking-[0.2em] uppercase text-[#C9A96E] mb-2">Check-in Date</label>
+                  <div className="relative">
+                    <Calendar size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#C9A96E]" />
+                    <input
+                      type="date"
+                      className="w-full bg-[#0D0D0D] border border-[#C9A96E]/20 pl-10 pr-4 py-3 text-[#F5F0E8] text-sm focus:outline-none focus:border-[#C9A96E]/50 transition-colors"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-xs tracking-[0.2em] uppercase text-[#C9A96E] mb-2">Check-out Date</label>
+                  <div className="relative">
+                    <Calendar size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#C9A96E]" />
+                    <input
+                      type="date"
+                      className="w-full bg-[#0D0D0D] border border-[#C9A96E]/20 pl-10 pr-4 py-3 text-[#F5F0E8] text-sm focus:outline-none focus:border-[#C9A96E]/50 transition-colors"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-xs tracking-[0.2em] uppercase text-[#C9A96E] mb-2">Number of Guests</label>
+                  <select defaultValue="2" className="w-full bg-[#0D0D0D] border border-[#C9A96E]/20 px-4 py-3 text-[#F5F0E8] text-sm focus:outline-none focus:border-[#C9A96E]/50 transition-colors appearance-none cursor-pointer">
+                    <option value="1">1 Guest</option>
+                    <option value="2">2 Guests</option>
+                    <option value="3">3 Guests</option>
+                    <option value="4">4 Guests</option>
+                    <option value="5">5 Guests</option>
+                    <option value="6">6 Guests</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-xs tracking-[0.2em] uppercase text-[#C9A96E] mb-2">Room Type</label>
+                  <select className="w-full bg-[#0D0D0D] border border-[#C9A96E]/20 px-4 py-3 text-[#F5F0E8] text-sm focus:outline-none focus:border-[#C9A96E]/50 transition-colors appearance-none cursor-pointer">
+                    <option>Deluxe Room</option>
+                    <option>Junior Suite</option>
+                    <option>Presidential Suite</option>
+                  </select>
+                </div>
               </div>
-              <div className="flex items-center gap-2 text-sm text-[#F5F0E8]/60">
-                <Calendar size={16} className="text-[#C9A96E]" />
-                <input type="date" className="bg-transparent border border-[#C9A96E]/20 px-3 py-2 text-[#F5F0E8] text-sm" />
-              </div>
-              <select className="bg-transparent border border-[#C9A96E]/20 px-3 py-2 text-[#F5F0E8] text-sm">
-                <option>2 Guests</option>
-                <option>1 Guest</option>
-                <option>3 Guests</option>
-                <option>4 Guests</option>
-              </select>
-              <button className="bg-[#C9A96E] text-[#0D0D0D] px-8 py-2.5 text-sm tracking-wider uppercase font-semibold hover:bg-[#B8955E] transition-colors whitespace-nowrap">
-                Check Availability
+              <button
+                onClick={() => alert("This is a demo \u2014 in a real implementation, this would check live availability.")}
+                className="w-full bg-[#C9A96E] text-[#0D0D0D] py-4 text-sm tracking-[0.2em] uppercase font-semibold hover:bg-[#B8955E] transition-colors flex items-center justify-center gap-2"
+              >
+                <Calendar size={16} /> Check Availability
               </button>
+              <p className="text-center text-xs text-[#F5F0E8]/30 mt-4">Best rate guaranteed when you book directly with us</p>
             </div>
           </motion.div>
+        </div>
+      </section>
+
+      {/* Find Us */}
+      <section className="py-24">
+        <div className="max-w-5xl mx-auto px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-10"
+          >
+            <p className="text-[#C9A96E] tracking-[0.3em] uppercase text-sm mb-3">Location</p>
+            <h2 className="text-4xl md:text-5xl font-light tracking-wide" style={{ fontFamily: "var(--font-display)" }}>
+              Find Us
+            </h2>
+          </motion.div>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3231.8!2d14.5148!3d35.8978!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzXCsDUzJzUyLjEiTiAxNMKwMzAnNTMuMyJF!5e0!3m2!1sen!2smt!4v1"
+            width="100%"
+            height="300"
+            style={{ border: 0, borderRadius: '12px', filter: 'grayscale(0.3) contrast(1.1)' }}
+            allowFullScreen
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            title="Grand Harbour Hotel Location"
+          />
         </div>
       </section>
 

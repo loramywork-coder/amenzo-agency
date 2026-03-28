@@ -39,9 +39,7 @@ export default function NgoDemo() {
       {/* Demo Banner */}
       <div className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-[#7C3AED] to-[#06B6D4] text-white text-center py-2 text-sm">
         This is an <strong>AMENZO</strong> design preview.{" "}
-        <a href="/start-project" className="underline font-semibold">
-          Want something like this? Get a Quote &rarr;
-        </a>
+        <a href="/work" className="underline font-medium opacity-80 hover:opacity-100">View All Previews</a>{" · "}<a href="/start-project?industry=NGO+%2F+Non-Profit&service=new-website&ref=Swiss+Health+Alliance" className="underline font-semibold">Get a Quote &rarr;</a>
       </div>
 
       {/* Navigation */}
@@ -257,6 +255,34 @@ export default function NgoDemo() {
           <p className="text-[#16A34A] font-semibold">Amina Osei</p>
           <p className="text-sm text-[#1A2E1A]/40">Community Leader, Ashanti Region, Ghana</p>
         </motion.div>
+      </section>
+
+      {/* Our Location */}
+      <section className="bg-[#F0F7EC] py-24">
+        <div className="max-w-5xl mx-auto px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-10"
+          >
+            <span className="text-[#16A34A] font-semibold uppercase tracking-widest text-sm">Headquarters</span>
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tight mt-3" style={{ fontFamily: "var(--font-display)" }}>
+              Our Location
+            </h2>
+          </motion.div>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2761.0!2d6.1432!3d46.2044!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDbCsDEyJzE1LjgiTiA2wrAwOCczNS41IkU!5e0!3m2!1sen!2sch!4v1"
+            width="100%"
+            height="300"
+            style={{ border: 0, borderRadius: '12px', filter: 'grayscale(0.3) contrast(1.1)' }}
+            allowFullScreen
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            title="Swiss Health Alliance Headquarters"
+          />
+        </div>
       </section>
 
       {/* Footer */}

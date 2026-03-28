@@ -3,7 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Search, MapPin, Bed, Bath, Maximize, Heart, Phone, Mail, ChevronDown } from "lucide-react";
+import { Search, MapPin, Bed, Bath, Maximize, Heart, Phone, Mail, ChevronDown, X, Calendar } from "lucide-react";
+import { useState } from "react";
 
 const properties = [
   {
@@ -14,7 +15,7 @@ const properties = [
     beds: 3,
     baths: 2,
     area: "185m\u00B2",
-    image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=3840&q=90",
+    image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920&q=85",
     tag: "Featured",
   },
   {
@@ -25,7 +26,7 @@ const properties = [
     beds: 4,
     baths: 3,
     area: "280m\u00B2",
-    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=3840&q=90",
+    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&q=85",
     tag: "New",
   },
   {
@@ -36,7 +37,7 @@ const properties = [
     beds: 2,
     baths: 1,
     area: "95m\u00B2",
-    image: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=3840&q=90",
+    image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1920&q=85",
     tag: null,
   },
   {
@@ -47,7 +48,7 @@ const properties = [
     beds: 5,
     baths: 3,
     area: "320m\u00B2",
-    image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=3840&q=90",
+    image: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1920&q=85",
     tag: "Premium",
   },
 ];
@@ -60,14 +61,69 @@ const stats = [
 ];
 
 export default function RealEstateDemo() {
+  const [activeType, setActiveType] = useState("Buy");
+  const [activePrice, setActivePrice] = useState("Any Price");
+  const [viewingProperty, setViewingProperty] = useState<number | null>(null);
+  const [favorites, setFavorites] = useState<number[]>([]);
+
+  const toggleFavorite = (id: number) => {
+    setFavorites((prev) => prev.includes(id) ? prev.filter((f) => f !== id) : [...prev, id]);
+  };
+
   return (
     <div className="min-h-screen bg-[#F8F9FC] text-[#1A1D2B]">
+      {/* Schedule Viewing Modal */}
+      {viewingProperty !== null && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-black/40" onClick={() => setViewingProperty(null)} />
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="relative bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 z-10"
+          >
+            <button onClick={() => setViewingProperty(null)} className="absolute top-4 right-4 text-[#1A1D2B]/40 hover:text-[#1A1D2B]">
+              <X size={20} />
+            </button>
+            <h3 className="text-xl font-bold mb-1" style={{ fontFamily: "var(--font-display)" }}>Schedule a Viewing</h3>
+            <p className="text-sm text-[#1A1D2B]/50 mb-6">
+              {properties.find((p) => p.id === viewingProperty)?.title}
+            </p>
+            <div className="space-y-4">
+              <div>
+                <label className="text-sm font-medium text-[#1A1D2B]/60 block mb-1">Full Name</label>
+                <input type="text" placeholder="Your name" className="w-full bg-[#F8F9FC] border border-[#E2E5EF] rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20" />
+              </div>
+              <div>
+                <label className="text-sm font-medium text-[#1A1D2B]/60 block mb-1">Email</label>
+                <input type="email" placeholder="you@example.com" className="w-full bg-[#F8F9FC] border border-[#E2E5EF] rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20" />
+              </div>
+              <div>
+                <label className="text-sm font-medium text-[#1A1D2B]/60 block mb-1">Preferred Date</label>
+                <input type="date" className="w-full bg-[#F8F9FC] border border-[#E2E5EF] rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20" />
+              </div>
+              <div>
+                <label className="text-sm font-medium text-[#1A1D2B]/60 block mb-1">Preferred Time</label>
+                <select className="w-full bg-[#F8F9FC] border border-[#E2E5EF] rounded-lg px-4 py-3 text-sm text-[#1A1D2B]/60 focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20">
+                  <option>Morning (9:00 - 12:00)</option>
+                  <option>Afternoon (12:00 - 17:00)</option>
+                  <option>Evening (17:00 - 20:00)</option>
+                </select>
+              </div>
+              <button
+                onClick={() => { alert("This is a demo \u2014 in a real implementation, this would schedule your viewing."); setViewingProperty(null); }}
+                className="w-full bg-[#2563EB] text-white py-3 text-sm font-semibold rounded-lg hover:bg-[#1D4ED8] transition-colors"
+              >
+                Request Viewing
+              </button>
+            </div>
+          </motion.div>
+        </div>
+      )}
+
       {/* Demo Banner */}
       <div className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-[#7C3AED] to-[#06B6D4] text-white text-center py-2 text-sm">
         This is an <strong>AMENZO</strong> design preview.{" "}
-        <a href="/start-project" className="underline font-semibold">
-          Want something like this? Get a Quote &rarr;
-        </a>
+        <a href="/work" className="underline font-medium opacity-80 hover:opacity-100">View All Previews</a>{" · "}<a href="/start-project?industry=Real+Estate&service=new-website&ref=MaltaLiving" className="underline font-semibold">Get a Quote &rarr;</a>
       </div>
 
       {/* Navigation */}
@@ -132,16 +188,36 @@ export default function RealEstateDemo() {
                 />
               </div>
               <div className="flex gap-3">
-                <select className="bg-[#F8F9FC] px-4 py-3 rounded-lg text-sm text-[#1A1D2B]/60 focus:outline-none appearance-none cursor-pointer">
-                  <option>Buy</option>
-                  <option>Rent</option>
-                </select>
-                <select className="bg-[#F8F9FC] px-4 py-3 rounded-lg text-sm text-[#1A1D2B]/60 focus:outline-none appearance-none cursor-pointer">
-                  <option>Any Price</option>
-                  <option>&euro;200k &ndash; &euro;500k</option>
-                  <option>&euro;500k &ndash; &euro;1M</option>
-                  <option>&euro;1M+</option>
-                </select>
+                <div className="flex bg-[#F8F9FC] rounded-lg overflow-hidden">
+                  {["Buy", "Rent"].map((type) => (
+                    <button
+                      key={type}
+                      onClick={() => setActiveType(type)}
+                      className={`px-5 py-3 text-sm font-medium transition-colors ${
+                        activeType === type
+                          ? "bg-[#2563EB] text-white"
+                          : "text-[#1A1D2B]/60 hover:text-[#1A1D2B]"
+                      }`}
+                    >
+                      {type}
+                    </button>
+                  ))}
+                </div>
+                <div className="flex bg-[#F8F9FC] rounded-lg overflow-hidden">
+                  {["Any Price", "\u20AC200k\u2013\u20AC500k", "\u20AC500k\u2013\u20AC1M", "\u20AC1M+"].map((price) => (
+                    <button
+                      key={price}
+                      onClick={() => setActivePrice(price)}
+                      className={`px-4 py-3 text-sm font-medium transition-colors whitespace-nowrap ${
+                        activePrice === price
+                          ? "bg-[#2563EB] text-white"
+                          : "text-[#1A1D2B]/60 hover:text-[#1A1D2B]"
+                      }`}
+                    >
+                      {price}
+                    </button>
+                  ))}
+                </div>
                 <button className="bg-[#2563EB] text-white px-8 py-3 text-sm font-semibold rounded-lg hover:bg-[#1D4ED8] transition-colors whitespace-nowrap flex items-center gap-2">
                   <Search size={16} /> Search
                 </button>
@@ -204,8 +280,11 @@ export default function RealEstateDemo() {
                     {property.tag}
                   </span>
                 )}
-                <button className="absolute top-4 right-4 w-9 h-9 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors shadow-sm">
-                  <Heart size={16} className="text-[#1A1D2B]/50" />
+                <button
+                  onClick={() => toggleFavorite(property.id)}
+                  className="absolute top-4 right-4 w-9 h-9 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors shadow-sm"
+                >
+                  <Heart size={16} className={favorites.includes(property.id) ? "fill-[#EF4444] text-[#EF4444]" : "text-[#1A1D2B]/50"} />
                 </button>
               </div>
               <div className="p-6">
@@ -228,8 +307,11 @@ export default function RealEstateDemo() {
                   <span className="flex items-center gap-1.5 text-sm text-[#1A1D2B]/60">
                     <Maximize size={16} className="text-[#2563EB]" /> {property.area}
                   </span>
-                  <button className="ml-auto text-sm text-[#2563EB] font-semibold hover:underline">
-                    View Details
+                  <button
+                    onClick={() => setViewingProperty(property.id)}
+                    className="ml-auto bg-[#2563EB] text-white px-4 py-1.5 text-sm font-semibold rounded-lg hover:bg-[#1D4ED8] transition-colors flex items-center gap-1"
+                  >
+                    <Calendar size={14} /> Schedule Viewing
                   </button>
                 </div>
               </div>
@@ -242,6 +324,30 @@ export default function RealEstateDemo() {
             View All Properties
           </button>
         </div>
+      </section>
+
+      {/* Our Office */}
+      <section className="max-w-5xl mx-auto px-6 pb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-8"
+        >
+          <h2 className="text-2xl font-bold" style={{ fontFamily: "var(--font-display)" }}>Visit Our Office</h2>
+          <p className="text-sm text-[#1A1D2B]/40 mt-1">Find us in the heart of St Julian&apos;s</p>
+        </motion.div>
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3231.5!2d14.4904!3d35.9180!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzXCsDU1JzA0LjgiTiAxNMKwMjknMjUuNCJF!5e0!3m2!1sen!2smt!4v1"
+          width="100%"
+          height="300"
+          style={{ border: 0, borderRadius: '12px', filter: 'grayscale(0.3) contrast(1.1)' }}
+          allowFullScreen
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+          title="MaltaLiving Office Location"
+        />
       </section>
 
       {/* CTA */}

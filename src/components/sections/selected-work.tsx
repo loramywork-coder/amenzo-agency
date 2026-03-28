@@ -14,9 +14,9 @@ export function SelectedWork() {
   return (
     <Section id="work">
       <SectionHeader
-        caption="WHAT WE BUILD"
-        title="Selected Work"
-        subtitle="A showcase of our design capabilities across industries."
+        caption="PORTFOLIO"
+        title="Built different. On purpose."
+        subtitle="Real results. Real design. See what we ship."
       />
 
       <div className="space-y-8">

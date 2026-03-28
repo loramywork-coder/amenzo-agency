@@ -91,29 +91,29 @@ At this price, you\u2019re getting a WordPress theme or a Wix site. Someone inst
 
 **Right for:** Businesses that just need a basic online presence and don\u2019t compete on digital experience.
 
-## The \u20AC1,500\u2013\u20AC5,000 Range: Custom Design
+## The \u20AC750\u2013\u20AC2,000 Range: Basic to Standard
 
 This is where real design begins. A good agency will design your site from scratch, build it with modern technology, and deliver something that genuinely represents your brand.
 
-**What you get:** Custom design tailored to your brand, mobile-first development, SEO foundation, performance optimisation, content management, and 1\u201315 pages.
+**What you get:** Custom design tailored to your brand, mobile-first development, SEO foundation, 2 languages, and 1\u201310 pages.
 
 **What you don\u2019t get:** Complex functionality like booking systems, e-commerce, or user accounts.
 
 **Right for:** Small to medium businesses serious about standing out.
 
-## The \u20AC5,000\u2013\u20AC15,000 Range: Premium Solutions
+## The \u20AC2,000\u2013\u20AC4,000 Range: Premium Solutions
 
-Sites that actively drive business results. Complex functionality, integrations, and design that makes competitors nervous.
+Sites that actively drive business results. Advanced features, multilingual support, and design that makes competitors nervous.
 
-**What you get:** Everything above plus e-commerce or booking systems, custom animations, multilingual support, third-party integrations, and Lighthouse scores above 95.
+**What you get:** Everything above plus booking forms, galleries, donation pages, custom animations, 3+ languages, and Lighthouse scores above 95.
 
 **Right for:** Businesses that see their website as a primary revenue driver.
 
-## The \u20AC15,000+ Range: Platforms
+## The \u20AC5,000\u2013\u20AC8,000 Range: Custom Builds
 
-Custom web applications, marketplaces, and complex platforms with multiple user types, API integrations, and architecture built for scale.
+E-commerce platforms, marketplace sites, and complex builds with payment processing, API integrations, and architecture built for scale.
 
-**Right for:** Companies building products, marketplaces, or enterprise tools.
+**Right for:** Companies building online stores, marketplaces, or bespoke digital platforms.
 
 ## Why the Same Project Can Cost \u20AC800 or \u20AC8,000
 
@@ -199,7 +199,7 @@ The web moved on. We moved with it.`,
     date: "2026-02-20",
     readTime: "5 min read",
     image:
-      "https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=3840&q=90",
+      "https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?w=3840&q=90",
     content: `You\u2019ve seen the difference. Some brands look polished on every touchpoint \u2014 their website, their Instagram, their emails, their proposals. Others look like each piece was designed by a different person on a different day.
 
 The difference is a design system.
@@ -262,7 +262,7 @@ Then build from there. The key is documenting decisions so they don\u2019t need 
     date: "2026-02-12",
     readTime: "7 min read",
     image:
-      "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=3840&q=90",
+      "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=3840&q=90",
     content: `A landing page has one job: convert a visitor into a lead or customer. No navigation distractions, no blog sidebar, no "explore our services." One page. One goal.
 
 Here are the 7 elements that make the difference.

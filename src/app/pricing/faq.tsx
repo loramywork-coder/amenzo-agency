@@ -6,34 +6,44 @@ import { AnimateIn } from "@/components/ui/motion";
 
 const FAQ_ITEMS = [
   {
-    question: "How does the pricing work? Are there any hidden fees?",
+    question: "How much does a website cost?",
     answer:
-      "Our pricing is completely transparent. The price you see is the price you pay. All tiers include design, development, and launch. The only additional costs would be optional add-ons that you choose, third-party services like premium stock photography, or domain registration. We will never surprise you with hidden charges.",
+      "Our packages start at EUR 750 for a basic 5-page website. A standard business website with custom design and 2 languages is EUR 2,000. Premium multilingual sites with advanced features are EUR 4,000. Complex projects like e-commerce platforms range from EUR 5,000 to EUR 8,000. Every project gets a fixed quote — no hourly billing, no surprises.",
   },
   {
-    question: "What is your payment structure?",
+    question: "What's the difference between Basic and Standard?",
     answer:
-      "We require a 50% deposit to begin work, with the remaining 50% due upon delivery before the site goes live. For projects over EUR 3,000, we offer payment plans split into three milestones: 40% to start, 30% at design approval, and 30% at launch. Enterprise projects have custom payment terms.",
+      "Basic (EUR 750) is a clean, professional site built from content you provide. No demo, no design consultation — just fast, quality output. Standard (EUR 2,000) includes custom design, we help structure your content, you get a preview before launch, and 2 rounds of revisions. Standard is our most popular package.",
   },
   {
-    question: "How long does a typical project take?",
+    question: "Do I get to see the site before it goes live?",
     answer:
-      "Timelines depend on the tier and scope. Starter projects typically take 2 weeks, Professional projects 3 weeks, and Premium projects 3-4 weeks. Enterprise projects are scoped individually. These timelines assume prompt feedback from your side. We will agree on a detailed timeline before starting.",
+      "For Basic: no — you provide content, we build, you review and approve. For Standard: yes, you get a preview link. For Premium and Custom: yes, plus dedicated revision rounds to refine everything before launch.",
   },
   {
-    question: "What if I need changes after launch?",
+    question: "Do you take a deposit?",
     answer:
-      "Every tier includes post-launch support (30 days to 12 months depending on tier). During this period, we handle bug fixes and minor content updates at no extra cost. For ongoing changes beyond the support period, we offer maintenance packages starting at EUR 80 per month. Larger feature additions are quoted separately.",
+      "For Basic (EUR 750): full payment on signing — it is a small, fast project. For Standard and above: 50% deposit on signing, 50% on launch.",
+  },
+  {
+    question: "What about ongoing costs?",
+    answer:
+      "After launch, we offer optional hosting and maintenance (EUR 80/month) and priority support (EUR 200/month). You can choose one, both, or neither. If you choose no ongoing services, we hand over everything and you manage it yourself.",
+  },
+  {
+    question: "Can I upgrade my package later?",
+    answer:
+      "Yes. If you start with Basic and want to add languages, a blog, or more pages later, we quote the additional work separately. Many clients start Basic and upgrade to Standard within 6 months.",
+  },
+  {
+    question: "How do you compare to other agencies in Malta?",
+    answer:
+      "Malta agencies typically charge EUR 775 to EUR 2,600 or more for similar work, often using WordPress templates. We build everything custom with modern technology (Next.js, React) — faster sites, better SEO, no plugin bloat. You get agency-quality output at competitive prices.",
   },
   {
     question: "Do I own the code and design files?",
     answer:
       "Absolutely. Once the project is paid in full, you own 100% of the code, design files, and all assets we create for you. We provide full access to the Git repository, Figma files, and any other deliverables. No lock-in, no proprietary systems, no hostage situations.",
-  },
-  {
-    question: "Can I switch tiers or upgrade mid-project?",
-    answer:
-      "Yes. If your needs evolve during the project, we can adjust the scope and pricing accordingly. We will provide a clear change order outlining the additional work, cost difference, and any impact on the timeline. You will never be locked into a tier that no longer fits.",
   },
   {
     question: "What technologies do you use?",
@@ -44,16 +54,6 @@ const FAQ_ITEMS = [
     question: "Do you work with clients outside Malta?",
     answer:
       "Absolutely. While we are based in Malta, we work with clients across Europe, the UK, and beyond. All communication happens over video calls, Slack, and email. Our process is designed for remote collaboration, and timezone differences have never been an issue.",
-  },
-  {
-    question: "What if I am not happy with the design?",
-    answer:
-      "We work closely with you throughout the design process to ensure alignment. Each tier includes revision rounds (1 for Starter, 3 for Professional, unlimited for Premium and Enterprise). If after revisions you are still not satisfied, we will work with you until we get it right. Our goal is your success.",
-  },
-  {
-    question: "Do you offer refunds?",
-    answer:
-      "If we have not started design work, we offer a full refund of your deposit. Once design work has begun, the deposit is non-refundable as it covers the discovery and design phase. However, in our entire history, we have never had a client request a refund, and we intend to keep it that way.",
   },
 ] as const;
 

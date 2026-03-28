@@ -33,18 +33,17 @@ export function AboutTeaser() {
                 About Amenzo
               </p>
               <h2 className="font-display text-[32px] md:text-[36px] font-bold text-text-primary tracking-[-0.02em] leading-[1.15] mb-8">
-                We don&apos;t build websites. We build competitive advantages.
+                Not an agency. A growth partner.
               </h2>
               <div className="space-y-5 text-[17px] text-[#B0B0B0] leading-[1.7]">
                 <p>
-                  Amenzo is a premium digital agency. We design and develop
-                  custom websites that transform how businesses connect
-                  with their customers.
+                  We build websites that convert visitors into customers.
+                  No templates. No page builders. Every line of code is
+                  written for your business.
                 </p>
                 <p>
-                  We work with hotels, restaurants, startups, enterprises, and
-                  everything in between. No templates. No themes. Every pixel
-                  is hand-crafted.
+                  Hotels, restaurants, startups, enterprises — if your
+                  brand matters, your website should prove it.
                 </p>
                 <p>
                   Using cutting-edge technology and obsessive attention to

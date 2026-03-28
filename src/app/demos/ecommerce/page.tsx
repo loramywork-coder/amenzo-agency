@@ -12,7 +12,7 @@ const products = [
     name: "Extra Virgin Olive Oil",
     description: "Cold-pressed from Maltese Bidni olives, first harvest 2025. Rich, peppery finish.",
     price: 24.90,
-    image: "https://images.unsplash.com/photo-1474979266404-7f28db3e3c2f?w=3840&q=90",
+    image: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=85",
     category: "Pantry",
   },
   {
@@ -20,7 +20,7 @@ const products = [
     name: "Wildflower Honey",
     description: "Raw, unfiltered honey from Gozo's wild thyme and borage fields. 340g glass jar.",
     price: 18.50,
-    image: "https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=3840&q=90",
+    image: "https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=800&q=85",
     category: "Pantry",
   },
   {
@@ -28,7 +28,7 @@ const products = [
     name: "Hand-Thrown Ceramic Bowl",
     description: "Artisan stoneware bowl in Mediterranean blue glaze. Handmade in Ta\u2019Qali crafts village.",
     price: 42.00,
-    image: "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=3840&q=90",
+    image: "https://images.unsplash.com/photo-1610701596007-11502861dcfa?w=800&q=85",
     category: "Homeware",
   },
   {
@@ -36,7 +36,7 @@ const products = [
     name: "Sea Salt Flakes",
     description: "Hand-harvested from the Marsaskala salt pans. Delicate, mineral-rich finishing salt. 200g.",
     price: 12.90,
-    image: "https://images.unsplash.com/photo-1518110925495-5fe2c8215c3e?w=3840&q=90",
+    image: "https://images.unsplash.com/photo-1588315029754-2dd089d39a1a?w=800&q=85",
     category: "Pantry",
   },
   {
@@ -44,7 +44,7 @@ const products = [
     name: "Woven Linen Napkins (Set of 4)",
     description: "Stonewashed European linen in natural ecru. Pre-shrunk, softens with every wash.",
     price: 36.00,
-    image: "https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=3840&q=90",
+    image: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800&q=85",
     category: "Homeware",
   },
   {
@@ -52,7 +52,7 @@ const products = [
     name: "Sundried Tomato Spread",
     description: "Slow-roasted cherry tomatoes with capers, garlic, and Maltese herbs. 180g jar.",
     price: 9.90,
-    image: "https://images.unsplash.com/photo-1472476443507-c7a5948772fc?w=3840&q=90",
+    image: "https://images.unsplash.com/photo-1536304929831-ee1ca9d44906?w=800&q=85",
     category: "Pantry",
   },
 ];
@@ -85,9 +85,7 @@ export default function EcommerceDemo() {
       {/* Demo Banner */}
       <div className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-[#7C3AED] to-[#06B6D4] text-white text-center py-2 text-sm">
         This is an <strong>AMENZO</strong> design preview.{" "}
-        <a href="/start-project" className="underline font-semibold">
-          Want something like this? Get a Quote &rarr;
-        </a>
+        <a href="/work" className="underline font-medium opacity-80 hover:opacity-100">View All Previews</a>{" · "}<a href="/start-project?industry=E-Commerce+%2F+Retail&service=ecommerce&ref=Olive+%26+Stone" className="underline font-semibold">Get a Quote &rarr;</a>
       </div>
 
       {/* Navigation */}
@@ -176,20 +174,38 @@ export default function EcommerceDemo() {
       )}
 
       {/* Hero */}
-      <section className="pt-32 pb-16 px-6">
-        <div className="max-w-7xl mx-auto text-center">
+      <section className="relative pt-32 pb-20 px-6 overflow-hidden">
+        <Image
+          src="https://images.unsplash.com/photo-1506976785307-8732e854ad03?w=1920&q=85"
+          alt="Mediterranean artisan products"
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0 bg-[#2C1810]/70" />
+        <div className="relative max-w-7xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <p className="text-[#8B7355] tracking-[0.3em] uppercase text-sm mb-3">Artisan Goods from the Mediterranean</p>
-            <h1 className="text-4xl md:text-6xl font-light tracking-wide mb-4" style={{ fontFamily: "var(--font-display)" }}>
+            {/* SVG Logo */}
+            <svg viewBox="0 0 200 24" className="h-5 w-auto mx-auto mb-6" fill="none">
+              <text x="0" y="18" fontFamily="Georgia, serif" fontSize="16" fontStyle="italic" fill="#D4A574">Olive</text>
+              <text x="50" y="18" fontFamily="Arial, sans-serif" fontSize="10" fill="#D4A574" opacity="0.6">&amp;</text>
+              <text x="66" y="18" fontFamily="Arial, sans-serif" fontSize="14" fontWeight="600" fill="#F5F0E8" letterSpacing="3">STONE</text>
+            </svg>
+            <p className="text-[#D4A574] tracking-[0.3em] uppercase text-xs mb-4 font-medium">Artisan Goods from the Mediterranean</p>
+            <h1 className="text-4xl md:text-6xl font-light tracking-wide mb-4 text-[#F5F0E8]" style={{ fontFamily: "var(--font-display)" }}>
               Curated with Care
             </h1>
-            <p className="text-[#2C2416]/50 max-w-lg mx-auto">
+            <p className="text-[#F5F0E8]/60 max-w-lg mx-auto text-sm leading-relaxed">
               Handpicked artisan products from Malta and the Mediterranean. Every item tells a story of tradition, craft, and sun-soaked terroir.
             </p>
+            <div className="flex gap-3 justify-center mt-6">
+              <a href="#shop" className="px-6 py-2.5 text-xs tracking-[0.15em] uppercase font-semibold bg-[#D4A574] text-[#2C1810] hover:bg-[#C49464] transition-colors">Shop Now</a>
+              <a href="#about" className="px-6 py-2.5 text-xs tracking-[0.15em] uppercase font-medium border border-[#F5F0E8]/30 text-[#F5F0E8]/80 hover:border-[#F5F0E8]/50 transition-colors">Our Story</a>
+            </div>
           </motion.div>
         </div>
       </section>
@@ -262,6 +278,28 @@ export default function EcommerceDemo() {
               Subscribe
             </button>
           </div>
+        </div>
+      </section>
+
+      {/* Visit Us */}
+      <section className="py-16">
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="text-center mb-8">
+            <p className="text-[#8B7355] tracking-[0.3em] uppercase text-sm mb-2">Our Showroom</p>
+            <h2 className="text-3xl font-light tracking-wide" style={{ fontFamily: "var(--font-display)" }}>
+              Visit Us
+            </h2>
+          </div>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3231.2!2d14.5044!3d35.9125!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzXCsDU0JzQ1LjAiTiAxNMKwMzAnMTUuOCJF!5e0!3m2!1sen!2smt!4v1"
+            width="100%"
+            height="300"
+            style={{ border: 0, borderRadius: '12px', filter: 'grayscale(0.3) contrast(1.1)' }}
+            allowFullScreen
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            title="Olive & Stone Showroom Location"
+          />
         </div>
       </section>
 

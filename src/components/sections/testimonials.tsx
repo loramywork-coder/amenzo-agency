@@ -48,8 +48,8 @@ export function TestimonialsSection() {
       <div className="container-wide">
         <AnimateIn>
           <SectionHeader
-            caption="CLIENT LOVE"
-            title="What Our Clients Say"
+            caption="TESTIMONIALS"
+            title="Don't take our word for it."
             align="center"
           />
         </AnimateIn>

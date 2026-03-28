@@ -19,15 +19,14 @@ export function FinalCTA() {
       <div className="relative container-wide text-center py-28 md:py-36">
         <AnimateIn>
           <h2 className="font-display text-[36px] sm:text-[42px] md:text-[48px] font-bold text-text-primary tracking-[-0.02em] leading-[1.08] mb-6 max-w-[700px] mx-auto">
-            Ready to Build Something{" "}
-            <span className="gradient-text italic">Extraordinary?</span>
+            Let&apos;s build something{" "}
+            <span className="gradient-text italic">worth talking about.</span>
           </h2>
         </AnimateIn>
 
         <AnimateIn delay={0.2}>
           <p className="text-[18px] text-[#999] max-w-[480px] mx-auto mb-10 leading-relaxed">
-            Let&apos;s talk about your project. First consultation is free
-            and always will be.
+            Free consultation. No strings. Just a conversation about what&apos;s possible.
           </p>
         </AnimateIn>
 

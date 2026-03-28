@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { SITE_NAME, CONTACT_EMAIL } from "@/lib/constants";
 import {
   AnimateIn,
@@ -62,8 +63,8 @@ const SERVICE_DETAILS = [
       "Analytics and conversion tracking",
       "Launch support and post-launch QA",
     ],
-    timeline: "2-4 weeks",
-    price: "1,500",
+    timeline: "1-4 weeks",
+    price: "750",
     tags: ["Next.js", "React", "Tailwind", "TypeScript", "Vercel"],
   },
   {
@@ -82,8 +83,8 @@ const SERVICE_DETAILS = [
       "Mobile-first responsive design",
       "Conversion rate optimisation",
     ],
-    timeline: "3-6 weeks",
-    price: "3,500",
+    timeline: "4-6 weeks",
+    price: "4,000",
     tags: ["Shopify", "WooCommerce", "Stripe", "Custom"],
   },
   {
@@ -102,7 +103,7 @@ const SERVICE_DETAILS = [
       "Brand voice and tone guidelines",
     ],
     timeline: "2-3 weeks",
-    price: "2,000",
+    price: "800",
     tags: ["Logo Design", "Brand Strategy", "Visual Identity"],
   },
   {
@@ -122,7 +123,7 @@ const SERVICE_DETAILS = [
       "Developer handoff with specs and assets",
     ],
     timeline: "2-4 weeks",
-    price: "2,500",
+    price: "2,000",
     tags: ["Figma", "User Research", "Prototyping", "Design Systems"],
   },
   {
@@ -142,7 +143,7 @@ const SERVICE_DETAILS = [
       "Local SEO optimisation (Google Business)",
     ],
     timeline: "Ongoing monthly",
-    price: "500/mo",
+    price: "300/mo",
     tags: ["Technical SEO", "Core Web Vitals", "Schema", "Analytics"],
   },
   {
@@ -161,8 +162,8 @@ const SERVICE_DETAILS = [
       "A/B testing setup for key pages",
       "Launch plan and rollback strategy",
     ],
-    timeline: "3-5 weeks",
-    price: "1,200",
+    timeline: "2-4 weeks",
+    price: "750",
     tags: ["Audit", "Redesign", "Migration", "Optimisation"],
   },
   {
@@ -239,10 +240,23 @@ const SERVICE_DETAILS = [
       "Documentation and developer handoff",
     ],
     timeline: "4-8 weeks",
-    price: "5,000",
+    price: "4,000",
     tags: ["Next.js", "Supabase", "APIs", "Full-Stack"],
   },
 ] as const;
+
+const SERVICE_IMAGES = [
+  "https://images.unsplash.com/photo-1542744094-3a31f272c490?w=1920&q=85",
+  "https://images.unsplash.com/photo-1556742111-a301076d9d18?w=1920&q=85",
+  "https://images.unsplash.com/photo-1626785774573-4b799315345d?w=1920&q=85",
+  "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=1920&q=85",
+  "https://images.unsplash.com/photo-1533750349088-cd871a92f312?w=1920&q=85",
+  "https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=1920&q=85",
+  "https://images.unsplash.com/photo-1597852074816-d933c7d2b988?w=1920&q=85",
+  "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=1920&q=85",
+  "https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?w=1920&q=85",
+  "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=1920&q=85",
+];
 
 export default function ServicesPage() {
   return (
@@ -280,6 +294,18 @@ export default function ServicesPage() {
             id={service.title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}
             className={isEven ? "bg-bg" : "bg-surface"}
           >
+            <AnimateIn animation="fadeUp" className="mb-10">
+              <div className="relative aspect-video rounded-xl overflow-hidden">
+                <Image
+                  src={SERVICE_IMAGES[index]}
+                  alt={service.title}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+                <div className="absolute inset-0 bg-black/20" />
+              </div>
+            </AnimateIn>
             <div className="grid lg:grid-cols-2 gap-12 lg:gap-20">
               {/* Left: Info */}
               <AnimateIn animation="fadeUp">

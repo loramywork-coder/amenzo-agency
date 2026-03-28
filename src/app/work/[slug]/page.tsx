@@ -13,7 +13,29 @@ import { SITE_NAME } from "@/lib/constants";
 import { Section } from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
 import { AnimateIn, StaggerContainer, StaggerItem } from "@/components/ui/motion";
-import { getTagColor } from "@/lib/tag-colors";
+import { getTagColor, getCategoryColor } from "@/lib/tag-colors";
+import { getProjectLogo } from "@/components/ui/project-logos";
+import { CaseStudyHero } from "@/components/ui/case-study-hero";
+import { PoweredByChip } from "@/components/ui/powered-by";
+
+const TECH_URLS: Record<string, string> = {
+  "next.js": "https://nextjs.org",
+  "react": "https://react.dev",
+  "typescript": "https://typescriptlang.org",
+  "tailwind css": "https://tailwindcss.com",
+  "vercel": "https://vercel.com",
+  "supabase": "https://supabase.com",
+  "stripe": "https://stripe.com",
+  "stripe connect": "https://stripe.com/connect",
+  "figma": "https://figma.com",
+  "framer motion": "https://motion.dev",
+  "mapbox": "https://mapbox.com",
+  "three.js": "https://threejs.org",
+  "d3.js": "https://d3js.org",
+  "sanity cms": "https://sanity.io",
+  "shopify": "https://shopify.com",
+  "woocommerce": "https://woocommerce.com",
+};
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -61,6 +83,8 @@ export default async function CaseStudyPage({ params }: Props) {
     <>
       {/* Hero */}
       <section className="relative pt-32 pb-0 bg-bg overflow-hidden">
+        {/* Subtle colored glow at top */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] rounded-full opacity-[0.06] blur-[120px]" style={{ background: project.color }} />
         <div className="container-wide relative z-10 pb-12">
           <AnimateIn animation="fadeUp">
             <Link
@@ -73,10 +97,29 @@ export default async function CaseStudyPage({ params }: Props) {
           </AnimateIn>
 
           <AnimateIn animation="fadeUp" delay={0.1}>
-            <span className="inline-block px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider bg-violet/10 text-violet border border-violet/20 mb-6">
-              {project.categoryTag}
-            </span>
+            {(() => {
+              const cc = getCategoryColor(project.categoryTag, 0);
+              return (
+                <span
+                  className="inline-block px-4 py-1.5 rounded-sm text-xs font-bold uppercase tracking-[0.12em] mb-6"
+                  style={{ background: cc.bg, color: cc.text, border: `1px solid ${cc.border}` }}
+                >
+                  {project.categoryTag}
+                </span>
+              );
+            })()}
           </AnimateIn>
+
+          {(() => {
+            const Logo = getProjectLogo(project.slug);
+            return Logo ? (
+              <AnimateIn animation="fadeUp" delay={0.12}>
+                <div className="mb-6">
+                  <Logo className="w-[200px] h-auto" />
+                </div>
+              </AnimateIn>
+            ) : null;
+          })()}
 
           <AnimateIn animation="fadeUp" delay={0.15}>
             <h1 className="font-display text-5xl md:text-7xl font-bold text-text-primary leading-tight">
@@ -90,17 +133,13 @@ export default async function CaseStudyPage({ params }: Props) {
             </p>
           </AnimateIn>
 
-          {/* Tech Stack */}
+          {/* Tech tags - simple */}
           <AnimateIn animation="fadeUp" delay={0.25}>
             <div className="mt-8 flex flex-wrap gap-2">
               {project.techStack.map((tech, idx) => {
                 const c = getTagColor(tech, idx);
                 return (
-                  <span
-                    key={tech}
-                    className="px-3 py-1.5 rounded-md text-xs font-medium"
-                    style={{ background: c.bg, color: c.text, border: `1px solid ${c.border}` }}
-                  >
+                  <span key={tech} className="px-3 py-1.5 rounded-md text-xs font-medium" style={{ background: c.bg, color: c.text, border: `1px solid ${c.border}` }}>
                     {tech}
                   </span>
                 );
@@ -109,18 +148,27 @@ export default async function CaseStudyPage({ params }: Props) {
           </AnimateIn>
         </div>
 
-        {/* Full-width Hero Image */}
+        {/* Hero Preview — browser chrome with live preview, same as carousel */}
         <AnimateIn animation="fadeUp" delay={0.3}>
-          <div className="relative aspect-[21/9] w-full overflow-hidden">
-            <Image
-              src={project.image}
-              alt={project.title}
-              fill
-              className="object-cover"
-              priority
-              sizes="100vw"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-bg via-transparent to-transparent" />
+          <div className="w-full mx-auto" style={{ maxWidth: "1400px" }}>
+            {project.demoSlug ? (
+              <CaseStudyHero
+                demoSlug={project.demoSlug}
+                categoryTag={project.categoryTag}
+                color={project.color}
+              />
+            ) : (
+              <div className="relative aspect-[21/9] w-full overflow-hidden rounded-xl">
+                <Image
+                  src={project.image}
+                  alt={project.title}
+                  fill
+                  className="object-cover"
+                  priority
+                  sizes="100vw"
+                />
+              </div>
+            )}
           </div>
         </AnimateIn>
       </section>
@@ -130,8 +178,11 @@ export default async function CaseStudyPage({ params }: Props) {
         <StaggerContainer className="grid grid-cols-2 md:grid-cols-4 gap-6">
           {project.results.map((result, i) => (
             <StaggerItem key={i}>
-              <div className="text-center p-6 rounded-2xl bg-surface border border-border">
-                <p className="font-display text-2xl md:text-3xl font-bold text-text-primary">
+              <div
+                className="text-center p-6 rounded-2xl bg-surface border border-border border-t-2 hover:-translate-y-1 hover:shadow-lg transition-all duration-500"
+                style={{ borderTopColor: project.color }}
+              >
+                <p className="font-display text-2xl md:text-3xl font-bold" style={{ color: project.color }}>
                   {result.split(" ")[0]}
                 </p>
                 <p className="mt-2 text-sm text-text-secondary">
@@ -148,7 +199,7 @@ export default async function CaseStudyPage({ params }: Props) {
         <div className="max-w-4xl mx-auto space-y-24">
           <AnimateIn animation="fadeUp">
             <div>
-              <p className="caption mb-4 text-violet">THE BRIEF</p>
+              <p className="caption mb-4" style={{ color: project.color }}>THE BRIEF</p>
               <h2 className="font-display text-3xl md:text-4xl font-bold text-text-primary mb-6">
                 What they needed
               </h2>
@@ -161,7 +212,7 @@ export default async function CaseStudyPage({ params }: Props) {
           {/* The Challenge */}
           <AnimateIn animation="fadeUp">
             <div>
-              <p className="caption mb-4 text-coral">THE CHALLENGE</p>
+              <p className="caption mb-4" style={{ color: project.color, opacity: 0.8 }}>THE CHALLENGE</p>
               <h2 className="font-display text-3xl md:text-4xl font-bold text-text-primary mb-6">
                 What stood in the way
               </h2>
@@ -174,7 +225,7 @@ export default async function CaseStudyPage({ params }: Props) {
           {/* The Approach */}
           <AnimateIn animation="fadeUp">
             <div>
-              <p className="caption mb-4 text-cyan">THE APPROACH</p>
+              <p className="caption mb-4" style={{ color: project.color, opacity: 0.7 }}>THE APPROACH</p>
               <h2 className="font-display text-3xl md:text-4xl font-bold text-text-primary mb-6">
                 How we tackled it
               </h2>
@@ -187,7 +238,7 @@ export default async function CaseStudyPage({ params }: Props) {
           {/* The Solution */}
           <AnimateIn animation="fadeUp">
             <div>
-              <p className="caption mb-4 text-success">THE SOLUTION</p>
+              <p className="caption mb-4" style={{ color: project.color, opacity: 0.9 }}>THE SOLUTION</p>
               <h2 className="font-display text-3xl md:text-4xl font-bold text-text-primary mb-6">
                 What we built
               </h2>
@@ -208,7 +259,8 @@ export default async function CaseStudyPage({ params }: Props) {
                 {project.results.map((result, i) => (
                   <div
                     key={i}
-                    className="p-5 rounded-xl bg-surface border border-border"
+                    className="p-5 rounded-xl bg-surface border border-border border-l-2"
+                    style={{ borderLeftColor: project.color }}
                   >
                     <p className="font-display text-lg font-semibold text-text-primary">
                       {result}
@@ -243,19 +295,34 @@ export default async function CaseStudyPage({ params }: Props) {
         </Section>
       )}
 
-      {/* Image Gallery */}
-      {project.images.length > 1 && (
-        <Section>
-          <AnimateIn animation="fadeUp">
-            <p className="caption mb-4 text-violet">GALLERY</p>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-text-primary mb-12">
-              Project Showcase
-            </h2>
+      {/* Project Preview + Gallery */}
+      <Section>
+        <AnimateIn animation="fadeUp">
+          <p className="caption mb-4" style={{ color: project.color }}>PREVIEW</p>
+          <h2 className="font-display text-3xl md:text-4xl font-bold text-text-primary mb-12">
+            Project Showcase
+          </h2>
+        </AnimateIn>
+
+        {/* Mini homepage preview from carousel */}
+        {project.demoSlug && (
+          <AnimateIn animation="fadeUp" delay={0.1}>
+            <Link href={`/demos/${project.demoSlug}`} className="block group mb-8">
+              <CaseStudyHero
+                demoSlug={project.demoSlug}
+                categoryTag="Live Preview"
+                color={project.color}
+              />
+            </Link>
           </AnimateIn>
+        )}
+
+        {/* Additional images */}
+        {project.images.length > 0 && (
           <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {project.images.map((img, i) => (
               <StaggerItem key={i}>
-                <div className="relative aspect-[16/10] rounded-2xl overflow-hidden">
+                <div className="relative aspect-[16/10] rounded-2xl overflow-hidden border border-border">
                   <Image
                     src={img}
                     alt={`${project.title} screenshot ${i + 1}`}
@@ -267,8 +334,8 @@ export default async function CaseStudyPage({ params }: Props) {
               </StaggerItem>
             ))}
           </StaggerContainer>
-        </Section>
-      )}
+        )}
+      </Section>
 
       {/* Demo Button */}
       {project.demoSlug && (
@@ -361,6 +428,56 @@ export default async function CaseStudyPage({ params }: Props) {
           </AnimateIn>
         </div>
       </Section>
+
+      {/* Floating project navigator */}
+      <div className="fixed bottom-0 left-0 right-0 z-40 bg-[#0A0A0A]/90 backdrop-blur-xl border-t border-[#1A1A1A]">
+        <div className="container-wide py-3 flex items-center justify-between gap-3">
+          {/* Prev */}
+          {prevProject ? (
+            <Link
+              href={`/work/${prevProject.slug}`}
+              className="flex items-center gap-2 px-3 py-2 rounded-lg text-[11px] font-medium text-white/50 hover:text-white hover:bg-white/5 transition-all duration-300 min-w-0"
+            >
+              <ArrowLeft size={14} className="shrink-0" />
+              <span className="truncate hidden sm:inline">{prevProject.title}</span>
+              <span className="sm:hidden">Prev</span>
+            </Link>
+          ) : <div />}
+
+          {/* Center: current project + demo button */}
+          <div className="flex items-center gap-3">
+            <span className="text-[10px] uppercase tracking-[0.1em] text-white/30 font-medium hidden md:inline">
+              {project.categoryTag}
+            </span>
+            <span className="text-[12px] font-semibold text-white/80 hidden sm:inline">
+              {project.title}
+            </span>
+            {project.demoSlug && (
+              <Link
+                href={`/demos/${project.demoSlug}`}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-[0.08em] text-white transition-all duration-300 hover:shadow-[0_0_15px_rgba(124,58,237,0.3)]"
+                style={{ background: `linear-gradient(135deg, ${project.color}, ${project.color}88)` }}
+              >
+                <ExternalLink size={11} />
+                View Demo
+              </Link>
+            )}
+          </div>
+
+          {/* Next */}
+          {nextProject ? (
+            <Link
+              href={`/work/${nextProject.slug}`}
+              className="flex items-center gap-2 px-4 py-2 rounded-full text-[11px] font-semibold text-white transition-all duration-300 hover:scale-105 min-w-0"
+              style={{ background: nextProject.color, boxShadow: `0 0 20px ${nextProject.color}30` }}
+            >
+              <span className="truncate hidden sm:inline">{nextProject.title}</span>
+              <span className="sm:hidden">Next</span>
+              <ArrowRight size={14} className="shrink-0" />
+            </Link>
+          ) : <div />}
+        </div>
+      </div>
     </>
   );
 }
