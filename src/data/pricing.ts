@@ -22,11 +22,11 @@ export const serviceOptions = [
 ] as const;
 
 export const budgetOptions = [
-  { label: "Under EUR 1,000", emoji: "🌱", min: 0, max: 1000 },
-  { label: "EUR 1,000 - 2,000", emoji: "🌿", min: 1000, max: 2000 },
-  { label: "EUR 2,000 - 4,000", emoji: "🌳", min: 2000, max: 4000 },
-  { label: "EUR 4,000 - 8,000", emoji: "🏗️", min: 4000, max: 8000 },
-  { label: "Not sure yet", emoji: "🤔", min: 0, max: 0 },
+  { label: "Under EUR 1,000", min: 0, max: 1000 },
+  { label: "EUR 1,000 - 2,000", min: 1000, max: 2000 },
+  { label: "EUR 2,000 - 4,000", min: 2000, max: 4000 },
+  { label: "EUR 4,000 - 8,000", min: 4000, max: 8000 },
+  { label: "Not sure yet", min: 0, max: 0 },
 ] as const;
 
 export const addOns = [

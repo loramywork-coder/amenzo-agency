@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight, Code, RefreshCw, ShoppingCart, Search, Server } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Code, RefreshCw, ShoppingCart, Search, Server, CodeXml, LayoutTemplate, CircleSlash, Gauge, Clock, Globe } from "lucide-react";
 import { motion } from "framer-motion";
 import HeroBackground from "@/components/hero-background";
 import Reveal from "@/components/demos/Reveal";
@@ -137,7 +137,14 @@ const techStack = [
   )},
 ];
 
-const trustItems = ["Hand-Crafted Code", "No Templates", "No WordPress", "Lighthouse 95+", "Delivered in Weeks", "Clients Worldwide"];
+const trustItems = [
+  { label: "Hand-Crafted Code", icon: CodeXml },
+  { label: "No Templates", icon: LayoutTemplate },
+  { label: "No WordPress", icon: CircleSlash },
+  { label: "Lighthouse 95+", icon: Gauge },
+  { label: "Delivered in Weeks", icon: Clock },
+  { label: "Clients Worldwide", icon: Globe },
+];
 
 /* ─── component ─── */
 
@@ -196,15 +203,20 @@ export function HomePage() {
       </section>
 
       {/* ── 2. TRUST STRIP ── */}
-      <section className="py-5">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
-            {trustItems.map((item, i) => (
-              <span key={i} className="text-[10px] text-white/60 tracking-[0.2em] uppercase font-medium">
-                {item}
-                {i < trustItems.length - 1 && <span className="ml-6">&middot;</span>}
-              </span>
-            ))}
+      <section className="py-6">
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-y-4 gap-x-2">
+            {trustItems.map((item, i) => {
+              const Icon = item.icon;
+              return (
+                <div key={i} className="flex flex-col items-center gap-1.5 text-center">
+                  <Icon size={14} className="text-white/40" strokeWidth={1.5} />
+                  <span className="text-[10px] text-white/60 tracking-[0.15em] uppercase font-medium leading-tight">
+                    {item.label}
+                  </span>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>

@@ -404,7 +404,7 @@ function StartProjectWizard() {
                         onChange={(e) =>
                           updateField("industry", e.target.value)
                         }
-                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white focus:border-white/30 focus:outline-none transition-colors"
+                        className="w-full px-4 py-3 bg-[#0a0a0a] border border-white/10 rounded-lg text-white focus:border-white/30 focus:outline-none transition-colors [&>option]:bg-[#0a0a0a] [&>option]:text-white"
                       >
                         <option value="">Select your industry</option>
                         {industryOptions.map((opt) => (
@@ -601,7 +601,6 @@ function StartProjectWizard() {
                                 : "border-white/[0.06] bg-white/[0.03] text-white/60 hover:border-white/20"
                             )}
                           >
-                            <span>{opt.emoji}</span>
                             {opt.label}
                           </button>
                         ))}
@@ -876,7 +875,7 @@ function StartProjectWizard() {
 
           {/* Floating estimate */}
           {estimate.hasEstimate && (
-            <div className="hidden md:flex items-center gap-2 text-xs text-white/50">
+            <div className="flex items-center gap-2 text-xs text-white/50">
               <span className="inline-block w-1.5 h-1.5 rounded-full bg-white/50" />
               Estimated: &euro;{estimate.min.toLocaleString()} &ndash; &euro;
               {estimate.max.toLocaleString()}
