@@ -83,6 +83,18 @@ body::before {
   color: #F0F0F0;
 }
 
+/* Force dark autofill on iOS/Chrome */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px rgba(10,10,10,0.95) inset !important;
+  -webkit-text-fill-color: #FAFAFA !important;
+  caret-color: #FAFAFA;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
 /* ================================================
    SCROLLBAR
    ================================================ */
