@@ -7,7 +7,6 @@ import { motion } from "framer-motion";
 import HeroBackground from "@/components/hero-background";
 import Reveal from "@/components/demos/Reveal";
 import Counter from "@/components/demos/Counter";
-import FuzzyText from "@/components/ui/fuzzy-text";
 import { GooeyReveal } from "@/components/ui/gooey-reveal";
 
 /* ─── data ─── */
@@ -154,41 +153,10 @@ export function HomePage() {
               Web Design Studio
             </p>
           </Reveal>
-          {/* Desktop: FuzzyText canvas | Mobile: regular h1 */}
           <Reveal type="fade" delay={0.2}>
-            <div className="hidden md:flex justify-center">
-              <FuzzyText
-                fontSize="clamp(48px, 8vw, 90px)"
-                fontWeight={700}
-                fontFamily="inherit"
-                color="#FFFFFF"
-                enableHover={true}
-                baseIntensity={0.06}
-                hoverIntensity={0.4}
-                scrollIntensity={0.7}
-                className="font-display"
-              >
-                Where Code
-              </FuzzyText>
-            </div>
-            <div className="hidden md:flex justify-center">
-              <FuzzyText
-                fontSize="clamp(48px, 8vw, 90px)"
-                fontWeight={700}
-                fontFamily="inherit"
-                color="#FFFFFF"
-                enableHover={true}
-                baseIntensity={0.06}
-                hoverIntensity={0.4}
-                scrollIntensity={0.7}
-                className="font-display"
-              >
-                Meets Craft
-              </FuzzyText>
-            </div>
             <h1
-              className="md:hidden font-bold text-white tracking-tight leading-[1.05] font-display"
-              style={{ fontSize: "clamp(48px, 12vw, 90px)" }}
+              className="font-bold text-white tracking-tight leading-[1.05] font-display"
+              style={{ fontSize: "clamp(48px, 10vw, 90px)" }}
             >
               Where Code<br />Meets Craft
             </h1>
@@ -263,7 +231,7 @@ export function HomePage() {
                   href={`/demos/${p.slug}`}
                   className="group flex items-center gap-4 md:gap-6 border-b border-white/[0.04] py-6 hover:border-white/[0.1] transition-colors"
                 >
-                  <span className="text-[11px] font-mono text-white/25 w-8 shrink-0">{p.num}</span>
+                  <span className="text-[11px] font-mono text-white/50 w-8 shrink-0">{p.num}</span>
                   <span className="text-xl md:text-2xl font-bold text-white/90 group-hover:text-white transition-colors flex-1 min-w-0">
                     {p.name}
                   </span>
@@ -330,7 +298,7 @@ export function HomePage() {
             {steps.map((s, i) => (
               <Reveal key={s.num} delay={i * 0.1}>
                 <div className="space-y-4">
-                  <span className="block text-[48px] font-bold text-white/20 leading-none">{s.num}</span>
+                  <span className="block text-[48px] font-bold text-white/40 leading-none">{s.num}</span>
                   <h3 className="text-[16px] font-bold text-white/90">{s.title}</h3>
                   <p className="text-[13px] text-white/80 leading-relaxed">{s.desc}</p>
                 </div>
@@ -488,10 +456,10 @@ export function HomePage() {
                 Start a Project <ArrowRight size={14} />
               </Link>
               <Link
-                href="mailto:hello@amenzo.com"
+                href="mailto:info@amenzo.co"
                 className="inline-flex items-center gap-2 border border-white/10 text-white/60 text-sm font-medium px-8 py-3.5 rounded-full hover:border-white/20 hover:text-white/80 transition-colors"
               >
-                hello@amenzo.com
+                info@amenzo.co
               </Link>
             </div>
           </Reveal>

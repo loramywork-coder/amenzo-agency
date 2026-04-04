@@ -68,8 +68,8 @@ export default function StartProjectPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen bg-bg flex items-center justify-center pt-20">
-          <div className="text-text-muted">Loading...</div>
+        <div className="min-h-screen bg-transparent flex items-center justify-center pt-20">
+          <div className="text-white/40">Loading...</div>
         </div>
       }
     >
@@ -233,25 +233,25 @@ function StartProjectWizard() {
 
   if (submitted) {
     return (
-      <div className="min-h-screen bg-bg flex items-center justify-center pt-20">
+      <div className="min-h-screen bg-transparent flex items-center justify-center pt-20">
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="text-center max-w-lg mx-auto px-6"
+          className="text-center max-w-lg mx-auto px-6 bg-black/50 backdrop-blur-sm rounded-2xl py-12"
         >
           <motion.div
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-            className="w-20 h-20 rounded-full bg-success/20 flex items-center justify-center mx-auto mb-8"
+            className="w-20 h-20 rounded-full bg-white/10 flex items-center justify-center mx-auto mb-8"
           >
-            <CheckCircle2 size={40} className="text-success" />
+            <CheckCircle2 size={40} className="text-white" />
           </motion.div>
 
-          <h1 className="font-display text-3xl md:text-4xl font-bold text-text-primary mb-4">
+          <h1 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
             Your Project Brief Has Been Received!
           </h1>
-          <p className="text-text-secondary mb-10">
+          <p className="text-white/60 mb-10">
             Thank you for choosing AMENZO. Here&apos;s what happens next:
           </p>
 
@@ -263,12 +263,12 @@ function StartProjectWizard() {
             ].map((step, i) => (
               <div
                 key={i}
-                className="flex items-start gap-3 p-4 rounded-lg bg-surface border border-border"
+                className="flex items-start gap-3 p-4 rounded-lg bg-white/5 border border-white/10"
               >
-                <span className="w-6 h-6 rounded-full bg-violet/20 text-violet text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">
+                <span className="w-6 h-6 rounded-full bg-white/10 text-white text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">
                   {i + 1}
                 </span>
-                <p className="text-text-primary text-sm">{step}</p>
+                <p className="text-white text-sm">{step}</p>
               </div>
             ))}
           </div>
@@ -287,11 +287,11 @@ function StartProjectWizard() {
   }
 
   return (
-    <div className="min-h-screen bg-bg flex flex-col pt-20">
+    <div className="min-h-screen bg-transparent flex flex-col pt-20">
       {/* Progress bar */}
-      <div className="fixed top-20 left-0 right-0 z-30 h-1 bg-border">
+      <div className="fixed top-20 left-0 right-0 z-30 h-1 bg-white/5">
         <motion.div
-          className="h-full bg-gradient-to-r from-violet to-cyan"
+          className="h-full bg-gradient-to-r from-white/70 to-white/40"
           initial={{ width: "0%" }}
           animate={{ width: `${(step / TOTAL_STEPS) * 100}%` }}
           transition={{ duration: 0.3 }}
@@ -315,20 +315,20 @@ function StartProjectWizard() {
                 className={cn(
                   "flex items-center gap-1.5 px-2 py-1.5 rounded-full text-xs font-medium transition-all duration-200 shrink-0",
                   isCurrent &&
-                    "bg-violet/15 text-violet border border-violet/30",
+                    "bg-white/10 text-white border border-white/20",
                   isCompleted &&
-                    "text-text-secondary hover:text-violet cursor-pointer",
+                    "text-white/50 hover:text-white cursor-pointer",
                   !isCurrent &&
                     !isCompleted &&
-                    "text-text-muted cursor-default"
+                    "text-white/30 cursor-default"
                 )}
               >
                 <span
                   className={cn(
                     "w-6 h-6 rounded-full flex items-center justify-center shrink-0 transition-all duration-200",
-                    isCurrent && "bg-violet text-white",
-                    isCompleted && "bg-violet/20 text-violet",
-                    !isCurrent && !isCompleted && "bg-border text-text-muted"
+                    isCurrent && "bg-white text-black",
+                    isCompleted && "bg-white/15 text-white",
+                    !isCurrent && !isCompleted && "bg-white/5 text-white/30"
                   )}
                 >
                   {isCompleted ? (
@@ -346,7 +346,7 @@ function StartProjectWizard() {
 
       {/* Form content */}
       <div className="flex-1 flex items-start justify-center pb-32">
-        <div className="w-full max-w-2xl mx-auto px-6">
+        <div className="w-full max-w-2xl mx-auto px-6 bg-black/50 backdrop-blur-sm rounded-2xl py-8 my-2">
           <AnimatePresence mode="wait">
             <motion.div
               key={step}
@@ -396,7 +396,7 @@ function StartProjectWizard() {
                       placeholder="https://example.com"
                     />
                     <div>
-                      <label className="block text-sm font-medium text-text-primary mb-2">
+                      <label className="block text-sm font-medium text-white mb-2">
                         Industry
                       </label>
                       <select
@@ -404,7 +404,7 @@ function StartProjectWizard() {
                         onChange={(e) =>
                           updateField("industry", e.target.value)
                         }
-                        className="w-full px-4 py-3 bg-surface border border-border rounded-lg text-text-primary focus:border-violet focus:outline-none transition-colors"
+                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white focus:border-white/30 focus:outline-none transition-colors"
                       >
                         <option value="">Select your industry</option>
                         {industryOptions.map((opt) => (
@@ -436,18 +436,18 @@ function StartProjectWizard() {
                           className={cn(
                             "flex items-center gap-3 p-4 rounded-xl border text-left transition-all duration-200 relative overflow-hidden",
                             selected
-                              ? "border-violet text-text-primary"
-                              : "border-border bg-surface text-text-secondary hover:border-violet/30"
+                              ? "border-white/30 bg-white/[0.08] text-white"
+                              : "border-white/[0.06] bg-white/[0.03] text-white/60 hover:border-white/20"
                           )}
                         >
                           {selected && (
-                            <div className="absolute inset-0 bg-gradient-to-br from-violet/10 via-violet/5 to-cyan/10" />
+                            <div className="absolute inset-0 bg-gradient-to-br from-white/[0.06] via-white/[0.03] to-white/[0.06]" />
                           )}
                           <Icon
                             size={20}
                             className={cn(
                               "relative z-10",
-                              selected ? "text-violet" : "text-text-muted"
+                              selected ? "text-white" : "text-white/40"
                             )}
                           />
                           <span className="text-sm font-medium relative z-10">
@@ -456,7 +456,7 @@ function StartProjectWizard() {
                           {selected && (
                             <Check
                               size={16}
-                              className="ml-auto text-violet relative z-10"
+                              className="ml-auto text-white relative z-10"
                             />
                           )}
                         </button>
@@ -539,7 +539,7 @@ function StartProjectWizard() {
                       placeholder="https://example.com"
                     />
                     <div>
-                      <label className="block text-sm font-medium text-text-primary mb-2">
+                      <label className="block text-sm font-medium text-white mb-2">
                         What do you like about them?
                       </label>
                       <textarea
@@ -548,15 +548,15 @@ function StartProjectWizard() {
                           updateField("inspirationNotes", e.target.value)
                         }
                         rows={4}
-                        className="w-full px-4 py-3 bg-surface border border-border rounded-lg text-text-primary placeholder:text-text-muted focus:border-violet focus:outline-none transition-colors resize-none"
+                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-white/30 focus:border-white/30 focus:outline-none transition-colors resize-none"
                         placeholder="I like the clean design of site 1, the animations on site 2..."
                       />
                     </div>
-                    <p className="text-sm text-text-muted">
+                    <p className="text-sm text-white/40">
                       Or{" "}
                       <Link
                         href="/work"
-                        className="text-violet hover:underline"
+                        className="text-white/70 hover:underline"
                       >
                         browse our portfolio
                       </Link>{" "}
@@ -586,7 +586,7 @@ function StartProjectWizard() {
                       onChange={(v) => updateField("timeline", v)}
                     />
                     <div>
-                      <label className="block text-sm font-medium text-text-primary mb-3">
+                      <label className="block text-sm font-medium text-white mb-3">
                         Budget range
                       </label>
                       <div className="flex flex-wrap gap-2">
@@ -597,8 +597,8 @@ function StartProjectWizard() {
                             className={cn(
                               "px-4 py-2 rounded-full text-sm font-medium border transition-all duration-200 flex items-center gap-2",
                               formData.budget === opt.label
-                                ? "border-violet bg-violet/10 text-text-primary"
-                                : "border-border bg-surface text-text-secondary hover:border-violet/30"
+                                ? "border-white/30 bg-white/10 text-white"
+                                : "border-white/[0.06] bg-white/[0.03] text-white/60 hover:border-white/20"
                             )}
                           >
                             <span>{opt.emoji}</span>
@@ -634,34 +634,34 @@ function StartProjectWizard() {
                           className={cn(
                             "w-full flex items-center gap-4 p-4 rounded-xl border text-left transition-all duration-200 relative overflow-hidden",
                             isSelected
-                              ? "border-l-4 border-l-violet border-t-violet/30 border-r-violet/30 border-b-violet/30"
-                              : "border-border bg-surface hover:border-violet/30"
+                              ? "border-l-4 border-l-white/50 border-t-white/20 border-r-white/20 border-b-white/20 bg-white/[0.08]"
+                              : "border-white/[0.06] bg-white/[0.03] hover:border-white/20"
                           )}
                         >
                           {isSelected && (
-                            <div className="absolute inset-0 bg-violet/[0.04]" />
+                            <div className="absolute inset-0 bg-white/[0.03]" />
                           )}
                           <div className="flex-1 relative z-10">
                             <div className="flex items-center gap-2">
-                              <span className="text-sm font-semibold text-text-primary">
+                              <span className="text-sm font-semibold text-white">
                                 {addon.name}
                               </span>
                               {addon.recurring && (
-                                <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-cyan/10 text-cyan font-medium">
+                                <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-white/10 text-white/70 font-medium">
                                   Monthly
                                 </span>
                               )}
                             </div>
-                            <p className="text-xs text-text-muted mt-0.5">
+                            <p className="text-xs text-white/40 mt-0.5">
                               {addon.description}
                             </p>
                           </div>
                           <div className="text-right relative z-10 shrink-0">
-                            <span className="text-sm font-bold text-text-primary">
+                            <span className="text-sm font-bold text-white">
                               &euro;{addon.price}
                             </span>
                             {addon.recurring && (
-                              <span className="text-xs text-text-muted">
+                              <span className="text-xs text-white/40">
                                 /mo
                               </span>
                             )}
@@ -669,11 +669,11 @@ function StartProjectWizard() {
                           <div
                             className={cn(
                               "w-10 h-6 rounded-full relative transition-colors duration-200 shrink-0",
-                              isSelected ? "bg-violet" : "bg-border"
+                              isSelected ? "bg-white" : "bg-white/10"
                             )}
                           >
                             <motion.div
-                              className="w-4 h-4 rounded-full bg-white absolute top-1 shadow-sm"
+                              className={cn("w-4 h-4 rounded-full absolute top-1 shadow-sm", isSelected ? "bg-black" : "bg-white/50")}
                               animate={{ left: isSelected ? 21 : 3 }}
                               transition={{ duration: 0.15 }}
                             />
@@ -685,8 +685,8 @@ function StartProjectWizard() {
 
                   {/* Package summary */}
                   {selectedAddOns.length > 0 && (
-                    <div className="rounded-xl border border-violet/20 bg-violet/[0.03] p-4 space-y-2">
-                      <p className="text-xs font-medium text-text-muted uppercase tracking-wider">
+                    <div className="rounded-xl border border-white/10 bg-white/5 p-4 space-y-2">
+                      <p className="text-xs font-medium text-white/40 uppercase tracking-wider">
                         Selected add-ons
                       </p>
                       {(() => {
@@ -708,10 +708,10 @@ function StartProjectWizard() {
                           <>
                             {oneTime.length > 0 && (
                               <div className="flex items-center justify-between text-sm">
-                                <span className="text-text-secondary">
+                                <span className="text-white/60">
                                   One-time ({oneTime.length} items)
                                 </span>
-                                <span className="font-semibold text-text-primary">
+                                <span className="font-semibold text-white">
                                   &euro;
                                   {oneTimeTotal.toLocaleString()}
                                 </span>
@@ -719,10 +719,10 @@ function StartProjectWizard() {
                             )}
                             {recurring.length > 0 && (
                               <div className="flex items-center justify-between text-sm">
-                                <span className="text-text-secondary">
+                                <span className="text-white/60">
                                   Recurring ({recurring.length} items)
                                 </span>
-                                <span className="font-semibold text-text-primary">
+                                <span className="font-semibold text-white">
                                   &euro;
                                   {recurringTotal.toLocaleString()}
                                   /mo
@@ -750,7 +750,7 @@ function StartProjectWizard() {
                       updateField("additionalNotes", e.target.value)
                     }
                     rows={8}
-                    className="w-full px-4 py-3 bg-surface border border-border rounded-lg text-text-primary placeholder:text-text-muted focus:border-violet focus:outline-none transition-colors resize-none"
+                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-white/30 focus:border-white/30 focus:outline-none transition-colors resize-none"
                     placeholder="We're launching a new product line in Q3 and need the site live by..."
                   />
                 </div>
@@ -833,18 +833,18 @@ function StartProjectWizard() {
                     )}
                   </div>
 
-                  <div className="mt-8 p-4 rounded-lg bg-surface border border-border">
+                  <div className="mt-8 p-4 rounded-lg bg-white/5 border border-white/10">
                     <label className="flex items-start gap-3 cursor-pointer">
                       <input
                         type="checkbox"
-                        className="mt-1 accent-violet"
+                        className="mt-1 accent-white"
                         defaultChecked
                       />
-                      <span className="text-sm text-text-secondary">
+                      <span className="text-sm text-white/60">
                         I agree to the{" "}
                         <Link
                           href="/privacy"
-                          className="text-violet hover:underline"
+                          className="text-white/70 hover:underline"
                         >
                           Privacy Policy
                         </Link>
@@ -861,12 +861,12 @@ function StartProjectWizard() {
       </div>
 
       {/* Navigation with estimate preview */}
-      <div className="fixed bottom-0 left-0 right-0 bg-bg/80 backdrop-blur-xl border-t border-border py-4 z-30">
+      <div className="fixed bottom-0 left-0 right-0 bg-black/80 backdrop-blur-xl border-t border-white/10 py-4 z-30">
         <div className="container-wide flex items-center justify-between">
           <button
             onClick={() => setStep((s) => Math.max(1, s - 1))}
             className={cn(
-              "flex items-center gap-2 text-sm font-medium text-text-secondary hover:text-text-primary transition-colors",
+              "flex items-center gap-2 text-sm font-medium border border-white/10 text-white/60 hover:text-white px-4 py-2 rounded-lg transition-colors",
               step === 1 && "invisible"
             )}
           >
@@ -876,8 +876,8 @@ function StartProjectWizard() {
 
           {/* Floating estimate */}
           {estimate.hasEstimate && (
-            <div className="hidden md:flex items-center gap-2 text-xs text-text-muted">
-              <span className="inline-block w-1.5 h-1.5 rounded-full bg-gradient-to-r from-violet to-cyan" />
+            <div className="hidden md:flex items-center gap-2 text-xs text-white/50">
+              <span className="inline-block w-1.5 h-1.5 rounded-full bg-white/50" />
               Estimated: &euro;{estimate.min.toLocaleString()} &ndash; &euro;
               {estimate.max.toLocaleString()}
               {estimate.recurring > 0 && (
@@ -919,11 +919,11 @@ function StepTitle({
 }) {
   return (
     <div className="mb-10">
-      <h2 className="font-display text-3xl md:text-4xl font-bold text-text-primary mb-2">
+      <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-2">
         {title}
       </h2>
-      <div className="w-[60px] h-[3px] rounded-full bg-gradient-to-r from-violet to-cyan mb-3" />
-      <p className="text-text-secondary">{subtitle}</p>
+      <div className="w-[60px] h-[3px] rounded-full bg-gradient-to-r from-white/70 to-white/40 mb-3" />
+      <p className="text-white/60">{subtitle}</p>
     </div>
   );
 }
@@ -943,7 +943,7 @@ function FormField({
 }) {
   return (
     <div>
-      <label className="block text-sm font-medium text-text-primary mb-2">
+      <label className="block text-sm font-medium text-white mb-2">
         {label}
       </label>
       <input
@@ -951,7 +951,7 @@ function FormField({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className="w-full px-4 py-3 bg-surface border border-border rounded-lg text-text-primary placeholder:text-text-muted focus:border-violet focus:outline-none transition-colors"
+        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-white/30 focus:border-white/30 focus:outline-none transition-colors"
       />
     </div>
   );
@@ -970,7 +970,7 @@ function RadioGroup({
 }) {
   return (
     <div>
-      <label className="block text-sm font-medium text-text-primary mb-3">
+      <label className="block text-sm font-medium text-white mb-3">
         {label}
       </label>
       <div className="flex flex-wrap gap-2">
@@ -981,8 +981,8 @@ function RadioGroup({
             className={cn(
               "px-4 py-2 rounded-full text-sm font-medium border transition-all duration-200",
               value === opt
-                ? "border-violet bg-violet/10 text-text-primary"
-                : "border-border bg-surface text-text-secondary hover:border-violet/30"
+                ? "border-white/30 bg-white/10 text-white"
+                : "border-white/[0.06] bg-white/[0.03] text-white/60 hover:border-white/20"
             )}
           >
             {opt}
@@ -1005,14 +1005,14 @@ function ReviewItem({
   onEdit: (step: number) => void;
 }) {
   return (
-    <div className="flex items-center justify-between py-3 border-b border-border">
+    <div className="flex items-center justify-between py-3 border-b border-white/10">
       <div>
-        <span className="text-xs text-text-muted">{label}</span>
-        <p className="text-sm text-text-primary">{value}</p>
+        <span className="text-xs text-white/40">{label}</span>
+        <p className="text-sm text-white">{value}</p>
       </div>
       <button
         onClick={() => onEdit(step)}
-        className="text-xs text-violet hover:underline"
+        className="text-xs text-white/70 hover:underline"
       >
         Edit
       </button>

@@ -25,12 +25,12 @@ void main(){
   uv*=vec2(2,1);
   float n=fbm(uv*.28-vec2(T*.01,0));
   n=noise(uv*3.+n*2.);
-  col.r-=fbm(uv+vec2(0,T*.015)+n);
-  col.g-=fbm(uv*1.005+vec2(0,T*.015)+n+.005);
-  col.b-=fbm(uv*1.01+vec2(0,T*.015)+n+.01);
-  col=mix(col, u_color*1.4, dot(col,vec3(.21,.71,.07)));
-  col=mix(vec3(.015),col,min(time*.18,1.));
-  col=clamp(col,.015,1.);
+  col.r-=fbm(uv*0.97+vec2(0,T*.015)+n-.02);
+  col.g-=fbm(uv*1.0+vec2(0,T*.015)+n);
+  col.b-=fbm(uv*1.04+vec2(0,T*.015)+n+.035);
+  col=mix(col, u_color*1.3, dot(col,vec3(.21,.71,.07)));
+  col=mix(vec3(.01),col,min(time*.18,1.));
+  col=clamp(col,.01,1.);
   O=vec4(col,1);
 }`;
 

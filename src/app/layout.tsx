@@ -119,7 +119,7 @@ export default function RootLayout({
           Skip to content
         </a>
         <LocalBusinessSchema />
-        <SmokeBackground smokeColor="#EE3333" />
+        <SmokeBackground smokeColor="#FFFFFF" />
         <ScrollProgress />
         <ScrollToTop />
         <Navigation />
