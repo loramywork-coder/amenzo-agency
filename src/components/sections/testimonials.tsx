@@ -44,7 +44,7 @@ export function TestimonialsSection() {
   const testimonial = TESTIMONIALS[current];
 
   return (
-    <section className="section-padding bg-[#141414]">
+    <section className="section-padding bg-transparent">
       <div className="container-wide">
         <AnimateIn>
           <SectionHeader

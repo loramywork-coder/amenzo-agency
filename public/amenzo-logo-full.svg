@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 256" width="1200" height="256" fill="none">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="256" y2="256" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#7B6BF7"/>
+      <stop offset="25%" stop-color="#9B7DE8"/>
+      <stop offset="50%" stop-color="#B89ACA"/>
+      <stop offset="75%" stop-color="#C9A455"/>
+      <stop offset="100%" stop-color="#B8923E"/>
+    </linearGradient>
+  </defs>
+  <!-- Logo Mark -->
+  <g transform="translate(0, 0)">
+    <path d="M128 18.29L228.57 73.14V182.86L128 237.71L27.43 182.86V73.14L128 18.29Z" stroke="url(#g)" stroke-width="12" fill="none" stroke-linejoin="round"/>
+    <path d="M128 73.14L82.29 164.57H105.14L114.29 141.71H141.71L150.86 164.57H173.71L128 73.14ZM120.69 123.43L128 105.14L135.31 123.43H120.69Z" fill="url(#g)" fill-rule="evenodd"/>
+  </g>
+  <!-- Wordmark -->
+  <text x="290" y="158" font-family="Satoshi, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="96" font-weight="700" letter-spacing="18" fill="#F0F0F0">AMENZO</text>
+</svg>

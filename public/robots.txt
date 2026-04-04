@@ -1,8 +1,0 @@
-User-agent: *
-Allow: /
-Disallow: /demos/
-Disallow: /api/
-Disallow: /start-project
-Disallow: /admin/
-
-Sitemap: https://amenzo.com/sitemap.xml

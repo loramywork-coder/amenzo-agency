@@ -14,9 +14,9 @@ export const blogPosts: BlogPost[] = [
     slug: "why-speed-is-the-most-underrated-conversion-tool",
     title: "Why Speed Is the Most Underrated Conversion Tool",
     excerpt:
-      "A 1-second delay costs you 7% of conversions. Here\u2019s how we build sites that load in under 1.5 seconds \u2014 and why it matters more than your headline.",
+      "A 1-second delay costs you 7% of conversions. Here\u2019s how modern sites load in under 1.5 seconds \u2014 and why it matters more than your headline.",
     category: "Performance",
-    date: "2026-03-15",
+    date: "2026-03-31",
     readTime: "6 min read",
     image:
       "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=3840&q=90",
@@ -35,12 +35,12 @@ That means a site loading in 5 seconds instead of 1.5 seconds is losing roughly 
 Most performance issues come from three places:
 
 1. **Unoptimised images.** A single hero image at 4MB will kill your load time. WebP format, responsive sizing, and lazy loading solve this overnight.
-2. **Too much JavaScript.** WordPress plugins, analytics scripts, chat widgets, cookie banners \u2014 each one adds weight. A typical WordPress site ships 2-3MB of JavaScript. Ours ship under 150KB.
+2. **Too much JavaScript.** WordPress plugins, analytics scripts, chat widgets, cookie banners \u2014 each one adds weight. A typical WordPress site ships 2-3MB of JavaScript. A well-built Next.js site ships under 150KB.
 3. **Bad hosting.** Shared hosting with a server in another continent adds hundreds of milliseconds. Edge deployment (Vercel, Cloudflare) serves your site from the nearest data centre.
 
-## How We Hit Sub-1.5 Seconds
+## How to Hit Sub-1.5 Seconds
 
-Our stack is built for speed from the ground up:
+The best approach is a stack built for speed from the ground up:
 
 - **Next.js** with automatic code splitting \u2014 each page loads only what it needs
 - **Static generation** where possible \u2014 pages are pre-built at deploy time
@@ -50,7 +50,7 @@ Our stack is built for speed from the ground up:
 
 ## The Lighthouse Standard
 
-Every site we deliver scores 95+ on Google Lighthouse. That\u2019s not a nice-to-have \u2014 it\u2019s our minimum standard.
+Every site built this way scores 95+ on Google Lighthouse. That\u2019s not a nice-to-have \u2014 it\u2019s the minimum standard.
 
 - Performance: 95+
 - Accessibility: 95+
@@ -73,7 +73,7 @@ Either way, speed is the cheapest conversion improvement you\u2019ll ever make.`
     excerpt:
       "From \u20AC500 templates to \u20AC50,000 platforms. An honest breakdown of what websites cost, why, and what you actually get at each price point.",
     category: "Business",
-    date: "2026-03-08",
+    date: "2026-03-30",
     readTime: "8 min read",
     image:
       "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=3840&q=90",
@@ -124,7 +124,7 @@ The difference comes down to four things:
 3. **Strategy.** Does the agency build what you ask for, or challenge you to build what works?
 4. **Support.** What happens after launch?
 
-## Our Advice
+## The Best Advice
 
 Don\u2019t buy the cheapest option just because it\u2019s cheap. And don\u2019t buy the most expensive assuming it\u2019s better.
 
@@ -132,19 +132,19 @@ Buy the option where the agency clearly explains what they\u2019ll build, why it
   },
   {
     slug: "why-we-dont-use-wordpress-anymore",
-    title: "Why We Don\u2019t Use WordPress Anymore",
+    title: "Why WordPress Is No Longer the Best Choice",
     excerpt:
-      "We used to build WordPress sites. Here\u2019s why we stopped \u2014 and why our clients\u2019 sites are faster, safer, and cheaper to maintain because of it.",
+      "WordPress used to be the go-to. Here\u2019s why many have moved on \u2014 and why businesses\u2019 sites are faster, safer, and cheaper to maintain because of it.",
     category: "Technology",
-    date: "2026-02-28",
+    date: "2026-03-29",
     readTime: "7 min read",
     image:
       "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=3840&q=90",
-    content: `We have a confession: we used to build WordPress sites.
+    content: `Here\u2019s a common story: many agencies used to build WordPress sites.
 
 They were fine. They worked. Clients could edit content. Everyone was happy enough.
 
-But "fine" isn\u2019t the standard we set. So we switched to Next.js. We haven\u2019t looked back.
+But "fine" isn\u2019t a high enough standard. The move to Next.js has been a game changer.
 
 ## The Problem with WordPress
 
@@ -152,9 +152,9 @@ WordPress powers 40% of the web. That\u2019s both its strength and its biggest v
 
 **Performance.** A typical WordPress site loads in 3\u20135 seconds after caching plugins and optimisation prayers. A comparable Next.js site loads in under 1.5 seconds out of the box.
 
-**Security.** WordPress is the most attacked CMS in the world. Every plugin is a potential entry point. We spent more time patching vulnerabilities than building features.
+**Security.** WordPress is the most attacked CMS in the world. Every plugin is a potential entry point. Teams spend more time patching vulnerabilities than building features.
 
-**Maintenance.** Core updates, theme updates, plugin updates. Each one can break something. The maintenance overhead was eating our time.
+**Maintenance.** Core updates, theme updates, plugin updates. Each one can break something. The maintenance overhead eats into development time.
 
 **Design ceiling.** WordPress themes give you a head start and a ceiling. The moment you need something the theme doesn\u2019t support, you\u2019re fighting its architecture.
 
@@ -166,7 +166,7 @@ Next.js gives us complete control over every aspect of the website.
 
 **Security by design.** No database to hack. No plugins to exploit. No admin panel to brute force. The attack surface is essentially zero.
 
-**Total design freedom.** Every pixel is intentional. We build exactly what we design, with no theme constraints.
+**Total design freedom.** Every pixel is intentional. You build exactly what you design, with no theme constraints.
 
 **Better developer experience.** TypeScript catches errors before production. Component architecture ensures consistency.
 
@@ -176,7 +176,7 @@ Actually, you can. Headless CMS platforms like Sanity give clients an editing ex
 
 ## The Measurable Difference
 
-After switching our clients:
+After switching to Next.js, companies typically see:
 
 - **Pages load 3\u20134x faster**
 - **99.99% uptime** vs. WordPress average of 99.5%
@@ -188,7 +188,7 @@ After switching our clients:
 
 No. It\u2019s still fine for simple blogs where budget is the primary constraint. But for businesses that compete on their digital experience, it\u2019s no longer the right tool.
 
-The web moved on. We moved with it.`,
+The web has moved on. Smart businesses are moving with it.`,
   },
   {
     slug: "design-systems-why-your-brand-needs-one",
@@ -196,7 +196,7 @@ The web moved on. We moved with it.`,
     excerpt:
       "A design system isn\u2019t a luxury for big companies. It\u2019s the reason some brands look polished everywhere and others look like they\u2019re winging it.",
     category: "Design",
-    date: "2026-02-20",
+    date: "2026-03-28",
     readTime: "5 min read",
     image:
       "https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?w=3840&q=90",
@@ -224,9 +224,9 @@ A design system is the single source of truth for your brand\u2019s visual langu
 
 **Cost savings.** Decisions made once don\u2019t need to be made again. No more debating which blue to use or what size the heading should be.
 
-## What We Include in Every Brand Package
+## What a Good Brand Package Includes
 
-When we build a design system, it covers:
+A solid design system covers:
 
 1. **Colour palette** with primary, secondary, accent, and neutral scales
 2. **Typography scale** with font families, weights, and sizes for every context
@@ -257,9 +257,9 @@ Then build from there. The key is documenting decisions so they don\u2019t need 
     slug: "anatomy-of-a-high-converting-landing-page",
     title: "Anatomy of a High-Converting Landing Page",
     excerpt:
-      "We\u2019ve built over 100 landing pages. Here are the 7 elements that separate pages that convert at 2% from pages that convert at 12%.",
+      "After studying hundreds of high-converting landing pages, here are the 7 elements that separate pages that convert at 2% from pages that convert at 12%.",
     category: "Strategy",
-    date: "2026-02-12",
+    date: "2026-03-27",
     readTime: "7 min read",
     image:
       "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=3840&q=90",
@@ -357,7 +357,7 @@ Then iterate. The first version is never the best version.`,
     excerpt:
       "The European Accessibility Act takes effect in 2025. Here\u2019s what it means for your website and why accessibility is good business, not just compliance.",
     category: "Accessibility",
-    date: "2026-02-05",
+    date: "2026-03-26",
     readTime: "6 min read",
     image:
       "https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=3840&q=90",
@@ -398,9 +398,9 @@ Accessibility isn\u2019t just about compliance. It\u2019s about reach.
 - **Accessible sites are faster** (clean code, proper structure, optimised media)
 - **Accessible sites convert better** (clear navigation, readable text, obvious CTAs help everyone)
 
-## Common Failures We See
+## Common Failures to Watch For
 
-When we audit websites, these issues appear on nearly every one:
+When auditing websites, these issues appear on nearly every one:
 
 1. **Missing alt text** on images (screen readers can\u2019t describe what they can\u2019t read)
 2. **Low colour contrast** (light grey text on white backgrounds \u2014 fails WCAG 4.5:1 ratio)
@@ -409,9 +409,9 @@ When we audit websites, these issues appear on nearly every one:
 5. **Auto-playing media** (disorienting for users with cognitive disabilities)
 6. **No skip navigation** (keyboard users must tab through the entire header on every page)
 
-## What We Build Into Every Project
+## What to Build Into Every Project
 
-Accessibility isn\u2019t an add-on. It\u2019s built into our process from day one:
+Accessibility isn\u2019t an add-on. It should be built into the process from day one:
 
 - Semantic HTML structure (proper headings, landmarks, and roles)
 - Colour contrast ratios that exceed WCAG AA requirements

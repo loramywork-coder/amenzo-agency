@@ -1,112 +1,13 @@
 "use client";
 
+import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useRef } from "react";
-
-// Animated neural network canvas
-function NeuralCanvas() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    let animId: number;
-    let nodes: { x: number; y: number; vx: number; vy: number }[] = [];
-    let lastTime = 0;
-    const TARGET_FPS = 60;
-    const FRAME_MS = 1000 / TARGET_FPS;
-
-    const resize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
-
-    const init = () => {
-      resize();
-      const count = Math.min(Math.floor((canvas.width * canvas.height) / 10000), 120);
-      nodes = Array.from({ length: count }, () => ({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.3,
-        vy: (Math.random() - 0.5) * 0.3,
-      }));
-    };
-
-    const draw = (timestamp: number) => {
-      // Delta time: clamp to prevent big jumps after tab switch or scroll jank
-      const rawDelta = timestamp - lastTime;
-      const delta = Math.min(rawDelta, FRAME_MS * 3) / FRAME_MS; // normalize to 1.0 at 60fps, cap at 3 frames
-      lastTime = timestamp;
-
-      const { width, height } = canvas;
-      ctx.clearRect(0, 0, width, height);
-
-      // Move nodes with delta time — consistent speed regardless of frame rate
-      for (const n of nodes) {
-        n.x += n.vx * delta;
-        n.y += n.vy * delta;
-        if (n.x < 0 || n.x > width) n.vx *= -1;
-        if (n.y < 0 || n.y > height) n.vy *= -1;
-      }
-
-      // Draw connections
-      const maxDist = 160;
-      ctx.lineWidth = 0.6;
-      for (let i = 0; i < nodes.length; i++) {
-        for (let j = i + 1; j < nodes.length; j++) {
-          const dx = nodes[i].x - nodes[j].x;
-          const dy = nodes[i].y - nodes[j].y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < maxDist) {
-            const alpha = (1 - dist / maxDist) * 0.25;
-            ctx.strokeStyle = `rgba(124, 58, 237, ${alpha})`;
-            ctx.beginPath();
-            ctx.moveTo(nodes[i].x, nodes[i].y);
-            ctx.lineTo(nodes[j].x, nodes[j].y);
-            ctx.stroke();
-          }
-        }
-      }
-
-      // Draw nodes
-      for (const n of nodes) {
-        ctx.fillStyle = "rgba(124, 58, 237, 0.5)";
-        ctx.beginPath();
-        ctx.arc(n.x, n.y, 2, 0, Math.PI * 2);
-        ctx.fill();
-      }
-
-      animId = requestAnimationFrame(draw);
-    };
-
-    init();
-    lastTime = performance.now();
-    animId = requestAnimationFrame(draw);
-    window.addEventListener("resize", () => { init(); });
-
-    return () => {
-      cancelAnimationFrame(animId);
-      window.removeEventListener("resize", init);
-    };
-  }, []);
-
-  return (
-    <canvas
-      ref={canvasRef}
-      className="absolute inset-0 z-[2]"
-      aria-hidden="true"
-    />
-  );
-}
 
 function RevealLine({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   return (
-    <span className="block overflow-hidden">
+    <span className="block overflow-hidden pb-2">
       <motion.span
         className="block"
         initial={{ y: "110%" }}
@@ -120,43 +21,19 @@ function RevealLine({ children, delay = 0 }: { children: React.ReactNode; delay?
 }
 
 export function HeroSection() {
+  const sectionRef = useRef<HTMLElement>(null);
   const { scrollY } = useScroll();
   const indicatorOpacity = useTransform(scrollY, [0, 150], [1, 0]);
 
   return (
-    <section className="relative min-h-screen flex flex-col overflow-hidden">
-      {/* Deep base */}
-      <div className="absolute inset-0 bg-[#040410]" />
-
-      {/* Gradient blobs behind the network */}
-      <div className="absolute inset-0 z-[1]" aria-hidden="true">
-        <div className="hero-blob hero-blob-1" />
-        <div className="hero-blob hero-blob-2" />
-        <div className="hero-blob hero-blob-3" />
-      </div>
-
-      {/* Neural network canvas */}
-      <NeuralCanvas />
-
-      {/* Vignette */}
-      <div
-        className="absolute inset-0 z-[3]"
-        style={{ background: "radial-gradient(ellipse at center, transparent 20%, #040410 80%)" }}
-        aria-hidden="true"
-      />
+    <section ref={sectionRef} className="relative min-h-screen flex flex-col">
+      {/* No video, no overlay — neural vortex shader IS the background */}
 
       {/* Content */}
       <div className="relative z-10 flex-1 flex flex-col justify-center items-center container-wide text-center px-6 pb-32 pt-28">
-        <h1 className="font-display font-bold max-w-[900px] mx-auto mb-8">
+        <h1 className="font-display font-bold text-5xl md:text-6xl lg:text-7xl text-white tracking-tight leading-none max-w-4xl mx-auto">
           <RevealLine delay={0.3}>
-            <span className="block text-[36px] sm:text-[48px] md:text-[60px] lg:text-[72px] leading-[1.02] tracking-[-0.03em] text-white">
-              Your website should
-            </span>
-          </RevealLine>
-          <RevealLine delay={0.45}>
-            <span className="block text-[36px] sm:text-[48px] md:text-[60px] lg:text-[72px] leading-[1.02] tracking-[-0.03em] gradient-text italic">
-              sell while you sleep.
-            </span>
+            Where Code Meets Craft.
           </RevealLine>
         </h1>
 
@@ -164,9 +41,9 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.9 }}
-          className="text-[15px] md:text-[17px] text-white/45 max-w-[440px] text-center mb-10 leading-relaxed"
+          className="mt-6 text-base md:text-lg text-white/40 tracking-wide uppercase font-medium mb-10"
         >
-          We design &amp; build high-performance websites for brands that refuse to blend in.
+          Hand-coded websites that make businesses impossible to ignore
         </motion.p>
 
         <motion.div
@@ -176,18 +53,16 @@ export function HeroSection() {
           className="flex flex-col sm:flex-row items-center gap-4"
         >
           <Link
-            href="/work"
-            className="px-8 py-4 rounded-lg border border-white/12 text-white/90 text-[12px] uppercase tracking-[0.14em] font-semibold hover:border-white/30 hover:bg-white/[0.03] transition-all duration-300"
-          >
-            View Work
-          </Link>
-          <Link
             href="/start-project"
-            className="group px-8 py-4 rounded-lg text-white text-[12px] uppercase tracking-[0.14em] font-semibold transition-all duration-300 hover:shadow-[0_0_30px_rgba(124,58,237,0.25)] flex items-center gap-2"
-            style={{ background: "linear-gradient(135deg, #7C3AED, #06B6D4)" }}
+            className="px-8 py-3.5 bg-white text-[#0A0A0A] text-sm font-medium uppercase tracking-wide rounded-full hover:bg-white/90 hover:scale-[1.02] transition-all duration-200"
           >
             Start a Project
-            <ArrowRight size={13} />
+          </Link>
+          <Link
+            href="/work"
+            className="px-8 py-3.5 border border-white/25 text-white/90 text-sm font-medium uppercase tracking-wide rounded-full hover:border-white hover:bg-white/5 transition-all duration-200"
+          >
+            View Work
           </Link>
         </motion.div>
       </div>

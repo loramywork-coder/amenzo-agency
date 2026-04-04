@@ -1,434 +1,593 @@
 "use client";
 
-import Image from "next/image";
+import { useState, useEffect, useRef, ReactNode } from "react";
+import { motion, AnimatePresence, useInView } from "framer-motion";
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { Clock, MapPin, Phone, Mail } from "lucide-react";
+import { DemoBanner } from "@/components/demos/demo-banner";
 
-const artworks = [
+/* ─────────────────────────── DATA ─────────────────────────── */
+
+const SELECTED_WORKS = [
   {
-    title: "Fragments of Light",
-    artist: "Mara Delacroix",
-    medium: "Oil on canvas",
+    id: 1,
+    title: "Untitled No. 7",
+    medium: "Oil on linen",
     year: "2024",
-    image: "https://images.unsplash.com/photo-1549490349-8643362247b5?w=800&q=85",
+    src: "https://images.unsplash.com/photo-1549490349-8643362247b5?w=800&q=80",
   },
   {
-    title: "Urban Pulse",
-    artist: "Kai Tanaka",
-    medium: "Mixed media",
+    id: 2,
+    title: "Harbour Study III",
+    medium: "Acrylic and gold leaf on canvas",
     year: "2025",
-    image: "https://images.unsplash.com/photo-1578926288207-a90a5366759d?w=800&q=85",
+    src: "https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=800&q=80",
   },
   {
-    title: "Chromatic Reverie",
-    artist: "Lena Sorensen",
-    medium: "Acrylic on linen",
-    year: "2025",
-    image: "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=800&q=85",
-  },
-  {
-    title: "Silent Form",
-    artist: "Julian Vassallo",
-    medium: "Bronze sculpture",
+    id: 3,
+    title: "Erosion (Triptych, Panel I)",
+    medium: "Mixed media on board",
     year: "2023",
-    image: "https://images.unsplash.com/photo-1547891654-e66ed7ebb968?w=800&q=85",
-  },
-  {
-    title: "Parallel Worlds",
-    artist: "Sofia Chen",
-    medium: "Photography",
-    year: "2025",
-    image: "https://images.unsplash.com/photo-1482160549825-59d1b23cb208?w=800&q=85",
-  },
-  {
-    title: "Entropy Garden",
-    artist: "Niko Alvarez",
-    medium: "Installation",
-    year: "2024",
-    image: "https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=800&q=85",
+    src: "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=800&q=80",
   },
 ];
 
-const upcomingExhibitions = [
-  {
-    title: "The Weight of Absence",
-    artist: "Freya Lindqvist",
-    dates: "15 May \u2013 28 July 2026",
-    description: "An immersive exploration of memory and loss through large-scale textile works and sound installations.",
-  },
-  {
-    title: "Concrete Poetry",
-    artist: "Tomasz Wierzbicki",
-    dates: "10 August \u2013 30 September 2026",
-    description: "Monumental concrete sculptures that challenge the boundary between architecture and fine art.",
-  },
-];
+/* ─────────────────────────── REVEAL ─────────────────────────── */
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.7, delay: i * 0.1, ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number] },
-  }),
-};
-
-const serifFont = "'Didot', 'Bodoni MT', 'Playfair Display', serif";
-
-export default function GalleryDemo() {
+function Reveal({
+  children,
+  delay = 0,
+  className = "",
+}: {
+  children: ReactNode;
+  delay?: number;
+  className?: string;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-60px" });
   return (
-    <div className="min-h-screen bg-[#FAFAF8] text-[#1A1A1A]">
-      {/* Demo Banner */}
-      <div className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-[#7C3AED] to-[#06B6D4] text-white text-center py-2 text-sm">
-        This is an <strong>AMENZO</strong> design preview.{" "}
-        <a href="/work" className="underline font-medium opacity-80 hover:opacity-100">View All Previews</a>{" \u00b7 "}<a href="/start-project?industry=Other&service=new-website&ref=Atelier+Noir+Gallery" className="underline font-semibold">Get a Quote &rarr;</a>
-      </div>
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 20 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 1, delay, ease: [0.22, 1, 0.36, 1] }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+}
 
-      {/* Navigation */}
-      <nav className="fixed top-10 left-0 right-0 z-40 bg-[#FAFAF8]/90 backdrop-blur-md border-b border-[#1A1A1A]/5">
-        <div className="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
-          <Link href="/demos/gallery" className="text-[15px] tracking-[0.35em] uppercase font-extralight text-[#1A1A1A]" style={{ fontFamily: serifFont }}>
+/* ─────────────────────────── NAV ─────────────────────────── */
+
+function Nav() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  return (
+    <>
+      <nav className="fixed top-10 left-0 right-0 z-50 px-6 md:px-12">
+        <div className="max-w-7xl mx-auto flex items-center justify-between py-5">
+          <Link
+            href="/demos/gallery"
+            className="text-[11px] tracking-[0.3em] uppercase"
+            style={{ color: "rgba(255,255,255,0.5)" }}
+          >
             Atelier Noir
           </Link>
-          <div className="hidden md:flex items-center gap-10 text-[11px] tracking-[0.2em] uppercase text-[#1A1A1A]/50">
-            {["Exhibitions", "Artists", "Visit", "Shop"].map((item) => (
-              <a key={item} href={`#${item.toLowerCase()}`} className="hover:text-[#1A1A1A] transition-colors duration-300">
-                {item}
-              </a>
-            ))}
+
+          <div className="hidden md:flex items-center gap-8">
+            <Link
+              href="/demos/gallery/exhibition"
+              className="text-[11px] tracking-[0.15em] uppercase transition-colors duration-300 hover:text-white/60"
+              style={{ color: "rgba(255,255,255,0.3)" }}
+            >
+              Exhibition
+            </Link>
+            <Link
+              href="/demos/gallery/collection"
+              className="text-[11px] tracking-[0.15em] uppercase transition-colors duration-300 hover:text-white/60"
+              style={{ color: "rgba(255,255,255,0.3)" }}
+            >
+              Collection
+            </Link>
+            <a
+              href="#visit"
+              className="text-[11px] tracking-[0.15em] uppercase transition-colors duration-300 hover:text-white/60"
+              style={{ color: "rgba(255,255,255,0.3)" }}
+            >
+              Visit
+            </a>
           </div>
+
+          <button
+            onClick={() => setMenuOpen(true)}
+            className="text-[11px] tracking-[0.15em] uppercase transition-colors duration-300 hover:text-white/60 md:hidden"
+            style={{ color: "rgba(255,255,255,0.3)" }}
+          >
+            Menu
+          </button>
+
+          <button
+            onClick={() => setMenuOpen(true)}
+            className="text-[11px] tracking-[0.15em] uppercase transition-colors duration-300 hover:text-white/60 hidden md:block"
+            style={{ color: "rgba(255,255,255,0.3)" }}
+          >
+            Menu
+          </button>
         </div>
       </nav>
 
-      {/* Hero */}
-      <section className="relative h-screen pt-10">
-        <Image
-          src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=1920&q=85"
-          alt="Gallery interior"
-          fill
-          className="object-cover"
-          priority
-          sizes="100vw"
-        />
-        <div className="absolute inset-0 bg-black/40" />
-        <div className="relative h-full flex flex-col items-center justify-center text-center px-6">
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-[11px] tracking-[0.4em] uppercase text-[#B8860B] mb-6 font-medium"
-          >
-            March 2026 &mdash; Now Open
-          </motion.p>
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.4 }}
-            className="text-5xl md:text-7xl lg:text-8xl text-white font-extralight italic leading-[1.05]"
-            style={{ fontFamily: serifFont }}
-          >
-            Between Light<br />&amp; Shadow
-          </motion.h1>
-          <motion.p
+      {/* Full-screen menu overlay */}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-            className="mt-6 text-[13px] tracking-[0.15em] text-white/60"
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.4 }}
+            className="fixed inset-0 z-[60] bg-[#0A0A0A] flex flex-col items-center justify-center"
           >
-            A retrospective by Mara Delacroix
-          </motion.p>
-        </div>
-      </section>
-
-      {/* Current Exhibition */}
-      <section id="exhibitions" className="py-32 px-6">
-        <div className="max-w-6xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-            className="mb-6"
-          >
-            <p className="text-[11px] tracking-[0.3em] uppercase text-[#B8860B] mb-4 font-medium">Current Exhibition</p>
-          </motion.div>
-          <div className="grid md:grid-cols-2 gap-16 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
+            <button
+              onClick={() => setMenuOpen(false)}
+              className="absolute top-14 right-6 md:right-12 text-[11px] tracking-[0.15em] uppercase"
+              style={{ color: "rgba(255,255,255,0.3)" }}
             >
-              <div className="relative aspect-[3/4] overflow-hidden">
-                <Image
-                  src="https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=1200&q=85"
-                  alt="Current exhibition"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
-              </div>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+              Close
+            </button>
+
+            <div className="flex flex-col items-center gap-8">
+              {[
+                { label: "Exhibition", href: "/demos/gallery/exhibition" },
+                { label: "Collection", href: "/demos/gallery/collection" },
+                { label: "Visit", href: "#visit" },
+              ].map((item, i) => (
+                <motion.div
+                  key={item.label}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 + i * 0.08, duration: 0.5 }}
+                >
+                  <Link
+                    href={item.href}
+                    onClick={() => setMenuOpen(false)}
+                    className="text-[28px] font-light tracking-[0.1em] uppercase transition-colors duration-300 hover:text-white/60"
+                    style={{ color: "rgba(255,255,255,0.4)" }}
+                  >
+                    {item.label}
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
+
+            <p
+              className="absolute bottom-10 text-[10px] tracking-[0.2em] uppercase"
+              style={{ color: "rgba(255,255,255,0.15)" }}
             >
-              <h2 className="text-4xl md:text-5xl font-extralight italic leading-tight mb-6" style={{ fontFamily: serifFont }}>
-                Between Light<br />&amp; Shadow
-              </h2>
-              <p className="text-[13px] tracking-[0.15em] text-[#B8860B] uppercase mb-4 font-medium">
-                Mara Delacroix
-              </p>
-              <p className="text-[13px] text-[#1A1A1A]/40 tracking-wider mb-8">
-                1 March &ndash; 30 June 2026
-              </p>
-              <p className="text-[15px] leading-[1.9] text-[#1A1A1A]/65 mb-8 max-w-md">
-                Delacroix&apos;s most ambitious body of work to date explores the tension between illumination and obscurity. Across thirty paintings and twelve sculptures, the artist interrogates how light shapes perception, memory, and emotional truth.
-              </p>
-              <p className="text-[15px] leading-[1.9] text-[#1A1A1A]/65 max-w-md">
-                This exhibition marks the artist&apos;s first major solo presentation in the Mediterranean, bringing together works created over the past five years alongside a series of new site-specific pieces conceived for the gallery.
-              </p>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Divider */}
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="h-px bg-[#1A1A1A]/10" />
-      </div>
-
-      {/* Collection */}
-      <section id="artists" className="py-32 px-6">
-        <div className="max-w-6xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-            className="mb-16"
-          >
-            <p className="text-[11px] tracking-[0.3em] uppercase text-[#B8860B] mb-4 font-medium">Collection</p>
-            <h2 className="text-3xl md:text-4xl font-extralight italic" style={{ fontFamily: serifFont }}>
-              Selected Works
-            </h2>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {artworks.map((work, i) => (
-              <motion.div
-                key={work.title}
-                custom={i}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                variants={fadeUp}
-                className="group cursor-pointer"
-              >
-                <div className="relative aspect-[4/5] overflow-hidden mb-4">
-                  <Image
-                    src={work.image}
-                    alt={work.title}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  />
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500" />
-                  <div className="absolute inset-0 flex items-end p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                    <div>
-                      <p className="text-white text-[13px] font-medium">{work.title}</p>
-                      <p className="text-white/60 text-[11px] mt-1">{work.medium}, {work.year}</p>
-                    </div>
-                  </div>
-                </div>
-                <p className="text-[13px] font-medium text-[#1A1A1A]">{work.artist}</p>
-                <p className="text-[11px] text-[#1A1A1A]/40 mt-1 italic" style={{ fontFamily: serifFont }}>{work.title}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Divider */}
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="h-px bg-[#1A1A1A]/10" />
-      </div>
-
-      {/* Upcoming Exhibitions */}
-      <section className="py-32 px-6">
-        <div className="max-w-6xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-            className="mb-16"
-          >
-            <p className="text-[11px] tracking-[0.3em] uppercase text-[#B8860B] mb-4 font-medium">Upcoming</p>
-            <h2 className="text-3xl md:text-4xl font-extralight italic" style={{ fontFamily: serifFont }}>
-              Future Exhibitions
-            </h2>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 gap-16">
-            {upcomingExhibitions.map((exhibition, i) => (
-              <motion.div
-                key={exhibition.title}
-                custom={i}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                variants={fadeUp}
-                className="border-t border-[#1A1A1A]/10 pt-8"
-              >
-                <p className="text-[11px] tracking-[0.2em] text-[#B8860B] uppercase mb-3 font-medium">{exhibition.dates}</p>
-                <h3 className="text-2xl font-extralight italic mb-2" style={{ fontFamily: serifFont }}>{exhibition.title}</h3>
-                <p className="text-[13px] font-medium text-[#1A1A1A]/60 mb-4">{exhibition.artist}</p>
-                <p className="text-[14px] leading-[1.8] text-[#1A1A1A]/50">{exhibition.description}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Divider */}
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="h-px bg-[#1A1A1A]/10" />
-      </div>
-
-      {/* Visit */}
-      <section id="visit" className="py-32 px-6">
-        <div className="max-w-6xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-            className="mb-16"
-          >
-            <p className="text-[11px] tracking-[0.3em] uppercase text-[#B8860B] mb-4 font-medium">Plan Your Visit</p>
-            <h2 className="text-3xl md:text-4xl font-extralight italic" style={{ fontFamily: serifFont }}>
-              Visit the Gallery
-            </h2>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 gap-16 items-start">
-            <div className="space-y-10">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="flex items-start gap-5"
-              >
-                <Clock size={18} className="text-[#B8860B] shrink-0 mt-1" />
-                <div>
-                  <h4 className="text-[13px] font-medium tracking-wide mb-2">Opening Hours</h4>
-                  <p className="text-[13px] text-[#1A1A1A]/45 leading-relaxed">
-                    Tuesday &ndash; Sunday: 10:00 &ndash; 19:00<br />
-                    Thursday late opening until 21:00<br />
-                    Monday: Closed
-                  </p>
-                </div>
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-                className="flex items-start gap-5"
-              >
-                <MapPin size={18} className="text-[#B8860B] shrink-0 mt-1" />
-                <div>
-                  <h4 className="text-[13px] font-medium tracking-wide mb-2">Address</h4>
-                  <p className="text-[13px] text-[#1A1A1A]/45 leading-relaxed">
-                    42 Republic Street<br />
-                    Valletta VLT 1112, Malta
-                  </p>
-                </div>
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="flex items-start gap-5"
-              >
-                <Mail size={18} className="text-[#B8860B] shrink-0 mt-1" />
-                <div>
-                  <h4 className="text-[13px] font-medium tracking-wide mb-2">Contact</h4>
-                  <p className="text-[13px] text-[#1A1A1A]/45 leading-relaxed">
-                    info@ateliernoir.com<br />
-                    +356 2124 5678
-                  </p>
-                </div>
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-                className="flex items-start gap-5"
-              >
-                <Phone size={18} className="text-[#B8860B] shrink-0 mt-1" />
-                <div>
-                  <h4 className="text-[13px] font-medium tracking-wide mb-2">Admission</h4>
-                  <p className="text-[13px] text-[#1A1A1A]/45 leading-relaxed">
-                    General: &euro;12 &middot; Concession: &euro;8<br />
-                    Under 18: Free &middot; Members: Free<br />
-                    Free entry first Sunday of every month
-                  </p>
-                </div>
-              </motion.div>
-            </div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="rounded-xl overflow-hidden border border-[#1A1A1A]/10 aspect-[4/3]"
-            >
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3232.5!2d14.5148!3d35.8978!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2smt!4v1700000000000!5m2!1sen!2smt"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="Atelier Noir Gallery Location"
-              />
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="border-t border-[#1A1A1A]/10 py-16 px-6 bg-[#FAFAF8]">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="text-center md:text-left">
-              <p className="text-[13px] tracking-[0.35em] uppercase font-extralight mb-1" style={{ fontFamily: serifFont }}>
-                Atelier Noir
-              </p>
-              <p className="text-[#1A1A1A]/30 text-[11px]">Contemporary Art &middot; Valletta, Malta</p>
-            </div>
-            <div className="flex gap-8 text-[11px] tracking-[0.15em] uppercase text-[#1A1A1A]/30">
-              <a href="#exhibitions" className="hover:text-[#1A1A1A] transition-colors">Exhibitions</a>
-              <a href="#artists" className="hover:text-[#1A1A1A] transition-colors">Artists</a>
-              <a href="#visit" className="hover:text-[#1A1A1A] transition-colors">Visit</a>
-            </div>
-          </div>
-          <div className="mt-12 pt-8 border-t border-[#1A1A1A]/5 text-center">
-            <p className="text-[#1A1A1A]/20 text-[11px] leading-relaxed">
-              This is a fictional demo website created by <a href="https://amenzo.com" className="underline hover:text-[#1A1A1A]/40">Amenzo</a> to showcase web design capabilities. Atelier Noir Gallery is not a real business. All artist names and exhibition titles are fictional. Images from Unsplash.
+              74 Strait Street, Valletta
             </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
+}
+
+/* ─────────────────────────── 1. HERO ─────────────────────────── */
+
+function Hero() {
+  const [revealed, setRevealed] = useState(false);
+  const [noirBright, setNoirBright] = useState(false);
+
+  useEffect(() => {
+    setRevealed(true);
+    const atelierDuration = "ATELIER".length * 40 + 200;
+    const t = setTimeout(() => setNoirBright(true), atelierDuration);
+    return () => clearTimeout(t);
+  }, []);
+
+  const staggerLetters = (text: string, baseDelay: number) =>
+    text.split("").map((ch, i) => (
+      <motion.span
+        key={`${text}-${i}`}
+        initial={{ opacity: 0 }}
+        animate={revealed ? { opacity: 1 } : {}}
+        transition={{ duration: 0.08, delay: baseDelay + i * 0.04 }}
+        className="inline-block"
+      >
+        {ch === " " ? "\u00A0" : ch}
+      </motion.span>
+    ));
+
+  return (
+    <section className="relative h-screen flex flex-col items-center justify-center bg-[#0A0A0A] overflow-hidden">
+      <div className="text-center">
+        <h1
+          className="text-[80px] font-light tracking-[0.15em] uppercase leading-none"
+          style={{ color: "rgba(255,255,255,0.8)" }}
+        >
+          {staggerLetters("ATELIER", 0)}
+        </h1>
+        <h1
+          className="text-[80px] font-light tracking-[0.15em] uppercase leading-none transition-colors"
+          style={{
+            color: noirBright
+              ? "rgba(255,255,255,0.6)"
+              : "rgba(255,255,255,0.05)",
+            transitionDuration: "3000ms",
+          }}
+        >
+          {staggerLetters("NOIR", "ATELIER".length * 0.04 + 0.1)}
+        </h1>
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={revealed ? { opacity: 1 } : {}}
+          transition={{ duration: 1.2, delay: 0.8 }}
+          className="mt-8 text-[11px] tracking-[0.25em] uppercase"
+          style={{ color: "rgba(255,255,255,0.2)" }}
+        >
+          Contemporary Art Gallery &middot; Valletta
+        </motion.p>
+      </div>
+
+      {/* Scroll indicator — thin pulsing line */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: [0, 0.4, 0] }}
+        transition={{ duration: 2.5, repeat: Infinity, delay: 2 }}
+        className="absolute bottom-12 left-1/2 -translate-x-1/2"
+      >
+        <div className="w-px h-16 bg-white/30" />
+      </motion.div>
+    </section>
+  );
+}
+
+/* ─────────────────────────── 2. CURRENT EXHIBITION ─────────────────────────── */
+
+function CurrentExhibition() {
+  return (
+    <section className="bg-[#0A0A0A] pt-32 pb-0">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 mb-12">
+        <Reveal>
+          <p
+            className="text-[9px] tracking-[0.3em] uppercase mb-8"
+            style={{ color: "rgba(255,255,255,0.2)" }}
+          >
+            Current Exhibition
+          </p>
+        </Reveal>
+        <Reveal delay={0.1}>
+          <h2
+            className="text-[40px] font-light italic leading-tight"
+            style={{ color: "rgba(255,255,255,0.8)" }}
+          >
+            Between Light &amp; Shadow
+          </h2>
+        </Reveal>
+        <Reveal delay={0.15}>
+          <p
+            className="mt-4 text-[14px]"
+            style={{ color: "rgba(255,255,255,0.3)" }}
+          >
+            Mara Delacroix
+          </p>
+        </Reveal>
+        <Reveal delay={0.2}>
+          <p
+            className="mt-2 text-[14px]"
+            style={{ color: "rgba(255,255,255,0.3)" }}
+          >
+            15 Mar &mdash; 30 May 2026
+          </p>
+        </Reveal>
+      </div>
+
+      <Reveal>
+        <div className="w-full overflow-hidden">
+          <img
+            src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=1920&q=85"
+            alt="Between Light and Shadow — exhibition view"
+            className="w-full h-[70vh] object-cover"
+            style={{ display: "block" }}
+          />
+        </div>
+      </Reveal>
+
+      <div className="max-w-7xl mx-auto px-6 md:px-12 mt-12">
+        <Reveal delay={0.1}>
+          <p
+            className="text-[14px] leading-relaxed max-w-2xl"
+            style={{ color: "rgba(255,255,255,0.35)" }}
+          >
+            A body of work spanning fifteen years, tracing Delacroix&apos;s
+            journey from gestural abstraction to the luminous, layered
+            canvases that have become her signature. The exhibition brings
+            together forty-two works that examine the interplay between
+            presence and absence, light and its negation.
+          </p>
+        </Reveal>
+        <Reveal delay={0.15}>
+          <Link
+            href="/demos/gallery/exhibition"
+            className="inline-block mt-8 text-[12px] tracking-[0.15em] uppercase transition-colors duration-300 hover:text-white/50"
+            style={{ color: "rgba(255,255,255,0.3)" }}
+          >
+            Enter Exhibition &rarr;
+          </Link>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+/* ─────────────────────────── 3. SELECTED WORKS ─────────────────────────── */
+
+function SelectedWorks() {
+  const [selected, setSelected] = useState<(typeof SELECTED_WORKS)[number] | null>(null);
+
+  return (
+    <section className="bg-[#0A0A0A] py-28">
+      <div className="max-w-7xl mx-auto px-6 md:px-12">
+        <Reveal>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-[3px]">
+            {SELECTED_WORKS.map((work, i) => (
+              <Reveal key={work.id} delay={i * 0.08}>
+                <button
+                  onClick={() => setSelected(work)}
+                  className="block w-full relative group focus:outline-none"
+                >
+                  <img
+                    src={work.src}
+                    alt={work.title}
+                    className="w-full aspect-[4/5] object-cover transition-all duration-500"
+                  />
+                  <div className="absolute inset-0 border border-transparent group-hover:border-white/10 transition-colors duration-300 pointer-events-none" />
+                  <div className="mt-3 text-left">
+                    <p
+                      className="text-[11px] tracking-[0.05em]"
+                      style={{ color: "rgba(255,255,255,0.2)" }}
+                    >
+                      {work.title}
+                    </p>
+                    <p
+                      className="text-[11px] mt-0.5"
+                      style={{ color: "rgba(255,255,255,0.2)" }}
+                    >
+                      {work.medium}, {work.year}
+                    </p>
+                  </div>
+                </button>
+              </Reveal>
+            ))}
+          </div>
+        </Reveal>
+      </div>
+
+      {/* Lightbox */}
+      <AnimatePresence>
+        {selected && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-[70] bg-black/95 flex items-center justify-center p-6 cursor-pointer"
+            onClick={() => setSelected(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="max-w-4xl w-full flex flex-col items-center"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <img
+                src={selected.src.replace("w=800", "w=1200")}
+                alt={selected.title}
+                className="max-h-[70vh] w-auto object-contain"
+              />
+              <div className="mt-6 text-center">
+                <p
+                  className="text-[14px] font-light italic"
+                  style={{ color: "rgba(255,255,255,0.6)" }}
+                >
+                  {selected.title}
+                </p>
+                <p
+                  className="text-[11px] mt-2"
+                  style={{ color: "rgba(255,255,255,0.25)" }}
+                >
+                  {selected.medium}, {selected.year}
+                </p>
+              </div>
+              <button
+                onClick={() => setSelected(null)}
+                className="mt-8 text-[11px] tracking-[0.15em] uppercase transition-colors duration-300 hover:text-white/40"
+                style={{ color: "rgba(255,255,255,0.2)" }}
+              >
+                Close
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </section>
+  );
+}
+
+/* ─────────────────────────── 4. ARTIST PREVIEW ─────────────────────────── */
+
+function ArtistPreview() {
+  return (
+    <section className="bg-[#0A0A0A] py-28">
+      <div className="max-w-7xl mx-auto px-6 md:px-12">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-12 md:gap-16">
+          {/* Left 40%: studio image */}
+          <Reveal className="md:col-span-2">
+            <img
+              src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=800&q=80&fit=crop&crop=face"
+              alt="Mara Delacroix in her studio"
+              className="w-full object-cover aspect-[3/4]"
+            />
+          </Reveal>
+
+          {/* Right 60%: bio */}
+          <div className="md:col-span-3 flex flex-col justify-center">
+            <Reveal>
+              <h3
+                className="text-[28px] font-light mb-6"
+                style={{ color: "rgba(255,255,255,0.7)" }}
+              >
+                Mara Delacroix
+              </h3>
+            </Reveal>
+            <Reveal delay={0.08}>
+              <p
+                className="text-[14px] leading-relaxed mb-5"
+                style={{ color: "rgba(255,255,255,0.35)" }}
+              >
+                Mara Delacroix&apos;s painting practice negotiates the tension
+                between figuration and abstraction, drawing on the
+                Mediterranean light that floods her Valletta studio. Working
+                primarily in oil on linen, she builds surfaces through dozens
+                of translucent layers, creating depth that shifts with the
+                viewer&apos;s position and the time of day.
+              </p>
+            </Reveal>
+            <Reveal delay={0.12}>
+              <Link
+                href="/demos/gallery/exhibition"
+                className="text-[12px] tracking-[0.15em] uppercase transition-colors duration-300 hover:text-white/50"
+                style={{ color: "rgba(255,255,255,0.25)" }}
+              >
+                Read Full Bio &rarr;
+              </Link>
+            </Reveal>
           </div>
         </div>
-      </footer>
-    </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─────────────────────────── 5. NEWSLETTER ─────────────────────────── */
+
+function Newsletter() {
+  const [submitted, setSubmitted] = useState(false);
+  const [email, setEmail] = useState("");
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email) return;
+    setSubmitted(true);
+    setEmail("");
+    setTimeout(() => setSubmitted(false), 4000);
+  };
+
+  return (
+    <section id="visit" className="bg-[#0A0A0A] py-28">
+      <div className="max-w-lg mx-auto px-6 md:px-12 text-center">
+        <Reveal>
+          <h3
+            className="text-[20px] font-light mb-10"
+            style={{ color: "rgba(255,255,255,0.6)" }}
+          >
+            Stay in the loop.
+          </h3>
+        </Reveal>
+        <Reveal delay={0.1}>
+          <form
+            onSubmit={handleSubmit}
+            className="flex items-end gap-6"
+          >
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Your email"
+              required
+              className="flex-1 bg-transparent text-[14px] py-2 placeholder:text-white/15 focus:outline-none"
+              style={{
+                color: "rgba(255,255,255,0.5)",
+                borderBottom: "1px solid rgba(255,255,255,0.1)",
+              }}
+            />
+            <button
+              type="submit"
+              className="text-[11px] tracking-[0.15em] uppercase pb-2 transition-colors duration-300 hover:text-white/50 shrink-0"
+              style={{ color: "rgba(255,255,255,0.3)" }}
+            >
+              Subscribe
+            </button>
+          </form>
+        </Reveal>
+
+        <AnimatePresence>
+          {submitted && (
+            <motion.p
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -6 }}
+              className="mt-6 text-[12px]"
+              style={{ color: "rgba(255,255,255,0.3)" }}
+            >
+              Thank you.
+            </motion.p>
+          )}
+        </AnimatePresence>
+      </div>
+    </section>
+  );
+}
+
+/* ─────────────────────────── FOOTER ─────────────────────────── */
+
+function Footer() {
+  return (
+    <footer className="bg-[#0A0A0A] border-t border-[#1A1A1A] py-10">
+      <div className="max-w-7xl mx-auto px-6 md:px-12">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-[11px]">
+          <p
+            className="tracking-[0.2em] uppercase font-light"
+            style={{ color: "rgba(255,255,255,0.3)" }}
+          >
+            Atelier Noir
+          </p>
+          <p style={{ color: "rgba(255,255,255,0.15)" }}>
+            74 Strait Street, Valletta VLT 1436
+          </p>
+          <a
+            href="#"
+            className="tracking-[0.1em] uppercase transition-colors duration-300 hover:text-white/30"
+            style={{ color: "rgba(255,255,255,0.2)" }}
+          >
+            Instagram
+          </a>
+        </div>
+        <p
+          className="text-center mt-6 text-[10px]"
+          style={{ color: "rgba(255,255,255,0.12)" }}
+        >
+          &copy; 2026 Atelier Noir
+        </p>
+      </div>
+    </footer>
+  );
+}
+
+/* ─────────────────────────── PAGE ─────────────────────────── */
+
+export default function GalleryPage() {
+  return (
+    <main className="bg-[#0A0A0A] text-white pt-10 min-h-screen">
+      <DemoBanner />
+      <Nav />
+      <Hero />
+      <CurrentExhibition />
+      <SelectedWorks />
+      <ArtistPreview />
+      <Newsletter />
+      <Footer />
+    </main>
   );
 }

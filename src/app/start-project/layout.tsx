@@ -1,15 +1,10 @@
-import type { Metadata } from "next";
+import { generatePageMeta } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Start a Project — Project Brief Wizard",
-  description:
-    "Submit your project brief to Amenzo. Walk through our guided wizard to define your requirements, timeline, and budget. Free consultation included.",
-  openGraph: {
-    title: "Start a Project — Project Brief Wizard | Amenzo",
-    description:
-      "Submit your project brief to Amenzo. Walk through our guided wizard to define your requirements, timeline, and budget. Free consultation included.",
-  },
-};
+export const metadata = generatePageMeta({
+  title: "Start Your Website Project — Custom Web Design",
+  description: "Ready to build your website? Tell us about your project and we will respond within 24 hours. Custom web design from EUR 750. No templates. You own the code.",
+  path: "/start-project",
+});
 
 export default function StartProjectLayout({
   children,

@@ -1,6 +1,7 @@
-import type { Metadata } from "next";
-import Image from "next/image";
-import { SITE_NAME, CONTACT_EMAIL } from "@/lib/constants";
+import { generatePageMeta } from "@/lib/seo";
+import { BreadcrumbSchema } from "@/components/structured-data";
+
+import { CONTACT_EMAIL } from "@/lib/constants";
 import {
   AnimateIn,
   StaggerContainer,
@@ -13,38 +14,27 @@ import { getTagColor } from "@/lib/tag-colors";
 import {
   Monitor,
   ShoppingBag,
-  Palette,
-  Layers,
   TrendingUp,
   RefreshCw,
   Server,
-  Compass,
   ArrowRight,
   Check,
   Clock,
   CreditCard,
 } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "Services — Web Design, Development & Digital Strategy",
-  description:
-    "Custom web design, e-commerce, branding, UI/UX, SEO, and digital strategy. Premium services from AMENZO, Malta's modern web agency.",
-  openGraph: {
-    title: `Services | ${SITE_NAME}`,
-    description:
-      "Custom web design, e-commerce, branding, UI/UX, SEO, and digital strategy. Premium services, transparent pricing.",
-  },
-};
+export const metadata = generatePageMeta({
+  title: "Web Design Services — Custom Websites, E-Commerce, SEO",
+  description: "Professional web design services. Custom websites from €750, e-commerce from €4,000, SEO from €300/month, hosting from €80/month. Hand-coded with Next.js. No templates.",
+  path: "/services",
+});
 
 const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
   Monitor,
   ShoppingBag,
-  Palette,
-  Layers,
   TrendingUp,
   RefreshCw,
   Server,
-  Compass,
 };
 
 const SERVICE_DETAILS = [
@@ -68,6 +58,26 @@ const SERVICE_DETAILS = [
     tags: ["Next.js", "React", "Tailwind", "TypeScript", "Vercel"],
   },
   {
+    title: "Website Redesign",
+    icon: "RefreshCw",
+    description:
+      "Your current site not cutting it? We take what you have and transform it into something extraordinary. A redesign is not just a facelift. It is a strategic rethink of how your digital presence serves your business.",
+    included: [
+      "Current site audit and performance review",
+      "Content audit and migration plan",
+      "New information architecture",
+      "Complete UI/UX redesign",
+      "Full-stack development on modern platform",
+      "SEO preservation and 301 redirect mapping",
+      "Data migration and content transfer",
+      "A/B testing setup for key pages",
+      "Launch plan and rollback strategy",
+    ],
+    timeline: "2-4 weeks",
+    price: "750",
+    tags: ["Audit", "Redesign", "Migration", "Optimisation"],
+  },
+  {
     title: "E-Commerce",
     icon: "ShoppingBag",
     description:
@@ -86,45 +96,6 @@ const SERVICE_DETAILS = [
     timeline: "4-6 weeks",
     price: "4,000",
     tags: ["Shopify", "WooCommerce", "Stripe", "Custom"],
-  },
-  {
-    title: "Branding & Identity",
-    icon: "Palette",
-    description:
-      "Your brand is more than a logo. It is the feeling people get when they encounter your business. We create comprehensive brand identities that are distinctive, memorable, and built to last across every touchpoint.",
-    included: [
-      "Brand strategy and positioning workshop",
-      "Logo design (primary, secondary, favicon)",
-      "Colour palette and typography system",
-      "Brand guidelines document",
-      "Business card and stationery design",
-      "Social media templates and assets",
-      "Icon and illustration style",
-      "Brand voice and tone guidelines",
-    ],
-    timeline: "2-3 weeks",
-    price: "800",
-    tags: ["Logo Design", "Brand Strategy", "Visual Identity"],
-  },
-  {
-    title: "UI/UX Design",
-    icon: "Layers",
-    description:
-      "User-centred design that looks stunning and converts. We do not just make things pretty. We research your users, map their journeys, and design interfaces that guide them exactly where you need them to go.",
-    included: [
-      "User research and persona development",
-      "Competitive analysis and benchmarking",
-      "Information architecture and sitemaps",
-      "Wireframes and low-fidelity prototypes",
-      "High-fidelity UI design in Figma",
-      "Interactive prototypes for testing",
-      "Design system and component library",
-      "Usability testing and iteration",
-      "Developer handoff with specs and assets",
-    ],
-    timeline: "2-4 weeks",
-    price: "2,000",
-    tags: ["Figma", "User Research", "Prototyping", "Design Systems"],
   },
   {
     title: "SEO & Performance",
@@ -147,26 +118,6 @@ const SERVICE_DETAILS = [
     tags: ["Technical SEO", "Core Web Vitals", "Schema", "Analytics"],
   },
   {
-    title: "Website Redesign",
-    icon: "RefreshCw",
-    description:
-      "Your current site not cutting it? We take what you have and transform it into something extraordinary. A redesign is not just a facelift. It is a strategic rethink of how your digital presence serves your business.",
-    included: [
-      "Current site audit and performance review",
-      "Content audit and migration plan",
-      "New information architecture",
-      "Complete UI/UX redesign",
-      "Full-stack development on modern platform",
-      "SEO preservation and 301 redirect mapping",
-      "Data migration and content transfer",
-      "A/B testing setup for key pages",
-      "Launch plan and rollback strategy",
-    ],
-    timeline: "2-4 weeks",
-    price: "750",
-    tags: ["Audit", "Redesign", "Migration", "Optimisation"],
-  },
-  {
     title: "Hosting & Maintenance",
     icon: "Server",
     description:
@@ -185,85 +136,16 @@ const SERVICE_DETAILS = [
     price: "80/mo",
     tags: ["Vercel", "Monitoring", "Backups", "Updates"],
   },
-  {
-    title: "Digital Strategy",
-    icon: "Compass",
-    description:
-      "Not sure where to start? We help you define your digital roadmap and prioritise what moves the needle. From audit to execution plan, we give you a clear path forward backed by data and experience.",
-    included: [
-      "Digital presence audit and competitor review",
-      "Business goals alignment workshop",
-      "Technology stack recommendations",
-      "Phased implementation roadmap",
-      "Budget planning and ROI projections",
-      "Vendor and tool evaluation",
-      "Team training and knowledge transfer",
-      "Quarterly strategy reviews",
-    ],
-    timeline: "1-2 weeks",
-    price: "2,000",
-    tags: ["Audit", "Strategy", "Roadmap", "Training"],
-  },
-  {
-    title: "Landing Pages & Funnels",
-    icon: "Monitor",
-    description:
-      "High-converting landing pages designed for specific campaigns, product launches, or lead generation. Every element is optimised for a single goal: getting your visitor to take action.",
-    included: [
-      "Campaign strategy and goal definition",
-      "Copywriting and messaging framework",
-      "Custom landing page design",
-      "A/B testing variants",
-      "Form and lead capture integration",
-      "Email automation setup",
-      "Analytics and conversion tracking",
-      "Post-launch optimisation report",
-    ],
-    timeline: "1-2 weeks",
-    price: "800",
-    tags: ["Conversion", "Lead Gen", "A/B Testing", "Analytics"],
-  },
-  {
-    title: "Web Application Development",
-    icon: "Compass",
-    description:
-      "Custom web applications built for scale. From internal dashboards to customer-facing SaaS platforms, we build robust, performant applications with modern architecture that grows with your business.",
-    included: [
-      "Requirements gathering and technical specification",
-      "System architecture and database design",
-      "Full-stack development (Next.js, Supabase)",
-      "Authentication and user management",
-      "API design and third-party integrations",
-      "Real-time features and notifications",
-      "Testing, QA, and staging environment",
-      "Deployment pipeline and CI/CD setup",
-      "Documentation and developer handoff",
-    ],
-    timeline: "4-8 weeks",
-    price: "4,000",
-    tags: ["Next.js", "Supabase", "APIs", "Full-Stack"],
-  },
 ] as const;
 
-const SERVICE_IMAGES = [
-  "https://images.unsplash.com/photo-1542744094-3a31f272c490?w=1920&q=85",
-  "https://images.unsplash.com/photo-1556742111-a301076d9d18?w=1920&q=85",
-  "https://images.unsplash.com/photo-1626785774573-4b799315345d?w=1920&q=85",
-  "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=1920&q=85",
-  "https://images.unsplash.com/photo-1533750349088-cd871a92f312?w=1920&q=85",
-  "https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=1920&q=85",
-  "https://images.unsplash.com/photo-1597852074816-d933c7d2b988?w=1920&q=85",
-  "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=1920&q=85",
-  "https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?w=1920&q=85",
-  "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=1920&q=85",
-];
 
 export default function ServicesPage() {
   return (
     <>
+      <BreadcrumbSchema items={[{ name: "Services", url: "/services" }]} />
       {/* Hero */}
-      <section className="relative min-h-[60vh] flex items-center bg-bg overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(124,58,237,0.08),transparent_60%)]" />
+      <section className="relative min-h-[60vh] flex items-center overflow-hidden">
+        
         <div className="container-wide relative z-10 pt-40 pb-24">
           <AnimateIn animation="fadeIn" delay={0.1}>
             <p className="caption mb-6 text-violet">What We Do</p>
@@ -292,20 +174,8 @@ export default function ServicesPage() {
           <Section
             key={service.title}
             id={service.title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}
-            className={isEven ? "bg-bg" : "bg-surface"}
+            className={isEven ? "" : ""}
           >
-            <AnimateIn animation="fadeUp" className="mb-10">
-              <div className="relative aspect-video rounded-xl overflow-hidden">
-                <Image
-                  src={SERVICE_IMAGES[index]}
-                  alt={service.title}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
-                <div className="absolute inset-0 bg-black/20" />
-              </div>
-            </AnimateIn>
             <div className="grid lg:grid-cols-2 gap-12 lg:gap-20">
               {/* Left: Info */}
               <AnimateIn animation="fadeUp">

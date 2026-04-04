@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { generatePageMeta } from "@/lib/seo";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, Clock } from "lucide-react";
@@ -7,16 +7,11 @@ import { Section } from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
 import { AnimateIn, StaggerContainer, StaggerItem } from "@/components/ui/motion";
 
-export const metadata: Metadata = {
-  title: "Insights — Blog & Articles",
-  description:
-    "Honest insights on web design, development, SEO, and digital strategy. Written by the team at AMENZO.",
-  openGraph: {
-    title: "Insights — Blog & Articles | Amenzo",
-    description:
-      "Honest insights on web design, development, SEO, and digital strategy. Written by the team at AMENZO.",
-  },
-};
+export const metadata = generatePageMeta({
+  title: "Web Design Blog — Tips & Guides for Businesses",
+  description: "Web design tips, pricing guides, SEO advice, and digital insights for businesses. Learn how to make the most of your online presence.",
+  path: "/insights",
+});
 
 function formatDate(dateStr: string): string {
   const date = new Date(dateStr);

@@ -1,330 +1,647 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { Flame, Clock, Users, Zap, ChevronRight, MapPin, Phone, Globe, Check } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { DemoBanner } from "@/components/demos/demo-banner";
+import Reveal from "@/components/demos/Reveal";
+import MagneticButton from "@/components/demos/MagneticButton";
 
-const classes = [
-  { name: "HIIT Blast", time: "06:00 AM", duration: "45 min", trainer: "Marco", intensity: "High", color: "#EF4444" },
-  { name: "Vinyasa Yoga", time: "07:30 AM", duration: "60 min", trainer: "Sara", intensity: "Low", color: "#10B981" },
-  { name: "CrossFit WOD", time: "09:00 AM", duration: "50 min", trainer: "Jake", intensity: "Extreme", color: "#F97316" },
-  { name: "Boxing Cardio", time: "12:00 PM", duration: "45 min", trainer: "Chris", intensity: "High", color: "#EF4444" },
-  { name: "Spin Session", time: "05:30 PM", duration: "40 min", trainer: "Nina", intensity: "Medium", color: "#F59E0B" },
-  { name: "Pilates Core", time: "07:00 PM", duration: "55 min", trainer: "Leah", intensity: "Medium", color: "#F59E0B" },
+/* ------------------------------------------------------------------ */
+/*  PALETTE                                                           */
+/* ------------------------------------------------------------------ */
+const BG      = "#080808";
+const SURFACE = "#111111";
+const GREEN   = "#22C55E";
+const WHITE   = "#FFFFFF";
+const MUTED   = "#71717A";
+const BORDER  = "#27272A";
+
+/* ------------------------------------------------------------------ */
+/*  DATA                                                              */
+/* ------------------------------------------------------------------ */
+const MARQUEE_TEXT = "500+ MEMBERS \u00B7 40+ CLASSES \u00B7 15 TRAINERS \u00B7 2,000 SQM \u00B7 5AM\u201311PM";
+
+interface GymClass {
+  name: string;
+  instructor: string;
+  duration: string;
+  difficulty: "Beginner" | "All Levels" | "Intermediate" | "Advanced";
+  schedule: string;
+  image: string;
+}
+
+const CLASSES: GymClass[] = [
+  {
+    name: "HIIT BURN",
+    instructor: "Alex Borg",
+    duration: "45 min",
+    difficulty: "Advanced",
+    schedule: "Mon / Wed / Fri  6:00 AM",
+    image: "https://images.unsplash.com/photo-1549060279-7e168fcee0c2?w=600&q=80",
+  },
+  {
+    name: "YOGA FLOW",
+    instructor: "Mia Grech",
+    duration: "60 min",
+    difficulty: "All Levels",
+    schedule: "Tue / Thu  8:00 AM",
+    image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&q=80",
+  },
+  {
+    name: "BOXING FIT",
+    instructor: "Danny Vella",
+    duration: "50 min",
+    difficulty: "Intermediate",
+    schedule: "Mon / Wed  6:00 PM",
+    image: "https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?w=600&q=80",
+  },
+  {
+    name: "STRENGTH LAB",
+    instructor: "Mark Zammit",
+    duration: "55 min",
+    difficulty: "Intermediate",
+    schedule: "Tue / Thu  10:00 AM",
+    image: "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=600&q=80",
+  },
 ];
 
-const plans = [
+const DIFFICULTY_COLOR: Record<string, string> = {
+  Beginner: GREEN,
+  "All Levels": GREEN,
+  Intermediate: "#EAB308",
+  Advanced: "#EF4444",
+};
+
+interface Plan {
+  name: string;
+  price: number;
+  recommended: boolean;
+  features: string[];
+}
+
+const PLANS: Plan[] = [
   {
-    name: "Starter",
-    price: 39,
-    period: "month",
-    features: ["Gym floor access", "2 classes per week", "Locker room", "Free parking"],
-    highlight: false,
+    name: "BASIC",
+    price: 49,
+    recommended: false,
+    features: ["Gym floor access", "Locker & shower", "1 class per week", "Basic app access"],
   },
   {
-    name: "Pro",
-    price: 69,
-    period: "month",
-    features: ["Unlimited gym access", "Unlimited classes", "Personal training (1x/mo)", "Sauna & pool", "Nutrition plan"],
-    highlight: true,
+    name: "PRO",
+    price: 79,
+    recommended: true,
+    features: ["Unlimited classes", "Sauna & steam", "Nutrition plan", "Personal dashboard", "1 guest pass / mo"],
   },
   {
-    name: "Elite",
-    price: 109,
-    period: "month",
-    features: ["Everything in Pro", "Personal training (4x/mo)", "Recovery suite", "Guest passes (2/mo)", "Priority booking"],
-    highlight: false,
+    name: "ELITE",
+    price: 119,
+    recommended: false,
+    features: ["Everything in Pro", "4x personal training", "Recovery suite", "Priority booking", "VIP events"],
   },
 ];
 
-export default function FitnessDemo() {
+interface Trainer {
+  name: string;
+  initials: string;
+  specialty: string;
+}
+
+const TRAINERS: Trainer[] = [
+  { name: "ALEX BORG",      initials: "AB", specialty: "HIIT & Conditioning" },
+  { name: "MIA GRECH",      initials: "MG", specialty: "Yoga & Wellness" },
+  { name: "DANNY VELLA",    initials: "DV", specialty: "Boxing & Combat" },
+  { name: "LISA CAMILLERI", initials: "LC", specialty: "Spin & Cardio" },
+];
+
+interface Testimonial {
+  quote: string;
+  name: string;
+  stars: number;
+}
+
+const TESTIMONIALS: Testimonial[] = [
+  {
+    quote: "FitZone completely changed my approach to fitness. The trainers actually care about your progress and push you beyond what you thought possible.",
+    name: "Sarah M.",
+    stars: 5,
+  },
+  {
+    quote: "Best gym in Malta, hands down. The HIIT classes with Alex are absolutely brutal in the best way. Lost 12kg in 3 months.",
+    name: "James K.",
+    stars: 5,
+  },
+  {
+    quote: "I was intimidated at first, but the community here is incredible. Everyone supports each other. The yoga sessions with Mia are life-changing.",
+    name: "Elena R.",
+    stars: 5,
+  },
+];
+
+const NAV_LINKS = [
+  { label: "Classes",    href: "/demos/fitness/classes" },
+  { label: "Trainers",   href: "/demos/fitness/trainers" },
+  { label: "Membership", href: "#membership" },
+  { label: "Schedule",   href: "#schedule" },
+  { label: "Gallery",    href: "#gallery" },
+];
+
+/* ------------------------------------------------------------------ */
+/*  INLINE NAV                                                        */
+/* ------------------------------------------------------------------ */
+function FitNav() {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handler = () => setScrolled(window.scrollY > 40);
+    window.addEventListener("scroll", handler, { passive: true });
+    return () => window.removeEventListener("scroll", handler);
+  }, []);
+
   return (
-    <div className="min-h-screen bg-[#0A0A0A] text-white">
-      {/* Demo Banner */}
-      <div className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-[#7C3AED] to-[#06B6D4] text-white text-center py-2 text-sm">
-        This is an <strong>AMENZO</strong> design preview.{" "}
-        <a href="/work" className="underline font-medium opacity-80 hover:opacity-100">View All Previews</a>{" · "}<a href="/start-project?industry=Fitness+%26+Lifestyle&service=new-website&ref=FitZone" className="underline font-semibold">Get a Quote &rarr;</a>
+    <nav
+      className="fixed top-10 left-0 right-0 z-50 transition-all duration-300"
+      style={{
+        background: scrolled ? "rgba(8,8,8,0.92)" : "transparent",
+        backdropFilter: scrolled ? "blur(16px)" : "none",
+        borderBottom: scrolled ? `1px solid ${BORDER}` : "1px solid transparent",
+      }}
+    >
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+        <Link href="/demos/fitness" className="flex items-center gap-0 text-xl font-bold uppercase tracking-wider" style={{ fontFamily: "var(--font-gym-display), sans-serif" }}>
+          <span style={{ color: WHITE }}>FIT</span>
+          <span style={{ color: GREEN }}>ZONE</span>
+        </Link>
+        <div className="hidden items-center gap-8 md:flex">
+          {NAV_LINKS.map((link) => (
+            <Link
+              key={link.label}
+              href={link.href}
+              className="text-[13px] uppercase tracking-wider transition-colors hover:text-white"
+              style={{ color: MUTED, letterSpacing: "0.08em" }}
+            >
+              {link.label}
+            </Link>
+          ))}
+        </div>
+        <Link
+          href="#cta"
+          className="hidden rounded-full px-6 py-2.5 text-[13px] font-medium uppercase tracking-wider transition-all hover:brightness-110 md:inline-block"
+          style={{ background: GREEN, color: "#000" }}
+        >
+          Start Free Trial
+        </Link>
       </div>
+    </nav>
+  );
+}
 
-      {/* Navigation */}
-      <nav className="fixed top-10 left-0 right-0 z-40 bg-[#0A0A0A]/90 backdrop-blur-md border-b border-white/5">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <Link href="/demos/fitness" className="text-2xl font-black tracking-tight" style={{ fontFamily: "var(--font-display)" }}>
-            FIT<span className="text-[#EF4444]">ZONE</span>
-          </Link>
-          <div className="hidden md:flex items-center gap-8 text-sm font-semibold uppercase tracking-wider">
-            {["Classes", "Pricing", "Trainers", "Contact"].map((item) => (
-              <a key={item} href={`#${item.toLowerCase()}`} className="text-white/50 hover:text-[#EF4444] transition-colors">
-                {item}
-              </a>
+/* ------------------------------------------------------------------ */
+/*  INLINE FOOTER                                                     */
+/* ------------------------------------------------------------------ */
+function FitFooter() {
+  return (
+    <footer style={{ background: "#000000", borderTop: `1px solid ${BORDER}` }} className="px-6 py-16 md:px-12 lg:px-20">
+      <div className="mx-auto max-w-6xl">
+        <div className="grid gap-12 md:grid-cols-4">
+          {/* Brand */}
+          <div className="md:col-span-2">
+            <div className="flex items-center gap-0 text-2xl font-bold uppercase tracking-wider" style={{ fontFamily: "var(--font-gym-display), sans-serif" }}>
+              <span style={{ color: WHITE }}>FIT</span>
+              <span style={{ color: GREEN }}>ZONE</span>
+            </div>
+            <p className="mt-4 max-w-xs text-[13px] leading-relaxed" style={{ color: MUTED }}>
+              Malta&apos;s premier fitness facility. Transforming bodies and lives since 2018.
+            </p>
+          </div>
+          {/* Address & Hours */}
+          <div>
+            <h4 className="text-[11px] font-semibold uppercase tracking-widest" style={{ color: WHITE }}>LOCATION</h4>
+            <div className="mt-4 space-y-2 text-[13px]" style={{ color: MUTED }}>
+              <p>23 Strand Street</p>
+              <p>Sliema, Malta</p>
+            </div>
+          </div>
+          <div>
+            <h4 className="text-[11px] font-semibold uppercase tracking-widest" style={{ color: WHITE }}>HOURS</h4>
+            <div className="mt-4 space-y-2 text-[13px]" style={{ color: MUTED }}>
+              <p>Mon &ndash; Fri: 5:00 AM &ndash; 11:00 PM</p>
+              <p>Sat &ndash; Sun: 6:00 AM &ndash; 10:00 PM</p>
+            </div>
+          </div>
+        </div>
+        {/* Social + Copyright */}
+        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t pt-8 md:flex-row" style={{ borderColor: BORDER }}>
+          <div className="flex gap-6">
+            {["Instagram", "Facebook", "YouTube", "TikTok"].map((s) => (
+              <span key={s} className="cursor-pointer text-[12px] uppercase tracking-wider transition-colors hover:text-white" style={{ color: MUTED }}>
+                {s}
+              </span>
             ))}
           </div>
-          <a
-            href="#pricing"
-            className="bg-[#EF4444] text-white px-6 py-2 text-sm font-bold uppercase tracking-wider rounded hover:bg-[#DC2626] transition-colors"
-          >
-            Join Now
-          </a>
+          <span className="text-[12px]" style={{ color: MUTED }}>&copy; 2026 FitZone Malta. All rights reserved.</span>
         </div>
-      </nav>
+      </div>
+    </footer>
+  );
+}
 
-      {/* Hero */}
-      <section className="relative h-screen pt-10">
+/* ------------------------------------------------------------------ */
+/*  PAGE                                                              */
+/* ------------------------------------------------------------------ */
+export default function FitnessHomePage() {
+  return (
+    <main style={{ background: BG, color: WHITE, fontFamily: "var(--font-gym-display), Inter, system-ui, sans-serif" }}>
+      <DemoBanner />
+      <FitNav />
+
+      {/* ════════════ 1. HERO (100vh) ════════════ */}
+      <section className="relative flex h-screen w-full items-center justify-center overflow-hidden pt-10">
         <Image
-          src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=3840&q=90"
-          alt="FitZone Malta gym"
+          src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1920&q=85"
+          alt="Premium gym interior"
           fill
           className="object-cover"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-[#0A0A0A]/70 to-transparent" />
-        <div className="relative z-10 flex flex-col justify-center h-full px-6 max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            className="max-w-xl"
+        <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.88), rgba(0,0,0,0.82))" }} />
+
+        <div className="relative z-10 flex flex-col items-center px-6 text-center">
+          {/* Green label */}
+          <motion.span
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="mb-8 text-[12px] font-semibold uppercase"
+            style={{ color: GREEN, letterSpacing: "0.45em" }}
           >
-            <div className="flex items-center gap-2 mb-4">
-              <Flame className="text-[#EF4444]" size={20} />
-              <span className="text-[#EF4444] font-bold uppercase tracking-widest text-sm">Malta&apos;s #1 Fitness Hub</span>
-            </div>
-            <h1 className="text-5xl md:text-7xl font-black tracking-tight mb-6 leading-[0.9]" style={{ fontFamily: "var(--font-display)" }}>
-              PUSH YOUR<br />
-              <span className="text-[#EF4444]">LIMITS</span>
-            </h1>
-            <p className="text-lg text-white/60 mb-8 max-w-md">
-              State-of-the-art equipment, world-class trainers, and a community that pushes you to be your best.
-            </p>
-            <div className="flex gap-4">
-              <a
-                href="#pricing"
-                className="bg-[#EF4444] text-white px-8 py-4 text-sm font-bold uppercase tracking-wider rounded hover:bg-[#DC2626] transition-colors flex items-center gap-2"
-              >
-                Start Free Trial <ChevronRight size={16} />
-              </a>
-              <a
-                href="#classes"
-                className="border border-white/20 text-white px-8 py-4 text-sm font-bold uppercase tracking-wider rounded hover:bg-white/5 transition-colors"
-              >
-                View Classes
-              </a>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+            FITZONE
+          </motion.span>
 
-      {/* Stats Bar */}
-      <section className="bg-[#EF4444] py-6">
-        <div className="max-w-5xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-          {[
-            { value: "2,500+", label: "Active Members" },
-            { value: "50+", label: "Weekly Classes" },
-            { value: "15", label: "Expert Trainers" },
-            { value: "24/7", label: "Open Hours" },
-          ].map((stat) => (
-            <div key={stat.label}>
-              <p className="text-2xl font-black" style={{ fontFamily: "var(--font-display)" }}>{stat.value}</p>
-              <p className="text-sm text-white/70 font-medium">{stat.label}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+          {/* SLAM line 1 */}
+          <motion.h1
+            initial={{ opacity: 0, scale: 1.3, filter: "blur(4px)" }}
+            animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+            transition={{ type: "spring", stiffness: 120, damping: 14, delay: 0.2 }}
+            className="text-[48px] font-black leading-[1.05] tracking-tight uppercase md:text-[72px]"
+            style={{ fontFamily: "var(--font-gym-display), sans-serif", color: WHITE }}
+          >
+            TRANSFORM YOUR BODY.
+          </motion.h1>
 
-      {/* Classes */}
-      <section id="classes" className="max-w-7xl mx-auto px-6 py-24">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <span className="text-[#EF4444] font-bold uppercase tracking-widest text-sm">Schedule</span>
-          <h2 className="text-4xl md:text-5xl font-black tracking-tight mt-2" style={{ fontFamily: "var(--font-display)" }}>
-            TODAY&apos;S CLASSES
-          </h2>
-        </motion.div>
+          {/* SLAM line 2 */}
+          <motion.h1
+            initial={{ opacity: 0, scale: 1.3, filter: "blur(4px)" }}
+            animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+            transition={{ type: "spring", stiffness: 120, damping: 14, delay: 0.55 }}
+            className="mt-2 text-[48px] font-black leading-[1.05] tracking-tight uppercase md:text-[72px]"
+            style={{ fontFamily: "var(--font-gym-display), sans-serif", color: GREEN }}
+          >
+            TRANSFORM YOUR LIFE.
+          </motion.h1>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {classes.map((cls, i) => (
-            <motion.div
-              key={cls.name}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: i * 0.08 }}
-              className="bg-[#141414] border border-white/5 rounded-xl p-6 hover:border-[#EF4444]/30 transition-colors group"
-            >
-              <div className="flex items-center justify-between mb-4">
-                <span
-                  className="text-xs font-bold uppercase tracking-wider px-2 py-1 rounded"
-                  style={{ backgroundColor: `${cls.color}20`, color: cls.color }}
-                >
-                  {cls.intensity}
-                </span>
-                <span className="text-white/40 text-sm">{cls.time}</span>
-              </div>
-              <h3 className="text-xl font-bold mb-2" style={{ fontFamily: "var(--font-display)" }}>{cls.name}</h3>
-              <div className="flex items-center gap-4 text-sm text-white/40 mb-4">
-                <span className="flex items-center gap-1"><Clock size={14} /> {cls.duration}</span>
-                <span className="flex items-center gap-1"><Users size={14} /> {cls.trainer}</span>
-              </div>
-              <button className="w-full border border-white/10 text-white py-2.5 text-sm font-semibold uppercase tracking-wider rounded hover:bg-[#EF4444] hover:border-[#EF4444] transition-all">
-                Book Spot
-              </button>
-            </motion.div>
-          ))}
-        </div>
-      </section>
+          {/* Subtitle */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.9 }}
+            className="mt-8 max-w-lg text-[16px] leading-relaxed"
+            style={{ color: MUTED }}
+          >
+            Malta&apos;s premier fitness experience. 40+ classes, 15 certified trainers,
+            and a community that pushes you further.
+          </motion.p>
 
-      {/* Pricing */}
-      <section id="pricing" className="bg-[#0F0F0F] py-24">
-        <div className="max-w-7xl mx-auto px-6">
+          {/* Two pill buttons */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 1.1 }}
+            className="mt-10 flex flex-wrap items-center justify-center gap-4"
           >
-            <span className="text-[#EF4444] font-bold uppercase tracking-widest text-sm">Membership</span>
-            <h2 className="text-4xl md:text-5xl font-black tracking-tight mt-2" style={{ fontFamily: "var(--font-display)" }}>
-              CHOOSE YOUR PLAN
-            </h2>
-          </motion.div>
-
-          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {plans.map((plan, i) => (
-              <motion.div
-                key={plan.name}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className={`rounded-2xl p-8 ${
-                  plan.highlight
-                    ? "bg-[#EF4444] text-white border-2 border-[#EF4444] scale-105"
-                    : "bg-[#141414] border border-white/10"
-                }`}
+            <MagneticButton>
+              <span
+                className="inline-block rounded-full px-9 py-4 text-[14px] font-semibold uppercase tracking-wider transition-all hover:brightness-110"
+                style={{ background: GREEN, color: "#000" }}
               >
-                <h3 className="text-lg font-bold uppercase tracking-wider mb-2">{plan.name}</h3>
-                <div className="mb-6">
-                  <span className="text-5xl font-black" style={{ fontFamily: "var(--font-display)" }}>&euro;{plan.price}</span>
-                  <span className={`text-sm ${plan.highlight ? "text-white/70" : "text-white/40"}`}>/{plan.period}</span>
-                </div>
-                <ul className="space-y-3 mb-8">
-                  {plan.features.map((feature) => (
-                    <li key={feature} className="flex items-center gap-2 text-sm">
-                      <Check size={16} className={plan.highlight ? "text-white" : "text-[#EF4444]"} />
-                      <span className={plan.highlight ? "text-white/90" : "text-white/60"}>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-                <button
-                  className={`w-full py-3 text-sm font-bold uppercase tracking-wider rounded transition-colors ${
-                    plan.highlight
-                      ? "bg-white text-[#EF4444] hover:bg-white/90"
-                      : "bg-[#EF4444] text-white hover:bg-[#DC2626]"
-                  }`}
-                >
-                  Get Started
-                </button>
-              </motion.div>
+                Start Free Trial
+              </span>
+            </MagneticButton>
+            <MagneticButton>
+              <span
+                className="inline-block rounded-full border-2 px-9 py-4 text-[14px] font-semibold uppercase tracking-wider transition-all hover:bg-white/5"
+                style={{ borderColor: "rgba(255,255,255,0.25)", color: "rgba(255,255,255,0.85)" }}
+              >
+                View Classes
+              </span>
+            </MagneticButton>
+          </motion.div>
+        </div>
+
+        {/* Bouncing arrow */}
+        <motion.div
+          animate={{ y: [0, 10, 0] }}
+          transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }}
+          className="absolute bottom-10 left-1/2 z-10 -translate-x-1/2"
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={MUTED} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
+        </motion.div>
+      </section>
+
+      {/* ════════════ 2. STATS MARQUEE ════════════ */}
+      <section className="overflow-hidden py-4" style={{ background: "rgba(34,197,94,0.05)" }}>
+        <div className="marquee-wrapper">
+          <div className="marquee-track">
+            {[0, 1].map((idx) => (
+              <span
+                key={idx}
+                className="whitespace-nowrap text-[13px] font-bold uppercase tracking-[0.25em]"
+                style={{ color: GREEN }}
+              >
+                {MARQUEE_TEXT}&nbsp;&nbsp;&nbsp;\u00B7&nbsp;&nbsp;&nbsp;{MARQUEE_TEXT}&nbsp;&nbsp;&nbsp;\u00B7&nbsp;&nbsp;&nbsp;
+              </span>
             ))}
           </div>
         </div>
+        <style jsx>{`
+          .marquee-wrapper {
+            display: flex;
+            width: 100%;
+          }
+          .marquee-track {
+            display: flex;
+            animation: marquee-scroll 30s linear infinite;
+          }
+          @keyframes marquee-scroll {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+          }
+        `}</style>
       </section>
 
-      {/* CTA */}
-      <section className="py-24 text-center">
-        <div className="max-w-3xl mx-auto px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <Zap className="mx-auto text-[#EF4444] mb-4" size={32} />
-            <h2 className="text-4xl md:text-5xl font-black tracking-tight mb-4" style={{ fontFamily: "var(--font-display)" }}>
-              YOUR FIRST WEEK IS <span className="text-[#EF4444]">FREE</span>
+      {/* ════════════ 3. CLASSES (4 cards) ════════════ */}
+      <section className="px-6 py-28 md:px-12 lg:px-20" style={{ background: BG }}>
+        <Reveal>
+          <div className="mx-auto max-w-6xl text-center">
+            <span className="text-[11px] font-semibold uppercase" style={{ color: GREEN, letterSpacing: "0.35em" }}>CLASSES</span>
+            <h2 className="mt-4 text-[40px] font-black uppercase tracking-tight md:text-[48px]" style={{ fontFamily: "var(--font-gym-display), sans-serif" }}>
+              FIND YOUR FIRE
             </h2>
-            <p className="text-white/50 mb-8 max-w-md mx-auto">
-              No commitment. No pressure. Just results. Walk in and experience FitZone Malta for yourself.
+            <p className="mt-3 text-[15px] leading-relaxed" style={{ color: MUTED }}>
+              From high-intensity intervals to mindful yoga flows.
             </p>
-            <button className="bg-[#EF4444] text-white px-10 py-4 text-sm font-bold uppercase tracking-wider rounded hover:bg-[#DC2626] transition-colors">
-              Claim Free Trial
-            </button>
-          </motion.div>
+          </div>
+        </Reveal>
+
+        <div className="mx-auto mt-14 grid max-w-6xl gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {CLASSES.map((cls, i) => (
+            <Reveal key={cls.name} delay={i * 0.08}>
+              <div
+                className="group overflow-hidden rounded-2xl transition-all duration-300 hover:-translate-y-1"
+                style={{ background: SURFACE, border: `1px solid ${BORDER}` }}
+                onMouseEnter={(e) => (e.currentTarget.style.borderTopColor = GREEN)}
+                onMouseLeave={(e) => (e.currentTarget.style.borderTopColor = BORDER)}
+              >
+                <div className="relative h-[200px] w-full overflow-hidden">
+                  <Image src={cls.image} alt={cls.name} fill className="object-cover transition-transform duration-500 group-hover:scale-110" />
+                  <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.6), transparent)" }} />
+                </div>
+                <div className="p-5">
+                  <h3 className="text-[15px] font-bold uppercase tracking-wide" style={{ color: WHITE }}>{cls.name}</h3>
+                  <p className="mt-1 text-[13px]" style={{ color: GREEN }}>{cls.instructor}</p>
+                  <p className="mt-2 text-[12px]" style={{ color: MUTED }}>{cls.schedule}</p>
+                  <div className="mt-3 flex items-center gap-3">
+                    <span className="rounded-full px-3 py-1 text-[11px]" style={{ background: "rgba(255,255,255,0.05)", color: MUTED }}>
+                      {cls.duration}
+                    </span>
+                    <span className="flex items-center gap-1.5 text-[11px]" style={{ color: MUTED }}>
+                      <span className="inline-block h-2 w-2 rounded-full" style={{ background: DIFFICULTY_COLOR[cls.difficulty] }} />
+                      {cls.difficulty}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </Reveal>
+          ))}
         </div>
+
+        <Reveal delay={0.3}>
+          <div className="mt-12 text-center">
+            <Link href="/demos/fitness/classes" className="inline-flex items-center gap-2 text-[14px] font-semibold uppercase tracking-wider transition-colors hover:text-white" style={{ color: GREEN }}>
+              View All Classes <span>&rarr;</span>
+            </Link>
+          </div>
+        </Reveal>
       </section>
 
-      {/* Our Location */}
-      <section className="py-24 bg-[#0F0F0F]">
-        <div className="max-w-5xl mx-auto px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-10"
-          >
-            <span className="text-[#EF4444] font-bold uppercase tracking-widest text-sm">Location</span>
-            <h2 className="text-4xl md:text-5xl font-black tracking-tight mt-2" style={{ fontFamily: "var(--font-display)" }}>
-              FIND US
+      {/* ════════════ 4. MEMBERSHIP (3 tiers) ════════════ */}
+      <section id="membership" className="px-6 py-28 md:px-12 lg:px-20" style={{ background: SURFACE }}>
+        <Reveal>
+          <div className="mx-auto max-w-6xl text-center">
+            <span className="text-[11px] font-semibold uppercase" style={{ color: GREEN, letterSpacing: "0.35em" }}>MEMBERSHIP</span>
+            <h2 className="mt-4 text-[40px] font-black uppercase tracking-tight md:text-[48px]" style={{ fontFamily: "var(--font-gym-display), sans-serif" }}>
+              INVEST IN YOURSELF
             </h2>
-          </motion.div>
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3231.4!2d14.4959!3d35.9067!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzXCsDU0JzI0LjEiTiAxNMKwMjknNDUuMiJF!5e0!3m2!1sen!2smt!4v1"
-            width="100%"
-            height="300"
-            style={{ border: 0, borderRadius: '12px', filter: 'grayscale(0.3) contrast(1.1)' }}
-            allowFullScreen
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            title="FitZone Malta Location"
-          />
+          </div>
+        </Reveal>
+
+        <div className="mx-auto mt-14 grid max-w-5xl gap-5 lg:grid-cols-3">
+          {PLANS.map((plan, i) => (
+            <Reveal key={plan.name} delay={i * 0.1}>
+              <div
+                className="relative flex flex-col rounded-2xl p-8 transition-all duration-300 hover:-translate-y-1"
+                style={{
+                  background: BG,
+                  border: plan.recommended ? `2px solid ${GREEN}` : `1px solid ${BORDER}`,
+                }}
+              >
+                {plan.recommended && (
+                  <span
+                    className="mb-4 inline-block self-start rounded-full px-3 py-1 text-[10px] font-bold uppercase"
+                    style={{ background: GREEN, color: "#000", letterSpacing: "0.1em" }}
+                  >
+                    MOST POPULAR
+                  </span>
+                )}
+                <span className="text-[13px] font-semibold uppercase" style={{ color: MUTED, letterSpacing: "0.15em" }}>
+                  {plan.name}
+                </span>
+                <div className="mt-4 flex items-baseline gap-1">
+                  <span className="text-[48px] font-black" style={{ color: WHITE, fontVariantNumeric: "tabular-nums" }}>
+                    &euro;{plan.price}
+                  </span>
+                  <span className="text-[14px]" style={{ color: MUTED }}>/mo</span>
+                </div>
+                <ul className="mt-8 flex-1 space-y-3">
+                  {plan.features.map((f) => (
+                    <li key={f} className="flex items-center gap-3 text-[13px]" style={{ color: MUTED }}>
+                      <span className="inline-block h-1.5 w-1.5 flex-shrink-0 rounded-full" style={{ background: GREEN }} />
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-8">
+                  <MagneticButton>
+                    <span
+                      className="block w-full rounded-full py-3.5 text-center text-[13px] font-semibold uppercase tracking-wider transition-all"
+                      style={{
+                        background: plan.recommended ? GREEN : "transparent",
+                        color: plan.recommended ? "#000" : MUTED,
+                        border: plan.recommended ? "none" : `1px solid ${BORDER}`,
+                      }}
+                    >
+                      GET STARTED
+                    </span>
+                  </MagneticButton>
+                </div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+
+        <Reveal delay={0.3}>
+          <div className="mt-12 text-center">
+            <Link href="#membership" className="inline-flex items-center gap-2 text-[14px] font-semibold uppercase tracking-wider transition-colors hover:text-white" style={{ color: GREEN }}>
+              View Plans <span>&rarr;</span>
+            </Link>
+          </div>
+        </Reveal>
+      </section>
+
+      {/* ════════════ 5. TRAINERS (4 mini cards) ════════════ */}
+      <section className="px-6 py-28 md:px-12 lg:px-20" style={{ background: BG }}>
+        <Reveal>
+          <div className="mx-auto max-w-6xl text-center">
+            <span className="text-[11px] font-semibold uppercase" style={{ color: GREEN, letterSpacing: "0.35em" }}>TEAM</span>
+            <h2 className="mt-4 text-[40px] font-black uppercase tracking-tight md:text-[48px]" style={{ fontFamily: "var(--font-gym-display), sans-serif" }}>
+              MEET YOUR COACHES
+            </h2>
+          </div>
+        </Reveal>
+
+        <div className="mx-auto mt-14 grid max-w-5xl gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {TRAINERS.map((trainer, i) => (
+            <Reveal key={trainer.name} delay={i * 0.08}>
+              <div
+                className="rounded-2xl p-6 text-center transition-all duration-300 hover:-translate-y-1"
+                style={{ background: SURFACE, border: `1px solid ${BORDER}` }}
+              >
+                <div
+                  className="mx-auto flex h-16 w-16 items-center justify-center rounded-full text-xl font-bold"
+                  style={{ border: `2px solid ${GREEN}`, color: GREEN }}
+                >
+                  {trainer.initials}
+                </div>
+                <h3 className="mt-4 text-[15px] font-bold uppercase tracking-wide" style={{ color: WHITE }}>{trainer.name}</h3>
+                <p className="mt-1 text-[13px]" style={{ color: GREEN }}>{trainer.specialty}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+
+        <Reveal delay={0.3}>
+          <div className="mt-12 text-center">
+            <Link href="/demos/fitness/trainers" className="inline-flex items-center gap-2 text-[14px] font-semibold uppercase tracking-wider transition-colors hover:text-white" style={{ color: GREEN }}>
+              Meet Coaches <span>&rarr;</span>
+            </Link>
+          </div>
+        </Reveal>
+      </section>
+
+      {/* ════════════ 6. TESTIMONIALS (3) ════════════ */}
+      <section className="px-6 py-28 md:px-12 lg:px-20" style={{ background: SURFACE }}>
+        <Reveal>
+          <div className="mx-auto max-w-6xl text-center">
+            <span className="text-[11px] font-semibold uppercase" style={{ color: GREEN, letterSpacing: "0.35em" }}>TESTIMONIALS</span>
+            <h2 className="mt-4 text-[40px] font-black uppercase tracking-tight md:text-[48px]" style={{ fontFamily: "var(--font-gym-display), sans-serif" }}>
+              REAL RESULTS
+            </h2>
+          </div>
+        </Reveal>
+
+        <div className="mx-auto mt-14 grid max-w-5xl gap-6 md:grid-cols-3">
+          {TESTIMONIALS.map((t, i) => (
+            <Reveal key={t.name} delay={i * 0.1}>
+              <div
+                className="rounded-2xl p-6 transition-all duration-300"
+                style={{ background: BG, borderLeft: `3px solid ${GREEN}`, border: `1px solid ${BORDER}`, borderLeftColor: GREEN, borderLeftWidth: "3px" }}
+              >
+                {/* Stars */}
+                <div className="flex gap-1">
+                  {Array.from({ length: t.stars }).map((_, si) => (
+                    <svg key={si} width="14" height="14" viewBox="0 0 24 24" fill={GREEN} stroke="none">
+                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                    </svg>
+                  ))}
+                </div>
+                <p className="mt-4 text-[14px] leading-relaxed" style={{ color: "rgba(255,255,255,0.7)" }}>
+                  &ldquo;{t.quote}&rdquo;
+                </p>
+                <p className="mt-4 text-[13px] font-semibold uppercase tracking-wide" style={{ color: WHITE }}>
+                  {t.name}
+                </p>
+              </div>
+            </Reveal>
+          ))}
         </div>
       </section>
 
-      {/* Footer */}
-      <footer id="contact" className="bg-[#0F0F0F] border-t border-white/5 py-12">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid md:grid-cols-4 gap-8">
-            <div>
-              <h3 className="text-xl font-black tracking-tight mb-3" style={{ fontFamily: "var(--font-display)" }}>
-                FIT<span className="text-[#EF4444]">ZONE</span>
-              </h3>
-              <p className="text-sm text-white/30">Malta&apos;s premier fitness and wellness destination.</p>
-            </div>
-            <div>
-              <h4 className="text-sm font-bold uppercase tracking-wider mb-3">Quick Links</h4>
-              <div className="space-y-2 text-sm text-white/40">
-                <p className="hover:text-[#EF4444] cursor-pointer transition-colors">Class Schedule</p>
-                <p className="hover:text-[#EF4444] cursor-pointer transition-colors">Membership</p>
-                <p className="hover:text-[#EF4444] cursor-pointer transition-colors">Personal Training</p>
-              </div>
-            </div>
-            <div>
-              <h4 className="text-sm font-bold uppercase tracking-wider mb-3">Contact</h4>
-              <div className="space-y-2 text-sm text-white/40">
-                <p className="flex items-center gap-2"><MapPin size={14} /> Tigne Point, Sliema</p>
-                <p className="flex items-center gap-2"><Phone size={14} /> +356 2134 5678</p>
-              </div>
-            </div>
-            <div>
-              <h4 className="text-sm font-bold uppercase tracking-wider mb-3">Follow Us</h4>
-              <p className="flex items-center gap-2 text-sm text-white/40 hover:text-[#EF4444] cursor-pointer transition-colors">
-                <Globe size={14} /> @fitzonemalta
-              </p>
+      {/* ════════════ 7. CTA + FLOATING DOTS ════════════ */}
+      <section id="cta" className="relative overflow-hidden px-6 py-36 text-center" style={{ background: BG }}>
+        {/* 12 floating green CSS dots */}
+        {Array.from({ length: 12 }).map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute rounded-full"
+            style={{
+              width: 4 + (i % 4) * 3,
+              height: 4 + (i % 4) * 3,
+              background: GREEN,
+              opacity: 0.15 + (i % 5) * 0.05,
+              left: `${8 + (i * 7.5) % 85}%`,
+              top: `${10 + ((i * 13) % 80)}%`,
+            }}
+            animate={{
+              y: [0, -20 - (i % 3) * 10, 0],
+              x: [0, (i % 2 === 0 ? 10 : -10), 0],
+              opacity: [0.15 + (i % 5) * 0.05, 0.3, 0.15 + (i % 5) * 0.05],
+            }}
+            transition={{
+              repeat: Infinity,
+              duration: 4 + (i % 3),
+              delay: i * 0.3,
+              ease: "easeInOut",
+            }}
+          />
+        ))}
+
+        <Reveal>
+          <div className="relative z-10">
+            <h2 className="mx-auto max-w-2xl text-[36px] font-black uppercase leading-tight tracking-tight md:text-[52px]" style={{ fontFamily: "var(--font-gym-display), sans-serif" }}>
+              <span style={{ color: WHITE }}>YOUR TRANSFORMATION</span>{" "}
+              <span style={{ color: GREEN }}>STARTS TODAY.</span>
+            </h2>
+            <p className="mt-6 text-[15px]" style={{ color: MUTED }}>
+              First week free. No commitment. No pressure.
+            </p>
+            <div className="mt-10">
+              <MagneticButton>
+                <span
+                  className="inline-block rounded-full px-12 py-5 text-[15px] font-bold uppercase tracking-wider transition-all hover:brightness-110"
+                  style={{ background: GREEN, color: "#000" }}
+                >
+                  START FREE TRIAL
+                </span>
+              </MagneticButton>
             </div>
           </div>
-          <div className="border-t border-white/5 mt-8 pt-8 text-center text-xs text-white/20">
-            &copy; 2026 FitZone Malta. All rights reserved. <span className="mx-2">|</span> This is a demo website built by AMENZO.
-          </div>
-        </div>
-      </footer>
-    </div>
+        </Reveal>
+      </section>
+
+      <FitFooter />
+    </main>
   );
 }

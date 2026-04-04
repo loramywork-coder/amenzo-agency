@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -13,9 +12,6 @@ import {
   MessageCircle,
   ArrowRight,
   Send,
-  Globe,
-  ExternalLink,
-  Users,
 } from "lucide-react";
 import { AnimateIn } from "@/components/ui/motion";
 import { Button } from "@/components/ui/button";
@@ -56,26 +52,25 @@ export default function ContactPage() {
   const enquiryType = watch("enquiryType");
 
   const onSubmit = async (data: ContactFormData) => {
-    // Simulate submission
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    toast.success("Message sent successfully! We'll get back to you within 24 hours.");
-    reset();
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      if (!res.ok) throw new Error("Failed to send");
+      toast.success("Message sent successfully! We'll get back to you within 24 hours.");
+      reset();
+    } catch {
+      toast.error("Something went wrong. Please try again or email us directly at info@amenzo.co.");
+    }
   };
 
   return (
     <>
       {/* Hero */}
       <section className="relative pt-40 pb-20 bg-bg overflow-hidden">
-        <div className="absolute inset-0">
-          <Image
-            src="https://images.unsplash.com/photo-1423666639041-f56000c27a9a?w=1920&q=85"
-            alt="Contact us"
-            fill
-            className="object-cover"
-            sizes="100vw"
-          />
-          <div className="absolute inset-0 bg-bg/85" />
-        </div>
+        
         <div className="container-wide relative z-10">
           <AnimateIn animation="fadeUp">
             <p className="caption mb-4 text-violet">CONTACT</p>
@@ -195,7 +190,7 @@ export default function ContactPage() {
                         id="phone"
                         type="tel"
                         {...register("phone")}
-                        placeholder="+356 9999 0000"
+                        placeholder="+31 62 831 8123"
                         className="w-full px-4 py-3 rounded-xl bg-surface-elevated border border-border text-text-primary placeholder:text-text-muted focus:outline-none focus:border-violet transition-colors"
                       />
                     </div>
@@ -353,45 +348,6 @@ export default function ContactPage() {
                         Weekend by appointment
                       </p>
                     </div>
-                  </div>
-                </div>
-              </AnimateIn>
-
-              {/* Social Links */}
-              <AnimateIn animation="fadeUp" delay={0.5}>
-                <div className="pt-6 border-t border-border">
-                  <h3 className="font-display text-lg font-semibold text-text-primary mb-4">
-                    Follow Us
-                  </h3>
-                  <div className="flex gap-3">
-                    {[
-                      {
-                        icon: ExternalLink,
-                        href: "https://linkedin.com/company/amenzo",
-                        label: "LinkedIn",
-                      },
-                      {
-                        icon: Globe,
-                        href: "https://instagram.com/amenzo",
-                        label: "Instagram",
-                      },
-                      {
-                        icon: Users,
-                        href: "https://facebook.com/amenzo",
-                        label: "Facebook",
-                      },
-                    ].map((social) => (
-                      <a
-                        key={social.label}
-                        href={social.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={social.label}
-                        className="w-10 h-10 rounded-xl bg-surface-elevated border border-border flex items-center justify-center text-text-secondary hover:text-violet hover:border-violet/40 transition-all"
-                      >
-                        <social.icon className="w-5 h-5" />
-                      </a>
-                    ))}
                   </div>
                 </div>
               </AnimateIn>

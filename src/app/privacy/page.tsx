@@ -1,9 +1,11 @@
-import type { Metadata } from "next";
+import { generatePageMeta } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = generatePageMeta({
   title: "Privacy Policy",
-  description: "AMENZO privacy policy. How we collect, use, and protect your personal data.",
-};
+  description: "AMENZO privacy policy. How we collect, use, and protect your personal data under GDPR.",
+  path: "/privacy",
+  noindex: true,
+});
 
 export default function PrivacyPage() {
   return (
@@ -22,10 +24,10 @@ export default function PrivacyPage() {
               1. Introduction
             </h2>
             <p>
-              AMENZO (&quot;we&quot;, &quot;our&quot;, &quot;us&quot;) is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website amenzo.com and use our services.
+              AMENZO (&quot;we&quot;, &quot;our&quot;, &quot;us&quot;) is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website amenzo.co and use our services.
             </p>
             <p className="mt-3">
-              We comply with the General Data Protection Regulation (GDPR) and applicable Maltese data protection legislation.
+              We comply with the General Data Protection Regulation (GDPR) and applicable Dutch data protection legislation.
             </p>
           </section>
 
@@ -91,7 +93,7 @@ export default function PrivacyPage() {
               <li>Object to processing</li>
               <li>Withdraw consent at any time</li>
             </ul>
-            <p className="mt-3">To exercise any of these rights, contact us at hello@amenzo.com.</p>
+            <p className="mt-3">To exercise any of these rights, contact us at info@amenzo.co.</p>
           </section>
 
           <section>
@@ -107,10 +109,10 @@ export default function PrivacyPage() {
             </h2>
             <p>If you have questions about this Privacy Policy or wish to exercise your rights, please contact us:</p>
             <p className="mt-3">
-              AMENZO<br />
-              Valletta, Malta<br />
-              hello@amenzo.com<br />
-              +356 9999 0000
+              ProgressPro, trading as Amenzo Studio<br />
+              Dammerweg 81, 1394 GR Nederhorst den Berg, The Netherlands<br />
+              info@amenzo.co<br />
+              +31 62 831 8123
             </p>
           </section>
         </div>

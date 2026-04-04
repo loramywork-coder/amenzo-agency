@@ -1,5 +1,6 @@
-import type { Metadata } from "next";
-import { SITE_NAME, CONTACT_EMAIL } from "@/lib/constants";
+import { generatePageMeta } from "@/lib/seo";
+import { FAQSchema, BreadcrumbSchema, faqData } from "@/components/structured-data";
+import { CONTACT_EMAIL } from "@/lib/constants";
 import {
   AnimateIn,
   StaggerContainer,
@@ -11,16 +12,12 @@ import { Section, SectionHeader } from "@/components/ui/section";
 import { ArrowRight, Check, Minus, HelpCircle } from "lucide-react";
 import { PricingFAQ } from "./faq";
 
-export const metadata: Metadata = {
-  title: "Pricing — Transparent Packages, Real Results",
-  description:
-    "Web design packages for Malta businesses. Basic websites from EUR 750, custom builds up to EUR 8,000. Transparent pricing, no hidden fees. Free consultation.",
-  openGraph: {
-    title: `Pricing | ${SITE_NAME}`,
-    description:
-      "Web design packages from EUR 750. Basic, Standard, Premium, Custom. Transparent pricing, no hidden fees.",
-  },
-};
+
+export const metadata = generatePageMeta({
+  title: "Web Design Pricing — Transparent Packages from €750",
+  description: "Transparent web design pricing. Basic €750 (1-5 pages), Standard €2,000 (bilingual), Premium €4,000 (multilingual + animations), Custom from €5,000+ (e-commerce). Try live demos of each package.",
+  path: "/pricing",
+});
 
 const TIERS = [
   {
@@ -99,7 +96,7 @@ const TIERS = [
     name: "Custom",
     price: "5,000",
     period: "custom",
-    priceNote: "-8,000",
+    priceNote: "+",
     description:
       "For complex projects. E-commerce, marketplace platforms, custom integrations — scoped and priced to your exact requirements.",
     features: [
@@ -192,7 +189,7 @@ const MONTHLY_SERVICES = [
 ] as const;
 
 const COMPARISON_ROWS = [
-  { label: "Price", basic: "€750", standard: "€2,000", premium: "€4,000", custom: "€5,000-8,000" },
+  { label: "Price", basic: "€750", standard: "€2,000", premium: "€4,000", custom: "From €5,000+" },
   { label: "Pages", basic: "1-5", standard: "5-10", premium: "10-20", custom: "Unlimited" },
   { label: "Delivery", basic: "1-2 weeks", standard: "2-3 weeks", premium: "3-4 weeks", custom: "4-6 weeks" },
   { label: "Design", basic: "Clean & responsive", standard: "Custom branded", premium: "Premium + animations", custom: "Fully bespoke" },
@@ -234,9 +231,11 @@ function ComparisonCell({ value }: { value: boolean | string | null }) {
 export default function PricingPage() {
   return (
     <>
+      <FAQSchema faqs={faqData} />
+      <BreadcrumbSchema items={[{ name: "Pricing", url: "/pricing" }]} />
       {/* Hero */}
-      <section className="relative min-h-[60vh] flex items-center bg-bg overflow-x-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(124,58,237,0.08),transparent_60%)]" />
+      <section className="relative min-h-[60vh] flex items-center overflow-x-hidden">
+        
         <div className="container-wide relative z-10 pt-40 pb-24">
           <AnimateIn animation="fadeIn" delay={0.1}>
             <p className="caption mb-6 text-violet">Pricing</p>
@@ -271,12 +270,12 @@ export default function PricingPage() {
               <div
                 className={`relative flex flex-col h-full rounded-2xl border p-8 transition-all duration-500 ${
                   tier.highlighted
-                    ? "border-violet bg-surface-elevated shadow-xl shadow-violet/10 ring-1 ring-violet/20"
-                    : "border-border bg-surface hover:border-violet/30 hover:-translate-y-1 hover:shadow-lg hover:shadow-black/20"
+                    ? "border-white/15 bg-surface-elevated shadow-xl shadow-white/5"
+                    : "border-border bg-surface hover:border-white/15 hover:-translate-y-1 hover:shadow-lg hover:shadow-black/20"
                 }`}
               >
                 {tier.highlighted && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-to-r from-violet to-cyan text-white text-xs font-semibold uppercase tracking-wider">
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm text-white/90 text-xs font-semibold uppercase tracking-wider">
                     Most Popular
                   </div>
                 )}
@@ -340,6 +339,7 @@ export default function PricingPage() {
                   ))}
                 </ul>
 
+
                 {/* CTA */}
                 <Button
                   href={tier.ctaHref}
@@ -364,7 +364,7 @@ export default function PricingPage() {
       </Section>
 
       {/* Feature Comparison Table */}
-      <Section className="bg-surface">
+      <Section className="">
         <AnimateIn animation="fadeUp">
           <SectionHeader
             caption="Compare"
@@ -457,7 +457,7 @@ export default function PricingPage() {
       </Section>
 
       {/* Monthly Services */}
-      <Section className="bg-surface">
+      <Section className="">
         <AnimateIn animation="fadeUp">
           <SectionHeader
             caption="Monthly Services"
@@ -510,7 +510,7 @@ export default function PricingPage() {
       </Section>
 
       {/* CTA */}
-      <Section className="bg-surface">
+      <Section className="">
         <div className="text-center max-w-3xl mx-auto">
           <AnimateIn animation="fadeUp">
             <p className="caption mb-4 text-violet">

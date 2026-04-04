@@ -79,14 +79,15 @@ function SwissHealthAlliance() {
   );
 }
 
-// ── Sengha ── modern geometric sans, distinctive
-function Sengha() {
+// ── Serenità Spa ── elegant serif with sage accent
+function SerenitaSpa() {
   return (
-    <svg viewBox="0 0 110 28" className="h-6 md:h-7 w-auto" fill="currentColor">
-      {/* geometric dot accent */}
-      <circle cx="6" cy="14" r="4" fill="currentColor" opacity="0.4" />
-      <text x="16" y="20" fontFamily="'Helvetica Neue', Arial, sans-serif" fontSize="18" fontWeight="600" letterSpacing="3">
-        SENGHA
+    <svg viewBox="0 0 150 28" className="h-6 md:h-7 w-auto" fill="currentColor">
+      <text x="0" y="20" fontFamily="'Cormorant Garamond', Georgia, serif" fontSize="18" fontWeight="300" fontStyle="italic" letterSpacing="1">
+        Serenità
+      </text>
+      <text x="88" y="20" fontFamily="'Helvetica Neue', Arial, sans-serif" fontSize="10" fontWeight="400" letterSpacing="3" fill="#9CAF88">
+        SPA
       </text>
     </svg>
   );
@@ -129,41 +130,6 @@ function CyberShield() {
   );
 }
 
-// ── Malta Financial ── conservative serif, MF monogram
-function MaltaFinancial() {
-  return (
-    <svg viewBox="0 0 200 28" className="h-6 md:h-7 w-auto" fill="currentColor">
-      {/* MF monogram circle */}
-      <circle cx="12" cy="14" r="10" stroke="currentColor" strokeWidth="0.8" fill="none" />
-      <text x="12" y="18" textAnchor="middle" fontFamily="Georgia, 'Times New Roman', serif" fontSize="10" fontWeight="400" letterSpacing="-0.5">
-        MF
-      </text>
-      {/* main text */}
-      <text x="28" y="13" fontFamily="Georgia, 'Times New Roman', serif" fontSize="13" fontWeight="400" letterSpacing="1.5">
-        MALTA
-      </text>
-      <text x="28" y="23" fontFamily="Georgia, 'Times New Roman', serif" fontSize="8" fontWeight="300" letterSpacing="3">
-        FINANCIAL
-      </text>
-    </svg>
-  );
-}
-
-// ── Bloom Boutique ── modern sans with flower accent
-function BloomBoutique() {
-  return (
-    <svg viewBox="0 0 170 28" className="h-6 md:h-7 w-auto" fill="currentColor">
-      <text x="0" y="20" fontFamily="'Helvetica Neue', Arial, sans-serif" fontSize="16" fontWeight="400" letterSpacing="1">
-        Bloom
-      </text>
-      <text x="62" y="20" fontFamily="'Helvetica Neue', Arial, sans-serif" fontSize="16" fontWeight="600" letterSpacing="2">
-        BOUTIQUE
-      </text>
-      {/* flower accent */}
-      <circle cx="55" cy="8" r="2" fill="currentColor" opacity="0.4" />
-    </svg>
-  );
-}
 
 // ── Reel House Cinema ── bold with red accent
 function ReelHouse() {
@@ -226,7 +192,7 @@ function TrustedBadge() {
 
 export function ClientsStrip() {
   return (
-    <section className="pt-4 pb-16 bg-bg">
+    <section className="pt-4 pb-16 bg-transparent">
       <div className="container-wide">
         <p className="text-[11px] uppercase tracking-[0.3em] text-white/20 text-center mb-10">
           Trusted by leading businesses
@@ -240,11 +206,11 @@ export function ClientsStrip() {
           <ClientLogo href="/work/swiss-health-alliance"><SwissHealthAlliance /></ClientLogo>
           <ClientLogo href="/work/olive-and-stone"><OliveAndStone /></ClientLogo>
           <ClientLogo href="/work/cybershield-malta"><CyberShield /></ClientLogo>
+          <ClientLogo href="/work/serenita-spa"><SerenitaSpa /></ClientLogo>
           <ClientLogo href="/work/reel-house-cinema"><ReelHouse /></ClientLogo>
           <ClientLogo href="/work/harbour-square"><HarbourSquareLogo /></ClientLogo>
           <ClientLogo href="/work/elena-voss"><ElenaVoss /></ClientLogo>
           <ClientLogo href="/work/atelier-noir"><AtelierNoir /></ClientLogo>
-          <ClientLogo href="/demos/ecommerce"><BloomBoutique /></ClientLogo>
         </div>
 
         <TrustedBadge />

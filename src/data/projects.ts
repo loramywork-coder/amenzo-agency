@@ -38,17 +38,17 @@ export const projects: Project[] = [
     solution:
       "A bespoke Next.js website with integrated booking engine, virtual room tours, and a content management system that lets staff update rates and availability in real-time. Performance was paramount \u2014 the site loads in under 1.5 seconds on mobile.",
     results: [
-      "+180% organic traffic",
-      "+45% direct bookings",
-      "Lighthouse score: 98",
-      "3 languages supported",
+      "Trilingual (EN/DE/FR)",
+      "Room Gallery with Lightbox",
+      "Integrated Booking System",
+      "CMS-Ready Content",
     ],
-    resultHighlight: "+180% organic traffic",
+    resultHighlight: "Trilingual · Booking System",
     testimonial: {
       quote:
-        "They didn\u2019t just redesign our website \u2014 they redesigned how our customers see us.",
-      name: "James Borg",
-      title: "General Manager",
+        "This is a design showcase demonstrating Amenzo's capabilities for hospitality businesses.",
+      name: "Amenzo Design Team",
+      title: "Design Showcase",
     },
     techStack: ["Next.js", "Tailwind CSS", "Vercel", "Sanity CMS", "i18n"],
     image:
@@ -76,17 +76,17 @@ export const projects: Project[] = [
     solution:
       "A visually stunning single-scroll experience with parallax imagery, animated menu sections, and an integrated reservation system. The design uses dark backgrounds with warm accent lighting to mirror the restaurant\u2019s ambiance.",
     results: [
-      "+60% reservations in first month",
-      "Average session: 3.2 minutes",
-      "Lighthouse score: 96",
-      "Zero PDF menus",
+      "Dark Atmospheric Theme",
+      "Full Interactive Menu",
+      "Online Reservations",
+      "Bilingual (EN/MT)",
     ],
-    resultHighlight: "+60% reservations",
+    resultHighlight: "Full Menu · Reservations",
     testimonial: {
       quote:
-        "We went from no online presence to the most beautiful restaurant website in Malta.",
-      name: "Maria Camilleri",
-      title: "Owner",
+        "This is a design showcase demonstrating Amenzo's capabilities for restaurant businesses.",
+      name: "Amenzo Design Team",
+      title: "Design Showcase",
     },
     techStack: ["Next.js", "Framer Motion", "Tailwind CSS", "Vercel"],
     image:
@@ -114,12 +114,18 @@ export const projects: Project[] = [
     solution:
       "A high-performance platform with map-based property search, saved searches, agent matchmaking, and a CMS that makes listing new properties a 2-minute task. Integrated with their existing CRM.",
     results: [
-      "200+ properties listed in Q1",
-      "Page load: 1.2s (was 6s)",
-      "+140% lead generation",
-      "3x more enquiries per listing",
+      "Property Search with Filters",
+      "Agent Profile Pages",
+      "Map Integration",
+      "Lead Capture Forms",
     ],
-    resultHighlight: "200+ properties in Q1",
+    resultHighlight: "Property Search · Filters",
+    testimonial: {
+      quote:
+        "This is a design showcase demonstrating Amenzo's capabilities for real estate businesses.",
+      name: "Amenzo Design Team",
+      title: "Design Showcase",
+    },
     techStack: [
       "Next.js",
       "Supabase",
@@ -152,12 +158,18 @@ export const projects: Project[] = [
     solution:
       "A comprehensive fitness platform with online membership sign-up, class booking with capacity tracking, trainer profiles with specialisations, and a members-only area with workout plans.",
     results: [
-      "+120 new members in month 1",
-      "85% class bookings moved online",
-      "30% reduction in admin time",
-      "Lighthouse score: 97",
+      "Interactive Class Schedule",
+      "Online Membership Sign-up",
+      "Trainer Profiles",
+      "Class Booking System",
     ],
-    resultHighlight: "+120 new members",
+    resultHighlight: "Class Schedule · Bookings",
+    testimonial: {
+      quote:
+        "This is a design showcase demonstrating Amenzo's capabilities for fitness businesses.",
+      name: "Amenzo Design Team",
+      title: "Design Showcase",
+    },
     techStack: [
       "Next.js",
       "Supabase",
@@ -190,12 +202,18 @@ export const projects: Project[] = [
     solution:
       "A purpose-built platform with integrated donation processing, impact storytelling with data visualisation, publications library, and event management. The design balances professionalism with emotional storytelling.",
     results: [
-      "+300% online donations",
-      "Average donation: +40%",
-      "Newsletter sign-ups: 5x",
-      "2 languages supported",
+      "Donation Processing System",
+      "Impact Data Visualisation",
+      "Multilingual (DE/EN)",
+      "Event Management",
     ],
-    resultHighlight: "+300% online donations",
+    resultHighlight: "Donations · Impact Reports",
+    testimonial: {
+      quote:
+        "This is a design showcase demonstrating Amenzo's capabilities for non-profit businesses.",
+      name: "Amenzo Design Team",
+      title: "Design Showcase",
+    },
     techStack: [
       "Next.js",
       "Stripe",
@@ -228,12 +246,18 @@ export const projects: Project[] = [
     solution:
       "A custom e-commerce platform with storytelling-driven product pages, gift box builder, subscription service for monthly Maltese products, and international shipping integration with real-time rates.",
     results: [
-      "\u20AC50K revenue in 6 months",
-      "Orders from 12 countries",
-      "Average order: \u20AC85",
-      "40% repeat customers",
+      "Working Shopping Cart",
+      "Product Gallery with Zoom",
+      "Stripe Checkout Integration",
+      "Brand Storytelling",
     ],
-    resultHighlight: "\u20AC50K revenue in 6 months",
+    resultHighlight: "E-Commerce · Shopping Cart",
+    testimonial: {
+      quote:
+        "This is a design showcase demonstrating Amenzo's capabilities for e-commerce businesses.",
+      name: "Amenzo Design Team",
+      title: "Design Showcase",
+    },
     techStack: [
       "Next.js",
       "Stripe",
@@ -266,17 +290,17 @@ export const projects: Project[] = [
     solution:
       "A high-impact corporate website with interactive service explorer, live threat dashboard widget, detailed case studies with ROI metrics, and a gated resource library for lead generation.",
     results: [
-      "+85% qualified leads",
-      "3x more RFP responses",
-      "Average session: 4.5 minutes",
-      "Lighthouse score: 97",
+      "SaaS Landing Page Design",
+      "3-Tier Pricing Comparison",
+      "Feature Showcase Sections",
+      "Lead Generation CTAs",
     ],
-    resultHighlight: "+85% qualified leads",
+    resultHighlight: "SaaS Landing · Pricing Tiers",
     testimonial: {
       quote:
-        "Our website finally reflects our capabilities. Enterprise clients take us seriously now.",
-      name: "Stefan Grech",
-      title: "CEO",
+        "This is a design showcase demonstrating Amenzo's capabilities for technology businesses.",
+      name: "Amenzo Design Team",
+      title: "Design Showcase",
     },
     techStack: [
       "Next.js",
@@ -305,8 +329,14 @@ export const projects: Project[] = [
     challenge: "A premium spa with no digital presence beyond an Instagram page. Clients had to call to book, and the brand's luxury positioning was invisible online.",
     approach: "We designed a serene, minimal experience that mirrors the calm of the spa itself. Warm tones, breathing whitespace, and a seamless booking flow.",
     solution: "A beautiful single-page site with treatment categories, pricing, online booking integration, gift voucher purchases, and a gallery that sells the experience.",
-    results: ["+200% online bookings", "45% reduction in phone enquiries", "Gift voucher sales: €15K in Q1", "Lighthouse: 97"],
-    resultHighlight: "+200% online bookings",
+    results: ["Treatment Menu with Booking", "Gift Card System", "Photo Gallery with Lightbox", "Online Appointment Booking"],
+    resultHighlight: "Treatment Booking · Gift Cards",
+    testimonial: {
+      quote:
+        "This is a design showcase demonstrating Amenzo's capabilities for wellness businesses.",
+      name: "Amenzo Design Team",
+      title: "Design Showcase",
+    },
     techStack: ["Next.js", "Tailwind CSS", "Stripe", "Vercel"],
     image: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=3840&q=90",
     images: ["https://images.unsplash.com/photo-1540555700478-4be289fbec6d?w=3840&q=90", "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?w=3840&q=90"],
@@ -323,8 +353,14 @@ export const projects: Project[] = [
     challenge: "A boutique cinema competing against multiplex chains. Their existing site was a static HTML page with no booking capability.",
     approach: "Bold, cinematic design with red and gold accents. The booking flow was designed to be faster than any competitor — 3 clicks from homepage to confirmed ticket.",
     solution: "A high-impact site with dynamic showtimes, IMAX/Dolby screen filters, seat maps, and Stripe-powered ticket purchases. Plus a loyalty programme integration.",
-    results: ["+340% online ticket sales", "Average booking time: 45 seconds", "Loyalty sign-ups: 2,000 in month 1", "Lighthouse: 96"],
-    resultHighlight: "+340% online tickets",
+    results: ["Showtime Listings", "Interactive Seat Selection", "Film Detail Pages", "Pricing & Experience Guide"],
+    resultHighlight: "Showtimes · Seat Selection",
+    testimonial: {
+      quote:
+        "This is a design showcase demonstrating Amenzo's capabilities for entertainment businesses.",
+      name: "Amenzo Design Team",
+      title: "Design Showcase",
+    },
     techStack: ["Next.js", "Supabase", "Stripe", "Tailwind CSS", "Vercel"],
     image: "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=3840&q=90",
     images: ["https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=3840&q=90", "https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=3840&q=90"],
@@ -341,8 +377,14 @@ export const projects: Project[] = [
     challenge: "A major retail destination with 80+ stores but a website that was essentially a PDF directory. No events, no dining info, no reason to visit the site.",
     approach: "We built a living, breathing digital hub — not just a directory. Real-time events, dining recommendations, store promotions, and a visit planner.",
     solution: "A dynamic platform with filterable store directory, event calendar, dining guide with menus, parking availability, and a loyalty programme.",
-    results: ["Website visits: +250%", "Event attendance: +180%", "Dining reservations via site: 500/month", "Lighthouse: 95"],
-    resultHighlight: "+250% website visits",
+    results: ["Store Directory with Search", "Event Listings", "Dining Guide", "Interactive Floor Plans"],
+    resultHighlight: "Store Directory · Events",
+    testimonial: {
+      quote:
+        "This is a design showcase demonstrating Amenzo's capabilities for retail businesses.",
+      name: "Amenzo Design Team",
+      title: "Design Showcase",
+    },
     techStack: ["Next.js", "Supabase", "Tailwind CSS", "Mapbox", "Vercel"],
     image: "https://images.unsplash.com/photo-1519567241046-7f570eee3ce6?w=3840&q=90",
     images: ["https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=3840&q=90", "https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=3840&q=90"],
@@ -359,8 +401,14 @@ export const projects: Project[] = [
     challenge: "A fashion and editorial photographer using Squarespace with a generic template. The portfolio didn't do justice to the calibre of the work.",
     approach: "We stripped everything back. Black background, no clutter — just the photographs at maximum impact. Every design decision serves the imagery.",
     solution: "A bespoke portfolio with masonry layout, category filtering, full-screen lightbox with swipe navigation, and a discreet contact form for commissions.",
-    results: ["Commission enquiries: +400%", "Average session duration: 4.2 minutes", "Featured on Behance", "Lighthouse: 99"],
-    resultHighlight: "+400% commission enquiries",
+    results: ["Full-Screen Portfolio Grid", "Project Lightbox Gallery", "Minimal Editorial Design", "Responsive Image Layout"],
+    resultHighlight: "Portfolio Grid · Lightbox",
+    testimonial: {
+      quote:
+        "This is a design showcase demonstrating Amenzo's capabilities for creative businesses.",
+      name: "Amenzo Design Team",
+      title: "Design Showcase",
+    },
     techStack: ["Next.js", "Tailwind CSS", "Framer Motion", "Vercel"],
     image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=3840&q=90",
     images: ["https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=3840&q=90", "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=3840&q=90"],
@@ -377,8 +425,14 @@ export const projects: Project[] = [
     challenge: "A contemporary gallery with a static WordPress site that couldn't handle exhibition rotations or online viewing rooms — critical post-pandemic.",
     approach: "High-contrast design inspired by gallery walls — off-white backgrounds, charcoal text, and gold accents. The art is always the focal point.",
     solution: "A CMS-driven platform with rotating exhibitions, artist pages, online viewing room, artwork enquiry system, and newsletter integration.",
-    results: ["Online enquiries: +320%", "Newsletter subscribers: 3,000", "Virtual exhibition views: 12,000", "Lighthouse: 98"],
-    resultHighlight: "+320% art enquiries",
+    results: ["Exhibition Pages", "Artist Profiles", "Event Calendar", "Dark Gallery Aesthetic"],
+    resultHighlight: "Exhibitions · Artist Profiles",
+    testimonial: {
+      quote:
+        "This is a design showcase demonstrating Amenzo's capabilities for art and culture businesses.",
+      name: "Amenzo Design Team",
+      title: "Design Showcase",
+    },
     techStack: ["Next.js", "Sanity CMS", "Tailwind CSS", "Stripe", "Vercel"],
     image: "https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=3840&q=90",
     images: ["https://images.unsplash.com/photo-1578926288207-a90a5366759d?w=3840&q=90", "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=3840&q=90"],

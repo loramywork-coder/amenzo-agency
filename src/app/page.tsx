@@ -1,35 +1,19 @@
-"use client";
+import { generatePageMeta } from "@/lib/seo";
+import { WebsiteSchema } from "@/components/structured-data";
+import { HomePage } from "@/components/homepage";
 
-import { HeroSection } from "@/components/sections/hero";
-import { ProjectReel } from "@/components/sections/project-reel";
-import { ClientsStrip } from "@/components/sections/clients-strip";
-import { AboutTeaser } from "@/components/sections/about-teaser";
-import { SelectedWork } from "@/components/sections/selected-work";
-import { ServicesOverview } from "@/components/sections/services-overview";
-import { StatsSection } from "@/components/sections/stats";
-import { ProcessSection } from "@/components/sections/process";
-import { TestimonialsSection } from "@/components/sections/testimonials";
-import { IndustriesSection } from "@/components/sections/industries";
-import { PricingPreview } from "@/components/sections/pricing-preview";
-import { BlogPreview } from "@/components/sections/blog-preview";
-import { FinalCTA } from "@/components/sections/final-cta";
+export const metadata = generatePageMeta({
+  title: "Amenzo \u2014 Web Design Studio | Custom Websites from \u20AC750",
+  description:
+    "Hand-coded websites that convert. No templates, no WordPress. Next.js, React, Tailwind \u2014 built for speed. From \u20AC750.",
+  path: "",
+});
 
-export default function HomePage() {
+export default function Page() {
   return (
     <>
-      <HeroSection />
-      <ProjectReel />
-      <ClientsStrip />
-      <AboutTeaser />
-      <ServicesOverview />
-      <SelectedWork />
-      <StatsSection />
-      <ProcessSection />
-      <TestimonialsSection />
-      <IndustriesSection />
-      <PricingPreview />
-      <BlogPreview />
-      <FinalCTA />
+      <WebsiteSchema />
+      <HomePage />
     </>
   );
 }

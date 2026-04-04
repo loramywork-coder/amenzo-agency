@@ -22,12 +22,12 @@ interface ButtonProps {
 
 const variantStyles: Record<ButtonVariant, string> = {
   primary:
-    "bg-gradient-to-r from-violet to-cyan text-white hover:shadow-lg hover:shadow-violet/25",
+    "bg-white text-[#0A0A0A] hover:bg-white/90 hover:scale-[1.02]",
   secondary:
-    "bg-surface-elevated text-text-primary border border-border hover:border-violet/50 hover:bg-surface",
+    "bg-surface-elevated text-text-primary border border-white/15 hover:border-white/30 hover:bg-surface",
   ghost: "text-text-secondary hover:text-text-primary hover:bg-surface",
   outline:
-    "border border-violet/50 text-text-primary hover:bg-violet/10 gradient-border bg-transparent",
+    "border border-white/20 text-text-primary hover:bg-white/5 hover:border-white/30",
 };
 
 const sizeStyles: Record<ButtonSize, string> = {

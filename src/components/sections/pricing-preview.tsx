@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, Check } from "lucide-react";
+import { Check } from "lucide-react";
 import { AnimateIn, StaggerContainer, StaggerItem } from "@/components/ui/motion";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -37,6 +37,21 @@ const tiers = [
     cta: "Get a Quote",
   },
   {
+    name: "Premium",
+    price: "4,000",
+    description: "The complete digital transformation",
+    features: [
+      "10-20 custom pages",
+      "Premium design + animations",
+      "3+ languages",
+      "Galleries, booking forms",
+      "Lighthouse 95+ guaranteed",
+      "3-4 week delivery",
+    ],
+    href: "/start-project",
+    cta: "Get a Quote",
+  },
+  {
     name: "Custom",
     price: "5,000",
     suffix: "+",
@@ -57,7 +72,7 @@ const tiers = [
 export function PricingPreview() {
   return (
     <section className="relative py-24 md:py-32 overflow-hidden">
-      <div className="absolute inset-0 bg-bg" />
+      <div className="absolute inset-0 bg-transparent" />
       <div
         className="absolute inset-0"
         style={{
@@ -80,19 +95,21 @@ export function PricingPreview() {
           </p>
         </AnimateIn>
 
-        <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto mb-12">
+        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 max-w-6xl mx-auto mb-12">
           {tiers.map((tier) => (
             <StaggerItem key={tier.name}>
               <Link href={tier.href} className="block h-full group">
+                {/* Gradient border wrapper for featured card */}
+                <div className={tier.featured ? "p-[1px] rounded-xl bg-gradient-to-br from-[#B8923E] via-[#8B6CE0] to-[#6D5BF7] group-hover:-translate-y-2 transition-all duration-500" : ""}>
                 <div
-                  className={`relative h-full flex flex-col p-8 bg-surface border rounded-xl transition-all duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:-translate-y-2 group-hover:shadow-[0_12px_40px_rgba(0,0,0,0.4)] ${
+                  className={`relative h-full flex flex-col p-8 rounded-xl transition-all duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)] ${
                     tier.featured
-                      ? "border-violet/40 shadow-lg shadow-violet/10 group-hover:border-violet/70 group-hover:shadow-violet/20"
-                      : "border-border group-hover:border-white/20"
+                      ? "bg-[#0A0A0A] shadow-lg shadow-[#6D5BF7]/10"
+                      : "bg-surface border border-border group-hover:border-white/15 group-hover:-translate-y-2 group-hover:shadow-[0_12px_40px_rgba(0,0,0,0.4)]"
                   }`}
                 >
                   {tier.featured && (
-                    <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 text-[10px] font-bold uppercase tracking-[0.15em] text-white bg-gradient-to-r from-violet to-cyan rounded-full">
+                    <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 text-[10px] font-bold uppercase tracking-[0.15em] text-white bg-gradient-to-r from-[#B8923E] to-[#6D5BF7] rounded-full">
                       Most Popular
                     </span>
                   )}
@@ -126,9 +143,7 @@ export function PricingPreview() {
                         >
                           <Check
                             size={14}
-                            className={`mt-0.5 flex-shrink-0 ${
-                              tier.featured ? "text-violet" : "text-cyan"
-                            }`}
+                            className="mt-0.5 flex-shrink-0 text-white/40"
                           />
                           {feature}
                         </li>
@@ -137,18 +152,16 @@ export function PricingPreview() {
                   </div>
 
                   <div
-                    className={`w-full py-3 text-center text-sm font-semibold uppercase tracking-[0.1em] rounded-lg transition-all duration-300 ${
+                    className={`w-full py-3 text-center text-sm font-semibold uppercase tracking-[0.1em] rounded-full transition-all duration-300 ${
                       tier.featured
-                        ? "bg-gradient-to-r from-violet to-cyan text-white group-hover:shadow-[0_0_20px_rgba(124,58,237,0.3)]"
-                        : "border border-white/15 text-white/80 group-hover:border-white/40 group-hover:text-white"
+                        ? "bg-white text-[#0A0A0A] group-hover:bg-white/90"
+                        : "border border-white/15 text-white/70 group-hover:border-white/30 group-hover:text-white/90"
                     }`}
                   >
                     {tier.cta}
-                    <ArrowRight
-                      size={14}
-                      className="inline ml-2 transition-transform duration-300 group-hover:translate-x-1"
-                    />
                   </div>
+                </div>
+                {/* Close gradient border wrapper */}
                 </div>
               </Link>
             </StaggerItem>

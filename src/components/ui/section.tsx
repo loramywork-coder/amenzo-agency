@@ -17,7 +17,7 @@ export function Section({
       id={id}
       className={cn(
         "section-padding",
-        dark ? "bg-bg/50" : "bg-light-bg text-[#0A0A0A]",
+        dark ? "" : "bg-light-bg text-[#0A0A0A]",
         className
       )}
     >

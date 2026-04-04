@@ -1,62 +1,40 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 import { AnimateIn } from "@/components/ui/motion";
 
 export function AboutTeaser() {
   return (
-    <section className="bg-[#0A0A0A]/50 section-padding">
+    <section className="bg-transparent py-28 md:py-36">
       <div className="container-wide">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          {/* Image */}
-          <AnimateIn animation="slideLeft">
-            <div className="relative aspect-[4/5] lg:aspect-[3/4] rounded-xl overflow-hidden">
-              <Image
-                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=3840&q=90"
-                alt="Amenzo team collaborating on a project"
-                fill
-                className="object-cover"
-                quality={100}
-                sizes="(max-width: 1024px) 100vw, 50vw"
-              />
-              {/* Gradient fade on right edge */}
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-[#0F0F0F]/30" />
-            </div>
+        <div className="max-w-3xl mx-auto">
+          <AnimateIn>
+            <p className="text-[11px] uppercase tracking-[0.2em] text-white/30 font-medium mb-6 text-center">
+              About Amenzo
+            </p>
+            <h2 className="font-display text-[32px] md:text-[40px] font-bold text-text-primary tracking-[-0.02em] leading-[1.15] mb-10 text-center">
+              Not an agency. A growth partner.
+            </h2>
           </AnimateIn>
-
-          {/* Text */}
-          <AnimateIn animation="slideRight" delay={0.2}>
-            <div className="max-w-[480px]">
-              <p className="text-[11px] uppercase tracking-[0.2em] gradient-text font-medium mb-6">
-                About Amenzo
+          <AnimateIn delay={0.15}>
+            <div className="space-y-5 text-[17px] text-[#999] leading-[1.75]">
+              <p>
+                We build websites that convert visitors into customers.
+                No templates. No page builders. Every line of code is
+                written specifically for your business.
               </p>
-              <h2 className="font-display text-[32px] md:text-[36px] font-bold text-text-primary tracking-[-0.02em] leading-[1.15] mb-8">
-                Not an agency. A growth partner.
-              </h2>
-              <div className="space-y-5 text-[17px] text-[#B0B0B0] leading-[1.7]">
-                <p>
-                  We build websites that convert visitors into customers.
-                  No templates. No page builders. Every line of code is
-                  written for your business.
-                </p>
-                <p>
-                  Hotels, restaurants, startups, enterprises — if your
-                  brand matters, your website should prove it.
-                </p>
-                <p>
-                  Using cutting-edge technology and obsessive attention to
-                  detail, we deliver in weeks what traditional agencies take
-                  months to build.
-                </p>
-              </div>
+              <p>
+                A two-person studio that moves fast and builds right.
+                Using cutting-edge technology and obsessive attention to detail,
+                we deliver in weeks what traditional agencies take months to build.
+              </p>
+            </div>
+            <div className="text-center mt-10">
               <Link
                 href="/about"
-                className="inline-flex items-center gap-2 mt-8 text-[13px] font-display font-semibold gradient-text link-underline"
+                className="inline-flex items-center gap-2 px-8 py-3.5 border border-white/25 text-white/90 text-sm font-medium uppercase tracking-wide rounded-full hover:border-white hover:bg-white/5 transition-all duration-200"
               >
                 Learn more about us
-                <ArrowRight size={14} />
               </Link>
             </div>
           </AnimateIn>

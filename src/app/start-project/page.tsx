@@ -208,11 +208,27 @@ function StartProjectWizard() {
     }
   };
 
-  const handleSubmit = () => {
-    toast.success(
-      "Project brief submitted! We'll be in touch within 24 hours."
-    );
-    setSubmitted(true);
+  const handleSubmit = async () => {
+    if (!formData.name || !formData.email) {
+      toast.error("Please fill in your name and email.");
+      return;
+    }
+    try {
+      const res = await fetch("/api/start-project", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...formData,
+          services: selectedServices,
+          addons: selectedAddOns,
+        }),
+      });
+      if (!res.ok) throw new Error("Failed to send");
+      toast.success("Project brief submitted! We'll be in touch within 24 hours.");
+      setSubmitted(true);
+    } catch {
+      toast.error("Something went wrong. Please try again or email us at info@amenzo.co.");
+    }
   };
 
   if (submitted) {
@@ -371,7 +387,7 @@ function StartProjectWizard() {
                       type="tel"
                       value={formData.phone}
                       onChange={(v) => updateField("phone", v)}
-                      placeholder="+356 9999 0000"
+                      placeholder="+31 62 831 8123"
                     />
                     <FormField
                       label="Current Website (if any)"

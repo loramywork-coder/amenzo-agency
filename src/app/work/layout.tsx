@@ -1,15 +1,10 @@
-import type { Metadata } from "next";
+import { generatePageMeta } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Our Work — Design Previews & Case Studies",
-  description:
-    "Explore Amenzo's portfolio of concept showcases and case studies. Custom web design, e-commerce, and branding projects across hospitality, real estate, and tech.",
-  openGraph: {
-    title: "Our Work — Design Previews & Case Studies | Amenzo",
-    description:
-      "Explore Amenzo's portfolio of concept showcases and case studies. Custom web design, e-commerce, and branding projects across hospitality, real estate, and tech.",
-  },
-};
+export const metadata = generatePageMeta({
+  title: "Our Work — Custom Websites We've Built",
+  description: "See the custom websites Amenzo has built for businesses worldwide. Real projects showcasing responsive design, multilingual support, and premium web development.",
+  path: "/work",
+});
 
 export default function WorkLayout({
   children,

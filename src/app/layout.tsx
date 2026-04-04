@@ -1,18 +1,27 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, Inter, JetBrains_Mono } from "next/font/google";
-import { SITE_NAME, SITE_DESCRIPTION, SITE_URL } from "@/lib/constants";
+import localFont from "next/font/local";
+import { Inter, JetBrains_Mono } from "next/font/google";
+import { siteConfig } from "@/lib/seo";
 import { Navigation } from "@/components/layout/navigation";
 import { FooterWrapper } from "@/components/layout/footer-wrapper";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
 import { ScrollToTop } from "@/components/ui/scroll-to-top";
+import { LocalBusinessSchema } from "@/components/structured-data";
+import { SmokeBackground } from "@/components/ui/spooky-smoke-animation";
+import WhatsAppButton from "@/components/whatsapp-button";
+import CursorGlow from "@/components/cursor-glow";
+
+import ExitIntent from "@/components/exit-intent";
 import { Toaster } from "sonner";
 import "./globals.css";
 
-const plusJakarta = Plus_Jakarta_Sans({
-  subsets: ["latin"],
+const satoshi = localFont({
+  src: [
+    { path: "../fonts/Satoshi-Variable.woff2", style: "normal" },
+    { path: "../fonts/Satoshi-VariableItalic.woff2", style: "italic" },
+  ],
   variable: "--font-display",
   display: "swap",
-  weight: ["400", "500", "600", "700", "800"],
 });
 
 const inter = Inter({
@@ -28,26 +37,68 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(SITE_URL),
+  metadataBase: new URL(siteConfig.url),
   title: {
-    default: `${SITE_NAME} — Premium Web Design & Digital Agency`,
-    template: `%s | ${SITE_NAME}`,
+    default: "Amenzo \u2014 Where Code Meets Craft",
+    template: "%s | Amenzo",
   },
-  description: SITE_DESCRIPTION,
+  description: siteConfig.description,
+  keywords: [
+    "web design",
+    "website design",
+    "web developer",
+    "custom website",
+    "Next.js web design",
+    "Amenzo",
+    "hand-coded websites",
+    "professional web design",
+    "multilingual website",
+    "responsive web design",
+  ],
+  authors: [{ name: siteConfig.founder }],
+  creator: siteConfig.name,
+  publisher: siteConfig.name,
+  formatDetection: { telephone: true, email: true, address: true },
+  icons: {
+    icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: SITE_URL,
-    siteName: SITE_NAME,
-    title: `${SITE_NAME} — Premium Web Design & Digital Agency`,
-    description: SITE_DESCRIPTION,
+    url: siteConfig.url,
+    siteName: siteConfig.name,
+    title: "Amenzo \u2014 Where Code Meets Craft",
+    description: siteConfig.description,
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Amenzo - Custom Web Design Studio - Hand-Coded Websites",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE_NAME} — Premium Web Design & Digital Agency`,
-    description: SITE_DESCRIPTION,
+    title: "Amenzo \u2014 Where Code Meets Craft",
+    description: siteConfig.description,
+    images: ["/opengraph-image"],
   },
-  robots: { index: true, follow: true },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  alternates: {
+    canonical: siteConfig.url,
+  },
+  category: "technology",
 };
 
 export default function RootLayout({
@@ -58,33 +109,25 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${plusJakarta.variable} ${inter.variable} ${jetbrainsMono.variable}`}
+      className={`${satoshi.variable} ${inter.variable} ${jetbrainsMono.variable}`}
     >
       <body className="min-h-screen bg-bg text-text-body font-body antialiased">
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Organization",
-          "name": "Amenzo",
-          "url": "https://amenzo.com",
-          "logo": "https://amenzo.com/logo.svg",
-          "description": "Premium web design, development & digital agency",
-          "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "Sliema",
-            "addressCountry": "MT"
-          },
-          "contactPoint": {
-            "@type": "ContactPoint",
-            "telephone": "+356-9999-0000",
-            "email": "hello@amenzo.com",
-            "contactType": "sales"
-          }
-        })}} />
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[200] focus:bg-white focus:text-black focus:px-4 focus:py-2 focus:rounded"
+        >
+          Skip to content
+        </a>
+        <LocalBusinessSchema />
+        <SmokeBackground smokeColor="#EE3333" />
         <ScrollProgress />
         <ScrollToTop />
         <Navigation />
-        <main>{children}</main>
+        <main id="main" className="relative z-10">{children}</main>
         <FooterWrapper />
+        <WhatsAppButton />
+        <CursorGlow />
+        <ExitIntent />
         <Toaster
           position="bottom-right"
           toastOptions={{

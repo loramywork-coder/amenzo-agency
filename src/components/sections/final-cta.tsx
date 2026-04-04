@@ -8,7 +8,7 @@ import Link from "next/link";
 export function FinalCTA() {
   return (
     <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
-      <div className="absolute inset-0 bg-bg" />
+      <div className="absolute inset-0 bg-[#0A0A0A]/40" />
       <div
         className="absolute inset-0"
         style={{
@@ -31,13 +31,16 @@ export function FinalCTA() {
         </AnimateIn>
 
         <AnimateIn delay={0.3}>
+          <p className="text-[13px] text-text-muted italic mb-6">
+            We take on a limited number of projects each month to maintain quality.
+            Currently booking for{" "}
+            {(() => { const d = new Date(); d.setMonth(d.getMonth() + 1); return d.toLocaleDateString("en-US", { month: "long", year: "numeric" }); })()}.
+          </p>
           <Link
             href="/start-project"
-            className="inline-flex items-center gap-2 px-14 py-5 rounded-xl text-white text-[15px] uppercase tracking-[0.12em] font-bold transition-all duration-300 hover:shadow-[0_0_40px_rgba(124,58,237,0.3)]"
-            style={{ background: "linear-gradient(135deg, #7C3AED, #06B6D4)" }}
+            className="inline-block px-12 py-4 bg-white text-[#0A0A0A] text-[15px] font-medium uppercase tracking-wide rounded-full hover:bg-white/90 hover:scale-[1.02] transition-all duration-200"
           >
             Start a Project
-            <ArrowRight size={16} />
           </Link>
         </AnimateIn>
 

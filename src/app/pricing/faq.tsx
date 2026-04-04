@@ -8,7 +8,7 @@ const FAQ_ITEMS = [
   {
     question: "How much does a website cost?",
     answer:
-      "Our packages start at EUR 750 for a basic 5-page website. A standard business website with custom design and 2 languages is EUR 2,000. Premium multilingual sites with advanced features are EUR 4,000. Complex projects like e-commerce platforms range from EUR 5,000 to EUR 8,000. Every project gets a fixed quote — no hourly billing, no surprises.",
+      "Our packages start at EUR 750 for a basic 5-page website. A standard business website with custom design and 2 languages is EUR 2,000. Premium multilingual sites with advanced features are EUR 4,000. Complex projects like e-commerce platforms start from EUR 5,000. Every project gets a fixed quote — no hourly billing, no surprises.",
   },
   {
     question: "What's the difference between Basic and Standard?",
@@ -36,9 +36,9 @@ const FAQ_ITEMS = [
       "Yes. If you start with Basic and want to add languages, a blog, or more pages later, we quote the additional work separately. Many clients start Basic and upgrade to Standard within 6 months.",
   },
   {
-    question: "How do you compare to other agencies in Malta?",
+    question: "How do you compare to other agencies?",
     answer:
-      "Malta agencies typically charge EUR 775 to EUR 2,600 or more for similar work, often using WordPress templates. We build everything custom with modern technology (Next.js, React) — faster sites, better SEO, no plugin bloat. You get agency-quality output at competitive prices.",
+      "Most agencies typically charge EUR 775 to EUR 2,600 or more for similar work, often using WordPress templates. We build everything custom with modern technology (Next.js, React) — faster sites, better SEO, no plugin bloat. You get agency-quality output at competitive prices.",
   },
   {
     question: "Do I own the code and design files?",
@@ -51,9 +51,9 @@ const FAQ_ITEMS = [
       "We build with Next.js, React, TypeScript, and Tailwind CSS, deployed on Vercel. For backend needs, we use Supabase, and for payments, Stripe. This modern stack ensures your site is fast, secure, accessible, and easy to maintain. No WordPress, no page builders, no technical debt.",
   },
   {
-    question: "Do you work with clients outside Malta?",
+    question: "Do you work with international clients?",
     answer:
-      "Absolutely. While we are based in Malta, we work with clients across Europe, the UK, and beyond. All communication happens over video calls, Slack, and email. Our process is designed for remote collaboration, and timezone differences have never been an issue.",
+      "We work with clients across Europe, the UK, and beyond. All communication happens over video calls, Slack, and email. Our process is designed for remote collaboration, and timezone differences have never been an issue.",
   },
 ] as const;
 

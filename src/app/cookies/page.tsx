@@ -1,9 +1,11 @@
-import type { Metadata } from "next";
+import { generatePageMeta } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = generatePageMeta({
   title: "Cookie Policy",
   description: "AMENZO cookie policy. How we use cookies on our website.",
-};
+  path: "/cookies",
+  noindex: true,
+});
 
 export default function CookiesPage() {
   return (
@@ -82,7 +84,7 @@ export default function CookiesPage() {
             <h2 className="font-display text-xl font-semibold text-text-primary mb-3">
               5. Contact
             </h2>
-            <p>If you have questions about our use of cookies, please contact us at hello@amenzo.com.</p>
+            <p>If you have questions about our use of cookies, please contact us at info@amenzo.co.</p>
           </section>
         </div>
       </div>

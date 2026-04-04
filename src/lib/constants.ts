@@ -1,17 +1,16 @@
 export const SITE_NAME = "AMENZO";
-export const SITE_URL = "https://amenzo.com";
+export const SITE_URL = "https://amenzo.co";
 export const SITE_DESCRIPTION =
-  "Premium web design, development & digital agency. Custom websites that make businesses impossible to ignore.";
-export const CONTACT_EMAIL = "hello@amenzo.com";
-export const CONTACT_PHONE = "+356 9999 0000";
-export const CONTACT_WHATSAPP = "35699990000";
-export const CONTACT_ADDRESS = "Europe";
+  "Custom web design and development. Starting from EUR 5,000. Serving businesses worldwide.";
+export const CONTACT_EMAIL = "info@amenzo.co";
+export const CONTACT_PHONE = "+31 62 831 8123";
+export const CONTACT_WHATSAPP = "31628318123";
+export const CONTACT_ADDRESS = "";
 
 export const NAV_LINKS = [
   { label: "Work", href: "/work" },
   { label: "Services", href: "/services" },
   { label: "Pricing", href: "/pricing" },
-  { label: "Build", href: "/build" },
   { label: "About", href: "/about" },
   { label: "Insights", href: "/insights" },
   { label: "Contact", href: "/contact" },
@@ -20,9 +19,9 @@ export const NAV_LINKS = [
 /** Slim header nav — only primary conversion links. Footer uses NAV_LINKS for everything. */
 export const HEADER_LINKS = [
   { label: "Work", href: "/work" },
+  { label: "Showcases", href: "/#showcases" },
   { label: "Services", href: "/services" },
   { label: "Pricing", href: "/pricing" },
-  { label: "Build", href: "/build" },
   { label: "About", href: "/about" },
 ] as const;
 
@@ -31,73 +30,46 @@ export const SERVICES = [
     title: "Web Design & Development",
     slug: "web-design-development",
     shortDesc:
-      "Custom websites built from scratch. No templates. No WordPress themes. Hand-crafted code that performs.",
+      "Custom websites built from scratch with Next.js and React. No templates, no WordPress.",
     tags: ["Next.js", "React", "Tailwind", "TypeScript", "Vercel"],
     price: "750",
     icon: "Monitor",
   },
   {
+    title: "Website Redesign",
+    slug: "website-redesign",
+    shortDesc:
+      "Rebuild your existing site on modern technology. Content migrated, SEO preserved.",
+    tags: ["Migration", "Next.js", "SEO Preservation", "Performance"],
+    price: "750",
+    icon: "RefreshCw",
+  },
+  {
     title: "E-Commerce",
     slug: "ecommerce",
     shortDesc:
-      "Online stores that convert. From boutique shops to full-scale retail \u2014 beautiful and built to sell.",
-    tags: ["Shopify", "WooCommerce", "Stripe", "Custom"],
+      "Online stores with custom code and Stripe. Product pages, cart, checkout \u2014 built to convert.",
+    tags: ["Next.js", "Stripe", "Custom Cart", "Product Pages"],
     price: "4,000",
     icon: "ShoppingBag",
-  },
-  {
-    title: "Branding & Identity",
-    slug: "branding-identity",
-    shortDesc:
-      "Logos, colour systems, typography, brand guidelines \u2014 the foundation everything else is built on.",
-    tags: ["Logo Design", "Brand Strategy", "Visual Identity"],
-    price: "800",
-    icon: "Palette",
-  },
-  {
-    title: "UI/UX Design",
-    slug: "ui-ux-design",
-    shortDesc:
-      "User-centred design that looks stunning and converts. Research, wireframes, prototypes, and pixel-perfect interfaces.",
-    tags: ["Figma", "User Research", "Prototyping", "Design Systems"],
-    price: "2,000",
-    icon: "Layers",
   },
   {
     title: "SEO & Performance",
     slug: "seo-performance",
     shortDesc:
-      "Beautiful means nothing if nobody finds it. We build fast, accessible, and search-engine-optimised from day one.",
+      "Fast, search-optimised sites from day one. Monthly monitoring and performance tuning.",
     tags: ["Technical SEO", "Core Web Vitals", "Schema", "Analytics"],
     price: "300/mo",
     icon: "TrendingUp",
   },
   {
-    title: "Website Redesign",
-    slug: "website-redesign",
-    shortDesc:
-      "Your current site not cutting it? We take what you have and transform it into something extraordinary.",
-    tags: ["Audit", "Redesign", "Migration", "Optimisation"],
-    price: "750",
-    icon: "RefreshCw",
-  },
-  {
     title: "Hosting & Maintenance",
     slug: "hosting-maintenance",
     shortDesc:
-      "Launch is just the beginning. We keep your site fast, secure, updated, and backed up.",
+      "Managed hosting, SSL, backups, monitoring, and updates. Your site stays fast and secure.",
     tags: ["Vercel", "Monitoring", "Backups", "Updates"],
     price: "80/mo",
     icon: "Server",
-  },
-  {
-    title: "Digital Strategy",
-    slug: "digital-strategy",
-    shortDesc:
-      "Not sure where to start? We help you define your digital roadmap and prioritise what moves the needle.",
-    tags: ["Audit", "Strategy", "Roadmap", "Training"],
-    price: "2,000",
-    icon: "Compass",
   },
 ] as const;
 

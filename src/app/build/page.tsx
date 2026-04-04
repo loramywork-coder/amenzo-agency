@@ -420,9 +420,13 @@ export default function BuildPage() {
   }, [selectedServices, selectedAddOns, pageCount, languageCount]);
 
   return (
-    <div className="min-h-screen bg-bg pt-32 pb-20">
+    <div className="min-h-screen pt-32 pb-20 relative">
+      {/* Video behind hero area */}
+      <div className="absolute inset-0 h-[70vh] overflow-hidden">
+        
+      </div>
       {/* Hero */}
-      <div className="container-wide mb-16">
+      <div className="container-wide mb-16 relative z-10">
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

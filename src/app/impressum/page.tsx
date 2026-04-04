@@ -1,10 +1,11 @@
-import type { Metadata } from "next";
+import { generatePageMeta } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = generatePageMeta({
   title: "Impressum — Legal Notice",
-  description:
-    "AMENZO legal notice (Impressum). Company information, contact details, and legal disclaimers as required by EU regulations.",
-};
+  description: "AMENZO legal notice (Impressum). Company information, contact details, and legal disclaimers as required by EU regulations.",
+  path: "/impressum",
+  noindex: true,
+});
 
 export default function ImpressumPage() {
   return (
@@ -21,12 +22,25 @@ export default function ImpressumPage() {
               Company Information
             </h2>
             <p>
-              <strong className="text-text-primary">Company Name:</strong>{" "}
-              AMENZO
+              <strong className="text-text-primary">Trade Name:</strong> Amenzo Studio
             </p>
             <p className="mt-2">
-              <strong className="text-text-primary">Legal Form:</strong> Sole
-              Proprietorship
+              <strong className="text-text-primary">Legal Entity:</strong> ProgressPro
+            </p>
+            <p className="mt-2">
+              <strong className="text-text-primary">Represented by:</strong> Amy de Boers
+            </p>
+          </section>
+
+          <section>
+            <h2 className="font-display text-xl font-semibold text-text-primary mb-3">
+              Registration
+            </h2>
+            <p>
+              <strong className="text-text-primary">KVK:</strong> 84642920
+            </p>
+            <p className="mt-2">
+              <strong className="text-text-primary">BTW:</strong> NL003992552B76
             </p>
           </section>
 
@@ -37,33 +51,47 @@ export default function ImpressumPage() {
             <p>
               <strong className="text-text-primary">Email:</strong>{" "}
               <a
-                href="mailto:hello@amenzo.com"
+                href="mailto:info@amenzo.co"
                 className="text-purple-400 hover:text-purple-300 transition-colors"
               >
-                hello@amenzo.com
+                info@amenzo.co
               </a>
             </p>
             <p className="mt-2">
-              <strong className="text-text-primary">Phone:</strong> +356 9999
-              0000
+              <strong className="text-text-primary">Web:</strong>{" "}
+              <a
+                href="https://amenzo.co"
+                className="text-purple-400 hover:text-purple-300 transition-colors"
+              >
+                https://amenzo.co
+              </a>
             </p>
           </section>
 
           <section>
             <h2 className="font-display text-xl font-semibold text-text-primary mb-3">
-              VAT Information
+              Registered Address
             </h2>
             <p>
-              <strong className="text-text-primary">VAT Number:</strong> Pending
-              registration
+              Dammerweg 81, 1394 GR Nederhorst den Berg, The Netherlands
             </p>
           </section>
 
           <section>
             <h2 className="font-display text-xl font-semibold text-text-primary mb-3">
-              Responsible for Content
+              Dispute Resolution
             </h2>
-            <p>AMENZO</p>
+            <p>
+              EU Online Dispute Resolution:{" "}
+              <a
+                href="https://ec.europa.eu/odr"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-purple-400 hover:text-purple-300 transition-colors"
+              >
+                https://ec.europa.eu/odr
+              </a>
+            </p>
           </section>
 
           <section>
@@ -74,11 +102,11 @@ export default function ImpressumPage() {
               The information provided on this website has been carefully
               checked and is regularly updated. However, no guarantee can be
               given that all information is complete, correct, and up-to-date
-              at all times. AMENZO reserves the right to make changes or
+              at all times. Amenzo reserves the right to make changes or
               additions to the information provided.
             </p>
             <p className="mt-3">
-              AMENZO is not responsible for the content of external websites
+              Amenzo is not responsible for the content of external websites
               that are linked from this website. The operators of linked
               websites are solely responsible for their content.
             </p>
@@ -93,10 +121,10 @@ export default function ImpressumPage() {
               and the design of the website, is protected by copyright. Any
               reproduction, processing, distribution, or any form of
               commercialisation of such material beyond the scope of copyright
-              law requires the prior written consent of AMENZO.
+              law requires the prior written consent of Amenzo.
             </p>
             <p className="mt-3">
-              &copy; {new Date().getFullYear()} AMENZO. All rights reserved.
+              &copy; 2026 Amenzo Studio. All rights reserved.
             </p>
           </section>
         </div>

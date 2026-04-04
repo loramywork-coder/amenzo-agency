@@ -143,7 +143,7 @@ export function TextReveal({
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
 
   return (
-    <div ref={ref} className={cn("overflow-hidden", className)}>
+    <div ref={ref} className={cn("overflow-hidden pb-2", className)}>
       <motion.div
         initial={{ y: "100%" }}
         animate={inView ? { y: 0 } : { y: "100%" }}

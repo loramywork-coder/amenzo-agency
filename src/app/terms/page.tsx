@@ -1,9 +1,11 @@
-import type { Metadata } from "next";
+import { generatePageMeta } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = generatePageMeta({
   title: "Terms of Service",
   description: "AMENZO terms of service. Conditions for using our web design and development services.",
-};
+  path: "/terms",
+  noindex: true,
+});
 
 export default function TermsPage() {
   return (
@@ -96,14 +98,14 @@ export default function TermsPage() {
             <h2 className="font-display text-xl font-semibold text-text-primary mb-3">
               10. Governing Law
             </h2>
-            <p>These terms are governed by and construed in accordance with the laws of Malta. Any disputes shall be resolved through the courts of Malta.</p>
+            <p>These terms are governed by and construed in accordance with the laws of the Netherlands. Any disputes shall be resolved through the courts of the Netherlands.</p>
           </section>
 
           <section>
             <h2 className="font-display text-xl font-semibold text-text-primary mb-3">
               11. Contact
             </h2>
-            <p>For questions about these terms, please contact us at hello@amenzo.com.</p>
+            <p>For questions about these terms, please contact us at info@amenzo.co.</p>
           </section>
         </div>
       </div>

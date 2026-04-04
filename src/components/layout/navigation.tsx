@@ -9,7 +9,7 @@ import { Logo } from "@/components/ui/logo";
 import { HEADER_LINKS, SERVICES } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
-const SERVICE_DROPDOWN = SERVICES.slice(0, 8).map((s) => ({
+const SERVICE_DROPDOWN = SERVICES.map((s) => ({
   label: s.title,
   href: `/services#${s.slug}`,
   price: s.price,
@@ -21,7 +21,7 @@ export function Navigation() {
   const [servicesOpen, setServicesOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const pathname = usePathname();
-  const isDemo = pathname.startsWith("/demos");
+  const isDemo = pathname.startsWith("/demos") || pathname.startsWith("/showcases");
   const dropdownRef = useRef<HTMLDivElement>(null);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
@@ -71,9 +71,7 @@ export function Navigation() {
       <header
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
-          scrolled
-            ? "bg-bg/90 backdrop-blur-xl border-b border-border"
-            : "bg-transparent"
+          "bg-transparent"
         )}
       >
         <nav className="container-wide flex items-center justify-between h-20">
@@ -99,7 +97,7 @@ export function Navigation() {
                   <div
                     key={link.href}
                     ref={dropdownRef}
-                    className="relative"
+                    className="relative flex items-center"
                     onMouseEnter={handleMouseEnter}
                     onMouseLeave={handleMouseLeave}
                   >
@@ -180,13 +178,10 @@ export function Navigation() {
             })}
           </div>
 
-          <div className="hidden lg:block">
+          <div className="hidden lg:flex items-center gap-5">
             <Link
               href="/start-project"
-              className="px-7 py-2.5 rounded-lg text-[12px] uppercase tracking-[0.15em] font-medium text-white transition-shadow duration-300 hover:shadow-[0_0_24px_rgba(124,58,237,0.2)]"
-              style={{
-                background: "linear-gradient(135deg, #7C3AED, #06B6D4)",
-              }}
+              className="px-6 py-2 bg-white text-[#0A0A0A] text-[12px] uppercase tracking-[0.12em] font-medium rounded-full hover:bg-white/90 transition-all duration-200"
             >
               Start a Project
             </Link>
@@ -227,7 +222,7 @@ export function Navigation() {
                       <button
                         onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
                         className={cn(
-                          "text-[28px] font-display font-bold tracking-[-0.02em] transition-colors inline-flex items-center gap-2",
+                          "text-[28px] font-display font-bold tracking-[-0.02em] transition-colors",
                           pathname.startsWith("/services")
                             ? "text-text-primary"
                             : "text-text-secondary"
@@ -235,9 +230,9 @@ export function Navigation() {
                       >
                         Services
                         <ChevronDown
-                          size={20}
+                          size={14}
                           className={cn(
-                            "transition-transform duration-200",
+                            "inline ml-1 transition-transform duration-200",
                             mobileServicesOpen && "rotate-180"
                           )}
                         />
@@ -276,6 +271,7 @@ export function Navigation() {
                   >
                     <Link
                       href={link.href}
+                      onClick={() => setIsOpen(false)}
                       className={cn(
                         "text-[28px] font-display font-bold tracking-[-0.02em] transition-colors hover:text-text-primary",
                         pathname === link.href
@@ -296,10 +292,7 @@ export function Navigation() {
               >
                 <Link
                   href="/start-project"
-                  className="px-9 py-4 rounded-lg text-[13px] uppercase tracking-[0.15em] font-medium text-white"
-                  style={{
-                    background: "linear-gradient(135deg, #7C3AED, #06B6D4)",
-                  }}
+                  className="px-9 py-4 bg-white text-[#0A0A0A] text-[13px] uppercase tracking-[0.15em] font-medium rounded-full"
                 >
                   Start a Project
                 </Link>

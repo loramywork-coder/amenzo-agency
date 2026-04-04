@@ -2,415 +2,954 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { Search, MapPin, Bed, Bath, Maximize, Heart, Phone, Mail, ChevronDown, X, Calendar } from "lucide-react";
-import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  Search, MapPin, Bed, Bath, Maximize, Phone, Mail, ChevronDown,
+  Home, Building2, Shield, TrendingUp, Globe, Award, ArrowRight,
+  Clock, Briefcase, BarChart3, Heart, Star, Quote, Menu, X,
+} from "lucide-react";
+import { useState, useRef, useEffect, useCallback } from "react";
+import { DemoBanner } from "@/components/demos/demo-banner";
+import Counter from "@/components/demos/Counter";
+import Reveal from "@/components/demos/Reveal";
+import MagneticButton from "@/components/demos/MagneticButton";
 
-const properties = [
+/* ═══════════════════════════ PALETTE ═══════════════════════════ */
+
+const C = {
+  bg: "#0A0F1C",
+  surface: "#111827",
+  gold: "#D4A853",
+  white: "#FFFFFF",
+  muted: "#6B7280",
+  border: "#1F2937",
+  goldHover: "#E4B863",
+  goldBorder: "rgba(212,168,83,0.15)",
+} as const;
+
+/* ═══════════════════════════ DATA ══════════════════════════════ */
+
+interface Property {
+  id: number;
+  title: string;
+  location: string;
+  type: string;
+  price: number;
+  beds: number;
+  baths: number;
+  sqm: number;
+  image: string;
+  badge?: string;
+}
+
+const featuredProperties: Property[] = [
   {
     id: 1,
-    title: "Seafront Penthouse in Sliema",
-    price: "€1,250,000",
-    location: "Sliema, Malta",
+    title: "Seaview Penthouse, Sliema",
+    location: "Sliema",
+    type: "Penthouse",
+    price: 1450000,
     beds: 3,
     baths: 2,
-    area: "185m\u00B2",
-    image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920&q=85",
-    tag: "Featured",
+    sqm: 180,
+    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80",
+    badge: "FOR SALE",
   },
   {
     id: 2,
-    title: "Converted Farmhouse in Gozo",
-    price: "€890,000",
-    location: "Xaghra, Gozo",
+    title: "Historic Townhouse, Valletta",
+    location: "Valletta",
+    type: "Townhouse",
+    price: 680000,
     beds: 4,
     baths: 3,
-    area: "280m\u00B2",
-    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&q=85",
-    tag: "New",
+    sqm: 220,
+    image: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c0?w=800&q=80",
+    badge: "FOR SALE",
   },
   {
     id: 3,
-    title: "Modern Apartment in St Julian's",
-    price: "€485,000",
-    location: "St Julian's, Malta",
-    beds: 2,
-    baths: 1,
-    area: "95m\u00B2",
-    image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1920&q=85",
-    tag: null,
+    title: "Luxury Villa, Madliena",
+    location: "Madliena",
+    type: "Villa",
+    price: 2200000,
+    beds: 5,
+    baths: 4,
+    sqm: 350,
+    image: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800&q=80",
+    badge: "FOR SALE",
+  },
+];
+
+const areas = [
+  { name: "Valletta", count: 24, image: "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&q=80" },
+  { name: "Sliema", count: 31, image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&q=80" },
+  { name: "St Julian's", count: 18, image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&q=80" },
+  { name: "Gozo", count: 15, image: "https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=600&q=80" },
+  { name: "Mdina", count: 8, image: "https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?w=600&q=80" },
+  { name: "Madliena", count: 12, image: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=600&q=80" },
+];
+
+const whyCards = [
+  { icon: Shield, title: "Licensed & Regulated", desc: "Fully licensed by the Malta Financial Services Authority with complete regulatory compliance." },
+  { icon: Globe, title: "International Reach", desc: "Global network spanning 40+ countries connecting buyers and sellers across borders." },
+  { icon: Briefcase, title: "End-to-End Service", desc: "From property search to key handover, we manage every step of your journey." },
+  { icon: BarChart3, title: "Market Intelligence", desc: "Data-driven insights and proprietary analytics to ensure optimal investment decisions." },
+];
+
+const testimonials = [
+  {
+    name: "James & Claire Thornton",
+    role: "Purchased Villa in Madliena",
+    text: "Malta Living made our relocation from London seamless. Their knowledge of the local market is unparalleled and they found us a property that exceeded every expectation.",
+    rating: 5,
   },
   {
-    id: 4,
-    title: "Townhouse in Valletta",
-    price: "€1,650,000",
-    location: "Valletta, Malta",
-    beds: 5,
-    baths: 3,
-    area: "320m\u00B2",
-    image: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1920&q=85",
-    tag: "Premium",
+    name: "Dr. Marco Bellini",
+    role: "Investment Portfolio Client",
+    text: "As an overseas investor, I needed a team I could trust entirely. Their transparency, market insights, and end-to-end management gave me complete confidence in every transaction.",
+    rating: 5,
+  },
+  {
+    name: "Sofia Andersson",
+    role: "Purchased Penthouse in Sliema",
+    text: "From the first viewing to handing over the keys, the experience was flawless. They understood exactly what we were looking for and delivered beyond our expectations.",
+    rating: 5,
   },
 ];
 
-const stats = [
-  { value: "500+", label: "Properties Listed" },
-  { value: "98%", label: "Client Satisfaction" },
-  { value: "12", label: "Years Experience" },
-  { value: "€2.1B", label: "Properties Sold" },
-];
+/* ═══════════════════════════ HELPERS ═══════════════════════════ */
 
-export default function RealEstateDemo() {
-  const [activeType, setActiveType] = useState("Buy");
-  const [activePrice, setActivePrice] = useState("Any Price");
-  const [viewingProperty, setViewingProperty] = useState<number | null>(null);
-  const [favorites, setFavorites] = useState<number[]>([]);
+function formatPriceFull(n: number) {
+  return `\u20AC${n.toLocaleString()}`;
+}
 
-  const toggleFavorite = (id: number) => {
-    setFavorites((prev) => prev.includes(id) ? prev.filter((f) => f !== id) : [...prev, id]);
+/* ═══════════════════════════ NAV ═════════════════════════════ */
+
+function SiteNav() {
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 60);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const links = [
+    { label: "Properties", href: "/demos/realestate/listings" },
+    { label: "Areas", href: "#areas" },
+    { label: "Insights", href: "#why-us" },
+    { label: "About", href: "#about" },
+  ];
+
+  return (
+    <nav
+      className="fixed top-10 left-0 right-0 z-50 transition-all duration-500"
+      style={{
+        background: scrolled ? "rgba(10,15,28,0.95)" : "transparent",
+        backdropFilter: scrolled ? "blur(20px)" : "none",
+        borderBottom: scrolled ? `1px solid ${C.border}` : "1px solid transparent",
+      }}
+    >
+      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-16 md:h-20">
+        {/* Logo */}
+        <Link href="/demos/realestate" className="flex items-center gap-2">
+          <span
+            className="text-xl font-bold tracking-tight"
+            style={{ fontFamily: "var(--font-display), system-ui", color: C.white }}
+          >
+            MALTA{" "}
+            <span style={{ color: C.gold }}>LIVING</span>
+          </span>
+        </Link>
+
+        {/* Desktop links */}
+        <div className="hidden md:flex items-center gap-8">
+          {links.map((l) => (
+            <a
+              key={l.label}
+              href={l.href}
+              className="text-sm font-medium tracking-wide transition-colors hover:text-white"
+              style={{ color: C.muted }}
+            >
+              {l.label}
+            </a>
+          ))}
+          <a
+            href="#contact"
+            className="px-5 py-2.5 text-sm font-semibold transition-all"
+            style={{
+              background: C.gold,
+              color: C.bg,
+              borderRadius: 10,
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.background = C.goldHover)}
+            onMouseLeave={(e) => (e.currentTarget.style.background = C.gold)}
+          >
+            Get in Touch
+          </a>
+        </div>
+
+        {/* Mobile toggle */}
+        <button
+          className="md:hidden p-2"
+          onClick={() => setMobileOpen(!mobileOpen)}
+          aria-label="Toggle menu"
+        >
+          {mobileOpen ? <X size={22} style={{ color: C.white }} /> : <Menu size={22} style={{ color: C.white }} />}
+        </button>
+      </div>
+
+      {/* Mobile menu */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden overflow-hidden"
+            style={{ background: "rgba(10,15,28,0.98)", borderBottom: `1px solid ${C.border}` }}
+          >
+            <div className="px-6 py-6 flex flex-col gap-4">
+              {links.map((l) => (
+                <a
+                  key={l.label}
+                  href={l.href}
+                  onClick={() => setMobileOpen(false)}
+                  className="text-base font-medium py-2"
+                  style={{ color: C.muted }}
+                >
+                  {l.label}
+                </a>
+              ))}
+              <a
+                href="#contact"
+                onClick={() => setMobileOpen(false)}
+                className="px-5 py-3 text-sm font-semibold text-center mt-2"
+                style={{ background: C.gold, color: C.bg, borderRadius: 10 }}
+              >
+                Get in Touch
+              </a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </nav>
+  );
+}
+
+/* ═══════════════════════════ DROPDOWN ══════════════════════════ */
+
+interface DropdownProps {
+  label: string;
+  options: string[];
+  value: string;
+  onChange: (v: string) => void;
+  icon: React.ReactNode;
+}
+
+function SearchDropdown({ label, options, value, onChange, icon }: DropdownProps) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClick(e: MouseEvent) {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    }
+    document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, []);
+
+  return (
+    <div ref={ref} className="relative flex-1 min-w-[180px]">
+      <button
+        onClick={() => setOpen(!open)}
+        className="w-full flex items-center gap-3 px-5 py-4 text-left transition-colors"
+        style={{
+          background: "rgba(255,255,255,0.05)",
+          border: `1px solid ${open ? C.gold : "rgba(255,255,255,0.1)"}`,
+          borderRadius: 12,
+          color: value === options[0] ? C.muted : C.white,
+        }}
+      >
+        <span style={{ color: C.gold }}>{icon}</span>
+        <span className="flex-1 truncate text-sm">{value || label}</span>
+        <motion.span animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.2 }}>
+          <ChevronDown size={16} style={{ color: C.muted }} />
+        </motion.span>
+      </button>
+
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, y: -8, scale: 0.96 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -8, scale: 0.96 }}
+            transition={{ duration: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
+            className="absolute top-full left-0 right-0 mt-2 z-50 overflow-hidden"
+            style={{
+              background: C.surface,
+              border: `1px solid ${C.goldBorder}`,
+              borderRadius: 12,
+              boxShadow: "0 20px 60px rgba(0,0,0,0.6)",
+            }}
+          >
+            {options.map((opt) => (
+              <button
+                key={opt}
+                onClick={() => { onChange(opt); setOpen(false); }}
+                className="w-full text-left px-5 py-3 text-sm transition-all"
+                style={{
+                  color: opt === value ? C.gold : C.white,
+                  background: opt === value ? "rgba(212,168,83,0.08)" : "transparent",
+                }}
+                onMouseEnter={(e) => {
+                  if (opt !== value) e.currentTarget.style.background = "rgba(255,255,255,0.05)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = opt === value ? "rgba(212,168,83,0.08)" : "transparent";
+                }}
+              >
+                {opt}
+              </button>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
+/* ═══════════════════════ PROPERTY CARD ═════════════════════════ */
+
+function PropertyCard({ p, large = false }: { p: Property; large?: boolean }) {
+  return (
+    <Link href="/demos/realestate/property">
+      <motion.div
+        whileHover={{ y: -8 }}
+        transition={{ duration: 0.3 }}
+        className="group overflow-hidden cursor-pointer"
+        style={{
+          background: C.surface,
+          borderRadius: 16,
+          border: `1px solid rgba(255,255,255,0.06)`,
+        }}
+      >
+        <div className="relative overflow-hidden" style={{ height: large ? 280 : 220 }}>
+          <Image
+            src={p.image}
+            alt={p.title}
+            fill
+            className="object-cover transition-transform duration-700 group-hover:scale-110"
+            sizes={large ? "(max-width:768px) 100vw, 33vw" : "(max-width:768px) 100vw, 25vw"}
+          />
+          <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 50%)" }} />
+          {p.badge && (
+            <span
+              className="absolute top-4 left-4 px-3 py-1 text-xs font-semibold tracking-wider"
+              style={{ background: C.gold, color: C.bg, borderRadius: 6 }}
+            >
+              {p.badge}
+            </span>
+          )}
+          <button
+            className="absolute top-4 right-4 p-2 rounded-full transition-colors"
+            style={{ background: "rgba(0,0,0,0.4)", backdropFilter: "blur(8px)" }}
+            onClick={(e) => e.preventDefault()}
+          >
+            <Heart size={16} style={{ color: C.white }} />
+          </button>
+        </div>
+
+        <div className="p-5">
+          <div className="flex items-start justify-between mb-2">
+            <div>
+              <h3 className="font-semibold text-base" style={{ color: C.white, fontFamily: "var(--font-display), system-ui" }}>
+                {p.title}
+              </h3>
+              <div className="flex items-center gap-1 mt-1">
+                <MapPin size={13} style={{ color: C.muted }} />
+                <span className="text-xs" style={{ color: C.muted }}>{p.location}, Malta</span>
+              </div>
+            </div>
+          </div>
+
+          <p className="text-xl font-bold mt-3" style={{ color: C.gold, fontFamily: "var(--font-display), system-ui" }}>
+            {formatPriceFull(p.price)}
+          </p>
+
+          <div className="flex items-center gap-4 mt-4 pt-4" style={{ borderTop: `1px solid rgba(255,255,255,0.06)` }}>
+            <div className="flex items-center gap-1.5">
+              <Bed size={14} style={{ color: C.muted }} />
+              <span className="text-xs" style={{ color: C.muted }}>{p.beds} Bed</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <Bath size={14} style={{ color: C.muted }} />
+              <span className="text-xs" style={{ color: C.muted }}>{p.baths} Bath</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <Maximize size={14} style={{ color: C.muted }} />
+              <span className="text-xs" style={{ color: C.muted }}>{p.sqm}m&sup2;</span>
+            </div>
+          </div>
+        </div>
+      </motion.div>
+    </Link>
+  );
+}
+
+/* ═══════════════════════ SITE FOOTER ═════════════════════════ */
+
+function SiteFooter() {
+  return (
+    <footer className="py-20 px-6" style={{ background: C.surface, borderTop: `1px solid ${C.border}` }}>
+      <div className="max-w-7xl mx-auto">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-12 mb-16">
+          {/* Col 1: Brand + license */}
+          <div>
+            <h3
+              className="text-xl font-bold mb-4"
+              style={{ fontFamily: "var(--font-display), system-ui" }}
+            >
+              <span style={{ color: C.white }}>MALTA </span>
+              <span style={{ color: C.gold }}>LIVING</span>
+            </h3>
+            <p className="text-sm leading-relaxed mb-4" style={{ color: C.muted }}>
+              The premier property portal for luxury real estate across the Maltese islands since 2008.
+            </p>
+            <p className="text-xs leading-relaxed" style={{ color: C.muted, opacity: 0.7 }}>
+              Licensed by the Malta Financial Services Authority. Licence No. C-84729. Registered office: Tower Road, Sliema SLM 1600, Malta.
+            </p>
+          </div>
+
+          {/* Col 2: Links + Areas */}
+          <div className="grid grid-cols-2 gap-8">
+            <div>
+              <h4 className="text-sm font-semibold uppercase tracking-wider mb-5" style={{ color: C.white }}>
+                Quick Links
+              </h4>
+              {["Properties", "Areas", "Insights", "About Us", "Careers"].map((item) => (
+                <p key={item} className="text-sm mb-3 cursor-pointer transition-colors hover:text-white" style={{ color: C.muted }}>
+                  {item}
+                </p>
+              ))}
+            </div>
+            <div>
+              <h4 className="text-sm font-semibold uppercase tracking-wider mb-5" style={{ color: C.white }}>
+                Areas
+              </h4>
+              {["Valletta", "Sliema", "St Julian's", "Gozo", "Mdina", "Madliena"].map((item) => (
+                <p key={item} className="text-sm mb-3 cursor-pointer transition-colors hover:text-white" style={{ color: C.muted }}>
+                  {item}
+                </p>
+              ))}
+            </div>
+          </div>
+
+          {/* Col 3: Contact + Social */}
+          <div>
+            <h4 className="text-sm font-semibold uppercase tracking-wider mb-5" style={{ color: C.white }}>
+              Get in Touch
+            </h4>
+            <div className="flex items-center gap-3 mb-4">
+              <Phone size={14} style={{ color: C.gold }} />
+              <span className="text-sm" style={{ color: C.muted }}>+356 2134 5678</span>
+            </div>
+            <div className="flex items-center gap-3 mb-4">
+              <Mail size={14} style={{ color: C.gold }} />
+              <span className="text-sm" style={{ color: C.muted }}>info@maltaliving.mt</span>
+            </div>
+            <div className="flex items-center gap-3 mb-6">
+              <MapPin size={14} style={{ color: C.gold }} />
+              <span className="text-sm" style={{ color: C.muted }}>Tower Road, Sliema SLM 1600</span>
+            </div>
+            <div className="flex gap-3">
+              {["Fb", "In", "Tw", "Ig"].map((s) => (
+                <span
+                  key={s}
+                  className="w-9 h-9 flex items-center justify-center text-xs font-semibold cursor-pointer transition-colors"
+                  style={{
+                    background: "rgba(212,168,83,0.1)",
+                    borderRadius: 8,
+                    color: C.gold,
+                  }}
+                >
+                  {s}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div
+          className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4"
+          style={{ borderTop: `1px solid ${C.border}` }}
+        >
+          <p className="text-xs" style={{ color: C.muted }}>
+            &copy; 2026 Malta Living. All rights reserved.
+          </p>
+          <div className="flex gap-6">
+            {["Privacy Policy", "Terms of Service", "Cookie Settings"].map((item) => (
+              <span key={item} className="text-xs cursor-pointer transition-colors hover:text-white" style={{ color: C.muted }}>
+                {item}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+/* ════════════════════════ MAIN PAGE ════════════════════════════ */
+
+export default function RealEstatePage() {
+  const listingsRef = useRef<HTMLDivElement>(null);
+
+  /* Search state */
+  const locationOptions = ["All Malta", "Valletta", "Sliema", "St Julian's", "Gozo", "Mellieha"];
+  const typeOptions = ["All Types", "Apartment", "Penthouse", "Villa", "Townhouse", "Farmhouse"];
+  const budgetOptions = ["Any Budget", "Under \u20AC200K", "\u20AC200-500K", "\u20AC500K-1M", "\u20AC1M+"];
+
+  const [location, setLocation] = useState(locationOptions[0]);
+  const [type, setType] = useState(typeOptions[0]);
+  const [budget, setBudget] = useState(budgetOptions[0]);
+
+  /* Testimonial rotation */
+  const [activeTestimonial, setActiveTestimonial] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveTestimonial((prev) => (prev + 1) % testimonials.length);
+    }, 6000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const handleSearch = () => {
+    listingsRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
-    <div className="min-h-screen bg-[#F8F9FC] text-[#1A1D2B]">
-      {/* Schedule Viewing Modal */}
-      {viewingProperty !== null && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          <div className="absolute inset-0 bg-black/40" onClick={() => setViewingProperty(null)} />
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="relative bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 z-10"
-          >
-            <button onClick={() => setViewingProperty(null)} className="absolute top-4 right-4 text-[#1A1D2B]/40 hover:text-[#1A1D2B]">
-              <X size={20} />
-            </button>
-            <h3 className="text-xl font-bold mb-1" style={{ fontFamily: "var(--font-display)" }}>Schedule a Viewing</h3>
-            <p className="text-sm text-[#1A1D2B]/50 mb-6">
-              {properties.find((p) => p.id === viewingProperty)?.title}
+    <div style={{ background: C.bg, color: C.white }} className="pt-10">
+      <DemoBanner />
+      <SiteNav />
+
+      {/* ─── 1. HERO ──────────────────────────────────────────── */}
+      <section className="relative flex items-center justify-center" style={{ minHeight: "100vh" }}>
+        <Image
+          src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920&q=85"
+          alt="Luxury property Malta"
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, rgba(10,15,28,0.7) 0%, rgba(10,15,28,0.85) 100%)" }} />
+
+        <div className="relative z-10 w-full max-w-5xl mx-auto px-6 text-center">
+          <Reveal type="fade" duration={1}>
+            <p className="text-sm uppercase tracking-[0.3em] mb-6" style={{ color: C.gold, fontFamily: "var(--font-display), system-ui" }}>
+              Malta&apos;s Premier Property Agency
             </p>
-            <div className="space-y-4">
-              <div>
-                <label className="text-sm font-medium text-[#1A1D2B]/60 block mb-1">Full Name</label>
-                <input type="text" placeholder="Your name" className="w-full bg-[#F8F9FC] border border-[#E2E5EF] rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20" />
-              </div>
-              <div>
-                <label className="text-sm font-medium text-[#1A1D2B]/60 block mb-1">Email</label>
-                <input type="email" placeholder="you@example.com" className="w-full bg-[#F8F9FC] border border-[#E2E5EF] rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20" />
-              </div>
-              <div>
-                <label className="text-sm font-medium text-[#1A1D2B]/60 block mb-1">Preferred Date</label>
-                <input type="date" className="w-full bg-[#F8F9FC] border border-[#E2E5EF] rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20" />
-              </div>
-              <div>
-                <label className="text-sm font-medium text-[#1A1D2B]/60 block mb-1">Preferred Time</label>
-                <select className="w-full bg-[#F8F9FC] border border-[#E2E5EF] rounded-lg px-4 py-3 text-sm text-[#1A1D2B]/60 focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20">
-                  <option>Morning (9:00 - 12:00)</option>
-                  <option>Afternoon (12:00 - 17:00)</option>
-                  <option>Evening (17:00 - 20:00)</option>
-                </select>
-              </div>
+          </Reveal>
+
+          <Reveal type="slide-up" delay={0.15}>
+            <h1
+              className="font-bold leading-tight mb-6"
+              style={{
+                fontSize: "clamp(32px, 5vw, 56px)",
+                fontFamily: "var(--font-display), system-ui",
+              }}
+            >
+              Find Your Dream{" "}
+              <br />
+              <span style={{ color: C.gold }}>Home in Malta</span>
+            </h1>
+          </Reveal>
+
+          <Reveal type="fade" delay={0.3}>
+            <p className="text-lg mb-12 max-w-2xl mx-auto" style={{ color: "rgba(255,255,255,0.6)" }}>
+              Discover exceptional properties across the Maltese islands. From historic townhouses to contemporary penthouses with Mediterranean views.
+            </p>
+          </Reveal>
+
+          {/* ── SEARCH BAR ─────────────────────── */}
+          <Reveal type="slide-up" delay={0.45}>
+            <div
+              className="p-3 flex flex-wrap gap-3 items-center"
+              style={{
+                background: "rgba(17,24,39,0.8)",
+                backdropFilter: "blur(20px)",
+                borderRadius: 16,
+                border: `1px solid rgba(255,255,255,0.08)`,
+              }}
+            >
+              <SearchDropdown
+                label="Location"
+                options={locationOptions}
+                value={location}
+                onChange={setLocation}
+                icon={<MapPin size={18} />}
+              />
+              <SearchDropdown
+                label="Type"
+                options={typeOptions}
+                value={type}
+                onChange={setType}
+                icon={<Home size={18} />}
+              />
+              <SearchDropdown
+                label="Budget"
+                options={budgetOptions}
+                value={budget}
+                onChange={setBudget}
+                icon={<Building2 size={18} />}
+              />
               <button
-                onClick={() => { alert("This is a demo \u2014 in a real implementation, this would schedule your viewing."); setViewingProperty(null); }}
-                className="w-full bg-[#2563EB] text-white py-3 text-sm font-semibold rounded-lg hover:bg-[#1D4ED8] transition-colors"
+                onClick={handleSearch}
+                className="flex items-center gap-2 px-8 py-4 font-semibold text-sm transition-all"
+                style={{
+                  background: C.gold,
+                  color: C.bg,
+                  borderRadius: 12,
+                  minWidth: 140,
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.background = C.goldHover)}
+                onMouseLeave={(e) => (e.currentTarget.style.background = C.gold)}
               >
-                Request Viewing
+                <Search size={18} />
+                Search
               </button>
             </div>
-          </motion.div>
+          </Reveal>
         </div>
-      )}
 
-      {/* Demo Banner */}
-      <div className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-[#7C3AED] to-[#06B6D4] text-white text-center py-2 text-sm">
-        This is an <strong>AMENZO</strong> design preview.{" "}
-        <a href="/work" className="underline font-medium opacity-80 hover:opacity-100">View All Previews</a>{" · "}<a href="/start-project?industry=Real+Estate&service=new-website&ref=MaltaLiving" className="underline font-semibold">Get a Quote &rarr;</a>
-      </div>
+        {/* Scroll indicator */}
+        <motion.div
+          className="absolute bottom-8 left-1/2 -translate-x-1/2"
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 2, repeat: Infinity }}
+        >
+          <ChevronDown size={24} style={{ color: "rgba(255,255,255,0.3)" }} />
+        </motion.div>
+      </section>
 
-      {/* Navigation */}
-      <nav className="fixed top-10 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-b border-[#E2E5EF] shadow-sm">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <Link href="/demos/realestate" className="text-2xl font-bold" style={{ fontFamily: "var(--font-display)" }}>
-            <span className="text-[#2563EB]">Malta</span>Living
-          </Link>
-          <div className="hidden md:flex items-center gap-8 text-sm">
-            {["Buy", "Rent", "New Developments", "About"].map((item) => (
-              <a key={item} href="#listings" className="text-[#1A1D2B]/60 hover:text-[#2563EB] transition-colors font-medium">
-                {item}
-              </a>
+      {/* ─── 2. FEATURED PROPERTIES ───────────────────────────── */}
+      <section className="py-24 px-6" ref={listingsRef}>
+        <div className="max-w-7xl mx-auto">
+          <Reveal type="slide-up">
+            <div className="text-center mb-16">
+              <p className="text-sm uppercase tracking-[0.25em] mb-4" style={{ color: C.gold }}>
+                Handpicked Selection
+              </p>
+              <h2
+                className="text-4xl md:text-5xl font-bold"
+                style={{ fontFamily: "var(--font-display), system-ui" }}
+              >
+                Featured Properties
+              </h2>
+            </div>
+          </Reveal>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {featuredProperties.map((p, i) => (
+              <Reveal key={p.id} type="slide-up" delay={i * 0.12}>
+                <PropertyCard p={p} large />
+              </Reveal>
             ))}
           </div>
-          <div className="flex items-center gap-3">
-            <a href="#contact" className="hidden md:inline-block text-sm text-[#2563EB] font-semibold hover:underline">
-              List Your Property
-            </a>
-            <a
-              href="#contact"
-              className="bg-[#2563EB] text-white px-5 py-2 text-sm font-semibold rounded-lg hover:bg-[#1D4ED8] transition-colors"
-            >
-              Contact Us
-            </a>
-          </div>
-        </div>
-      </nav>
 
-      {/* Hero */}
-      <section className="pt-32 pb-8 px-6">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-10"
-          >
-            <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-4" style={{ fontFamily: "var(--font-display)" }}>
-              Find Your Dream Home<br />
-              <span className="text-[#2563EB]">in Malta</span>
-            </h1>
-            <p className="text-lg text-[#1A1D2B]/50 max-w-xl mx-auto">
-              Browse premium properties across the Maltese Islands. From waterfront penthouses to historic townhouses.
-            </p>
-          </motion.div>
-
-          {/* Search Bar */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="bg-white rounded-2xl shadow-lg border border-[#E2E5EF] p-4 max-w-4xl mx-auto"
-          >
-            <div className="flex flex-col md:flex-row gap-3">
-              <div className="flex-1 relative">
-                <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#1A1D2B]/30" />
-                <input
-                  type="text"
-                  placeholder="Search by location, property type..."
-                  className="w-full pl-10 pr-4 py-3 bg-[#F8F9FC] rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20"
-                />
-              </div>
-              <div className="flex gap-3">
-                <div className="flex bg-[#F8F9FC] rounded-lg overflow-hidden">
-                  {["Buy", "Rent"].map((type) => (
-                    <button
-                      key={type}
-                      onClick={() => setActiveType(type)}
-                      className={`px-5 py-3 text-sm font-medium transition-colors ${
-                        activeType === type
-                          ? "bg-[#2563EB] text-white"
-                          : "text-[#1A1D2B]/60 hover:text-[#1A1D2B]"
-                      }`}
-                    >
-                      {type}
-                    </button>
-                  ))}
-                </div>
-                <div className="flex bg-[#F8F9FC] rounded-lg overflow-hidden">
-                  {["Any Price", "\u20AC200k\u2013\u20AC500k", "\u20AC500k\u2013\u20AC1M", "\u20AC1M+"].map((price) => (
-                    <button
-                      key={price}
-                      onClick={() => setActivePrice(price)}
-                      className={`px-4 py-3 text-sm font-medium transition-colors whitespace-nowrap ${
-                        activePrice === price
-                          ? "bg-[#2563EB] text-white"
-                          : "text-[#1A1D2B]/60 hover:text-[#1A1D2B]"
-                      }`}
-                    >
-                      {price}
-                    </button>
-                  ))}
-                </div>
-                <button className="bg-[#2563EB] text-white px-8 py-3 text-sm font-semibold rounded-lg hover:bg-[#1D4ED8] transition-colors whitespace-nowrap flex items-center gap-2">
-                  <Search size={16} /> Search
-                </button>
-              </div>
+          <Reveal type="fade" delay={0.4}>
+            <div className="text-center mt-12">
+              <Link
+                href="/demos/realestate/listings"
+                className="inline-flex items-center gap-2 text-sm font-semibold transition-colors"
+                style={{ color: C.gold }}
+              >
+                View All Properties <ArrowRight size={16} />
+              </Link>
             </div>
-          </motion.div>
+          </Reveal>
         </div>
       </section>
 
-      {/* Stats */}
-      <section className="max-w-5xl mx-auto px-6 py-12">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          {stats.map((stat, i) => (
-            <motion.div
-              key={stat.label}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="text-center"
+      {/* ─── 3. STATS ─────────────────────────────────────────── */}
+      <section className="py-24 px-6">
+        <div className="max-w-6xl mx-auto">
+          <Reveal type="scale">
+            <div
+              className="grid grid-cols-2 md:grid-cols-4 gap-8 p-12 md:p-16"
+              style={{
+                background: `linear-gradient(135deg, ${C.surface} 0%, rgba(212,168,83,0.06) 100%)`,
+                borderRadius: 24,
+                border: `1px solid ${C.goldBorder}`,
+              }}
             >
-              <p className="text-3xl font-bold text-[#2563EB]" style={{ fontFamily: "var(--font-display)" }}>{stat.value}</p>
-              <p className="text-sm text-[#1A1D2B]/40 mt-1">{stat.label}</p>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
-      {/* Listings */}
-      <section id="listings" className="max-w-7xl mx-auto px-6 pb-24">
-        <div className="flex items-center justify-between mb-8">
-          <div>
-            <h2 className="text-2xl font-bold" style={{ fontFamily: "var(--font-display)" }}>Featured Properties</h2>
-            <p className="text-sm text-[#1A1D2B]/40 mt-1">Handpicked listings from across the islands</p>
-          </div>
-          <button className="text-sm text-[#2563EB] font-semibold flex items-center gap-1 hover:underline">
-            Sort by <ChevronDown size={14} />
-          </button>
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-8">
-          {properties.map((property, i) => (
-            <motion.div
-              key={property.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="group bg-white rounded-2xl overflow-hidden shadow-sm border border-[#E2E5EF] hover:shadow-lg transition-shadow"
-            >
-              <div className="relative h-64 overflow-hidden">
-                <Image
-                  src={property.image}
-                  alt={property.title}
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                {property.tag && (
-                  <span className="absolute top-4 left-4 bg-[#2563EB] text-white text-xs font-semibold px-3 py-1 rounded-full">
-                    {property.tag}
-                  </span>
-                )}
-                <button
-                  onClick={() => toggleFavorite(property.id)}
-                  className="absolute top-4 right-4 w-9 h-9 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors shadow-sm"
-                >
-                  <Heart size={16} className={favorites.includes(property.id) ? "fill-[#EF4444] text-[#EF4444]" : "text-[#1A1D2B]/50"} />
-                </button>
-              </div>
-              <div className="p-6">
-                <div className="flex items-start justify-between mb-2">
-                  <h3 className="text-lg font-semibold" style={{ fontFamily: "var(--font-display)" }}>
-                    {property.title}
-                  </h3>
-                  <span className="text-xl font-bold text-[#2563EB] whitespace-nowrap ml-4">{property.price}</span>
-                </div>
-                <p className="flex items-center gap-1 text-sm text-[#1A1D2B]/50 mb-4">
-                  <MapPin size={14} /> {property.location}
-                </p>
-                <div className="flex items-center gap-6 pt-4 border-t border-[#E2E5EF]">
-                  <span className="flex items-center gap-1.5 text-sm text-[#1A1D2B]/60">
-                    <Bed size={16} className="text-[#2563EB]" /> {property.beds} Beds
-                  </span>
-                  <span className="flex items-center gap-1.5 text-sm text-[#1A1D2B]/60">
-                    <Bath size={16} className="text-[#2563EB]" /> {property.baths} Baths
-                  </span>
-                  <span className="flex items-center gap-1.5 text-sm text-[#1A1D2B]/60">
-                    <Maximize size={16} className="text-[#2563EB]" /> {property.area}
-                  </span>
-                  <button
-                    onClick={() => setViewingProperty(property.id)}
-                    className="ml-auto bg-[#2563EB] text-white px-4 py-1.5 text-sm font-semibold rounded-lg hover:bg-[#1D4ED8] transition-colors flex items-center gap-1"
+              {[
+                { target: 120, suffix: "+", label: "Properties Listed" },
+                { target: 340, prefix: "\u20AC", suffix: "M", label: "Portfolio Value" },
+                { target: 98, suffix: "%", label: "Client Satisfaction" },
+                { target: 48, suffix: "hr", label: "Avg. Response Time" },
+              ].map((s, i) => (
+                <div key={i} className="text-center">
+                  <div
+                    className="text-4xl md:text-5xl font-bold mb-2"
+                    style={{ color: C.gold, fontFamily: "var(--font-display), system-ui" }}
                   >
-                    <Calendar size={14} /> Schedule Viewing
-                  </button>
+                    <Counter target={s.target} prefix={s.prefix || ""} suffix={s.suffix} />
+                  </div>
+                  <p className="text-sm" style={{ color: C.muted }}>{s.label}</p>
                 </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-        <div className="text-center mt-12">
-          <button className="border-2 border-[#2563EB] text-[#2563EB] px-8 py-3 text-sm font-semibold rounded-lg hover:bg-[#2563EB] hover:text-white transition-colors">
-            View All Properties
-          </button>
+              ))}
+            </div>
+          </Reveal>
         </div>
       </section>
 
-      {/* Our Office */}
-      <section className="max-w-5xl mx-auto px-6 pb-16">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-8"
-        >
-          <h2 className="text-2xl font-bold" style={{ fontFamily: "var(--font-display)" }}>Visit Our Office</h2>
-          <p className="text-sm text-[#1A1D2B]/40 mt-1">Find us in the heart of St Julian&apos;s</p>
-        </motion.div>
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3231.5!2d14.4904!3d35.9180!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzXCsDU1JzA0LjgiTiAxNMKwMjknMjUuNCJF!5e0!3m2!1sen!2smt!4v1"
-          width="100%"
-          height="300"
-          style={{ border: 0, borderRadius: '12px', filter: 'grayscale(0.3) contrast(1.1)' }}
-          allowFullScreen
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-          title="MaltaLiving Office Location"
-        />
-      </section>
+      {/* ─── 4. AREAS ─────────────────────────────────────────── */}
+      <section id="areas" className="py-24 px-6" style={{ background: "rgba(255,255,255,0.01)" }}>
+        <div className="max-w-7xl mx-auto">
+          <Reveal type="slide-up">
+            <div className="text-center mb-16">
+              <p className="text-sm uppercase tracking-[0.25em] mb-4" style={{ color: C.gold }}>
+                Explore Locations
+              </p>
+              <h2
+                className="text-3xl md:text-4xl font-bold"
+                style={{ fontFamily: "var(--font-display), system-ui" }}
+              >
+                Popular Areas
+              </h2>
+            </div>
+          </Reveal>
 
-      {/* CTA */}
-      <section className="bg-[#2563EB] py-16 text-white">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-3xl font-bold mb-4" style={{ fontFamily: "var(--font-display)" }}>
-            Ready to Find Your Perfect Home?
-          </h2>
-          <p className="text-white/70 mb-8 max-w-lg mx-auto">
-            Our experienced agents are ready to help you navigate the Maltese property market. Get in touch for a free consultation.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-white text-[#2563EB] px-8 py-3 text-sm font-semibold rounded-lg hover:bg-white/90 transition-colors">
-              Schedule a Viewing
-            </button>
-            <button className="border border-white/30 text-white px-8 py-3 text-sm font-semibold rounded-lg hover:bg-white/10 transition-colors">
-              Call +356 2133 0000
-            </button>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {areas.map((area, i) => (
+              <Reveal key={area.name} type="scale" delay={i * 0.08}>
+                <motion.div
+                  whileHover={{ scale: 1.03 }}
+                  transition={{ duration: 0.4 }}
+                  className="relative overflow-hidden group cursor-pointer"
+                  style={{ borderRadius: 16, height: 220 }}
+                >
+                  <Image
+                    src={area.image}
+                    alt={area.name}
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    sizes="(max-width:768px) 100vw, 33vw"
+                  />
+                  <div
+                    className="absolute inset-0 transition-opacity duration-500"
+                    style={{ background: "linear-gradient(to top, rgba(10,15,28,0.85) 0%, rgba(10,15,28,0.3) 100%)" }}
+                  />
+                  <div className="absolute inset-0 flex flex-col justify-end p-6">
+                    <h3
+                      className="text-xl font-bold mb-1"
+                      style={{ fontFamily: "var(--font-display), system-ui" }}
+                    >
+                      {area.name}
+                    </h3>
+                    <p className="text-sm" style={{ color: C.muted }}>
+                      {area.count} Properties
+                    </p>
+                  </div>
+                  <div
+                    className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  >
+                    <div
+                      className="w-10 h-10 flex items-center justify-center"
+                      style={{ background: C.gold, borderRadius: 10 }}
+                    >
+                      <ArrowRight size={18} style={{ color: C.bg }} />
+                    </div>
+                  </div>
+                </motion.div>
+              </Reveal>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer id="contact" className="bg-white border-t border-[#E2E5EF] py-12">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid md:grid-cols-4 gap-8">
-            <div>
-              <h3 className="text-lg font-bold mb-3" style={{ fontFamily: "var(--font-display)" }}>
-                <span className="text-[#2563EB]">Malta</span>Living
-              </h3>
-              <p className="text-sm text-[#1A1D2B]/40">Your trusted partner in Maltese real estate since 2014.</p>
+      {/* ─── 5. WHY US ────────────────────────────────────────── */}
+      <section id="why-us" className="py-24 px-6">
+        <div className="max-w-7xl mx-auto">
+          <Reveal type="slide-up">
+            <div className="text-center mb-16">
+              <p className="text-sm uppercase tracking-[0.25em] mb-4" style={{ color: C.gold }}>
+                The Difference
+              </p>
+              <h2
+                className="text-3xl md:text-4xl font-bold"
+                style={{ fontFamily: "var(--font-display), system-ui" }}
+              >
+                Why Choose Us
+              </h2>
             </div>
-            <div>
-              <h4 className="text-sm font-semibold mb-3">Properties</h4>
-              <div className="space-y-2 text-sm text-[#1A1D2B]/50">
-                <p className="hover:text-[#2563EB] cursor-pointer transition-colors">For Sale</p>
-                <p className="hover:text-[#2563EB] cursor-pointer transition-colors">For Rent</p>
-                <p className="hover:text-[#2563EB] cursor-pointer transition-colors">New Developments</p>
-                <p className="hover:text-[#2563EB] cursor-pointer transition-colors">Commercial</p>
-              </div>
-            </div>
-            <div>
-              <h4 className="text-sm font-semibold mb-3">Company</h4>
-              <div className="space-y-2 text-sm text-[#1A1D2B]/50">
-                <p className="hover:text-[#2563EB] cursor-pointer transition-colors">About Us</p>
-                <p className="hover:text-[#2563EB] cursor-pointer transition-colors">Our Team</p>
-                <p className="hover:text-[#2563EB] cursor-pointer transition-colors">Careers</p>
-              </div>
-            </div>
-            <div>
-              <h4 className="text-sm font-semibold mb-3">Contact</h4>
-              <div className="space-y-2 text-sm text-[#1A1D2B]/50">
-                <p className="flex items-center gap-2"><Phone size={14} /> +356 2133 0000</p>
-                <p className="flex items-center gap-2"><Mail size={14} /> info@maltaliving.com</p>
-                <p className="flex items-center gap-2"><MapPin size={14} /> Tower Road, Sliema</p>
-              </div>
-            </div>
-          </div>
-          <div className="border-t border-[#E2E5EF] mt-8 pt-8 text-center text-xs text-[#1A1D2B]/30">
-            &copy; 2026 MaltaLiving. All rights reserved. <span className="mx-2">|</span> This is a demo website built by AMENZO.
+          </Reveal>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {whyCards.map((card, i) => (
+              <Reveal key={i} type="slide-up" delay={i * 0.1}>
+                <motion.div
+                  whileHover={{ y: -6, borderColor: C.gold }}
+                  transition={{ duration: 0.3 }}
+                  className="p-8 h-full"
+                  style={{
+                    background: C.surface,
+                    borderRadius: 16,
+                    border: `1px solid rgba(255,255,255,0.06)`,
+                  }}
+                >
+                  <div
+                    className="w-14 h-14 flex items-center justify-center mb-6"
+                    style={{
+                      background: "rgba(212,168,83,0.1)",
+                      borderRadius: 14,
+                    }}
+                  >
+                    <card.icon size={24} style={{ color: C.gold }} />
+                  </div>
+                  <h3
+                    className="text-lg font-semibold mb-3"
+                    style={{ fontFamily: "var(--font-display), system-ui", color: C.white }}
+                  >
+                    {card.title}
+                  </h3>
+                  <p className="text-sm leading-relaxed" style={{ color: C.muted }}>
+                    {card.desc}
+                  </p>
+                </motion.div>
+              </Reveal>
+            ))}
           </div>
         </div>
-      </footer>
+      </section>
+
+      {/* ─── 6. TESTIMONIALS ──────────────────────────────────── */}
+      <section className="py-24 px-6" style={{ background: "rgba(255,255,255,0.01)" }}>
+        <div className="max-w-4xl mx-auto">
+          <Reveal type="slide-up">
+            <div className="text-center mb-16">
+              <p className="text-sm uppercase tracking-[0.25em] mb-4" style={{ color: C.gold }}>
+                Client Stories
+              </p>
+              <h2
+                className="text-3xl md:text-4xl font-bold"
+                style={{ fontFamily: "var(--font-display), system-ui" }}
+              >
+                What Our Clients Say
+              </h2>
+            </div>
+          </Reveal>
+
+          <div className="relative" style={{ minHeight: 280 }}>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeTestimonial}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+                className="text-center"
+              >
+                <div className="flex justify-center mb-6">
+                  <Quote size={40} style={{ color: C.gold, opacity: 0.4 }} />
+                </div>
+                <p
+                  className="text-lg md:text-xl leading-relaxed mb-8 max-w-3xl mx-auto"
+                  style={{ color: "rgba(255,255,255,0.8)" }}
+                >
+                  {testimonials[activeTestimonial].text}
+                </p>
+                <div className="flex justify-center gap-1 mb-4">
+                  {Array.from({ length: testimonials[activeTestimonial].rating }).map((_, i) => (
+                    <Star key={i} size={16} fill={C.gold} style={{ color: C.gold }} />
+                  ))}
+                </div>
+                <p className="font-semibold text-base" style={{ color: C.white, fontFamily: "var(--font-display), system-ui" }}>
+                  {testimonials[activeTestimonial].name}
+                </p>
+                <p className="text-sm mt-1" style={{ color: C.muted }}>
+                  {testimonials[activeTestimonial].role}
+                </p>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          {/* Dots */}
+          <div className="flex justify-center gap-3 mt-8">
+            {testimonials.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setActiveTestimonial(i)}
+                className="w-3 h-3 rounded-full transition-all duration-300"
+                style={{
+                  background: i === activeTestimonial ? C.gold : "rgba(255,255,255,0.15)",
+                  transform: i === activeTestimonial ? "scale(1.3)" : "scale(1)",
+                }}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── 7. CTA ───────────────────────────────────────────── */}
+      <section id="contact" className="py-32 px-6">
+        <div className="max-w-4xl mx-auto text-center">
+          <Reveal type="scale">
+            <p className="text-sm uppercase tracking-[0.25em] mb-6" style={{ color: C.gold }}>
+              Ready to Move?
+            </p>
+            <h2
+              className="font-bold mb-8 leading-tight"
+              style={{
+                fontSize: "clamp(28px, 4vw, 42px)",
+                fontFamily: "var(--font-display), system-ui",
+              }}
+            >
+              Your Next Chapter<br />Starts Here
+            </h2>
+            <p className="text-lg mb-12 max-w-xl mx-auto" style={{ color: C.muted }}>
+              Whether you are buying your first home or expanding your portfolio, our team is ready to guide you every step of the way.
+            </p>
+
+            <div className="flex flex-wrap items-center justify-center gap-4">
+              <MagneticButton>
+                <span
+                  className="inline-flex items-center gap-2 px-8 py-4 font-semibold text-sm"
+                  style={{
+                    background: C.gold,
+                    color: C.bg,
+                    borderRadius: 12,
+                  }}
+                >
+                  <Award size={18} />
+                  Schedule Viewing
+                </span>
+              </MagneticButton>
+
+              <MagneticButton>
+                <span
+                  className="inline-flex items-center gap-2 px-8 py-4 font-semibold text-sm"
+                  style={{
+                    background: "transparent",
+                    color: C.white,
+                    borderRadius: 12,
+                    border: `1px solid rgba(255,255,255,0.2)`,
+                  }}
+                >
+                  <Phone size={18} />
+                  Call Us
+                </span>
+              </MagneticButton>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ─── FOOTER ───────────────────────────────────────────── */}
+      <SiteFooter />
     </div>
   );
 }

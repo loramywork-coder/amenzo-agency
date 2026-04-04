@@ -1,15 +1,10 @@
-import type { Metadata } from "next";
+import { generatePageMeta } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Contact Us — Get in Touch",
-  description:
-    "Contact Amenzo for web design, development, and digital strategy. Based in Sliema, Malta. Free 30-minute consultation available.",
-  openGraph: {
-    title: "Contact Us — Get in Touch | Amenzo",
-    description:
-      "Contact Amenzo for web design, development, and digital strategy. Based in Sliema, Malta. Free 30-minute consultation available.",
-  },
-};
+export const metadata = generatePageMeta({
+  title: "Contact Amenzo — Free Web Design Consultation",
+  description: "Get a free consultation for your website project. Amenzo — custom web design. Phone: +31 62 831 8123. Email: info@amenzo.co. Based in the Netherlands. Response within 24 hours.",
+  path: "/contact",
+});
 
 export default function ContactLayout({
   children,
