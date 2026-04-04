@@ -154,8 +154,9 @@ export function HomePage() {
               Web Design Studio
             </p>
           </Reveal>
+          {/* Desktop: FuzzyText canvas | Mobile: regular h1 */}
           <Reveal type="fade" delay={0.2}>
-            <div className="flex justify-center">
+            <div className="hidden md:flex justify-center">
               <FuzzyText
                 fontSize="clamp(48px, 8vw, 90px)"
                 fontWeight={700}
@@ -170,9 +171,7 @@ export function HomePage() {
                 Where Code
               </FuzzyText>
             </div>
-          </Reveal>
-          <Reveal type="fade" delay={0.3}>
-            <div className="flex justify-center">
+            <div className="hidden md:flex justify-center">
               <FuzzyText
                 fontSize="clamp(48px, 8vw, 90px)"
                 fontWeight={700}
@@ -187,6 +186,12 @@ export function HomePage() {
                 Meets Craft
               </FuzzyText>
             </div>
+            <h1
+              className="md:hidden font-bold text-white tracking-tight leading-[1.05] font-display"
+              style={{ fontSize: "clamp(48px, 12vw, 90px)" }}
+            >
+              Where Code<br />Meets Craft
+            </h1>
           </Reveal>
           <Reveal type="fade" delay={0.5}>
             <p className="text-sm text-white/75 max-w-xs mx-auto mt-8 tracking-wide">
