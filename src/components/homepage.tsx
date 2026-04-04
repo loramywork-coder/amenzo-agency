@@ -165,7 +165,7 @@ export function HomePage() {
                 baseIntensity={0.06}
                 hoverIntensity={0.4}
                 scrollIntensity={0.7}
-                className="max-w-full font-display"
+                className="font-display"
               >
                 Where Code
               </FuzzyText>
@@ -182,7 +182,7 @@ export function HomePage() {
                 baseIntensity={0.06}
                 hoverIntensity={0.4}
                 scrollIntensity={0.7}
-                className="max-w-full font-display"
+                className="font-display"
               >
                 Meets Craft
               </FuzzyText>

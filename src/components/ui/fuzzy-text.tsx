@@ -114,10 +114,16 @@ const FuzzyText = React.forwardRef<HTMLCanvasElement, FuzzyTextProps>(
         offCtx.fillStyle = color;
         offCtx.fillText(text, xOffset - actualLeft, actualAscent);
 
-        const horizontalMargin = Math.min(40, Math.ceil(numericFontSize * 0.4));
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        const horizontalMargin = Math.ceil(numericFontSize * 0.35);
         const verticalMargin = 0;
-        canvas.width = offscreenWidth + horizontalMargin * 2;
-        canvas.height = tightHeight + verticalMargin * 2;
+        const cssWidth = offscreenWidth + horizontalMargin * 2;
+        const cssHeight = tightHeight + verticalMargin * 2;
+        canvas.width = cssWidth * dpr;
+        canvas.height = cssHeight * dpr;
+        canvas.style.width = `${cssWidth}px`;
+        canvas.style.height = `${cssHeight}px`;
+        ctx.scale(dpr, dpr);
         ctx.translate(horizontalMargin, verticalMargin);
 
         const interactiveLeft = horizontalMargin + xOffset;

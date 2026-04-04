@@ -243,7 +243,14 @@ function StepCard({
   const stepStart = index / 4;
   const stepEnd = (index + 1) / 4;
 
-  const cardOpacity = useTransform(globalProgress, [stepStart, stepStart + 0.05, stepEnd - 0.05, stepEnd], [0, 1, 1, index < 3 ? 0 : 1]);
+  const cardOpacity = useTransform(globalProgress,
+    index === 0
+      ? [0, 0.01, stepEnd - 0.05, stepEnd]
+      : [stepStart, stepStart + 0.05, stepEnd - 0.05, stepEnd],
+    index === 0
+      ? [1, 1, 1, 0]
+      : [0, 1, 1, index < 3 ? 0 : 1]
+  );
   const cardY = useTransform(globalProgress, [stepStart, stepStart + 0.08], [60, 0]);
   const cardScale = useTransform(globalProgress, [stepEnd - 0.08, stepEnd], [1, index < 3 ? 0.95 : 1]);
 
