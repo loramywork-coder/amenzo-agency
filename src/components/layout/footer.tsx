@@ -16,7 +16,7 @@ const serviceLinks = SERVICES.map((s) => ({
 
 export function Footer() {
   return (
-    <footer className="bg-black/40 border-t border-white/[0.04] relative">
+    <footer className="bg-[#050505] border-t border-white/[0.04] relative">
       <div className="container-wide py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
           {/* Brand */}
@@ -75,19 +75,23 @@ export function Footer() {
 
           {/* Contact */}
           <div>
-            <h4 className="text-[11px] uppercase tracking-[0.15em] text-white/40 mb-5">
+            <h4 className="text-[10px] tracking-[0.25em] text-white/30 uppercase mb-5 font-medium">
               Contact
             </h4>
-            <ul className="space-y-3 text-[14px] text-white/60">
-              <li>
-                <a
-                  href={`mailto:${CONTACT_EMAIL}`}
-                  className="hover:text-white transition-colors duration-300"
-                >
-                  {CONTACT_EMAIL}
-                </a>
-              </li>
-            </ul>
+            <a href={`mailto:${CONTACT_EMAIL}`} className="text-sm text-white/50 hover:text-white transition-colors duration-300 block">
+              {CONTACT_EMAIL}
+            </a>
+            <div className="flex items-center gap-4 mt-5">
+              <span className="text-xs text-white/20 cursor-default">LinkedIn</span>
+              <span className="text-xs text-white/20 cursor-default">Instagram</span>
+              <span className="text-xs text-white/20 cursor-default">Facebook</span>
+            </div>
+            <p className="text-xs text-white/15 mt-5 italic">
+              Currently booking for{" "}
+              <span className="text-white/30">
+                {new Date(new Date().setMonth(new Date().getMonth() + 1)).toLocaleString("en-US", { month: "long", year: "numeric" })}
+              </span>
+            </p>
           </div>
         </div>
       </div>
