@@ -73,7 +73,7 @@ export default function ContactPage() {
         
         <div className="container-wide relative z-10">
           <AnimateIn animation="fadeUp">
-            <p className="caption mb-4 text-violet">CONTACT</p>
+            <p className="caption mb-4 text-white/70">CONTACT</p>
           </AnimateIn>
           <AnimateIn animation="fadeUp" delay={0.1}>
             <h1 className="font-display text-5xl md:text-7xl font-bold text-text-primary leading-tight">
@@ -98,7 +98,7 @@ export default function ContactPage() {
               <AnimateIn animation="fadeUp" delay={0.3}>
                 <form
                   onSubmit={handleSubmit(onSubmit)}
-                  className="space-y-6 p-8 md:p-10 rounded-2xl bg-surface border border-border"
+                  className="space-y-6 p-8 md:p-10 rounded-2xl bg-black/50 backdrop-blur-sm border border-white/8"
                 >
                   {/* Enquiry Type Toggle */}
                   <div>
@@ -112,8 +112,8 @@ export default function ContactPage() {
                         className={cn(
                           "flex-1 px-5 py-3 rounded-xl text-sm font-medium transition-all duration-300 cursor-pointer",
                           enquiryType === "project"
-                            ? "bg-violet text-white"
-                            : "bg-surface-elevated text-text-secondary border border-border hover:border-violet/40"
+                            ? "bg-white/15 text-white border-white/30"
+                            : "bg-white/5 text-white/60 border border-white/10 hover:border-white/30"
                         )}
                       >
                         Start a Project
@@ -124,8 +124,8 @@ export default function ContactPage() {
                         className={cn(
                           "flex-1 px-5 py-3 rounded-xl text-sm font-medium transition-all duration-300 cursor-pointer",
                           enquiryType === "general"
-                            ? "bg-violet text-white"
-                            : "bg-surface-elevated text-text-secondary border border-border hover:border-violet/40"
+                            ? "bg-white/15 text-white border-white/30"
+                            : "bg-white/5 text-white/60 border border-white/10 hover:border-white/30"
                         )}
                       >
                         General Enquiry
@@ -147,7 +147,7 @@ export default function ContactPage() {
                         type="text"
                         {...register("name")}
                         placeholder="John Doe"
-                        className="w-full px-4 py-3 rounded-xl bg-surface-elevated border border-border text-text-primary placeholder:text-text-muted focus:outline-none focus:border-violet transition-colors"
+                        className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-white/30 transition-colors"
                       />
                       {errors.name && (
                         <p className="mt-1.5 text-xs text-coral">
@@ -167,7 +167,7 @@ export default function ContactPage() {
                         type="email"
                         {...register("email")}
                         placeholder="john@company.com"
-                        className="w-full px-4 py-3 rounded-xl bg-surface-elevated border border-border text-text-primary placeholder:text-text-muted focus:outline-none focus:border-violet transition-colors"
+                        className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-white/30 transition-colors"
                       />
                       {errors.email && (
                         <p className="mt-1.5 text-xs text-coral">
@@ -191,7 +191,7 @@ export default function ContactPage() {
                         type="tel"
                         {...register("phone")}
                         placeholder="+31 62 831 8123"
-                        className="w-full px-4 py-3 rounded-xl bg-surface-elevated border border-border text-text-primary placeholder:text-text-muted focus:outline-none focus:border-violet transition-colors"
+                        className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-white/30 transition-colors"
                       />
                     </div>
                     <div>
@@ -206,7 +206,7 @@ export default function ContactPage() {
                         type="text"
                         {...register("company")}
                         placeholder="Your company name"
-                        className="w-full px-4 py-3 rounded-xl bg-surface-elevated border border-border text-text-primary placeholder:text-text-muted focus:outline-none focus:border-violet transition-colors"
+                        className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-white/30 transition-colors"
                       />
                     </div>
                   </div>
@@ -224,7 +224,7 @@ export default function ContactPage() {
                       rows={6}
                       {...register("message")}
                       placeholder="Tell us about your project, timeline, and budget..."
-                      className="w-full px-4 py-3 rounded-xl bg-surface-elevated border border-border text-text-primary placeholder:text-text-muted focus:outline-none focus:border-violet transition-colors resize-none"
+                      className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-white/30 transition-colors resize-none"
                     />
                     {errors.message && (
                       <p className="mt-1.5 text-xs text-coral">
@@ -255,7 +255,7 @@ export default function ContactPage() {
                     Need a detailed brief?{" "}
                     <a
                       href="/start-project"
-                      className="text-violet hover:underline"
+                      className="text-white/70 hover:underline"
                     >
                       Use our project wizard
                     </a>{" "}
@@ -278,12 +278,12 @@ export default function ContactPage() {
                     href={`mailto:${CONTACT_EMAIL}`}
                     className="flex items-start gap-4 group"
                   >
-                    <div className="w-10 h-10 rounded-xl bg-violet/10 flex items-center justify-center shrink-0">
-                      <Mail className="w-5 h-5 text-violet" />
+                    <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center shrink-0">
+                      <Mail className="w-5 h-5 text-white/70" />
                     </div>
                     <div>
                       <p className="text-sm text-text-secondary">Email</p>
-                      <p className="text-text-primary group-hover:text-violet transition-colors">
+                      <p className="text-text-primary group-hover:text-white/70 transition-colors">
                         {CONTACT_EMAIL}
                       </p>
                     </div>
@@ -354,7 +354,7 @@ export default function ContactPage() {
 
               {/* Project Brief Link */}
               <AnimateIn animation="fadeUp" delay={0.6}>
-                <div className="p-6 rounded-2xl bg-gradient-to-br from-violet/10 to-cyan/10 border border-violet/20">
+                <div className="p-6 rounded-2xl bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10">
                   <h3 className="font-display text-lg font-semibold text-text-primary mb-2">
                     Have a detailed brief?
                   </h3>
@@ -364,7 +364,7 @@ export default function ContactPage() {
                   </p>
                   <a
                     href="/start-project"
-                    className="inline-flex items-center gap-2 text-sm font-medium text-violet hover:gap-3 transition-all"
+                    className="inline-flex items-center gap-2 text-sm font-medium text-white/70 hover:gap-3 transition-all"
                   >
                     Start Project Wizard
                     <ArrowRight className="w-4 h-4" />

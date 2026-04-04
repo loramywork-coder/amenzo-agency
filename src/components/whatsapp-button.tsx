@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 
 export default function WhatsAppButton() {
   const pathname = usePathname();
-  if (pathname.startsWith("/demos") || pathname.startsWith("/showcases")) return null;
+  if (pathname !== "/") return null;
 
   return (
     <a
