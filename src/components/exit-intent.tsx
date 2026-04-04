@@ -15,6 +15,7 @@ export default function ExitIntent() {
       if (e.clientY < 10) {
         setShow(true);
         localStorage.setItem("exitShown", "true");
+        document.removeEventListener("mouseleave", handleMouseLeave);
       }
     };
 
