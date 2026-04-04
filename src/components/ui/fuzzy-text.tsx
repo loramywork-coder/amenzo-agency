@@ -117,10 +117,17 @@ const FuzzyText = React.forwardRef<HTMLCanvasElement, FuzzyTextProps>(
         const dpr = Math.min(window.devicePixelRatio || 1, 2);
         const horizontalMargin = Math.ceil(numericFontSize * 0.35);
         const verticalMargin = 0;
-        const cssWidth = offscreenWidth + horizontalMargin * 2;
-        const cssHeight = tightHeight + verticalMargin * 2;
-        canvas.width = cssWidth * dpr;
-        canvas.height = cssHeight * dpr;
+        const naturalWidth = offscreenWidth + horizontalMargin * 2;
+        const naturalHeight = tightHeight + verticalMargin * 2;
+
+        // On narrow viewports, cap to parent width and scale down
+        const parentWidth = canvas.parentElement?.clientWidth || window.innerWidth;
+        const scale = Math.min(1, parentWidth / naturalWidth);
+        const cssWidth = naturalWidth * scale;
+        const cssHeight = naturalHeight * scale;
+
+        canvas.width = naturalWidth * dpr;
+        canvas.height = naturalHeight * dpr;
         canvas.style.width = `${cssWidth}px`;
         canvas.style.height = `${cssHeight}px`;
         ctx.scale(dpr, dpr);
