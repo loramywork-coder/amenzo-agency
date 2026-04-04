@@ -180,64 +180,69 @@ export default function AboutPage() {
         <AnimateIn>
           <SectionHeader
             caption="The Team"
-            title="Founded by Amy & Lorenzo"
+            title="Who We Are"
             align="center"
           />
         </AnimateIn>
         <AnimateIn delay={0.05}>
           <p className="text-center text-lg text-text-secondary max-w-2xl mx-auto mb-12">
-            A two-person studio that moves fast and builds right. Every project gets both of us. Every decision is deliberate.
+            A lean, focused studio where every project gets senior-level attention from day one.
           </p>
         </AnimateIn>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-2xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-xl mx-auto">
           <AnimateIn delay={0.1}>
-            <div className="text-center">
-              <div className="w-16 h-16 rounded-full border border-white/20 flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl font-bold text-white">A</span>
+            <div className="rounded-xl border border-border bg-surface-elevated p-6 text-center">
+              <div className="w-14 h-14 rounded-full bg-white/[0.06] border border-white/10 flex items-center justify-center mx-auto mb-4">
+                <span className="text-xl font-bold text-white">A</span>
               </div>
               <h3 className="font-display text-lg font-semibold text-text-primary">Amy de Boers</h3>
-              <p className="text-sm text-text-muted">Head of Operations</p>
-              <p className="text-xs text-text-muted mt-1">Client success, business operations, and project delivery</p>
+              <p className="text-sm text-violet mt-0.5">Operations &amp; Strategy</p>
+              <p className="text-xs text-text-muted mt-2 leading-relaxed">Client success, business operations, and project delivery</p>
             </div>
           </AnimateIn>
           <AnimateIn delay={0.2}>
-            <div className="text-center">
-              <div className="w-16 h-16 rounded-full border border-white/20 flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl font-bold text-white">L</span>
+            <div className="rounded-xl border border-border bg-surface-elevated p-6 text-center">
+              <div className="w-14 h-14 rounded-full bg-white/[0.06] border border-white/10 flex items-center justify-center mx-auto mb-4">
+                <span className="text-xl font-bold text-white">L</span>
               </div>
               <h3 className="font-display text-lg font-semibold text-text-primary">Lorenzo Senn</h3>
-              <p className="text-sm text-text-muted">Director</p>
-              <p className="text-xs text-text-muted mt-1">Design, development, and technical architecture</p>
+              <p className="text-sm text-violet mt-0.5">Design &amp; Engineering</p>
+              <p className="text-xs text-text-muted mt-2 leading-relaxed">Design, development, and technical architecture</p>
             </div>
           </AnimateIn>
         </div>
 
         {/* Company Details */}
         <AnimateIn delay={0.3}>
-          <div className="mt-14 max-w-2xl mx-auto">
-            <div className="rounded-xl border border-border bg-surface-elevated/50 p-8">
-              <h3 className="text-sm uppercase tracking-widest text-white/40 mb-6">Company Information</h3>
-              <div className="space-y-4 text-sm text-text-secondary">
-                <div className="flex flex-col sm:flex-row sm:justify-between gap-1">
-                  <span className="text-text-muted">Company</span>
-                  <span className="text-text-primary">Amenzo Limited <span className="text-text-muted">(incorporation in progress)</span></span>
+          <div className="mt-14 max-w-xl mx-auto">
+            <div className="rounded-xl border border-border bg-surface-elevated/50 p-6 sm:p-8">
+              <h3 className="text-[11px] uppercase tracking-[0.2em] text-white/40 mb-5">Registered Information</h3>
+              <dl className="space-y-0 text-sm">
+                <div className="flex flex-col sm:flex-row sm:justify-between py-3 border-b border-white/[0.06]">
+                  <dt className="text-text-muted">Trade Name</dt>
+                  <dd className="text-text-primary font-medium">Amenzo Studio</dd>
                 </div>
-                <div className="border-t border-white/[0.06]" />
-                <div className="flex flex-col sm:flex-row sm:justify-between gap-1">
-                  <span className="text-text-muted">Location</span>
-                  <span>Dammerweg 81, 1394 GR Nederhorst den Berg, Netherlands</span>
+                <div className="flex flex-col sm:flex-row sm:justify-between py-3 border-b border-white/[0.06]">
+                  <dt className="text-text-muted">Legal Entity</dt>
+                  <dd className="text-text-primary font-medium">ProgressPro</dd>
                 </div>
-                <div className="border-t border-white/[0.06]" />
-                <div className="flex flex-col sm:flex-row sm:justify-between gap-1">
-                  <span className="text-text-muted">Services</span>
-                  <span className="text-right">Web design, development, redesign, e-commerce, SEO, hosting &amp; maintenance</span>
+                <div className="flex flex-col sm:flex-row sm:justify-between py-3 border-b border-white/[0.06]">
+                  <dt className="text-text-muted">Represented by</dt>
+                  <dd className="text-text-secondary">Amy de Boers</dd>
                 </div>
-                <div className="border-t border-white/[0.06]" />
-                <div className="flex flex-col sm:flex-row sm:justify-between gap-1">
-                  <span className="text-text-muted">Clients</span>
-                  <span>Small and medium-sized businesses across Europe and beyond</span>
+                <div className="flex flex-col sm:flex-row sm:justify-between py-3 border-b border-white/[0.06]">
+                  <dt className="text-text-muted">KVK</dt>
+                  <dd className="text-text-secondary">84642920</dd>
                 </div>
-              </div>
+                <div className="flex flex-col sm:flex-row sm:justify-between py-3 border-b border-white/[0.06]">
+                  <dt className="text-text-muted">Location</dt>
+                  <dd className="text-text-secondary sm:text-right">Nederhorst den Berg, Netherlands</dd>
+                </div>
+                <div className="flex flex-col sm:flex-row sm:justify-between py-3">
+                  <dt className="text-text-muted">Clients</dt>
+                  <dd className="text-text-secondary sm:text-right">SMBs across Europe and beyond</dd>
+                </div>
+              </dl>
             </div>
           </div>
         </AnimateIn>
