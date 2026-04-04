@@ -232,11 +232,11 @@ export function HomePage() {
                   className="group flex items-center gap-4 md:gap-6 border-b border-white/[0.04] py-6 hover:border-white/[0.1] transition-colors"
                 >
                   <span className="text-[11px] font-mono text-white/50 w-8 shrink-0">{p.num}</span>
-                  <span className="text-xl md:text-2xl font-bold text-white/90 group-hover:text-white transition-colors flex-1 min-w-0">
+                  <span className="text-xl md:text-2xl font-bold text-white/90 group-hover:text-white transition-colors w-[200px] md:w-[280px] shrink-0">
                     {p.name}
                   </span>
-                  <span className="hidden md:block text-xs text-white/75 flex-1 min-w-0 truncate">{p.desc}</span>
-                  <span className="text-[10px] text-white/65 tracking-[0.15em] uppercase shrink-0">{p.cat}</span>
+                  <span className="hidden md:block text-xs text-white/75 flex-1 min-w-0 truncate text-right">{p.desc}</span>
+                  <span className="text-[10px] text-white/65 tracking-[0.15em] uppercase shrink-0 w-[100px] text-right">{p.cat}</span>
                   <span className="w-8 h-8 rounded-full border border-white/[0.06] flex items-center justify-center group-hover:bg-white/[0.05] group-hover:border-white/[0.12] transition-all shrink-0">
                     <ArrowUpRight size={12} className="text-white/50 group-hover:text-white/70 transition-colors" />
                   </span>
@@ -281,6 +281,13 @@ export function HomePage() {
               </Reveal>
             ))}
           </div>
+          <Reveal delay={0.4}>
+            <p className="text-center mt-10">
+              <Link href="/capabilities" className="text-[11px] text-white/40 hover:text-white/60 tracking-[0.15em] uppercase transition-colors">
+                View all capabilities &rarr;
+              </Link>
+            </p>
+          </Reveal>
         </div>
       </section>
 

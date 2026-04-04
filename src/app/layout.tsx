@@ -123,7 +123,7 @@ export default function RootLayout({
         <ScrollProgress />
         <ScrollToTop />
         <Navigation />
-        <main id="main" className="relative z-10">{children}</main>
+        <main id="main" className="relative z-10 bg-black/40">{children}</main>
         <FooterWrapper />
         <WhatsAppButton />
         <CursorGlow />
