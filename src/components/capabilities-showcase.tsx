@@ -30,7 +30,7 @@ function SectionDivider({
     <div className="max-w-6xl mx-auto px-6 py-12 border-t border-white/[0.04]">
       <div className="flex items-center justify-between">
         <div>
-          <p className="text-[9px] tracking-[0.5em] uppercase text-white/20 font-medium">
+          <p className="text-[9px] tracking-[0.5em] uppercase text-white/35 font-medium">
             {num}
           </p>
           <h3 className="text-lg font-bold text-white/80 mt-1">{title}</h3>
@@ -160,18 +160,21 @@ function ButtonsSection() {
 function SpotlightCard() {
   const [pos, setPos] = useState({ x: 50, y: 50 });
   const ref = useRef<HTMLDivElement>(null);
-  const handleMove = (e: React.MouseEvent) => {
+  const handleMove = (e: React.MouseEvent | React.TouchEvent) => {
     const r = ref.current?.getBoundingClientRect();
     if (!r) return;
+    const clientX = "touches" in e ? e.touches[0].clientX : e.clientX;
+    const clientY = "touches" in e ? e.touches[0].clientY : e.clientY;
     setPos({
-      x: ((e.clientX - r.left) / r.width) * 100,
-      y: ((e.clientY - r.top) / r.height) * 100,
+      x: ((clientX - r.left) / r.width) * 100,
+      y: ((clientY - r.top) / r.height) * 100,
     });
   };
   return (
     <div
       ref={ref}
       onMouseMove={handleMove}
+      onTouchMove={handleMove}
       className="relative h-60 rounded-xl border border-white/[0.06] overflow-hidden flex items-center justify-center transition-all"
       style={{
         background: `radial-gradient(circle at ${pos.x}% ${pos.y}%, rgba(255,255,255,0.06) 0%, transparent 60%)`,
@@ -179,7 +182,7 @@ function SpotlightCard() {
     >
       <div className="text-center">
         <p className="text-sm font-bold text-white/60">Spotlight</p>
-        <p className="text-[10px] text-white/20 mt-1">Move your cursor</p>
+        <p className="text-[10px] text-white/35 mt-1">Move your cursor</p>
       </div>
     </div>
   );
@@ -207,7 +210,7 @@ function TiltCard() {
     >
       <div className="text-center">
         <p className="text-sm font-bold text-white/60">3D Tilt</p>
-        <p className="text-[10px] text-white/20 mt-1">Hover to tilt</p>
+        <p className="text-[10px] text-white/35 mt-1">Hover to tilt</p>
       </div>
     </div>
   );
@@ -234,7 +237,7 @@ function CardHoverSection() {
           <div className="h-60 rounded-xl border border-white/[0.06] bg-white/[0.02] flex items-center justify-center hover:border-white/30 hover:shadow-[0_0_30px_rgba(255,255,255,0.05)] transition-all duration-300">
             <div className="text-center">
               <p className="text-sm font-bold text-white/60">Border Glow</p>
-              <p className="text-[10px] text-white/20 mt-1">Hover me</p>
+              <p className="text-[10px] text-white/35 mt-1">Hover me</p>
             </div>
           </div>
 
@@ -242,7 +245,7 @@ function CardHoverSection() {
           <div className="h-60 rounded-xl border border-white/[0.06] bg-white/[0.02] flex items-center justify-center hover:-translate-y-2 hover:shadow-[0_20px_60px_rgba(0,0,0,0.5)] transition-all duration-300">
             <div className="text-center">
               <p className="text-sm font-bold text-white/60">Lift & Shadow</p>
-              <p className="text-[10px] text-white/20 mt-1">Hover to lift</p>
+              <p className="text-[10px] text-white/35 mt-1">Hover to lift</p>
             </div>
           </div>
 
@@ -250,15 +253,16 @@ function CardHoverSection() {
           <div className="h-60 rounded-xl border border-white/[0.06] bg-white/[0.02] flex items-center justify-center hover:scale-[1.03] transition-transform duration-300">
             <div className="text-center">
               <p className="text-sm font-bold text-white/60">Scale</p>
-              <p className="text-[10px] text-white/20 mt-1">Subtle grow</p>
+              <p className="text-[10px] text-white/35 mt-1">Subtle grow</p>
             </div>
           </div>
 
           {/* Content Reveal */}
           <div
+            onClick={() => setHoveredReveal(!hoveredReveal)}
             onMouseEnter={() => setHoveredReveal(true)}
             onMouseLeave={() => setHoveredReveal(false)}
-            className="rounded-xl border border-white/[0.06] bg-white/[0.02] overflow-hidden transition-all duration-500"
+            className="rounded-xl border border-white/[0.06] bg-white/[0.02] overflow-hidden transition-all duration-500 cursor-pointer"
             style={{ height: hoveredReveal ? 240 : 140 }}
           >
             <div className="p-6">
@@ -427,20 +431,22 @@ function GlassSection() {
 
 function ScrollRevealBlock({
   label,
-  animClass,
+  startClass,
+  endClass,
 }: {
   label: string;
-  animClass: string;
+  startClass: string;
+  endClass: string;
 }) {
   const { ref, inView } = useInView(0.2);
   return (
     <div ref={ref} className="flex flex-col items-center gap-2">
       <div
         className={`w-full h-28 rounded-xl bg-white/[0.04] border border-white/[0.06] transition-all duration-700 ${
-          inView ? animClass : "opacity-0"
+          inView ? endClass : startClass
         }`}
       />
-      <span className="text-[10px] text-white/25">{label}</span>
+      <span className="text-[10px] text-white/40">{label}</span>
     </div>
   );
 }
@@ -479,31 +485,38 @@ function ScrollRevealsSection() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <ScrollRevealBlock
             label="Fade Up"
-            animClass="opacity-100 translate-y-0"
+            startClass="opacity-0 translate-y-8"
+            endClass="opacity-100 translate-y-0"
           />
           <ScrollRevealBlock
             label="Fade Down"
-            animClass="opacity-100 translate-y-0"
+            startClass="opacity-0 -translate-y-8"
+            endClass="opacity-100 translate-y-0"
           />
           <ScrollRevealBlock
             label="Fade Left"
-            animClass="opacity-100 translate-x-0"
+            startClass="opacity-0 -translate-x-8"
+            endClass="opacity-100 translate-x-0"
           />
           <ScrollRevealBlock
             label="Fade Right"
-            animClass="opacity-100 translate-x-0"
+            startClass="opacity-0 translate-x-8"
+            endClass="opacity-100 translate-x-0"
           />
           <ScrollRevealBlock
             label="Scale"
-            animClass="opacity-100 scale-100"
+            startClass="opacity-0 scale-75"
+            endClass="opacity-100 scale-100"
           />
           <ScrollRevealBlock
             label="Blur"
-            animClass="opacity-100 blur-0"
+            startClass="opacity-0 blur-md"
+            endClass="opacity-100 blur-0"
           />
           <ScrollRevealBlock
             label="Flip"
-            animClass="opacity-100 [transform:rotateX(0deg)]"
+            startClass="opacity-0 [transform:rotateX(-30deg)]"
+            endClass="opacity-100 [transform:rotateX(0deg)]"
           />
           <StaggerBlock />
         </div>
@@ -536,7 +549,7 @@ function TypewriterText() {
 
   return (
     <div ref={ref} className="py-6">
-      <p className="text-[10px] text-white/20 mb-2">Typewriter</p>
+      <p className="text-[10px] text-white/35 mb-2">Typewriter</p>
       <p className="font-mono text-lg text-white/70">
         {text}
         <span className="inline-block w-2 h-5 bg-white/50 ml-0.5 animate-pulse align-middle" />
@@ -567,7 +580,7 @@ function CounterText() {
 
   return (
     <div ref={ref} className="py-6">
-      <p className="text-[10px] text-white/20 mb-2">Counter</p>
+      <p className="text-[10px] text-white/35 mb-2">Counter</p>
       <p className="text-5xl font-bold text-white/80 tabular-nums">
         {count.toLocaleString()}
       </p>
@@ -586,7 +599,7 @@ function TextEffectsSection() {
       <div className="max-w-6xl mx-auto px-6 pb-16 space-y-2">
         {/* Gradient Shimmer */}
         <div className="py-6">
-          <p className="text-[10px] text-white/20 mb-2">Gradient Shimmer</p>
+          <p className="text-[10px] text-white/35 mb-2">Gradient Shimmer</p>
           <p
             className="text-3xl md:text-5xl font-extrabold uppercase tracking-tight bg-clip-text text-transparent"
             style={{
@@ -605,9 +618,9 @@ function TextEffectsSection() {
 
         {/* Split Color */}
         <div className="py-6">
-          <p className="text-[10px] text-white/20 mb-2">Split Color</p>
+          <p className="text-[10px] text-white/35 mb-2">Split Color</p>
           <div className="relative inline-block">
-            <p className="text-6xl md:text-8xl font-black uppercase tracking-tighter text-white/15">
+            <p className="text-6xl md:text-8xl font-black uppercase tracking-tighter text-white/30">
               DESIGN
             </p>
             <p
@@ -699,7 +712,7 @@ function PricingSection() {
               <p className="mt-2 text-4xl font-bold text-white/80">
                 &euro;{plan.price}
               </p>
-              <p className="text-[10px] text-white/20 mt-1">one-time</p>
+              <p className="text-[10px] text-white/35 mt-1">one-time</p>
               <ul className="mt-6 space-y-3">
                 {plan.features.map((f) => (
                   <li
@@ -1063,7 +1076,7 @@ function MarqueeSection() {
             {trustItems.map((item) => (
               <span
                 key={item}
-                className="text-sm text-white/20 whitespace-nowrap"
+                className="text-sm text-white/35 whitespace-nowrap"
               >
                 {item}
                 <span className="mx-8 text-white/10">&bull;</span>
@@ -1078,7 +1091,7 @@ function MarqueeSection() {
             {logoNames.map((name) => (
               <span
                 key={name}
-                className="text-xs tracking-[0.15em] uppercase text-white/15 whitespace-nowrap font-medium"
+                className="text-xs tracking-[0.15em] uppercase text-white/30 whitespace-nowrap font-medium"
               >
                 {name}
               </span>
@@ -1159,14 +1172,14 @@ function BentoSection() {
           <div className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-6 flex flex-col items-center justify-center">
             <ArrowRight className="w-5 h-5 text-white/25 mb-2" />
             <p className="text-2xl font-bold text-white/60">99.9%</p>
-            <p className="text-[10px] text-white/20 mt-1">Uptime</p>
+            <p className="text-[10px] text-white/35 mt-1">Uptime</p>
           </div>
 
           {/* Small 1x1 — stat */}
           <div className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-6 flex flex-col items-center justify-center">
             <Check className="w-5 h-5 text-white/25 mb-2" />
             <p className="text-2xl font-bold text-white/60">95+</p>
-            <p className="text-[10px] text-white/20 mt-1">Lighthouse</p>
+            <p className="text-[10px] text-white/35 mt-1">Lighthouse</p>
           </div>
 
           {/* Wide 2x1 — marquee */}
@@ -1183,7 +1196,7 @@ function BentoSection() {
                 ].map((t) => (
                   <span
                     key={t}
-                    className="text-xs tracking-[0.2em] text-white/15 font-medium whitespace-nowrap"
+                    className="text-xs tracking-[0.2em] text-white/30 font-medium whitespace-nowrap"
                   >
                     {t}
                   </span>
@@ -1194,7 +1207,7 @@ function BentoSection() {
 
           {/* Tall 1x2 — list */}
           <div className="row-span-2 rounded-2xl border border-white/[0.06] bg-white/[0.02] p-6 flex flex-col justify-center">
-            <p className="text-[10px] tracking-[0.3em] uppercase text-white/20 mb-4">
+            <p className="text-[10px] tracking-[0.3em] uppercase text-white/35 mb-4">
               Services
             </p>
             {[
@@ -1228,7 +1241,7 @@ function FinalCTA() {
     <section className="py-32 px-6">
       <div className="max-w-3xl mx-auto text-center">
         <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight leading-tight">
-          Seen enough<span className="text-white/20">?</span>
+          Seen enough<span className="text-white/35">?</span>
         </h2>
         <p className="mt-6 text-sm text-white/40 max-w-md mx-auto">
           Every component on this page is something we can build for your
@@ -1342,13 +1355,13 @@ export function CapabilitiesShowcase() {
       {/* HERO */}
       <section className="pt-40 pb-20 px-6">
         <div className="max-w-4xl mx-auto text-center">
-          <p className="text-[9px] tracking-[0.6em] uppercase text-white/20 font-medium mb-6">
+          <p className="text-[9px] tracking-[0.6em] uppercase text-white/35 font-medium mb-6">
             Design Capabilities
           </p>
           <h1 className="text-4xl md:text-6xl font-bold text-white tracking-tight leading-[1.05]">
             Everything We Can
             <br />
-            Build For You<span className="text-white/20">.</span>
+            Build For You<span className="text-white/35">.</span>
           </h1>
           <p className="mt-6 text-sm text-white/40 max-w-lg mx-auto leading-relaxed">
             Every component below is live and interactive. Hover it. Click it.

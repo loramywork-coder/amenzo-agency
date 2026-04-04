@@ -861,7 +861,7 @@ function StartProjectWizard() {
       </div>
 
       {/* Navigation with estimate preview */}
-      <div className="fixed bottom-0 left-0 right-0 bg-black/80 backdrop-blur-xl border-t border-white/10 py-4 z-30">
+      <div className="fixed bottom-0 left-0 right-0 bg-[#050505]/95 backdrop-blur-xl border-t border-white/10 py-4 z-[60]">
         <div className="container-wide flex items-center justify-between">
           <button
             onClick={() => setStep((s) => Math.max(1, s - 1))}
