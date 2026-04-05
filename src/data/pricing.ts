@@ -42,7 +42,7 @@ export const addOns = [
 ] as const;
 
 export const SERVICE_BASE_PRICES: Record<string, number> = {
-  "new-website": 750,
+  "new-website": 1000,
   redesign: 750,
   ecommerce: 4000,
   "landing-page": 750,
@@ -50,7 +50,7 @@ export const SERVICE_BASE_PRICES: Record<string, number> = {
   "ui-ux": 2000,
   seo: 300,
   maintenance: 80,
-  "not-sure": 750,
+  "not-sure": 1000,
 };
 
 export const PAGE_COUNT_MULTIPLIERS: Record<string, number> = {

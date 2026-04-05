@@ -9,7 +9,7 @@ import { ScrollToTop } from "@/components/ui/scroll-to-top";
 import { LocalBusinessSchema } from "@/components/structured-data";
 import { SmokeBackground } from "@/components/ui/spooky-smoke-animation";
 import WhatsAppButton from "@/components/whatsapp-button";
-import CursorGlow from "@/components/cursor-glow";
+
 
 import ExitIntent from "@/components/exit-intent";
 import { Toaster } from "sonner";
@@ -126,7 +126,7 @@ export default function RootLayout({
         <main id="main" className="relative z-10 bg-black/40">{children}</main>
         <FooterWrapper />
         <WhatsAppButton />
-        <CursorGlow />
+
         <ExitIntent />
         <Toaster
           position="bottom-right"

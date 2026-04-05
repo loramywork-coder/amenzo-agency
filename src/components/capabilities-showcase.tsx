@@ -647,7 +647,7 @@ function PricingSection() {
   const plans = [
     {
       name: "Starter",
-      price: "750",
+      price: "1,000",
       features: [
         "Single-page website",
         "Mobile responsive",

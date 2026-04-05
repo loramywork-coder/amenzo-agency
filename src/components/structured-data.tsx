@@ -65,7 +65,7 @@ export function LocalBusinessSchema() {
             description:
               "Professional 1-5 page custom website with mobile-responsive design, contact form, basic SEO, and Google Analytics. Delivered in 1-2 weeks.",
           },
-          price: "750",
+          price: "1000",
           priceCurrency: "EUR",
         },
         {
@@ -255,7 +255,7 @@ export function BlogPostSchema({
 export const faqData = [
   {
     q: "How much does a website cost?",
-    a: "At Amenzo, our website packages start from EUR 750 for a basic 1-5 page site, EUR 2,000 for a standard 5-10 page bilingual site, EUR 4,000 for a premium multilingual site with advanced features, and EUR 5,000-8,000 for custom e-commerce and platform builds. Every site is custom-coded with Next.js — no templates.",
+    a: "At Amenzo, our website packages start from EUR 1,000 for a basic 1-5 page site, EUR 2,000 for a standard 5-10 page bilingual site, EUR 4,000 for a premium multilingual site with advanced features, and EUR 5,000-8,000 for custom e-commerce and platform builds. Every site is custom-coded with Next.js — no templates.",
   },
   {
     q: "How long does it take to build a website?",

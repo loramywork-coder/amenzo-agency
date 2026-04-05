@@ -32,7 +32,7 @@ export const SERVICES = [
     shortDesc:
       "Custom websites built from scratch with Next.js and React. No templates, no WordPress.",
     tags: ["Next.js", "React", "Tailwind", "TypeScript", "Vercel"],
-    price: "750",
+    price: "1,000",
     icon: "Monitor",
   },
   {

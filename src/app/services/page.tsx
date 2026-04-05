@@ -25,7 +25,7 @@ import {
 
 export const metadata = generatePageMeta({
   title: "Web Design Services — Custom Websites, E-Commerce, SEO",
-  description: "Professional web design services. Custom websites from €750, e-commerce from €4,000, SEO from €300/month, hosting from €80/month. Hand-coded with Next.js. No templates.",
+  description: "Professional web design services. Custom websites from €1,000, e-commerce from €4,000, SEO from €300/month, hosting from €80/month. Hand-coded with Next.js. No templates.",
   path: "/services",
 });
 
@@ -54,7 +54,7 @@ const SERVICE_DETAILS = [
       "Launch support and post-launch QA",
     ],
     timeline: "1-4 weeks",
-    price: "750",
+    price: "1,000",
     tags: ["Next.js", "React", "Tailwind", "TypeScript", "Vercel"],
   },
   {

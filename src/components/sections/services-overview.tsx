@@ -19,7 +19,7 @@ const services = [
     title: "Web Design & Development",
     description:
       "Custom websites built from scratch. No templates. No WordPress themes. Hand-crafted code that performs, converts, and scales.",
-    price: "750",
+    price: "1,000",
     icon: Code2,
     href: "/services",
   },

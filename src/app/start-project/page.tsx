@@ -837,7 +837,6 @@ function StartProjectWizard() {
                       <input
                         type="checkbox"
                         className="mt-1 accent-white"
-                        defaultChecked
                       />
                       <span className="text-sm text-white/60">
                         I agree to the{" "}

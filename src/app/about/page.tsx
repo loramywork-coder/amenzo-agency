@@ -90,9 +90,9 @@ export default function AboutPage() {
             </h1>
           </TextReveal>
           <AnimateIn animation="fadeUp" delay={0.5}>
-            <p className="mt-8 max-w-2xl text-lg md:text-xl text-text-secondary leading-relaxed">
+            <p className="mt-8 max-w-2xl text-lg md:text-xl text-white/90 leading-relaxed">
               We build premium digital experiences for businesses that refuse to
-              blend in. Powered by modern AI tools, driven by craft, measured by
+              blend in. Powered by AI automation, driven by craft, measured by
               results.
             </p>
           </AnimateIn>
@@ -111,7 +111,7 @@ export default function AboutPage() {
           </AnimateIn>
           <div className="space-y-6">
             <AnimateIn animation="fadeUp" delay={0.1}>
-              <p className="text-lg text-text-secondary leading-relaxed">
+              <p className="text-lg text-white leading-relaxed">
                 AMENZO was founded on a simple observation: the web agency model
                 is broken. Clients pay for hours, not outcomes. Projects drag on
                 for months. Budgets balloon. And the end result is often a
@@ -119,15 +119,14 @@ export default function AboutPage() {
               </p>
             </AnimateIn>
             <AnimateIn animation="fadeUp" delay={0.2}>
-              <p className="text-lg text-text-secondary leading-relaxed">
-                We took a different path. By integrating AI-powered development
-                tools like Claude Code and Cowork into our workflow, we deliver
-                agency-quality work at startup speed. Every line of code is
+              <p className="text-lg text-white leading-relaxed">
+                We took a different path. By integrating AI-powered automation into
+                our workflow, we deliver agency-quality work at startup speed. Every line of code is
                 custom. Every design is original. Every pixel serves a purpose.
               </p>
             </AnimateIn>
             <AnimateIn animation="fadeUp" delay={0.3}>
-              <p className="text-lg text-text-secondary leading-relaxed">
+              <p className="text-lg text-white leading-relaxed">
                 We charge for results, not hours. Our clients get premium
                 websites that load in under two seconds, score 95+ on Lighthouse,
                 and are built on a modern stack that scales with their business.
@@ -136,7 +135,7 @@ export default function AboutPage() {
               </p>
             </AnimateIn>
             <AnimateIn animation="fadeUp" delay={0.4}>
-              <p className="text-lg text-text-primary font-medium">
+              <p className="text-lg text-white leading-relaxed">
                 The future of web development is not about bigger teams. It is
                 about sharper tools, deeper expertise, and relentless focus on
                 what matters: your business growth.
@@ -166,7 +165,7 @@ export default function AboutPage() {
                 <h3 className="font-display text-2xl font-semibold text-text-primary mb-3">
                   {value.title}
                 </h3>
-                <p className="text-text-secondary leading-relaxed">
+                <p className="text-white/85 leading-relaxed">
                   {value.description}
                 </p>
               </div>

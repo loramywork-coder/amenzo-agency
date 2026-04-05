@@ -14,15 +14,15 @@ import { PricingFAQ } from "./faq";
 
 
 export const metadata = generatePageMeta({
-  title: "Web Design Pricing — Transparent Packages from €750",
-  description: "Transparent web design pricing. Basic €750 (1-5 pages), Standard €2,000 (bilingual), Premium €4,000 (multilingual + animations), Custom from €5,000+ (e-commerce). Try live demos of each package.",
+  title: "Web Design Pricing — Transparent Packages from €1,000",
+  description: "Transparent web design pricing. Basic €1,000 (1-5 pages), Standard €2,000 (bilingual), Premium €4,000 (multilingual + animations), Custom from €5,000+ (e-commerce). Try live demos of each package.",
   path: "/pricing",
 });
 
 const TIERS = [
   {
     name: "Basic",
-    price: "750",
+    price: "1,000",
     period: "one-time",
     description:
       "A clean, professional website built from your content. You provide the text, images, and logo — we handle everything else.",
@@ -189,7 +189,7 @@ const MONTHLY_SERVICES = [
 ] as const;
 
 const COMPARISON_ROWS = [
-  { label: "Price", basic: "€750", standard: "€2,000", premium: "€4,000", custom: "From €5,000+" },
+  { label: "Price", basic: "€1,000", standard: "€2,000", premium: "€4,000", custom: "From €5,000+" },
   { label: "Pages", basic: "1-5", standard: "5-10", premium: "10-20", custom: "Unlimited" },
   { label: "Delivery", basic: "1-2 weeks", standard: "2-3 weeks", premium: "3-4 weeks", custom: "4-6 weeks" },
   { label: "Design", basic: "Clean & responsive", standard: "Custom branded", premium: "Premium + animations", custom: "Fully bespoke" },

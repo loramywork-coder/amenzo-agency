@@ -8,13 +8,13 @@ export default function ExitIntent() {
 
   useEffect(() => {
     if (pathname !== "/") return;
-    if (localStorage.getItem("exitShown")) return;
+    if (sessionStorage.getItem("exitShown")) return;
     if ("ontouchstart" in window) return;
 
     const handleMouseLeave = (e: MouseEvent) => {
       if (e.clientY < 10) {
         setShow(true);
-        localStorage.setItem("exitShown", "true");
+        sessionStorage.setItem("exitShown", "true");
         document.removeEventListener("mouseleave", handleMouseLeave);
       }
     };

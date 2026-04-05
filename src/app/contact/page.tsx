@@ -7,7 +7,6 @@ import { toast } from "sonner";
 import {
   Mail,
   Phone,
-  MapPin,
   Clock,
   MessageCircle,
   ArrowRight,
@@ -19,7 +18,6 @@ import {
   CONTACT_EMAIL,
   CONTACT_PHONE,
   CONTACT_WHATSAPP,
-  CONTACT_ADDRESS,
 } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
@@ -233,6 +231,22 @@ export default function ContactPage() {
                     )}
                   </div>
 
+                  {/* Consent */}
+                  <label className="flex items-start gap-3 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      required
+                      className="mt-1 accent-white"
+                    />
+                    <span className="text-sm text-white/60">
+                      I agree to the{" "}
+                      <a href="/privacy" className="text-white/70 hover:underline">
+                        Privacy Policy
+                      </a>
+                      . AMENZO will use this information to respond to my enquiry.
+                    </span>
+                  </label>
+
                   {/* Submit */}
                   <Button
                     type="submit"
@@ -322,17 +336,6 @@ export default function ContactPage() {
                       </p>
                     </div>
                   </a>
-
-                  {/* Address */}
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-coral/10 flex items-center justify-center shrink-0">
-                      <MapPin className="w-5 h-5 text-coral" />
-                    </div>
-                    <div>
-                      <p className="text-sm text-text-secondary">Address</p>
-                      <p className="text-text-primary">{CONTACT_ADDRESS}</p>
-                    </div>
-                  </div>
 
                   {/* Hours */}
                   <div className="flex items-start gap-4">

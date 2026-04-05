@@ -359,7 +359,7 @@ export function HomePage() {
                     Fully responsive, SEO-ready, and performance-optimised
                     out of the box.
                   </p>
-                  <p className="text-sm text-white/75 font-medium">From &euro;750</p>
+                  <p className="text-sm text-white/75 font-medium">From &euro;1,000</p>
                 </div>
               </div>
             </Reveal>

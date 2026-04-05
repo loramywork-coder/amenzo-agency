@@ -8,7 +8,7 @@ import Link from "next/link";
 const tiers = [
   {
     name: "Basic",
-    price: "750",
+    price: "1,000",
     description: "Professional online presence, fast",
     features: [
       "1-5 responsive pages",
