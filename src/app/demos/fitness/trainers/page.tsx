@@ -108,9 +108,8 @@ function FitNav() {
     <nav
       className="fixed top-10 left-0 right-0 z-50 transition-all duration-300"
       style={{
-        background: scrolled ? "rgba(8,8,8,0.92)" : "transparent",
-        backdropFilter: scrolled ? "blur(16px)" : "none",
-        borderBottom: scrolled ? `1px solid ${BORDER}` : "1px solid transparent",
+        background: "transparent",
+        borderBottom: "none",
       }}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">

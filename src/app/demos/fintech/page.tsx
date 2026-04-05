@@ -132,10 +132,8 @@ export default function FintechDemo() {
           left: 0,
           right: 0,
           zIndex: 90,
-          background: scrolled ? "rgba(250,250,250,0.95)" : "rgba(255,255,255,0.92)",
-          backdropFilter: "blur(20px)",
-          WebkitBackdropFilter: "blur(20px)",
-          borderBottom: `1px solid ${scrolled ? P.bgAlt : "rgba(0,0,0,0.04)"}`,
+          background: "transparent",
+          borderBottom: "none",
           padding: "0 clamp(20px, 4vw, 48px)",
           transition: "all 0.3s ease",
         }}

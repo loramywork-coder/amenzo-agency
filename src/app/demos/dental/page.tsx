@@ -115,9 +115,8 @@ function Nav() {
         left: 0,
         right: 0,
         zIndex: 90,
-        background: "rgba(10,16,21,0.85)",
-        backdropFilter: "blur(12px)",
-        borderBottom: "1px solid rgba(255,255,255,0.06)",
+        background: "transparent",
+        borderBottom: "none",
         fontFamily: FONT,
       }}
     >
@@ -504,7 +503,7 @@ export default function DentalHomePage() {
           minHeight: "100vh",
         }}
       >
-        <VideoHeroBg src="/videos/demo-dental.mp4" gradient="linear-gradient(to bottom, rgba(10,16,21,0.45) 0%, rgba(10,16,21,0.3) 40%, rgba(10,16,21,0.7) 75%, rgba(10,16,21,0.95) 95%)" startOpacity={0.65} />
+        <VideoHeroBg src="/videos/demo-dental.mp4" gradient="linear-gradient(to bottom, rgba(10,16,21,0.1) 0%, rgba(10,16,21,0.06) 35%, rgba(10,16,21,0.3) 65%, rgba(10,16,21,0.9) 92%)" startOpacity={0.7} />
         <div
           style={{
             position: "relative",

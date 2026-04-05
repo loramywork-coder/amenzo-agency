@@ -38,7 +38,7 @@ function Nav() {
   return (
     <>
       <nav className="fixed top-10 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-10 py-4"
-        style={{ background: `${P.bg}ee`, backdropFilter: "blur(16px)", borderBottom: `1px solid ${P.border}` }}>
+        style={{ background: "transparent", borderBottom: "none" }}>
         <Link href="/demos/fintech" className="flex items-center gap-2" style={{ textDecoration: "none" }}>
           <svg width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect x="1" y="1" width="30" height="30" rx="8" stroke="#0F766E" strokeWidth="1.5" fill="none"/>

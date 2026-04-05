@@ -142,9 +142,8 @@ function SiteNav() {
       className="fixed left-0 right-0 z-50 transition-all duration-500"
       style={{
         top: 40,
-        background: "rgba(10,15,28,0.85)",
-        backdropFilter: "blur(12px)",
-        borderBottom: "1px solid rgba(255,255,255,0.06)",
+        background: "transparent",
+        borderBottom: "none",
       }}
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-16 md:h-20">
@@ -505,7 +504,7 @@ export default function RealEstatePage() {
 
       {/* ─── 1. HERO ──────────────────────────────────────────── */}
       <section className="relative flex items-center justify-center" style={{ minHeight: "100vh", position: "relative" }}>
-        <VideoHeroBg src="/videos/demo-realestate.mp4" gradient="linear-gradient(to bottom, rgba(10,15,28,0.4) 0%, rgba(10,15,28,0.25) 40%, rgba(10,15,28,0.65) 75%, rgba(10,15,28,0.95) 95%)" startOpacity={0.7} />
+        <VideoHeroBg src="/videos/demo-realestate.mp4" gradient="linear-gradient(to bottom, rgba(10,15,28,0.1) 0%, rgba(10,15,28,0.06) 35%, rgba(10,15,28,0.3) 65%, rgba(10,15,28,0.9) 92%)" startOpacity={0.75} />
 
         <div className="relative z-10 w-full max-w-5xl mx-auto px-6 text-center" style={{ position: "relative", zIndex: 2 }}>
           <Reveal type="fade" duration={1}>

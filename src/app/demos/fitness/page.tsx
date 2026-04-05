@@ -159,9 +159,8 @@ function FitNav() {
         className="fixed left-0 right-0 z-50 transition-all duration-300"
         style={{
           top: 40,
-          background: "rgba(8,8,8,0.85)",
-          backdropFilter: "blur(12px)",
-          borderBottom: "1px solid rgba(255,255,255,0.06)",
+          background: "transparent",
+          borderBottom: "none",
         }}
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
@@ -302,7 +301,7 @@ export default function FitnessHomePage() {
 
       {/* ════════════ 1. HERO (100vh) ════════════ */}
       <section className="relative flex h-screen w-full items-center justify-center overflow-hidden pt-10" style={{ position: "relative" }}>
-        <VideoHeroBg src="/videos/demo-fitness.mp4" gradient="linear-gradient(to bottom, rgba(8,8,8,0.4) 0%, rgba(8,8,8,0.25) 40%, rgba(8,8,8,0.65) 75%, rgba(8,8,8,0.95) 95%)" startOpacity={0.7} />
+        <VideoHeroBg src="/videos/demo-fitness.mp4" gradient="linear-gradient(to bottom, rgba(8,8,8,0.1) 0%, rgba(8,8,8,0.06) 35%, rgba(8,8,8,0.3) 65%, rgba(8,8,8,0.9) 92%)" startOpacity={0.75} />
 
         <div className="relative z-10 flex flex-col items-center px-6 text-center" style={{ position: "relative", zIndex: 10 }}>
           {/* Green label */}

@@ -60,8 +60,8 @@ export default function AboutPage() {
       {/* ─── Navigation Header ─── */}
       <header style={{
         position: "fixed", top: 40, left: 0, right: 0, zIndex: 50,
-        background: "rgba(10,10,8,0.92)", backdropFilter: "blur(12px)",
-        borderBottom: `1px solid ${C.border}`,
+        background: "transparent",
+        borderBottom: "none",
       }}>
         <div style={{
           maxWidth: 1200, margin: "0 auto", padding: "0 24px",

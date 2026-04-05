@@ -277,7 +277,7 @@ export default function InteriorPage() {
               <p className="text-[12px] tracking-[0.2em] uppercase mb-3" style={{ color: P.textMuted, fontFamily: fBody }}>
                 {projects[0].type} &middot; {projects[0].year}
               </p>
-              <h3 className="text-[clamp(28px,3vw,44px)] font-light mb-3" style={{ fontFamily: fHead }}>
+              <h3 className="text-[clamp(28px,3vw,44px)] font-light mb-3" style={{ fontFamily: fHead, color: P.text }}>
                 {projects[0].title}
               </h3>
               <p className="text-[14px] font-light" style={{ color: P.textBody, fontFamily: fBody }}>
@@ -294,7 +294,7 @@ export default function InteriorPage() {
               <p className="text-[12px] tracking-[0.2em] uppercase mb-3" style={{ color: P.textMuted, fontFamily: fBody }}>
                 {projects[1].type} &middot; {projects[1].year}
               </p>
-              <h3 className="text-[clamp(28px,3vw,44px)] font-light mb-3" style={{ fontFamily: fHead }}>
+              <h3 className="text-[clamp(28px,3vw,44px)] font-light mb-3" style={{ fontFamily: fHead, color: P.text }}>
                 {projects[1].title}
               </h3>
               <p className="text-[14px] font-light" style={{ color: P.textBody, fontFamily: fBody }}>

@@ -41,7 +41,7 @@ const PILLARS = [
   {
     title: "Time",
     img: "/images/interior/project-08.jpg",
-    text: "We design for the long view. Oak floors that will patina over decades. Brass hardware that deepens with each touch. Linen upholstery that softens with every season. Trends are temporary; the qualities we seek \u2014 warmth, dignity, quietude \u2014 are permanent. A Studio \u0112lan interior should feel more beautiful in ten years than it does on the day of handover. This is our deepest measure of success: spaces that age with the same grace as the lives lived within them.",
+    text: "We design for the long view. Oak floors that will patina over decades. Brass hardware that deepens with each touch. Linen upholstery that softens with every season. Trends are temporary; the qualities we seek \u2014 warmth, dignity, quietude \u2014 are permanent. A Studio Ēlan interior should feel more beautiful in ten years than it does on the day of handover. This is our deepest measure of success: spaces that age with the same grace as the lives lived within them.",
   },
 ];
 
@@ -61,7 +61,7 @@ function Nav() {
     <nav className="fixed top-10 left-0 right-0 z-50 mix-blend-difference">
       <div className="max-w-[1400px] mx-auto px-6 md:px-10 flex items-center justify-between h-16">
         <Link href="/demos/interior" className="text-white font-[family-name:var(--font-heading)] text-xl tracking-wide">
-          Studio \u0112lan
+          Studio Ēlan
         </Link>
         <div className="hidden md:flex items-center gap-8">
           {NAV.map(l => (
@@ -95,7 +95,7 @@ function Footer() {
     <footer style={{ background: P.dark, color: "#fff" }}>
       <div className="max-w-[1400px] mx-auto px-6 md:px-10 py-20 grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8">
         <div>
-          <p className="font-[family-name:var(--font-heading)] text-2xl mb-4">Studio \u0112lan</p>
+          <p className="font-[family-name:var(--font-heading)] text-2xl mb-4">Studio Ēlan</p>
           <p className="text-sm text-white/40 font-[family-name:var(--font-body)] leading-relaxed">Refined interiors for<br />discerning spaces.</p>
         </div>
         <div>
@@ -118,7 +118,7 @@ function Footer() {
       </div>
       <div className="border-t" style={{ borderColor: P.borderDark }}>
         <div className="max-w-[1400px] mx-auto px-6 md:px-10 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-white/30 font-[family-name:var(--font-body)]">&copy; 2026 Studio \u0112lan. All rights reserved.</p>
+          <p className="text-xs text-white/30 font-[family-name:var(--font-body)]">&copy; 2026 Studio Ēlan. All rights reserved.</p>
           <div className="flex gap-6">
             <Link href="/demos/interior/press" className="text-xs text-white/30 hover:text-white/60 transition-colors font-[family-name:var(--font-body)]">Press</Link>
             <Link href="/demos/interior/impressum" className="text-xs text-white/30 hover:text-white/60 transition-colors font-[family-name:var(--font-body)]">Impressum</Link>

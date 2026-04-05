@@ -17,7 +17,7 @@ const P = {
   darkSurface: "#161618",
   text: "#0C0C0E",
   textBody: "#52525B",
-  textMuted: "#A1A1AA",
+  textMuted: "#71717A",
   blue: "#1D4ED8",
   blueLight: "#3B82F6",
   blueBg: "#EFF6FF",
@@ -198,7 +198,7 @@ export default function StartupPage() {
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(to bottom, rgba(12,12,14,0.15) 0%, rgba(12,12,14,0.1) 30%, rgba(12,12,14,0.5) 70%, rgba(12,12,14,0.85) 100%)",
+              "linear-gradient(to bottom, rgba(12,12,14,0.06) 0%, rgba(12,12,14,0.04) 30%, rgba(12,12,14,0.25) 65%, rgba(12,12,14,0.85) 95%)",
           }}
         />
 

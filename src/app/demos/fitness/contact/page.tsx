@@ -70,9 +70,8 @@ function NavHeader() {
         style={{
           position: "fixed", top: 40, left: 0, right: 0, zIndex: 50, height: 60,
           display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 24px",
-          background: scrolled ? "rgba(8,8,8,0.95)" : "rgba(8,8,8,0.85)",
-          backdropFilter: "blur(12px)",
-          borderBottom: `1px solid ${C.border}`,
+          background: "transparent",
+          borderBottom: "none",
           transition: "background 0.4s",
         }}
       >

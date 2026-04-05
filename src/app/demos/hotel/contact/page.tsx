@@ -83,10 +83,9 @@ function SiteHeader() {
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          background: scrolled ? "rgba(12,18,32,0.95)" : "transparent",
-          backdropFilter: scrolled ? "blur(12px)" : "none",
-          borderBottom: scrolled ? `1px solid ${C.border}` : "1px solid transparent",
-          transition: "background 0.4s, border-color 0.4s, backdrop-filter 0.4s",
+          background: "transparent",
+          borderBottom: "none",
+          transition: "background 0.4s, border-color 0.4s",
         }}
       >
         <Link href="/demos/hotel" style={{ textDecoration: "none" }}>

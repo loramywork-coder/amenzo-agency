@@ -69,9 +69,8 @@ function Nav() {
         className="fixed left-0 right-0 z-50 px-6 md:px-12"
         style={{
           top: 40,
-          background: "rgba(10,10,10,0.85)",
-          backdropFilter: "blur(12px)",
-          borderBottom: "1px solid rgba(255,255,255,0.06)",
+          background: "transparent",
+          borderBottom: "none",
         }}
       >
         <div className="max-w-7xl mx-auto flex items-center justify-between py-5">
@@ -176,7 +175,7 @@ function Hero() {
 
   return (
     <section className="relative h-screen flex flex-col items-center justify-center bg-[#0A0A0A] overflow-hidden">
-      <VideoHeroBg src="/videos/demo-gallery.mp4" gradient="linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.25) 40%, rgba(0,0,0,0.65) 75%, rgba(0,0,0,0.95) 95%)" startOpacity={0.65} />
+      <VideoHeroBg src="/videos/demo-gallery.mp4" gradient="linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.06) 35%, rgba(0,0,0,0.3) 65%, rgba(0,0,0,0.9) 92%)" startOpacity={0.7} />
       <div className="relative z-10 text-center">
         <h1
           className="text-[80px] font-light tracking-[0.15em] uppercase leading-none"

@@ -142,9 +142,8 @@ export default function ContactPage() {
           left: 0,
           right: 0,
           zIndex: 50,
-          background: "rgba(10,10,8,0.85)",
-          backdropFilter: "blur(12px)",
-          borderBottom: `1px solid rgba(201,147,90,0.08)`,
+          background: "transparent",
+          borderBottom: "none",
         }}
       >
         <div

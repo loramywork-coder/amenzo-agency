@@ -99,9 +99,8 @@ function NavHeader() {
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          background: "rgba(10,10,8,0.85)",
-          backdropFilter: "blur(12px)",
-          borderBottom: "1px solid rgba(255,255,255,0.06)",
+          background: "transparent",
+          borderBottom: "none",
         }}
       >
         {/* Logo */}
@@ -504,7 +503,7 @@ export default function RestaurantPage() {
           paddingTop: 40,
         }}
       >
-        <VideoHeroBg src="/videos/demo-restaurant.mp4" gradient="linear-gradient(to bottom, rgba(10,10,8,0.4) 0%, rgba(10,10,8,0.25) 40%, rgba(10,10,8,0.65) 75%, rgba(10,10,8,0.95) 95%)" startOpacity={0.7} />
+        <VideoHeroBg src="/videos/demo-restaurant.mp4" gradient="linear-gradient(to bottom, rgba(10,10,8,0.1) 0%, rgba(10,10,8,0.06) 35%, rgba(10,10,8,0.3) 65%, rgba(10,10,8,0.9) 92%)" startOpacity={0.75} />
         {/* content */}
         <div
           style={{

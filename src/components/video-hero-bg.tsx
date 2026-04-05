@@ -47,7 +47,7 @@ export function VideoHeroBg({ src, gradient, startOpacity = 0.7 }: { src: string
         className="absolute inset-0"
         style={{
           background: gradient ||
-            "linear-gradient(to bottom, rgba(10,10,10,0.35) 0%, rgba(10,10,10,0.2) 40%, rgba(10,10,10,0.6) 75%, rgba(10,10,10,0.95) 95%)",
+            "linear-gradient(to bottom, rgba(10,10,10,0.1) 0%, rgba(10,10,10,0.06) 35%, rgba(10,10,10,0.3) 65%, rgba(10,10,10,0.9) 92%)",
         }}
       />
     </div>

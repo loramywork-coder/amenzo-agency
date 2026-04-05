@@ -58,9 +58,8 @@ function SiteNav() {
     <nav
       className="fixed top-10 left-0 right-0 z-50 transition-all duration-500"
       style={{
-        background: scrolled ? "rgba(10,15,28,0.95)" : "transparent",
-        backdropFilter: scrolled ? "blur(20px)" : "none",
-        borderBottom: scrolled ? `1px solid ${C.border}` : "1px solid transparent",
+        background: "transparent",
+        borderBottom: "none",
       }}
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-16 md:h-20">

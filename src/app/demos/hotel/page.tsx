@@ -179,9 +179,8 @@ function NavHeader() {
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          background: "rgba(12,18,32,0.85)",
-          backdropFilter: "blur(12px)",
-          borderBottom: "1px solid rgba(255,255,255,0.06)",
+          background: "transparent",
+          borderBottom: "none",
         }}
       >
         {/* Logo */}
@@ -325,7 +324,7 @@ function SiteFooter() {
       style={{
         background: C.bg,
         borderTop: `1px solid ${C.border}`,
-        padding: "64px 24px 48px",
+        padding: "80px 24px 56px",
       }}
     >
       <div
@@ -553,7 +552,7 @@ export default function HotelPage() {
       <section
         style={{ position: "relative", minHeight: "100vh", overflow: "hidden", paddingTop: 40 }}
       >
-        <VideoHeroBg src="/videos/demo-hotel.mp4" gradient="linear-gradient(to bottom, rgba(12,18,32,0.2) 0%, rgba(12,18,32,0.1) 40%, rgba(12,18,32,0.5) 75%, rgba(12,18,32,0.9) 95%)" startOpacity={0.75} />
+        <VideoHeroBg src="/videos/demo-hotel.mp4" gradient="linear-gradient(to bottom, rgba(12,18,32,0.08) 0%, rgba(12,18,32,0.04) 35%, rgba(12,18,32,0.25) 65%, rgba(12,18,32,0.85) 92%)" startOpacity={0.8} />
 
         {/* hero content */}
         <div style={{ position: "relative", zIndex: 10, minHeight: "100vh" }} className="flex flex-col items-center justify-center text-center px-6" >
@@ -699,8 +698,8 @@ export default function HotelPage() {
           ═══════════════════════════════════════ */}
       <section
         style={{
-          padding: "120px 24px",
-          maxWidth: 820,
+          padding: "160px 24px",
+          maxWidth: 860,
           margin: "0 auto",
           textAlign: "center",
         }}
@@ -756,7 +755,7 @@ export default function HotelPage() {
           SECTION 3 - ROOMS PREVIEW
           ═══════════════════════════════════════ */}
       <section
-        style={{ padding: "40px 24px 100px", maxWidth: 1200, margin: "0 auto" }}
+        style={{ padding: "100px 24px 140px", maxWidth: 1300, margin: "0 auto" }}
       >
         <Reveal type="fade">
           <p
@@ -782,7 +781,7 @@ export default function HotelPage() {
               fontSize: "clamp(32px, 4vw, 48px)",
               fontWeight: 300,
               color: C.cream,
-              marginBottom: 56,
+              marginBottom: 72,
             }}
           >
             Rooms &amp; Suites
@@ -793,7 +792,7 @@ export default function HotelPage() {
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(3, 1fr)",
-            gap: 20,
+            gap: 28,
           }}
           className="hotel-rooms-grid"
         >
@@ -805,7 +804,7 @@ export default function HotelPage() {
                   position: "relative",
                   overflow: "hidden",
                   borderRadius: 4,
-                  height: 480,
+                  height: 540,
                   cursor: "pointer",
                 }}
               >
@@ -916,7 +915,7 @@ export default function HotelPage() {
           SECTION 4 - DINING
           ═══════════════════════════════════════ */}
       <section
-        style={{ padding: "100px 24px", maxWidth: 1200, margin: "0 auto" }}
+        style={{ padding: "140px 24px", maxWidth: 1300, margin: "0 auto" }}
       >
         <Reveal type="fade">
           <p
@@ -928,7 +927,7 @@ export default function HotelPage() {
               fontSize: 12,
               fontWeight: 500,
               textTransform: "uppercase",
-              marginBottom: 12,
+              marginBottom: 14,
             }}
           >
             Gastronomy
@@ -942,7 +941,7 @@ export default function HotelPage() {
               fontSize: "clamp(32px, 4vw, 48px)",
               fontWeight: 300,
               color: C.cream,
-              marginBottom: 64,
+              marginBottom: 80,
             }}
           >
             Dining &amp; Drinks
@@ -952,8 +951,8 @@ export default function HotelPage() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
-            gap: 20,
+            gridTemplateColumns: "repeat(auto-fill, minmax(340px, 1fr))",
+            gap: 28,
           }}
         >
           {restaurants.map((r, i) => (
@@ -1129,8 +1128,8 @@ export default function HotelPage() {
       {/* ═══════════════════════════════════════
           SECTION 6 - AMENITIES
           ═══════════════════════════════════════ */}
-      <section id="amenities" style={{ padding: "100px 24px", background: C.surface }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+      <section id="amenities" style={{ padding: "140px 24px", background: C.surface }}>
+        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <Reveal type="fade">
             <p
               style={{
@@ -1155,7 +1154,7 @@ export default function HotelPage() {
                 fontSize: "clamp(32px, 4vw, 48px)",
                 fontWeight: 300,
                 color: C.cream,
-                marginBottom: 64,
+                marginBottom: 80,
               }}
             >
               Hotel Amenities
@@ -1165,15 +1164,15 @@ export default function HotelPage() {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))",
-              gap: 24,
+              gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))",
+              gap: 28,
             }}
           >
             {amenities.map((a, i) => (
               <Reveal key={a.title} type="slide-up" delay={i * 0.07}>
                 <div
                   style={{
-                    padding: "36px 28px",
+                    padding: "44px 32px",
                     border: `1px solid rgba(201,169,110,0.15)`,
                     borderRadius: 4,
                     textAlign: "center",
@@ -1240,9 +1239,9 @@ export default function HotelPage() {
       {/* ═══════════════════════════════════════
           SECTION 7 - TESTIMONIALS
           ═══════════════════════════════════════ */}
-      <section style={{ padding: "100px 24px", textAlign: "center" }}>
+      <section style={{ padding: "140px 24px", textAlign: "center" }}>
         <Reveal type="fade">
-          <div style={{ maxWidth: 720, margin: "0 auto" }}>
+          <div style={{ maxWidth: 760, margin: "0 auto" }}>
             {/* gold quote mark */}
             <div
               style={{
@@ -1346,14 +1345,14 @@ export default function HotelPage() {
       {/* ═══════════════════════════════════════
           SECTION 8 - LOCATION
           ═══════════════════════════════════════ */}
-      <section style={{ padding: "80px 24px", background: C.surface }}>
+      <section style={{ padding: "140px 24px", background: C.surface }}>
         <div
           style={{
-            maxWidth: 1100,
+            maxWidth: 1200,
             margin: "0 auto",
             display: "grid",
             gridTemplateColumns: "1fr 1fr",
-            gap: 48,
+            gap: 72,
             alignItems: "center",
           }}
           className="hotel-location-grid"
@@ -1484,7 +1483,7 @@ export default function HotelPage() {
       <section
         id="events"
         className="relative overflow-hidden"
-        style={{ padding: "120px 24px", textAlign: "center" }}
+        style={{ padding: "160px 24px", textAlign: "center" }}
       >
         {/* background image */}
         <div className="absolute inset-0">

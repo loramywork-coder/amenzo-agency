@@ -141,9 +141,8 @@ function NavHeader() {
           alignItems: "center",
           justifyContent: "space-between",
           padding: "0 24px",
-          background: scrolled ? "rgba(8,8,8,0.95)" : "transparent",
-          backdropFilter: scrolled ? "blur(12px)" : "none",
-          borderBottom: scrolled ? `1px solid ${C.border}` : "1px solid transparent",
+          background: "transparent",
+          borderBottom: "none",
           transition: "background 0.4s, border-color 0.4s",
         }}
       >
