@@ -1,12 +1,12 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Reveal from "@/components/demos/Reveal";
-import MagneticButton from "@/components/demos/MagneticButton";
-import TextScramble from "@/components/demos/TextScramble";
+
 import { DemoBanner } from "@/components/demos/demo-banner";
+import { VideoHeroBg } from "@/components/video-hero-bg";
 
 /* ─── palette ─── */
 const C = {
@@ -77,14 +77,7 @@ const NAV_LINKS = [
 
 /* ━━━ NAV HEADER ━━━ */
 function NavHeader() {
-  const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   useEffect(() => {
     if (mobileOpen) document.body.style.overflow = "hidden";
@@ -101,15 +94,14 @@ function NavHeader() {
           left: 0,
           right: 0,
           zIndex: 50,
-          padding: "0 24px",
-          height: 64,
+          padding: "10px 28px",
+          height: 72,
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          background: scrolled ? "rgba(10,10,8,0.95)" : "transparent",
-          backdropFilter: scrolled ? "blur(12px)" : "none",
-          borderBottom: scrolled ? `1px solid ${C.border}` : "1px solid transparent",
-          transition: "background 0.4s, border-color 0.4s, backdrop-filter 0.4s",
+          background: "rgba(10,10,8,0.85)",
+          backdropFilter: "blur(12px)",
+          borderBottom: "1px solid rgba(255,255,255,0.06)",
         }}
       >
         {/* Logo */}
@@ -143,71 +135,12 @@ function NavHeader() {
           </div>
         </Link>
 
-        {/* Desktop nav */}
-        <nav
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 32,
-          }}
-          className="rest-desktop-nav"
-        >
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.label}
-              href={link.href}
-              style={{
-                fontFamily: fontBody,
-                fontSize: 11,
-                letterSpacing: "0.18em",
-                textTransform: "uppercase",
-                color: "rgba(245,230,211,0.6)",
-                textDecoration: "none",
-                transition: "color 0.25s",
-              }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.color = C.cream;
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLElement).style.color =
-                  "rgba(245,230,211,0.6)";
-              }}
-            >
-              {link.label}
-            </Link>
-          ))}
-          <Link
-            href="/demos/restaurant/contact"
-            style={{
-              fontFamily: fontBody,
-              fontSize: 11,
-              fontWeight: 600,
-              letterSpacing: "0.1em",
-              textTransform: "uppercase",
-              padding: "10px 22px",
-              background: C.gold,
-              color: C.bg,
-              textDecoration: "none",
-              transition: "opacity 0.25s",
-            }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLElement).style.opacity = "0.85";
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLElement).style.opacity = "1";
-            }}
-          >
-            Reserve a Table
-          </Link>
-        </nav>
-
-        {/* Mobile hamburger */}
+        {/* Hamburger */}
         <button
-          className="rest-mobile-hamburger"
           onClick={() => setMobileOpen(true)}
           aria-label="Open menu"
           style={{
-            display: "none",
+            display: "flex",
             background: "none",
             border: "none",
             cursor: "pointer",
@@ -309,15 +242,6 @@ function NavHeader() {
         )}
       </AnimatePresence>
 
-      {/* Responsive CSS */}
-      <style>{`
-        .rest-desktop-nav{display:flex!important;}
-        .rest-mobile-hamburger{display:none!important;}
-        @media(max-width:899px){
-          .rest-desktop-nav{display:none!important;}
-          .rest-mobile-hamburger{display:flex!important;}
-        }
-      `}</style>
     </>
   );
 }
@@ -575,50 +499,24 @@ export default function RestaurantPage() {
       <section
         style={{
           position: "relative",
-          height: "100vh",
+          minHeight: "100svh",
           overflow: "hidden",
           paddingTop: 40,
         }}
       >
-        {/* Ken Burns */}
-        <motion.div
-          initial={{ scale: 1 }}
-          animate={{ scale: 1.08 }}
-          transition={{
-            duration: 25,
-            ease: "linear" as const,
-            repeat: Infinity,
-            repeatType: "reverse" as const,
-          }}
-          style={{
-            position: "absolute",
-            inset: 0,
-            backgroundImage: `url(${IMAGES.hero})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        />
-        {/* gradient overlay */}
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            background:
-              "linear-gradient(to bottom, rgba(10,10,8,0.5) 0%, rgba(10,10,8,0.7) 50%, rgba(10,10,8,0.95) 100%)",
-          }}
-        />
+        <VideoHeroBg src="/videos/demo-restaurant.mp4" gradient="linear-gradient(to bottom, rgba(10,10,8,0.4) 0%, rgba(10,10,8,0.25) 40%, rgba(10,10,8,0.65) 75%, rgba(10,10,8,0.95) 95%)" startOpacity={0.7} />
         {/* content */}
         <div
           style={{
             position: "relative",
-            zIndex: 2,
+            zIndex: 10,
             height: "100%",
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
             textAlign: "center",
-            padding: "0 24px",
+            padding: "140px 24px 0",
           }}
         >
           <Reveal type="fade" delay={0.2}>
@@ -692,7 +590,7 @@ export default function RestaurantPage() {
                 justifyContent: "center",
               }}
             >
-              <MagneticButton href="/demos/restaurant/contact">
+              <Link href="/demos/restaurant/contact">
                 <span
                   style={{
                     display: "inline-block",
@@ -709,8 +607,8 @@ export default function RestaurantPage() {
                 >
                   Reserve a Table
                 </span>
-              </MagneticButton>
-              <MagneticButton href="/demos/restaurant/menu">
+              </Link>
+              <Link href="/demos/restaurant/menu">
                 <span
                   style={{
                     display: "inline-block",
@@ -728,7 +626,7 @@ export default function RestaurantPage() {
                 >
                   Explore the Menu
                 </span>
-              </MagneticButton>
+              </Link>
             </div>
           </Reveal>
         </div>
@@ -1067,7 +965,7 @@ export default function RestaurantPage() {
                 marginBottom: 20,
               }}
             >
-              <TextScramble text="Every plate is a canvas." speed={35} />
+              Every plate is a canvas.
             </div>
           </Reveal>
           <Reveal type="fade" delay={0.3}>
@@ -1376,7 +1274,7 @@ export default function RestaurantPage() {
             </Reveal>
 
             <Reveal type="slide-right" delay={0.3}>
-              <MagneticButton href="/demos/restaurant/contact">
+              <Link href="/demos/restaurant/contact">
                 <span
                   style={{
                     display: "inline-block",
@@ -1393,7 +1291,7 @@ export default function RestaurantPage() {
                 >
                   Book a Table
                 </span>
-              </MagneticButton>
+              </Link>
             </Reveal>
           </div>
         </div>

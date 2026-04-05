@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, ReactNode } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import Link from "next/link";
 import { DemoBanner } from "@/components/demos/demo-banner";
+import { VideoHeroBg } from "@/components/video-hero-bg";
 
 /* ─────────────────────────── DATA ─────────────────────────── */
 
@@ -64,7 +65,15 @@ function Nav() {
 
   return (
     <>
-      <nav className="fixed top-10 left-0 right-0 z-50 px-6 md:px-12">
+      <nav
+        className="fixed left-0 right-0 z-50 px-6 md:px-12"
+        style={{
+          top: 40,
+          background: "rgba(10,10,10,0.85)",
+          backdropFilter: "blur(12px)",
+          borderBottom: "1px solid rgba(255,255,255,0.06)",
+        }}
+      >
         <div className="max-w-7xl mx-auto flex items-center justify-between py-5">
           <Link
             href="/demos/gallery"
@@ -74,41 +83,9 @@ function Nav() {
             Atelier Noir
           </Link>
 
-          <div className="hidden md:flex items-center gap-8">
-            <Link
-              href="/demos/gallery/exhibition"
-              className="text-[11px] tracking-[0.15em] uppercase transition-colors duration-300 hover:text-white/60"
-              style={{ color: "rgba(255,255,255,0.3)" }}
-            >
-              Exhibition
-            </Link>
-            <Link
-              href="/demos/gallery/collection"
-              className="text-[11px] tracking-[0.15em] uppercase transition-colors duration-300 hover:text-white/60"
-              style={{ color: "rgba(255,255,255,0.3)" }}
-            >
-              Collection
-            </Link>
-            <a
-              href="#visit"
-              className="text-[11px] tracking-[0.15em] uppercase transition-colors duration-300 hover:text-white/60"
-              style={{ color: "rgba(255,255,255,0.3)" }}
-            >
-              Visit
-            </a>
-          </div>
-
           <button
             onClick={() => setMenuOpen(true)}
-            className="text-[11px] tracking-[0.15em] uppercase transition-colors duration-300 hover:text-white/60 md:hidden"
-            style={{ color: "rgba(255,255,255,0.3)" }}
-          >
-            Menu
-          </button>
-
-          <button
-            onClick={() => setMenuOpen(true)}
-            className="text-[11px] tracking-[0.15em] uppercase transition-colors duration-300 hover:text-white/60 hidden md:block"
+            className="text-[11px] tracking-[0.15em] uppercase transition-colors duration-300 hover:text-white/60"
             style={{ color: "rgba(255,255,255,0.3)" }}
           >
             Menu
@@ -199,7 +176,8 @@ function Hero() {
 
   return (
     <section className="relative h-screen flex flex-col items-center justify-center bg-[#0A0A0A] overflow-hidden">
-      <div className="text-center">
+      <VideoHeroBg src="/videos/demo-gallery.mp4" gradient="linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.25) 40%, rgba(0,0,0,0.65) 75%, rgba(0,0,0,0.95) 95%)" startOpacity={0.65} />
+      <div className="relative z-10 text-center">
         <h1
           className="text-[80px] font-light tracking-[0.15em] uppercase leading-none"
           style={{ color: "rgba(255,255,255,0.8)" }}

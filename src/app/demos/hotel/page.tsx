@@ -3,6 +3,7 @@
 import Reveal from "@/components/demos/Reveal";
 import MagneticButton from "@/components/demos/MagneticButton";
 import { DemoBanner } from "@/components/demos/demo-banner";
+import { VideoHeroBg } from "@/components/video-hero-bg";
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect, useRef, useCallback } from "react";
@@ -154,14 +155,7 @@ const NAV_LINKS = [
    NAV HEADER
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 function NavHeader() {
-  const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   useEffect(() => {
     if (mobileOpen) document.body.style.overflow = "hidden";
@@ -180,18 +174,14 @@ function NavHeader() {
           left: 0,
           right: 0,
           zIndex: 50,
-          padding: "0 24px",
-          height: 64,
+          padding: "8px 24px",
+          height: 80,
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          background: scrolled ? "rgba(12,18,32,0.95)" : "transparent",
-          backdropFilter: scrolled ? "blur(12px)" : "none",
-          borderBottom: scrolled
-            ? `1px solid ${C.border}`
-            : "1px solid transparent",
-          transition:
-            "background 0.4s, border-color 0.4s, backdrop-filter 0.4s",
+          background: "rgba(12,18,32,0.85)",
+          backdropFilter: "blur(12px)",
+          borderBottom: "1px solid rgba(255,255,255,0.06)",
         }}
       >
         {/* Logo */}
@@ -221,70 +211,14 @@ function NavHeader() {
             >
               Hotel &amp; Spa
             </span>
+            <span style={{ display: "block", fontSize: 7, color: C.gold, letterSpacing: "0.25em", marginTop: 4 }}>
+              ★ ★ ★ ★ ★
+            </span>
           </div>
         </Link>
 
-        {/* Desktop nav */}
-        <nav
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 32,
-          }}
-          className="hidden md:flex"
-        >
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.label}
-              href={link.href}
-              style={{
-                fontFamily: fontBody,
-                fontSize: 12,
-                fontWeight: 500,
-                color: C.muted,
-                textTransform: "uppercase",
-                letterSpacing: "0.1em",
-                textDecoration: "none",
-                transition: "color 0.3s",
-              }}
-              onMouseEnter={(e) =>
-                ((e.target as HTMLElement).style.color = C.cream)
-              }
-              onMouseLeave={(e) =>
-                ((e.target as HTMLElement).style.color = C.muted)
-              }
-            >
-              {link.label}
-            </Link>
-          ))}
-          <Link
-            href="/demos/hotel/contact"
-            style={{
-              fontFamily: fontBody,
-              fontSize: 12,
-              fontWeight: 600,
-              color: C.bg,
-              background: C.gold,
-              padding: "10px 24px",
-              letterSpacing: "0.08em",
-              textTransform: "uppercase",
-              textDecoration: "none",
-              transition: "opacity 0.3s",
-            }}
-            onMouseEnter={(e) =>
-              ((e.target as HTMLElement).style.opacity = "0.85")
-            }
-            onMouseLeave={(e) =>
-              ((e.target as HTMLElement).style.opacity = "1")
-            }
-          >
-            Book Your Stay
-          </Link>
-        </nav>
-
-        {/* Mobile hamburger */}
+        {/* Hamburger menu — all screen sizes */}
         <button
-          className="md:hidden"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Toggle menu"
           style={{
@@ -591,9 +525,6 @@ function SiteFooter() {
    MAIN COMPONENT
    ═══════════════════════════════════════════════════════ */
 export default function HotelPage() {
-  /* hero Ken Burns trigger */
-  const [heroLoaded, setHeroLoaded] = useState(false);
-
   /* spa parallax offset */
   const [scrollY, setScrollY] = useState(0);
   useEffect(() => {
@@ -620,39 +551,12 @@ export default function HotelPage() {
           SECTION 1 - HERO (100vh)
           ═══════════════════════════════════════ */}
       <section
-        className="relative overflow-hidden"
-        style={{ height: "100vh", paddingTop: 40 }}
+        style={{ position: "relative", minHeight: "100vh", overflow: "hidden", paddingTop: 40 }}
       >
-        {/* background image with Ken Burns */}
-        <div
-          className="absolute inset-0"
-          style={{
-            animation: heroLoaded
-              ? "kenburns 25s ease-in-out infinite alternate"
-              : "none",
-          }}
-        >
-          <Image
-            src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1920&q=85"
-            alt="Grand Harbour Hotel aerial view"
-            fill
-            priority
-            className="object-cover"
-            onLoad={() => setHeroLoaded(true)}
-          />
-        </div>
-
-        {/* gradient overlay */}
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "linear-gradient(to bottom, rgba(12,18,32,0.4) 0%, rgba(12,18,32,0.65) 55%, rgba(12,18,32,0.95) 100%)",
-          }}
-        />
+        <VideoHeroBg src="/videos/demo-hotel.mp4" gradient="linear-gradient(to bottom, rgba(12,18,32,0.2) 0%, rgba(12,18,32,0.1) 40%, rgba(12,18,32,0.5) 75%, rgba(12,18,32,0.9) 95%)" startOpacity={0.75} />
 
         {/* hero content */}
-        <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-6">
+        <div style={{ position: "relative", zIndex: 10, minHeight: "100vh" }} className="flex flex-col items-center justify-center text-center px-6" >
           <Reveal type="fade" delay={0.2}>
             <p
               style={{

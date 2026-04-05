@@ -5,7 +5,6 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { DemoBanner } from "@/components/demos/demo-banner";
 import Reveal from "@/components/demos/Reveal";
-import MagneticButton from "@/components/demos/MagneticButton";
 
 /* ------------------------------------------------------------------ */
 /*  PALETTE                                                           */
@@ -64,7 +63,7 @@ const TRAINERS: Trainer[] = [
     specialty: "BOXING & COMBAT",
     experience: "15 YEARS",
     bio: [
-      "Danny represented Malta on the national boxing team for seven years, competing across Europe and bringing elite-level fight knowledge to his coaching.",
+      "Danny competed on the national boxing team for seven years, competing across Europe and bringing elite-level fight knowledge to his coaching.",
       "His Boxing Fit class breaks down professional techniques into accessible drills, making combat fitness available to beginners while challenging seasoned fighters.",
       "With 15 years of combined competition and coaching experience, Danny has developed a reputation for building confidence as much as physical power.",
     ],
@@ -157,14 +156,14 @@ function FitFooter() {
               <span style={{ color: GREEN }}>ZONE</span>
             </div>
             <p className="mt-4 max-w-xs text-[13px] leading-relaxed" style={{ color: MUTED }}>
-              Malta&apos;s premier fitness facility. Transforming bodies and lives since 2018.
+              Premium fitness facility. Transforming bodies and lives since 2018.
             </p>
           </div>
           <div>
             <h4 className="text-[11px] font-semibold uppercase tracking-widest" style={{ color: WHITE }}>LOCATION</h4>
             <div className="mt-4 space-y-2 text-[13px]" style={{ color: MUTED }}>
-              <p>23 Strand Street</p>
-              <p>Sliema, Malta</p>
+              <p>23 Harbour Street</p>
+              <p>Downtown</p>
             </div>
           </div>
           <div>
@@ -183,7 +182,7 @@ function FitFooter() {
               </span>
             ))}
           </div>
-          <span className="text-[12px]" style={{ color: MUTED }}>&copy; 2026 FitZone Malta. All rights reserved.</span>
+          <span className="text-[12px]" style={{ color: MUTED }}>&copy; 2026 FitZone. All rights reserved.</span>
         </div>
       </div>
     </footer>
@@ -314,14 +313,14 @@ export default function TrainersPage() {
 
                   {/* Book Session button */}
                   <div className="mt-8">
-                    <MagneticButton>
+                    <Link href="#">
                       <span
                         className="inline-block rounded-full px-8 py-3.5 text-[13px] font-semibold uppercase tracking-wider transition-all hover:brightness-110"
                         style={{ background: GREEN, color: "#000" }}
                       >
                         BOOK SESSION
                       </span>
-                    </MagneticButton>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -368,14 +367,14 @@ export default function TrainersPage() {
               Book a free consultation with any of our coaches.
             </p>
             <div className="mt-8">
-              <MagneticButton>
+              <Link href="#">
                 <span
                   className="inline-block rounded-full px-10 py-4 text-[14px] font-bold uppercase tracking-wider transition-all hover:brightness-110"
                   style={{ background: GREEN, color: "#000" }}
                 >
                   START FREE TRIAL
                 </span>
-              </MagneticButton>
+              </Link>
             </div>
           </div>
         </Reveal>

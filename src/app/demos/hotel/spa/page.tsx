@@ -1,7 +1,6 @@
 "use client";
 
 import Reveal from "@/components/demos/Reveal";
-import MagneticButton from "@/components/demos/MagneticButton";
 import { DemoBanner } from "@/components/demos/demo-banner";
 import Image from "next/image";
 import Link from "next/link";
@@ -425,7 +424,7 @@ export default function SpaPage() {
             </p>
           </Reveal>
           <Reveal type="slide-up" delay={0.2}>
-            <MagneticButton>
+            <Link href="#">
               <span style={{
                 display: "inline-block", padding: "16px 44px",
                 background: C.gold, color: C.bg,
@@ -435,7 +434,7 @@ export default function SpaPage() {
               }}>
                 Book a Treatment
               </span>
-            </MagneticButton>
+            </Link>
           </Reveal>
         </div>
       </section>

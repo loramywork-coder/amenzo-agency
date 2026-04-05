@@ -2,13 +2,12 @@
 
 import { useEffect, useRef, useState } from "react";
 
-export function VideoHeroBg({ src }: { src: string }) {
+export function VideoHeroBg({ src, gradient, startOpacity = 0.7 }: { src: string; gradient?: string; startOpacity?: number }) {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [opacity, setOpacity] = useState(0.45);
+  const [opacity, setOpacity] = useState(startOpacity);
 
   useEffect(() => {
-    // Try to play video (some browsers block autoplay)
     const video = videoRef.current;
     if (video) {
       video.play().catch(() => {});
@@ -17,7 +16,7 @@ export function VideoHeroBg({ src }: { src: string }) {
     const onScroll = () => {
       const y = window.scrollY;
       if (y < 600) {
-        setOpacity(Math.max(0, 0.45 - (y / 600) * 0.45));
+        setOpacity(Math.max(0, startOpacity - (y / 600) * startOpacity));
       } else {
         setOpacity(0);
       }
@@ -47,8 +46,8 @@ export function VideoHeroBg({ src }: { src: string }) {
       <div
         className="absolute inset-0"
         style={{
-          background:
-            "linear-gradient(to bottom, rgba(10,10,10,0.4) 0%, rgba(10,10,10,0.25) 40%, rgba(10,10,10,0.7) 75%, rgba(10,10,10,1) 95%)",
+          background: gradient ||
+            "linear-gradient(to bottom, rgba(10,10,10,0.35) 0%, rgba(10,10,10,0.2) 40%, rgba(10,10,10,0.6) 75%, rgba(10,10,10,0.95) 95%)",
         }}
       />
     </div>

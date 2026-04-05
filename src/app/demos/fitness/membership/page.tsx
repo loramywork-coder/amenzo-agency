@@ -483,9 +483,9 @@ export default function MembershipPage() {
         <div style={{ maxWidth: 1100, margin: "0 auto", display: "flex", flexDirection: "column", alignItems: "center", gap: 16, textAlign: "center" }}>
           <span style={{ fontFamily: fontBody, fontWeight: 700, fontSize: 14, color: C.white, letterSpacing: "0.2em" }}>FITZONE</span>
           <div style={{ fontSize: 13, color: C.muted, lineHeight: 1.8 }}>
-            <span>23 Strand Street, Sliema, Malta</span><br />
+            <span>23 Harbour Street, Downtown</span><br />
             <span>Daily 5:00 AM &ndash; 11:00 PM</span><br />
-            <span>hello@fitzonemalta.com</span>
+            <span>hello@fitzone.com</span>
           </div>
           <div style={{ display: "flex", gap: 20, marginTop: 8 }}>
             {["Privacy", "Impressum"].map((t) => (
@@ -506,7 +506,7 @@ export default function MembershipPage() {
               </a>
             </span>
           </div>
-          <span style={{ fontSize: 11, color: "rgba(255,255,255,0.2)" }}>&copy; 2026 FitZone Malta</span>
+          <span style={{ fontSize: 11, color: "rgba(255,255,255,0.2)" }}>&copy; 2026 FitZone</span>
         </div>
       </footer>
     </div>

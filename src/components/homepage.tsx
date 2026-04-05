@@ -14,9 +14,9 @@ import { GooeyReveal } from "@/components/ui/gooey-reveal";
 const projects = [
   { num: "01", name: "Grand Harbour Hotel", desc: "10-page luxury hotel with virtual tours & booking", cat: "HOSPITALITY", slug: "hotel" },
   { num: "02", name: "Porto Valletta", desc: "9-page fine dining with reservations & tasting menus", cat: "GASTRO", slug: "restaurant" },
-  { num: "03", name: "MaltaLiving", desc: "8-page property agency with listings & area guides", cat: "REAL ESTATE", slug: "realestate" },
+  { num: "03", name: "Mediterranean Living", desc: "8-page property agency with listings & area guides", cat: "REAL ESTATE", slug: "realestate" },
   { num: "04", name: "Dr. Vella Dental", desc: "8-page dental clinic with booking & treatments", cat: "HEALTHCARE", slug: "dental" },
-  { num: "05", name: "FitZone Malta", desc: "8-page fitness gym with classes & membership", cat: "FITNESS", slug: "fitness" },
+  { num: "05", name: "FitZone", desc: "8-page fitness gym with classes & membership", cat: "FITNESS", slug: "fitness" },
   { num: "06", name: "Atelier Noir", desc: "7-page art gallery with exhibitions & artists", cat: "ART & CULTURE", slug: "gallery" },
 ];
 

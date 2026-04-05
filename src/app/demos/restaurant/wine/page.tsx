@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Reveal from "@/components/demos/Reveal";
-import MagneticButton from "@/components/demos/MagneticButton";
 import { DemoBanner } from "@/components/demos/demo-banner";
 
 /* ─── palette ─── */
@@ -840,7 +839,7 @@ export default function WinePage() {
           </Reveal>
 
           <Reveal type="fade" delay={0.6}>
-            <MagneticButton href="/demos/restaurant/contact">
+            <Link href="/demos/restaurant/contact">
               <span
                 style={{
                   display: "inline-block",
@@ -857,7 +856,7 @@ export default function WinePage() {
               >
                 Book a Wine Experience
               </span>
-            </MagneticButton>
+            </Link>
           </Reveal>
         </div>
       </section>

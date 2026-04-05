@@ -132,10 +132,9 @@ export default function ImpressumPage() {
         <div style={sectionStyle}>
           <h2 style={headingStyle}>Company Information</h2>
           <p style={textStyle}>
-            FitZone Malta Ltd.<br />
-            23 Strand Street<br />
-            Sliema SLM 1022<br />
-            Malta
+            FitZone Ltd.<br />
+            23 Harbour Street<br />
+            Downtown
           </p>
         </div>
 
@@ -143,15 +142,15 @@ export default function ImpressumPage() {
           <h2 style={headingStyle}>Contact</h2>
           <p style={textStyle}>
             Phone: +356 2123 4567<br />
-            Email: hello@fitzonemalta.com<br />
-            Website: www.fitzonemalta.com
+            Email: hello@fitzone.com<br />
+            Website: www.fitzone.com
           </p>
         </div>
 
         <div style={sectionStyle}>
           <h2 style={headingStyle}>Registration</h2>
           <p style={textStyle}>
-            Malta Business Registry: C 12345<br />
+            Business Registry: C 12345<br />
             VAT Number: MT 1234 5678
           </p>
         </div>
@@ -166,8 +165,8 @@ export default function ImpressumPage() {
         <div style={sectionStyle}>
           <h2 style={headingStyle}>Responsible for Content</h2>
           <p style={textStyle}>
-            FitZone Malta Ltd.<br />
-            23 Strand Street, Sliema SLM 1022, Malta
+            FitZone Ltd.<br />
+            23 Harbour Street, Downtown
           </p>
         </div>
 
@@ -197,7 +196,7 @@ export default function ImpressumPage() {
           }}
         >
           <p style={{ fontSize: 13, color: C.muted, lineHeight: 1.7, margin: 0 }}>
-            <strong style={{ color: C.white }}>Demo Disclaimer:</strong> This is a fictional demonstration website created by Amenzo to showcase web design capabilities. FitZone Malta is not a real business. All content, names, addresses, and data are entirely fictitious and used for illustrative purposes only. No real services are offered through this website.
+            <strong style={{ color: C.white }}>Demo Disclaimer:</strong> This is a fictional demonstration website created by Amenzo to showcase web design capabilities. FitZone is not a real business. All content, names, addresses, and data are entirely fictitious and used for illustrative purposes only. No real services are offered through this website.
           </p>
         </div>
       </section>
@@ -207,9 +206,9 @@ export default function ImpressumPage() {
         <div style={{ maxWidth: 1100, margin: "0 auto", display: "flex", flexDirection: "column", alignItems: "center", gap: 16, textAlign: "center" }}>
           <span style={{ fontWeight: 700, fontSize: 14, color: C.white, letterSpacing: "0.2em" }}>FITZONE</span>
           <div style={{ fontSize: 13, color: C.muted, lineHeight: 1.8 }}>
-            <span>23 Strand Street, Sliema, Malta</span><br />
+            <span>23 Harbour Street, Downtown</span><br />
             <span>Daily 5:00 AM &ndash; 11:00 PM</span><br />
-            <span>hello@fitzonemalta.com</span>
+            <span>hello@fitzone.com</span>
           </div>
           <div style={{ display: "flex", gap: 20, marginTop: 8 }}>
             {["Privacy", "Impressum"].map((t) => (
@@ -223,7 +222,7 @@ export default function ImpressumPage() {
               Site by <a href="https://amenzo.co" target="_blank" rel="noopener noreferrer" style={{ color: C.green, textDecoration: "none" }}>Amenzo</a>
             </span>
           </div>
-          <span style={{ fontSize: 11, color: "rgba(255,255,255,0.2)" }}>&copy; 2026 FitZone Malta</span>
+          <span style={{ fontSize: 11, color: "rgba(255,255,255,0.2)" }}>&copy; 2026 FitZone</span>
         </div>
       </footer>
     </div>

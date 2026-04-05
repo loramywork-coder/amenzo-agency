@@ -53,7 +53,7 @@ function SiteNav() {
             className="text-xl font-bold tracking-tight"
             style={{ fontFamily: "var(--font-display), system-ui", color: C.white }}
           >
-            MALTA <span style={{ color: C.gold }}>LIVING</span>
+            MEDITERRANEAN <span style={{ color: C.gold }}>LIVING</span>
           </span>
         </Link>
 
@@ -134,7 +134,7 @@ function SiteFooter() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-12 mb-16">
           <div>
             <h3 className="text-xl font-bold mb-4" style={{ fontFamily: "var(--font-display), system-ui" }}>
-              <span style={{ color: C.white }}>MALTA </span>
+              <span style={{ color: C.white }}>MEDITERRANEAN </span>
               <span style={{ color: C.gold }}>LIVING</span>
             </h3>
             <p className="text-sm leading-relaxed mb-4" style={{ color: C.muted }}>
@@ -168,7 +168,7 @@ function SiteFooter() {
             </div>
             <div className="flex items-center gap-3 mb-4">
               <Mail size={14} style={{ color: C.gold }} />
-              <span className="text-sm" style={{ color: C.muted }}>info@maltaliving.mt</span>
+              <span className="text-sm" style={{ color: C.muted }}>info@mediterraneanliving.com</span>
             </div>
             <div className="flex items-center gap-3 mb-6">
               <MapPin size={14} style={{ color: C.gold }} />
@@ -189,7 +189,7 @@ function SiteFooter() {
         </div>
 
         <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4" style={{ borderTop: `1px solid ${C.border}` }}>
-          <p className="text-xs" style={{ color: C.muted }}>&copy; 2026 Malta Living. All rights reserved.</p>
+          <p className="text-xs" style={{ color: C.muted }}>&copy; 2026 Mediterranean Living. All rights reserved.</p>
           <div className="flex gap-6">
             {["Privacy Policy", "Terms of Service", "Cookie Settings"].map((item) => (
               <span key={item} className="text-xs cursor-pointer transition-colors hover:text-white" style={{ color: C.muted }}>{item}</span>
@@ -376,7 +376,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <p className="text-sm font-medium mb-0.5">Email</p>
-                  <p className="text-sm" style={{ color: C.muted }}>info@maltaliving.mt</p>
+                  <p className="text-sm" style={{ color: C.muted }}>info@mediterraneanliving.com</p>
                 </div>
               </div>
 

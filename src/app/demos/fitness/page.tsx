@@ -1,12 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { DemoBanner } from "@/components/demos/demo-banner";
+import { VideoHeroBg } from "@/components/video-hero-bg";
 import Reveal from "@/components/demos/Reveal";
-import MagneticButton from "@/components/demos/MagneticButton";
 
 /* ------------------------------------------------------------------ */
 /*  PALETTE                                                           */
@@ -128,7 +128,7 @@ const TESTIMONIALS: Testimonial[] = [
     stars: 5,
   },
   {
-    quote: "Best gym in Malta, hands down. The HIIT classes with Alex are absolutely brutal in the best way. Lost 12kg in 3 months.",
+    quote: "Best gym in the city, hands down. The HIIT classes with Alex are absolutely brutal in the best way. Lost 12kg in 3 months.",
     name: "James K.",
     stars: 5,
   },
@@ -151,49 +151,93 @@ const NAV_LINKS = [
 /*  INLINE NAV                                                        */
 /* ------------------------------------------------------------------ */
 function FitNav() {
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handler = () => setScrolled(window.scrollY > 40);
-    window.addEventListener("scroll", handler, { passive: true });
-    return () => window.removeEventListener("scroll", handler);
-  }, []);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <nav
-      className="fixed top-10 left-0 right-0 z-50 transition-all duration-300"
-      style={{
-        background: scrolled ? "rgba(8,8,8,0.92)" : "transparent",
-        backdropFilter: scrolled ? "blur(16px)" : "none",
-        borderBottom: scrolled ? `1px solid ${BORDER}` : "1px solid transparent",
-      }}
-    >
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        <Link href="/demos/fitness" className="flex items-center gap-0 text-xl font-bold uppercase tracking-wider" style={{ fontFamily: "var(--font-gym-display), sans-serif" }}>
-          <span style={{ color: WHITE }}>FIT</span>
-          <span style={{ color: GREEN }}>ZONE</span>
-        </Link>
-        <div className="hidden items-center gap-8 md:flex">
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.label}
-              href={link.href}
-              className="text-[13px] uppercase tracking-wider transition-colors hover:text-white"
-              style={{ color: MUTED, letterSpacing: "0.08em" }}
-            >
-              {link.label}
-            </Link>
-          ))}
+    <>
+      <nav
+        className="fixed left-0 right-0 z-50 transition-all duration-300"
+        style={{
+          top: 40,
+          background: "rgba(8,8,8,0.85)",
+          backdropFilter: "blur(12px)",
+          borderBottom: "1px solid rgba(255,255,255,0.06)",
+        }}
+      >
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+          <Link href="/demos/fitness" className="flex items-center gap-0 text-xl font-bold uppercase tracking-wider" style={{ fontFamily: "var(--font-gym-display), sans-serif" }}>
+            <span style={{ color: WHITE }}>FIT</span>
+            <span style={{ color: GREEN }}>ZONE</span>
+          </Link>
+          <button
+            onClick={() => setMenuOpen(true)}
+            className="flex items-center justify-center"
+            aria-label="Open menu"
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={WHITE} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <line x1="3" y1="12" x2="21" y2="12" />
+              <line x1="3" y1="18" x2="21" y2="18" />
+            </svg>
+          </button>
         </div>
-        <Link
-          href="#cta"
-          className="hidden rounded-full px-6 py-2.5 text-[13px] font-medium uppercase tracking-wider transition-all hover:brightness-110 md:inline-block"
-          style={{ background: GREEN, color: "#000" }}
-        >
-          Start Free Trial
-        </Link>
-      </div>
-    </nav>
+      </nav>
+
+      {/* Full-screen mobile overlay */}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-[60] flex flex-col items-center justify-center"
+            style={{ background: "rgba(8,8,8,0.97)" }}
+          >
+            <button
+              onClick={() => setMenuOpen(false)}
+              className="absolute top-5 right-6 text-[13px] uppercase tracking-wider"
+              style={{ color: MUTED }}
+            >
+              Close
+            </button>
+            <div className="flex flex-col items-center gap-6">
+              {NAV_LINKS.map((link, i) => (
+                <motion.div
+                  key={link.label}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.05 + i * 0.06, duration: 0.4 }}
+                >
+                  <Link
+                    href={link.href}
+                    onClick={() => setMenuOpen(false)}
+                    className="text-[24px] font-bold uppercase tracking-wider transition-colors hover:text-white"
+                    style={{ color: MUTED }}
+                  >
+                    {link.label}
+                  </Link>
+                </motion.div>
+              ))}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.05 + NAV_LINKS.length * 0.06, duration: 0.4 }}
+              >
+                <Link
+                  href="#cta"
+                  onClick={() => setMenuOpen(false)}
+                  className="mt-4 inline-block rounded-full px-8 py-3 text-[14px] font-semibold uppercase tracking-wider"
+                  style={{ background: GREEN, color: "#000" }}
+                >
+                  Start Free Trial
+                </Link>
+              </motion.div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }
 
@@ -212,15 +256,15 @@ function FitFooter() {
               <span style={{ color: GREEN }}>ZONE</span>
             </div>
             <p className="mt-4 max-w-xs text-[13px] leading-relaxed" style={{ color: MUTED }}>
-              Malta&apos;s premier fitness facility. Transforming bodies and lives since 2018.
+              Premium fitness facility. Transforming bodies and lives since 2018.
             </p>
           </div>
           {/* Address & Hours */}
           <div>
             <h4 className="text-[11px] font-semibold uppercase tracking-widest" style={{ color: WHITE }}>LOCATION</h4>
             <div className="mt-4 space-y-2 text-[13px]" style={{ color: MUTED }}>
-              <p>23 Strand Street</p>
-              <p>Sliema, Malta</p>
+              <p>23 Harbour Street</p>
+              <p>Downtown</p>
             </div>
           </div>
           <div>
@@ -240,7 +284,7 @@ function FitFooter() {
               </span>
             ))}
           </div>
-          <span className="text-[12px]" style={{ color: MUTED }}>&copy; 2026 FitZone Malta. All rights reserved.</span>
+          <span className="text-[12px]" style={{ color: MUTED }}>&copy; 2026 FitZone. All rights reserved.</span>
         </div>
       </div>
     </footer>
@@ -257,17 +301,10 @@ export default function FitnessHomePage() {
       <FitNav />
 
       {/* ════════════ 1. HERO (100vh) ════════════ */}
-      <section className="relative flex h-screen w-full items-center justify-center overflow-hidden pt-10">
-        <Image
-          src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1920&q=85"
-          alt="Premium gym interior"
-          fill
-          className="object-cover"
-          priority
-        />
-        <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.88), rgba(0,0,0,0.82))" }} />
+      <section className="relative flex h-screen w-full items-center justify-center overflow-hidden pt-10" style={{ position: "relative" }}>
+        <VideoHeroBg src="/videos/demo-fitness.mp4" gradient="linear-gradient(to bottom, rgba(8,8,8,0.4) 0%, rgba(8,8,8,0.25) 40%, rgba(8,8,8,0.65) 75%, rgba(8,8,8,0.95) 95%)" startOpacity={0.7} />
 
-        <div className="relative z-10 flex flex-col items-center px-6 text-center">
+        <div className="relative z-10 flex flex-col items-center px-6 text-center" style={{ position: "relative", zIndex: 10 }}>
           {/* Green label */}
           <motion.span
             initial={{ opacity: 0, y: -10 }}
@@ -309,7 +346,7 @@ export default function FitnessHomePage() {
             className="mt-8 max-w-lg text-[16px] leading-relaxed"
             style={{ color: MUTED }}
           >
-            Malta&apos;s premier fitness experience. 40+ classes, 15 certified trainers,
+            Premium fitness experience. 40+ classes, 15 certified trainers,
             and a community that pushes you further.
           </motion.p>
 
@@ -320,22 +357,22 @@ export default function FitnessHomePage() {
             transition={{ duration: 0.6, delay: 1.1 }}
             className="mt-10 flex flex-wrap items-center justify-center gap-4"
           >
-            <MagneticButton>
+            <Link href="#">
               <span
                 className="inline-block rounded-full px-9 py-4 text-[14px] font-semibold uppercase tracking-wider transition-all hover:brightness-110"
                 style={{ background: GREEN, color: "#000" }}
               >
                 Start Free Trial
               </span>
-            </MagneticButton>
-            <MagneticButton>
+            </Link>
+            <Link href="#">
               <span
                 className="inline-block rounded-full border-2 px-9 py-4 text-[14px] font-semibold uppercase tracking-wider transition-all hover:bg-white/5"
                 style={{ borderColor: "rgba(255,255,255,0.25)", color: "rgba(255,255,255,0.85)" }}
               >
                 View Classes
               </span>
-            </MagneticButton>
+            </Link>
           </motion.div>
         </div>
 
@@ -484,7 +521,7 @@ export default function FitnessHomePage() {
                   ))}
                 </ul>
                 <div className="mt-8">
-                  <MagneticButton>
+                  <Link href="#">
                     <span
                       className="block w-full rounded-full py-3.5 text-center text-[13px] font-semibold uppercase tracking-wider transition-all"
                       style={{
@@ -495,7 +532,7 @@ export default function FitnessHomePage() {
                     >
                       GET STARTED
                     </span>
-                  </MagneticButton>
+                  </Link>
                 </div>
               </div>
             </Reveal>
@@ -628,14 +665,14 @@ export default function FitnessHomePage() {
               First week free. No commitment. No pressure.
             </p>
             <div className="mt-10">
-              <MagneticButton>
+              <Link href="#">
                 <span
                   className="inline-block rounded-full px-12 py-5 text-[15px] font-bold uppercase tracking-wider transition-all hover:brightness-110"
                   style={{ background: GREEN, color: "#000" }}
                 >
                   START FREE TRIAL
                 </span>
-              </MagneticButton>
+              </Link>
             </div>
           </div>
         </Reveal>

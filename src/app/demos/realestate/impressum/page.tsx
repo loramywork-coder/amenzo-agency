@@ -53,7 +53,7 @@ function SiteNav() {
             className="text-xl font-bold tracking-tight"
             style={{ fontFamily: "var(--font-display), system-ui", color: C.white }}
           >
-            MALTA <span style={{ color: C.gold }}>LIVING</span>
+            MEDITERRANEAN <span style={{ color: C.gold }}>LIVING</span>
           </span>
         </Link>
 
@@ -134,7 +134,7 @@ function SiteFooter() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-12 mb-16">
           <div>
             <h3 className="text-xl font-bold mb-4" style={{ fontFamily: "var(--font-display), system-ui" }}>
-              <span style={{ color: C.white }}>MALTA </span>
+              <span style={{ color: C.white }}>MEDITERRANEAN </span>
               <span style={{ color: C.gold }}>LIVING</span>
             </h3>
             <p className="text-sm leading-relaxed mb-4" style={{ color: C.muted }}>
@@ -168,7 +168,7 @@ function SiteFooter() {
             </div>
             <div className="flex items-center gap-3 mb-4">
               <Mail size={14} style={{ color: C.gold }} />
-              <span className="text-sm" style={{ color: C.muted }}>info@maltaliving.mt</span>
+              <span className="text-sm" style={{ color: C.muted }}>info@mediterraneanliving.com</span>
             </div>
             <div className="flex items-center gap-3 mb-6">
               <MapPin size={14} style={{ color: C.gold }} />
@@ -189,7 +189,7 @@ function SiteFooter() {
         </div>
 
         <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4" style={{ borderTop: `1px solid ${C.border}` }}>
-          <p className="text-xs" style={{ color: C.muted }}>&copy; 2026 Malta Living. All rights reserved.</p>
+          <p className="text-xs" style={{ color: C.muted }}>&copy; 2026 Mediterranean Living. All rights reserved.</p>
           <div className="flex gap-6">
             {["Privacy Policy", "Terms of Service", "Cookie Settings"].map((item) => (
               <span key={item} className="text-xs cursor-pointer transition-colors hover:text-white" style={{ color: C.muted }}>{item}</span>
@@ -242,7 +242,7 @@ export default function ImpressumPage() {
           <div style={sectionStyle}>
             <h2 className="text-lg font-semibold mb-4" style={{ color: C.gold }}>Company Information</h2>
             <div className="space-y-2 text-sm leading-relaxed" style={{ color: C.muted }}>
-              <p><strong style={{ color: C.white }}>Malta Living Ltd.</strong></p>
+              <p><strong style={{ color: C.white }}>Mediterranean Living Ltd.</strong></p>
               <p>Tower Road, Sliema SLM 1600, Malta</p>
               <p>Registration No.: C-58234</p>
               <p>VAT No.: MT 2458-7231</p>
@@ -254,7 +254,7 @@ export default function ImpressumPage() {
             <h2 className="text-lg font-semibold mb-4" style={{ color: C.gold }}>Regulatory Licence</h2>
             <div className="space-y-2 text-sm leading-relaxed" style={{ color: C.muted }}>
               <p>
-                Malta Living Ltd. is licensed by the <strong style={{ color: C.white }}>Malta Financial Services Authority (MFSA)</strong> to provide property brokerage and advisory services under Licence No. <strong style={{ color: C.white }}>C-84729</strong>.
+                Mediterranean Living Ltd. is licensed by the <strong style={{ color: C.white }}>Malta Financial Services Authority (MFSA)</strong> to provide property brokerage and advisory services under Licence No. <strong style={{ color: C.white }}>C-84729</strong>.
               </p>
               <p>
                 The company operates in full compliance with the Maltese Estate Agents Act (Cap. 615) and all applicable EU directives governing property transactions and consumer protection.
@@ -267,8 +267,8 @@ export default function ImpressumPage() {
             <h2 className="text-lg font-semibold mb-4" style={{ color: C.gold }}>Contact</h2>
             <div className="space-y-2 text-sm leading-relaxed" style={{ color: C.muted }}>
               <p>Telephone: +356 2134 5678</p>
-              <p>Email: info@maltaliving.mt</p>
-              <p>Website: www.maltaliving.mt</p>
+              <p>Email: info@mediterraneanliving.com</p>
+              <p>Website: www.mediterraneanliving.com</p>
             </div>
           </div>
 
@@ -285,7 +285,7 @@ export default function ImpressumPage() {
           <div style={sectionStyle}>
             <h2 className="text-lg font-semibold mb-4" style={{ color: C.gold }}>Liability Disclaimer</h2>
             <p className="text-sm leading-relaxed" style={{ color: C.muted }}>
-              All property listings, prices, descriptions, and images on this website are provided for informational purposes only and do not constitute a binding offer. While Malta Living Ltd. takes reasonable care to ensure accuracy, we accept no liability for errors, omissions, or changes in the information presented. Prospective buyers and tenants are advised to verify all details independently before making any decisions.
+              All property listings, prices, descriptions, and images on this website are provided for informational purposes only and do not constitute a binding offer. While Mediterranean Living Ltd. takes reasonable care to ensure accuracy, we accept no liability for errors, omissions, or changes in the information presented. Prospective buyers and tenants are advised to verify all details independently before making any decisions.
             </p>
           </div>
 
@@ -300,7 +300,7 @@ export default function ImpressumPage() {
           >
             <p className="text-sm font-semibold mb-2" style={{ color: C.gold }}>Demo Disclaimer</p>
             <p className="text-xs leading-relaxed max-w-lg mx-auto" style={{ color: C.muted }}>
-              This website is a design demonstration created by Amenzo. Malta Living is a fictitious company. No real properties are listed, no transactions can be made, and no personal data is collected or stored. All names, addresses, and licence numbers are fictional.
+              This website is a design demonstration created by Amenzo. Mediterranean Living is a fictitious company. No real properties are listed, no transactions can be made, and no personal data is collected or stored. All names, addresses, and licence numbers are fictional.
             </p>
           </div>
         </div>

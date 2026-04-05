@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
 import { DemoBanner } from "@/components/demos/demo-banner";
+import { VideoHeroBg } from "@/components/video-hero-bg";
 import {
   Sparkles,
   Shield,
@@ -34,13 +35,13 @@ import {
 const C = {
   bg: "#0A1015",
   surface: "#111920",
-  teal: "#0EA5E9",
-  tealDark: "#0284C7",
+  teal: "#94B8A0",
+  tealDark: "#7DA08A",
   white: "#F8FAFC",
   muted: "#64748B",
   mutedLight: "#94A3B8",
   border: "#1E293B",
-  gold: "#F59E0B",
+  gold: "#94B8A0",
 };
 
 const FONT =
@@ -104,14 +105,7 @@ const NAV_LINKS = [
 ];
 
 function Nav() {
-  const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-
-  useEffect(() => {
-    const h = () => setScrolled(window.scrollY > 40);
-    window.addEventListener("scroll", h, { passive: true });
-    return () => window.removeEventListener("scroll", h);
-  }, []);
 
   return (
     <nav
@@ -121,10 +115,9 @@ function Nav() {
         left: 0,
         right: 0,
         zIndex: 90,
-        background: scrolled ? "rgba(10,16,21,0.95)" : "transparent",
-        backdropFilter: scrolled ? "blur(16px)" : "none",
-        borderBottom: scrolled ? `1px solid ${C.border}` : "none",
-        transition: "all 0.3s ease",
+        background: "rgba(10,16,21,0.85)",
+        backdropFilter: "blur(12px)",
+        borderBottom: "1px solid rgba(255,255,255,0.06)",
         fontFamily: FONT,
       }}
     >
@@ -149,94 +142,23 @@ function Nav() {
             textDecoration: "none",
           }}
         >
-          <div
-            style={{
-              width: 36,
-              height: 36,
-              borderRadius: 10,
-              background: `linear-gradient(135deg, ${C.teal}, ${C.tealDark})`,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <SmilePlus size={20} color="#fff" strokeWidth={2} />
-          </div>
           <span
             style={{
               fontSize: 18,
-              fontWeight: 700,
+              fontWeight: 300,
               color: C.white,
-              letterSpacing: "-0.02em",
+              letterSpacing: "0.05em",
+              textTransform: "uppercase" as const,
             }}
           >
-            Dr. Vella Dental
+            Dr. Vella <span style={{ fontWeight: 600 }}>Dental</span>
           </span>
         </Link>
 
-        {/* Desktop links */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 32,
-          }}
-          className="dental-nav-desktop"
-        >
-          {NAV_LINKS.map((l) => (
-            <Link
-              key={l.label}
-              href={l.href}
-              style={{
-                fontSize: 14,
-                fontWeight: 500,
-                color: C.mutedLight,
-                textDecoration: "none",
-                transition: "color 0.2s",
-              }}
-              onMouseEnter={(e) =>
-                (e.currentTarget.style.color = C.white)
-              }
-              onMouseLeave={(e) =>
-                (e.currentTarget.style.color = C.mutedLight)
-              }
-            >
-              {l.label}
-            </Link>
-          ))}
-          <Link
-            href="/demos/dental/contact"
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 8,
-              padding: "10px 22px",
-              borderRadius: 10,
-              background: `linear-gradient(135deg, ${C.teal}, ${C.tealDark})`,
-              color: "#fff",
-              fontSize: 14,
-              fontWeight: 600,
-              textDecoration: "none",
-              transition: "opacity 0.2s",
-            }}
-            onMouseEnter={(e) =>
-              (e.currentTarget.style.opacity = "0.9")
-            }
-            onMouseLeave={(e) =>
-              (e.currentTarget.style.opacity = "1")
-            }
-          >
-            <Phone size={15} />
-            Book Appointment
-          </Link>
-        </div>
-
-        {/* Mobile toggle */}
+        {/* Hamburger toggle */}
         <button
-          className="dental-nav-mobile-toggle"
           onClick={() => setMobileOpen(!mobileOpen)}
           style={{
-            display: "none",
             background: "none",
             border: "none",
             color: C.white,
@@ -299,15 +221,6 @@ function Nav() {
         </div>
       )}
 
-      <style>{`
-        @media (max-width: 768px) {
-          .dental-nav-desktop { display: none !important; }
-          .dental-nav-mobile-toggle { display: block !important; }
-        }
-        @media (min-width: 769px) {
-          .dental-nav-mobile-menu { display: none !important; }
-        }
-      `}</style>
     </nav>
   );
 }
@@ -587,17 +500,24 @@ export default function DentalHomePage() {
       {/* ── HERO ── */}
       <section
         style={{
-          paddingTop: 152,
-          paddingBottom: 80,
-          maxWidth: 1200,
-          margin: "0 auto",
-          padding: "152px 24px 80px",
-          display: "flex",
-          alignItems: "center",
-          gap: 48,
-          flexWrap: "wrap",
+          position: "relative",
+          minHeight: "100vh",
         }}
       >
+        <VideoHeroBg src="/videos/demo-dental.mp4" gradient="linear-gradient(to bottom, rgba(10,16,21,0.45) 0%, rgba(10,16,21,0.3) 40%, rgba(10,16,21,0.7) 75%, rgba(10,16,21,0.95) 95%)" startOpacity={0.65} />
+        <div
+          style={{
+            position: "relative",
+            zIndex: 10,
+            maxWidth: 1200,
+            margin: "0 auto",
+            padding: "152px 24px 80px",
+            display: "flex",
+            alignItems: "center",
+            gap: 48,
+            flexWrap: "wrap",
+          }}
+        >
         {/* Left 55% */}
         <div style={{ flex: "1 1 520px", minWidth: 300 }}>
           <Reveal>
@@ -652,16 +572,17 @@ export default function DentalHomePage() {
                   alignItems: "center",
                   gap: 8,
                   padding: "14px 28px",
-                  borderRadius: 12,
-                  background: `linear-gradient(135deg, ${C.teal}, ${C.tealDark})`,
-                  color: "#fff",
-                  fontSize: 15,
+                  borderRadius: 999,
+                  background: "#fff",
+                  color: C.bg,
+                  fontSize: 14,
                   fontWeight: 600,
                   textDecoration: "none",
+                  letterSpacing: "0.03em",
                   transition: "opacity 0.2s",
                 }}
               >
-                <CalendarCheck size={17} />
+                <CalendarCheck size={16} />
                 Book Your Visit
               </Link>
               <Link
@@ -671,14 +592,15 @@ export default function DentalHomePage() {
                   alignItems: "center",
                   gap: 8,
                   padding: "14px 28px",
-                  borderRadius: 12,
+                  borderRadius: 999,
                   background: "transparent",
-                  color: C.teal,
-                  fontSize: 15,
-                  fontWeight: 600,
+                  color: "rgba(255,255,255,0.7)",
+                  fontSize: 14,
+                  fontWeight: 500,
                   textDecoration: "none",
-                  border: `1.5px solid ${C.teal}`,
-                  transition: "background 0.2s",
+                  letterSpacing: "0.03em",
+                  border: "1px solid rgba(255,255,255,0.2)",
+                  transition: "all 0.2s",
                 }}
               >
                 Our Services
@@ -730,6 +652,7 @@ export default function DentalHomePage() {
             />
           </div>
         </Reveal>
+        </div>
       </section>
 
       {/* ── SERVICES BENTO ── */}

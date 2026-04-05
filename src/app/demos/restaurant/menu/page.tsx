@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Reveal from "@/components/demos/Reveal";
-import MagneticButton from "@/components/demos/MagneticButton";
 import { DemoBanner } from "@/components/demos/demo-banner";
 
 /* ─── palette ─── */
@@ -634,7 +633,7 @@ export default function MenuPage() {
                   </div>
 
                   <div style={{ marginTop: 40 }}>
-                    <MagneticButton href="/demos/restaurant/contact">
+                    <Link href="/demos/restaurant/contact">
                       <span
                         style={{
                           display: "inline-block",
@@ -651,7 +650,7 @@ export default function MenuPage() {
                       >
                         Reserve the Journey
                       </span>
-                    </MagneticButton>
+                    </Link>
                   </div>
                 </div>
               ) : (

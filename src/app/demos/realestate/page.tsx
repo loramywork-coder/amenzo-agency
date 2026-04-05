@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { useState, useRef, useEffect, useCallback } from "react";
 import { DemoBanner } from "@/components/demos/demo-banner";
+import { VideoHeroBg } from "@/components/video-hero-bg";
 import Counter from "@/components/demos/Counter";
 import Reveal from "@/components/demos/Reveal";
 import MagneticButton from "@/components/demos/MagneticButton";
@@ -82,7 +83,7 @@ const featuredProperties: Property[] = [
 ];
 
 const areas = [
-  { name: "Valletta", count: 24, image: "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&q=80" },
+  { name: "Valletta", count: 24, image: "https://images.unsplash.com/photo-1603565816030-6b389eeb23cb?w=600&q=80&auto=format&fit=crop" },
   { name: "Sliema", count: 31, image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&q=80" },
   { name: "St Julian's", count: 18, image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&q=80" },
   { name: "Gozo", count: 15, image: "https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=600&q=80" },
@@ -101,7 +102,7 @@ const testimonials = [
   {
     name: "James & Claire Thornton",
     role: "Purchased Villa in Madliena",
-    text: "Malta Living made our relocation from London seamless. Their knowledge of the local market is unparalleled and they found us a property that exceeded every expectation.",
+    text: "Mediterranean Living made our relocation from London seamless. Their knowledge of the local market is unparalleled and they found us a property that exceeded every expectation.",
     rating: 5,
   },
   {
@@ -127,14 +128,7 @@ function formatPriceFull(n: number) {
 /* ═══════════════════════════ NAV ═════════════════════════════ */
 
 function SiteNav() {
-  const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 60);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   const links = [
     { label: "Properties", href: "/demos/realestate/listings" },
@@ -145,11 +139,12 @@ function SiteNav() {
 
   return (
     <nav
-      className="fixed top-10 left-0 right-0 z-50 transition-all duration-500"
+      className="fixed left-0 right-0 z-50 transition-all duration-500"
       style={{
-        background: scrolled ? "rgba(10,15,28,0.95)" : "transparent",
-        backdropFilter: scrolled ? "blur(20px)" : "none",
-        borderBottom: scrolled ? `1px solid ${C.border}` : "1px solid transparent",
+        top: 40,
+        background: "rgba(10,15,28,0.85)",
+        backdropFilter: "blur(12px)",
+        borderBottom: "1px solid rgba(255,255,255,0.06)",
       }}
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-16 md:h-20">
@@ -159,41 +154,14 @@ function SiteNav() {
             className="text-xl font-bold tracking-tight"
             style={{ fontFamily: "var(--font-display), system-ui", color: C.white }}
           >
-            MALTA{" "}
+            MEDITERRANEAN{" "}
             <span style={{ color: C.gold }}>LIVING</span>
           </span>
         </Link>
 
-        {/* Desktop links */}
-        <div className="hidden md:flex items-center gap-8">
-          {links.map((l) => (
-            <a
-              key={l.label}
-              href={l.href}
-              className="text-sm font-medium tracking-wide transition-colors hover:text-white"
-              style={{ color: C.muted }}
-            >
-              {l.label}
-            </a>
-          ))}
-          <a
-            href="#contact"
-            className="px-5 py-2.5 text-sm font-semibold transition-all"
-            style={{
-              background: C.gold,
-              color: C.bg,
-              borderRadius: 10,
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.background = C.goldHover)}
-            onMouseLeave={(e) => (e.currentTarget.style.background = C.gold)}
-          >
-            Get in Touch
-          </a>
-        </div>
-
-        {/* Mobile toggle */}
+        {/* Hamburger toggle */}
         <button
-          className="md:hidden p-2"
+          className="p-2"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Toggle menu"
         >
@@ -208,7 +176,7 @@ function SiteNav() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden overflow-hidden"
+            className="overflow-hidden"
             style={{ background: "rgba(10,15,28,0.98)", borderBottom: `1px solid ${C.border}` }}
           >
             <div className="px-6 py-6 flex flex-col gap-4">
@@ -412,7 +380,7 @@ function SiteFooter() {
               className="text-xl font-bold mb-4"
               style={{ fontFamily: "var(--font-display), system-ui" }}
             >
-              <span style={{ color: C.white }}>MALTA </span>
+              <span style={{ color: C.white }}>MEDITERRANEAN </span>
               <span style={{ color: C.gold }}>LIVING</span>
             </h3>
             <p className="text-sm leading-relaxed mb-4" style={{ color: C.muted }}>
@@ -458,7 +426,7 @@ function SiteFooter() {
             </div>
             <div className="flex items-center gap-3 mb-4">
               <Mail size={14} style={{ color: C.gold }} />
-              <span className="text-sm" style={{ color: C.muted }}>info@maltaliving.mt</span>
+              <span className="text-sm" style={{ color: C.muted }}>info@mediterraneanliving.com</span>
             </div>
             <div className="flex items-center gap-3 mb-6">
               <MapPin size={14} style={{ color: C.gold }} />
@@ -487,7 +455,7 @@ function SiteFooter() {
           style={{ borderTop: `1px solid ${C.border}` }}
         >
           <p className="text-xs" style={{ color: C.muted }}>
-            &copy; 2026 Malta Living. All rights reserved.
+            &copy; 2026 Mediterranean Living. All rights reserved.
           </p>
           <div className="flex gap-6">
             {["Privacy Policy", "Terms of Service", "Cookie Settings"].map((item) => (
@@ -536,20 +504,13 @@ export default function RealEstatePage() {
       <SiteNav />
 
       {/* ─── 1. HERO ──────────────────────────────────────────── */}
-      <section className="relative flex items-center justify-center" style={{ minHeight: "100vh" }}>
-        <Image
-          src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920&q=85"
-          alt="Luxury property Malta"
-          fill
-          className="object-cover"
-          priority
-        />
-        <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, rgba(10,15,28,0.7) 0%, rgba(10,15,28,0.85) 100%)" }} />
+      <section className="relative flex items-center justify-center" style={{ minHeight: "100vh", position: "relative" }}>
+        <VideoHeroBg src="/videos/demo-realestate.mp4" gradient="linear-gradient(to bottom, rgba(10,15,28,0.4) 0%, rgba(10,15,28,0.25) 40%, rgba(10,15,28,0.65) 75%, rgba(10,15,28,0.95) 95%)" startOpacity={0.7} />
 
-        <div className="relative z-10 w-full max-w-5xl mx-auto px-6 text-center">
+        <div className="relative z-10 w-full max-w-5xl mx-auto px-6 text-center" style={{ position: "relative", zIndex: 2 }}>
           <Reveal type="fade" duration={1}>
             <p className="text-sm uppercase tracking-[0.3em] mb-6" style={{ color: C.gold, fontFamily: "var(--font-display), system-ui" }}>
-              Malta&apos;s Premier Property Agency
+              Mediterranean Property Specialists
             </p>
           </Reveal>
 
@@ -563,7 +524,7 @@ export default function RealEstatePage() {
             >
               Find Your Dream{" "}
               <br />
-              <span style={{ color: C.gold }}>Home in Malta</span>
+              <span style={{ color: C.gold }}>Home in the Mediterranean</span>
             </h1>
           </Reveal>
 

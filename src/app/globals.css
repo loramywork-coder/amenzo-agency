@@ -508,6 +508,9 @@ p, li, span {
   user-select: none;
 }
 
+/* ─── Demo hero text readability ─── */
+.demo-hero-text { text-shadow: 0 2px 20px rgba(0,0,0,0.6), 0 1px 4px rgba(0,0,0,0.4); }
+
 /* ─── Capabilities page animations ─── */
 @keyframes ripple-expand {
   0% { transform: translate(-50%,-50%) scale(0); opacity: 0.4; }

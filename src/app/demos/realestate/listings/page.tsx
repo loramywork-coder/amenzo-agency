@@ -191,7 +191,7 @@ function SiteNav() {
             className="text-xl font-bold tracking-tight"
             style={{ fontFamily: "var(--font-display), system-ui", color: C.white }}
           >
-            MALTA{" "}
+            MEDITERRANEAN{" "}
             <span style={{ color: C.gold }}>LIVING</span>
           </span>
         </Link>
@@ -347,7 +347,7 @@ function SiteFooter() {
               className="text-xl font-bold mb-4"
               style={{ fontFamily: "var(--font-display), system-ui" }}
             >
-              <span style={{ color: C.white }}>MALTA </span>
+              <span style={{ color: C.white }}>MEDITERRANEAN </span>
               <span style={{ color: C.gold }}>LIVING</span>
             </h3>
             <p className="text-sm leading-relaxed mb-4" style={{ color: C.muted }}>
@@ -393,7 +393,7 @@ function SiteFooter() {
             </div>
             <div className="flex items-center gap-3 mb-4">
               <Mail size={14} style={{ color: C.gold }} />
-              <span className="text-sm" style={{ color: C.muted }}>info@maltaliving.mt</span>
+              <span className="text-sm" style={{ color: C.muted }}>info@mediterraneanliving.com</span>
             </div>
             <div className="flex items-center gap-3 mb-6">
               <MapPin size={14} style={{ color: C.gold }} />
@@ -418,7 +418,7 @@ function SiteFooter() {
           style={{ borderTop: `1px solid ${C.border}` }}
         >
           <p className="text-xs" style={{ color: C.muted }}>
-            &copy; 2026 Malta Living. All rights reserved.
+            &copy; 2026 Mediterranean Living. All rights reserved.
           </p>
           <div className="flex gap-6">
             {["Privacy Policy", "Terms of Service", "Cookie Settings"].map((item) => (

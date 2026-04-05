@@ -69,7 +69,7 @@ function SiteNav() {
             className="text-xl font-bold tracking-tight"
             style={{ fontFamily: "var(--font-display), system-ui", color: C.white }}
           >
-            MALTA <span style={{ color: C.gold }}>LIVING</span>
+            MEDITERRANEAN <span style={{ color: C.gold }}>LIVING</span>
           </span>
         </Link>
 
@@ -150,7 +150,7 @@ function SiteFooter() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-12 mb-16">
           <div>
             <h3 className="text-xl font-bold mb-4" style={{ fontFamily: "var(--font-display), system-ui" }}>
-              <span style={{ color: C.white }}>MALTA </span>
+              <span style={{ color: C.white }}>MEDITERRANEAN </span>
               <span style={{ color: C.gold }}>LIVING</span>
             </h3>
             <p className="text-sm leading-relaxed mb-4" style={{ color: C.muted }}>
@@ -184,7 +184,7 @@ function SiteFooter() {
             </div>
             <div className="flex items-center gap-3 mb-4">
               <Mail size={14} style={{ color: C.gold }} />
-              <span className="text-sm" style={{ color: C.muted }}>info@maltaliving.mt</span>
+              <span className="text-sm" style={{ color: C.muted }}>info@mediterraneanliving.com</span>
             </div>
             <div className="flex items-center gap-3 mb-6">
               <MapPin size={14} style={{ color: C.gold }} />
@@ -205,7 +205,7 @@ function SiteFooter() {
         </div>
 
         <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4" style={{ borderTop: `1px solid ${C.border}` }}>
-          <p className="text-xs" style={{ color: C.muted }}>&copy; 2026 Malta Living. All rights reserved.</p>
+          <p className="text-xs" style={{ color: C.muted }}>&copy; 2026 Mediterranean Living. All rights reserved.</p>
           <div className="flex gap-6">
             {["Privacy Policy", "Terms of Service", "Cookie Settings"].map((item) => (
               <span key={item} className="text-xs cursor-pointer transition-colors hover:text-white" style={{ color: C.muted }}>{item}</span>
@@ -238,7 +238,7 @@ export default function AboutPage() {
             className="text-[36px] md:text-[44px] font-bold leading-tight max-w-3xl mx-auto"
             style={{ fontFamily: "var(--font-display), system-ui" }}
           >
-            Malta&apos;s Most Trusted Agency
+            The Mediterranean&apos;s Most Trusted Agency
           </h1>
         </div>
       </section>
@@ -247,13 +247,13 @@ export default function AboutPage() {
       <section className="px-6 pb-20">
         <div className="max-w-3xl mx-auto flex flex-col gap-6">
           <p className="text-base leading-relaxed" style={{ color: C.muted }}>
-            Founded in 2008, Malta Living was born from a simple conviction: that international buyers deserve the same quality of service, transparency, and market expertise that was traditionally reserved for local insiders. What began as a boutique consultancy in Sliema has grown into the island&apos;s most respected full-service real estate agency.
+            Founded in 2008, Mediterranean Living was born from a simple conviction: that international buyers deserve the same quality of service, transparency, and market expertise that was traditionally reserved for local insiders. What began as a boutique consultancy in Sliema has grown into the island&apos;s most respected full-service real estate agency.
           </p>
           <p className="text-base leading-relaxed" style={{ color: C.muted }}>
             Over the past 18 years we have guided more than 2,000 families, investors, and entrepreneurs through every stage of the Maltese property journey. Our team combines deep local knowledge with a truly global perspective, serving clients from over 40 countries in seven languages. We do not simply list properties; we build long-term relationships founded on trust and results.
           </p>
           <p className="text-base leading-relaxed" style={{ color: C.muted }}>
-            Today, Malta Living manages a curated portfolio of premium residences, commercial spaces, and development projects across every major district. We remain independently owned, fiercely client-focused, and committed to raising the standard of real estate practice in Malta.
+            Today, Mediterranean Living manages a curated portfolio of premium residences, commercial spaces, and development projects across every major district. We remain independently owned, fiercely client-focused, and committed to raising the standard of real estate practice in Malta.
           </p>
         </div>
       </section>
@@ -356,7 +356,7 @@ export default function AboutPage() {
           <Shield size={32} style={{ color: C.gold, margin: "0 auto 12px" }} />
           <h3 className="text-lg font-semibold mb-2">Licensed by MFSA</h3>
           <p className="text-sm leading-relaxed max-w-xl mx-auto" style={{ color: C.muted }}>
-            Malta Living is fully licensed and regulated by the Malta Financial Services Authority under Licence No. C-84729. We operate with full transparency and in strict compliance with Maltese and EU property legislation.
+            Mediterranean Living is fully licensed and regulated by the Malta Financial Services Authority under Licence No. C-84729. We operate with full transparency and in strict compliance with Maltese and EU property legislation.
           </p>
         </div>
       </section>

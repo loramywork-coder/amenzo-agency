@@ -8,7 +8,7 @@ import { motion, AnimatePresence } from "framer-motion";
 const projects = [
   { num: "01", name: "Grand Harbour Hotel", category: "Hospitality", href: "/demos/hotel" },
   { num: "02", name: "Porto Valletta", category: "Gastro", href: "/demos/restaurant" },
-  { num: "03", name: "MaltaLiving", category: "Real Estate", href: "/demos/realestate" },
+  { num: "03", name: "Mediterranean Living", category: "Real Estate", href: "/demos/realestate" },
   { num: "04", name: "Dr. Vella Dental", category: "Healthcare", href: "/demos/dental" },
   { num: "05", name: "FitZone Malta", category: "Fitness", href: "/demos/fitness" },
   { num: "06", name: "Atelier Noir", category: "Art & Culture", href: "/demos/gallery" },

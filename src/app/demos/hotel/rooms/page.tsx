@@ -1,7 +1,6 @@
 "use client";
 
 import Reveal from "@/components/demos/Reveal";
-import MagneticButton from "@/components/demos/MagneticButton";
 import { DemoBanner } from "@/components/demos/demo-banner";
 import Image from "next/image";
 import Link from "next/link";
@@ -757,7 +756,7 @@ export default function RoomsPage() {
                   </p>
 
                   {/* Reserve button */}
-                  <MagneticButton href="/demos/hotel/contact">
+                  <Link href="/demos/hotel/contact">
                     <span
                       style={{
                         display: "inline-block",
@@ -774,7 +773,7 @@ export default function RoomsPage() {
                     >
                       Reserve
                     </span>
-                  </MagneticButton>
+                  </Link>
                 </div>
               </Reveal>
             </div>

@@ -198,14 +198,14 @@ function FitFooter() {
               <span style={{ color: GREEN }}>ZONE</span>
             </div>
             <p className="mt-4 max-w-xs text-[13px] leading-relaxed" style={{ color: MUTED }}>
-              Malta&apos;s premier fitness facility. Transforming bodies and lives since 2018.
+              Premium fitness facility. Transforming bodies and lives since 2018.
             </p>
           </div>
           <div>
             <h4 className="text-[11px] font-semibold uppercase tracking-widest" style={{ color: WHITE }}>LOCATION</h4>
             <div className="mt-4 space-y-2 text-[13px]" style={{ color: MUTED }}>
-              <p>23 Strand Street</p>
-              <p>Sliema, Malta</p>
+              <p>23 Harbour Street</p>
+              <p>Downtown</p>
             </div>
           </div>
           <div>
@@ -224,7 +224,7 @@ function FitFooter() {
               </span>
             ))}
           </div>
-          <span className="text-[12px]" style={{ color: MUTED }}>&copy; 2026 FitZone Malta. All rights reserved.</span>
+          <span className="text-[12px]" style={{ color: MUTED }}>&copy; 2026 FitZone. All rights reserved.</span>
         </div>
       </div>
     </footer>
