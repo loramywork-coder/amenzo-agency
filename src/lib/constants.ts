@@ -19,7 +19,7 @@ export const NAV_LINKS = [
 /** Slim header nav — only primary conversion links. Footer uses NAV_LINKS for everything. */
 export const HEADER_LINKS = [
   { label: "Work", href: "/work" },
-  { label: "Showcases", href: "/#showcases" },
+  { label: "Capabilities", href: "/capabilities" },
   { label: "Services", href: "/services" },
   { label: "Pricing", href: "/pricing" },
   { label: "About", href: "/about" },

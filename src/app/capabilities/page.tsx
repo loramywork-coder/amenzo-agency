@@ -2,9 +2,9 @@ import { generatePageMeta } from "@/lib/seo";
 import { CapabilitiesShowcase } from "@/components/capabilities-showcase";
 
 export const metadata = generatePageMeta({
-  title: "Design Capabilities — What We Build | Amenzo",
+  title: "Design Capabilities — Interactive Components | Amenzo",
   description:
-    "Interactive showcase of design techniques. Buttons, cards, animations, layouts, forms — every component is live and touchable.",
+    "Tap, swipe, and scroll through 20+ interactive design components. Every element is live and touchable — on desktop and mobile.",
   path: "/capabilities",
 });
 
