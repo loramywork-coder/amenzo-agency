@@ -201,8 +201,8 @@ export function ClientsStrip() {
         <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12">
           <ClientLogo href="/work/grand-harbour-hotel"><GrandHarbourHotel /></ClientLogo>
           <ClientLogo href="/work/porto-valletta"><PortoValletta /></ClientLogo>
-          <ClientLogo href="/work/maltaliving"><MaltaLiving /></ClientLogo>
-          <ClientLogo href="/work/fitzone-malta"><FitZone /></ClientLogo>
+          <ClientLogo href="/work/mediterranean-living"><MaltaLiving /></ClientLogo>
+          <ClientLogo href="/work/fitzone"><FitZone /></ClientLogo>
           <ClientLogo href="/work/swiss-health-alliance"><SwissHealthAlliance /></ClientLogo>
           <ClientLogo href="/work/olive-and-stone"><OliveAndStone /></ClientLogo>
           <ClientLogo href="/work/cybershield-malta"><CyberShield /></ClientLogo>

@@ -14,12 +14,38 @@ import { PricingFAQ } from "./faq";
 
 
 export const metadata = generatePageMeta({
-  title: "Web Design Pricing — Transparent Packages from €1,000",
-  description: "Transparent web design pricing. Basic €1,000 (1-5 pages), Standard €2,000 (bilingual), Premium €4,000 (multilingual + animations), Custom from €5,000+ (e-commerce). Try live demos of each package.",
+  title: "Web Design Pricing — Transparent Packages from €500",
+  description: "Transparent web design pricing. Startup Launch €500, Basic €1,000, Standard €2,000 (bilingual), Premium €4,000, Custom from €5,000+. Hand-coded with Next.js. No templates.",
   path: "/pricing",
 });
 
 const TIERS = [
+  {
+    name: "Startup Launch",
+    price: "500",
+    period: "one-time",
+    description:
+      "Launch-ready in 10 days. Hand-coded, fully responsive, and built on the same stack we use for every client. Because every great company starts with a great website.",
+    features: [
+      { text: "1-5 page website", included: true },
+      { text: "Custom design (no templates)", included: true },
+      { text: "Mobile responsive", included: true },
+      { text: "Lighthouse 90+", included: true },
+      { text: "Basic SEO setup", included: true },
+      { text: "Deployed on Vercel", included: true },
+      { text: "1 round of revisions", included: true },
+      { text: "Delivered in 10 days", included: true },
+      { text: "Preview link before launch", included: false },
+      { text: "Content guidance", included: false },
+      { text: "Multilingual support", included: false },
+      { text: "Blog or dynamic sections", included: false },
+    ],
+    cta: "Start a Project",
+    ctaHref: "/start-project",
+    highlighted: false,
+    badge: "For Founders",
+    footnote: "Amenzo backlink in footer · 1 public review required",
+  },
   {
     name: "Basic",
     price: "1,000",
@@ -189,21 +215,21 @@ const MONTHLY_SERVICES = [
 ] as const;
 
 const COMPARISON_ROWS = [
-  { label: "Price", basic: "€1,000", standard: "€2,000", premium: "€4,000", custom: "From €5,000+" },
-  { label: "Pages", basic: "1-5", standard: "5-10", premium: "10-20", custom: "Unlimited" },
-  { label: "Delivery", basic: "1-2 weeks", standard: "2-3 weeks", premium: "3-4 weeks", custom: "4-6 weeks" },
-  { label: "Design", basic: "Clean & responsive", standard: "Custom branded", premium: "Premium + animations", custom: "Fully bespoke" },
-  { label: "Languages", basic: "1", standard: "2", premium: "3+", custom: "Unlimited" },
-  { label: "SEO", basic: "Basic", standard: "Full", premium: "Full + schema", custom: "Full + advanced" },
-  { label: "Blog / News", basic: null, standard: true, premium: true, custom: true },
-  { label: "E-commerce", basic: null, standard: null, premium: null, custom: true },
-  { label: "Booking / Donations", basic: null, standard: null, premium: true, custom: true },
-  { label: "Image sourcing", basic: null, standard: true, premium: true, custom: true },
-  { label: "Content guidance", basic: null, standard: true, premium: true, custom: "Full collaboration" },
-  { label: "Preview / Demo", basic: null, standard: "Preview link", premium: "Preview + revisions", custom: "Full demo + 2 rounds" },
-  { label: "Revisions", basic: "1 round", standard: "2 rounds", premium: "Dedicated round", custom: "2 dedicated rounds" },
-  { label: "Lighthouse 95+", basic: null, standard: null, premium: "Guaranteed", custom: "Guaranteed" },
-  { label: "Priority support", basic: null, standard: null, premium: null, custom: true },
+  { label: "Price", startup: "€500", basic: "€1,000", standard: "€2,000", premium: "€4,000", custom: "From €5,000+" },
+  { label: "Pages", startup: "1-5", basic: "1-5", standard: "5-10", premium: "10-20", custom: "Unlimited" },
+  { label: "Delivery", startup: "10 days", basic: "1-2 weeks", standard: "2-3 weeks", premium: "3-4 weeks", custom: "4-6 weeks" },
+  { label: "Design", startup: "Custom", basic: "Clean & responsive", standard: "Custom branded", premium: "Premium + animations", custom: "Fully bespoke" },
+  { label: "Languages", startup: "1", basic: "1", standard: "2", premium: "3+", custom: "Unlimited" },
+  { label: "SEO", startup: "Basic", basic: "Basic", standard: "Full", premium: "Full + schema", custom: "Full + advanced" },
+  { label: "Blog / News", startup: null, basic: null, standard: true, premium: true, custom: true },
+  { label: "E-commerce", startup: null, basic: null, standard: null, premium: null, custom: true },
+  { label: "Booking / Donations", startup: null, basic: null, standard: null, premium: true, custom: true },
+  { label: "Image sourcing", startup: null, basic: null, standard: true, premium: true, custom: true },
+  { label: "Content guidance", startup: null, basic: null, standard: true, premium: true, custom: "Full collaboration" },
+  { label: "Preview / Demo", startup: null, basic: null, standard: "Preview link", premium: "Preview + revisions", custom: "Full demo + 2 rounds" },
+  { label: "Revisions", startup: "1 round", basic: "1 round", standard: "2 rounds", premium: "Dedicated round", custom: "2 dedicated rounds" },
+  { label: "Lighthouse 95+", startup: null, basic: null, standard: null, premium: "Guaranteed", custom: "Guaranteed" },
+  { label: "Priority support", startup: null, basic: null, standard: null, premium: null, custom: true },
 ] as const;
 
 function ComparisonCell({ value }: { value: boolean | string | null }) {
@@ -282,6 +308,11 @@ export default function PricingPage() {
 
                 {/* Header */}
                 <div className="mb-6">
+                  {"badge" in tier && tier.badge && (
+                    <span className="inline-block text-[10px] tracking-[0.15em] uppercase text-success bg-success/10 px-2.5 py-1 rounded-full font-medium mb-3">
+                      {tier.badge}
+                    </span>
+                  )}
                   <h3 className="font-display text-xl font-semibold text-text-primary mb-2">
                     {tier.name}
                   </h3>
@@ -349,6 +380,11 @@ export default function PricingPage() {
                 >
                   {tier.cta} <ArrowRight className="w-4 h-4" />
                 </Button>
+                {"footnote" in tier && tier.footnote && (
+                  <p className="text-[9px] text-text-muted text-center mt-3 italic">
+                    {tier.footnote}
+                  </p>
+                )}
               </div>
             </StaggerItem>
           ))}
@@ -378,8 +414,11 @@ export default function PricingPage() {
             <table className="w-full min-w-[640px] border-collapse">
               <thead>
                 <tr className="border-b border-border">
-                  <th className="text-left py-4 px-4 text-sm font-semibold text-text-primary w-[180px]">
+                  <th className="text-left py-4 px-4 text-sm font-semibold text-text-primary w-[160px]">
                     Feature
+                  </th>
+                  <th className="text-center py-4 px-3 text-sm font-semibold text-success">
+                    Startup
                   </th>
                   <th className="text-center py-4 px-3 text-sm font-semibold text-text-primary">
                     Basic
@@ -403,6 +442,9 @@ export default function PricingPage() {
                   >
                     <td className="py-3 px-4 text-sm font-medium text-text-primary">
                       {row.label}
+                    </td>
+                    <td className="py-3 px-3 text-center">
+                      <ComparisonCell value={row.startup} />
                     </td>
                     <td className="py-3 px-3 text-center">
                       <ComparisonCell value={row.basic} />

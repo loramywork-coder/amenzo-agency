@@ -10,11 +10,14 @@ const projects = [
   { num: "02", name: "Porto Valletta", category: "Gastro", href: "/demos/restaurant" },
   { num: "03", name: "Mediterranean Living", category: "Real Estate", href: "/demos/realestate" },
   { num: "04", name: "Dr. Vella Dental", category: "Healthcare", href: "/demos/dental" },
-  { num: "05", name: "FitZone Malta", category: "Fitness", href: "/demos/fitness" },
+  { num: "05", name: "FitZone", category: "Fitness", href: "/demos/fitness" },
   { num: "06", name: "Atelier Noir", category: "Art & Culture", href: "/demos/gallery" },
+  { num: "07", name: "Nova Space", category: "Space Tech", href: "/demos/startup" },
+  { num: "08", name: "Meridian Capital", category: "Fintech", href: "/demos/fintech" },
+  { num: "09", name: "Studio Ēlan", category: "Interior", href: "/demos/interior" },
 ];
 
-const categories = ["All", "Hospitality", "Gastro", "Real Estate", "Healthcare", "Fitness", "Art & Culture"];
+const categories = ["All", "Hospitality", "Gastro", "Real Estate", "Healthcare", "Fitness", "Art & Culture", "Space Tech", "Fintech", "Interior"];
 
 export default function WorkPage() {
   const [filter, setFilter] = useState("All");

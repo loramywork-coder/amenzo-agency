@@ -61,6 +61,17 @@ export function LocalBusinessSchema() {
           "@type": "Offer",
           itemOffered: {
             "@type": "Service",
+            name: "Startup Launch Package",
+            description:
+              "Hand-coded 1-5 page website for founders. Custom design, mobile responsive, Lighthouse 90+, deployed on Vercel. Delivered in 10 days.",
+          },
+          price: "500",
+          priceCurrency: "EUR",
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
             name: "Basic Website Package",
             description:
               "Professional 1-5 page custom website with mobile-responsive design, contact form, basic SEO, and Google Analytics. Delivered in 1-2 weeks.",
@@ -255,7 +266,7 @@ export function BlogPostSchema({
 export const faqData = [
   {
     q: "How much does a website cost?",
-    a: "At Amenzo, our website packages start from EUR 1,000 for a basic 1-5 page site, EUR 2,000 for a standard 5-10 page bilingual site, EUR 4,000 for a premium multilingual site with advanced features, and EUR 5,000-8,000 for custom e-commerce and platform builds. Every site is custom-coded with Next.js — no templates.",
+    a: "At Amenzo, our website packages start from EUR 500 for our Startup Launch package (1-5 pages, 10-day delivery), EUR 1,000 for a basic site, EUR 2,000 for a standard bilingual site, EUR 4,000 for a premium multilingual site, and EUR 5,000+ for custom e-commerce builds. Every site is custom-coded with Next.js — no templates.",
   },
   {
     q: "How long does it take to build a website?",

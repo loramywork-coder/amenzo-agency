@@ -166,7 +166,7 @@ export const TESTIMONIALS = [
       "Our old site loaded in 8 seconds. The new one loads in 1.2. Our Google rankings went from page 3 to page 1.",
     name: "Diana Fenech",
     title: "Marketing Director",
-    company: "MaltaLiving",
+    company: "Mediterranean Living",
     location: "St Julian\u2019s",
   },
   {

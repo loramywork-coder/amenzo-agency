@@ -12,7 +12,7 @@ const DEMO_URLS: Record<string, string> = {
   hotel: "grandharbourhotel.com",
   restaurant: "portovalletta.com",
   ecommerce: "oliveandstone.com",
-  realestate: "maltaliving.com",
+  realestate: "mediterraneanliving.com",
   fitness: "fitzone.com",
   ngo: "swisshealthalliance.org",
   saas: "cybershield.io",

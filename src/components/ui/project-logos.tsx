@@ -322,8 +322,8 @@ export function CyberShieldLogo({ className, variant }: LogoProps) {
 const logoMap: Record<string, React.ComponentType<LogoProps>> = {
   "grand-harbour-hotel": GrandHarbourLogo,
   "porto-valletta": PortoVallettaLogo,
-  maltaliving: MaltaLivingLogo,
-  "fitzone-malta": FitZoneLogo,
+  "mediterranean-living": MaltaLivingLogo,
+  "fitzone": FitZoneLogo,
   "swiss-health-alliance": SwissHealthLogo,
   "olive-and-stone": OliveAndStoneLogo,
   "cybershield-malta": CyberShieldLogo,

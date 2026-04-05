@@ -100,9 +100,9 @@ export const projects: Project[] = [
     color: "#8B4513",
   },
   {
-    slug: "maltaliving",
-    title: "MaltaLiving",
-    client: "MaltaLiving",
+    slug: "mediterranean-living",
+    title: "Mediterranean Living",
+    client: "Mediterranean Living",
     category: "Real Estate",
     categoryTag: "REAL ESTATE",
     description:
@@ -144,13 +144,13 @@ export const projects: Project[] = [
     color: "#2563EB",
   },
   {
-    slug: "fitzone-malta",
-    title: "FitZone Malta",
-    client: "FitZone Malta",
+    slug: "fitzone",
+    title: "FitZone",
+    client: "FitZone",
     category: "Fitness",
     categoryTag: "FITNESS",
     description:
-      "An energetic, high-performance website for Malta\u2019s fastest-growing gym chain. Class bookings, membership management, and trainer profiles.",
+      "An energetic, high-performance website for a fast-growing gym chain. Class bookings, membership management, and trainer profiles.",
     challenge:
       "A gym with 3 locations and no unified digital presence. Membership sign-ups were handled through paper forms, and class schedules were posted as images on Instagram.",
     approach:

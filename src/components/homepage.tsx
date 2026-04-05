@@ -18,6 +18,9 @@ const projects = [
   { num: "04", name: "Dr. Vella Dental", desc: "8-page dental clinic with booking & treatments", cat: "HEALTHCARE", slug: "dental" },
   { num: "05", name: "FitZone", desc: "8-page fitness gym with classes & membership", cat: "FITNESS", slug: "fitness" },
   { num: "06", name: "Atelier Noir", desc: "7-page art gallery with exhibitions & artists", cat: "ART & CULTURE", slug: "gallery" },
+  { num: "07", name: "Nova Space", desc: "9-page deep-tech startup with mission log & investor deck", cat: "SPACE TECH", slug: "startup" },
+  { num: "08", name: "Meridian Capital", desc: "9-page global fintech with 3D globe & live data", cat: "FINTECH", slug: "fintech" },
+  { num: "09", name: "Studio Ēlan", desc: "9-page editorial interior design portfolio", cat: "INTERIOR", slug: "interior" },
 ];
 
 const showcases = [
