@@ -737,7 +737,7 @@ function GlassSection() {
   return (
     <>
       <SectionDivider num="06" title="Glassmorphism" useCase="Floating panels with real depth" />
-      <div ref={ref} className="max-w-5xl mx-auto px-6 pb-16 relative overflow-hidden touch-none" style={{ minHeight: 340 }}>
+      <div ref={ref} className="max-w-5xl mx-auto px-6 pb-16 relative overflow-hidden" style={{ minHeight: 340 }}>
         {/* Orbs */}
         <div className="absolute w-40 h-40 rounded-full top-10 left-10 opacity-10" style={{ background: "#3b3bf6", filter: "blur(80px)" }} />
         <div className="absolute w-32 h-32 rounded-full top-20 right-20 opacity-10" style={{ background: "#8b3aed", filter: "blur(60px)" }} />
