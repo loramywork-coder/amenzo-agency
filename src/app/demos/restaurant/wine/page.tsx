@@ -95,7 +95,7 @@ const FEATURED_WINES = [
     bottle: "\u20AC280",
   },
   {
-    name: "Ta\u2019 Betta Gellewza 2021",
+    name: "Ta’ Betta Gellewza 2021",
     region: "Siggiewi, Malta",
     grape: "Gellewza",
     notes: "Wild strawberry, dried thyme, and garrigue. A genuine expression of Maltese terroir, medium-bodied with bright acidity.",

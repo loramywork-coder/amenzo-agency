@@ -81,7 +81,7 @@ export default function AboutPage() {
           </AnimateIn>
           <TextReveal>
             <p className="font-display text-5xl md:text-7xl lg:text-8xl font-bold text-text-primary leading-tight">
-              The Agency
+              The Studio
             </p>
           </TextReveal>
           <TextReveal delay={0.15}>
@@ -112,7 +112,7 @@ export default function AboutPage() {
           <div className="space-y-6">
             <AnimateIn animation="fadeUp" delay={0.1}>
               <p className="text-lg text-white leading-relaxed">
-                AMENZO was founded on a simple observation: the web agency model
+                AMENZO was founded on a simple observation: the traditional web studio model
                 is broken. Clients pay for hours, not outcomes. Projects drag on
                 for months. Budgets balloon. And the end result is often a
                 template with a fresh coat of paint.
@@ -121,7 +121,7 @@ export default function AboutPage() {
             <AnimateIn animation="fadeUp" delay={0.2}>
               <p className="text-lg text-white leading-relaxed">
                 We took a different path. By integrating AI-powered automation into
-                our workflow, we deliver agency-quality work at startup speed. Every line of code is
+                our workflow, we deliver studio-quality work at startup speed. Every line of code is
                 custom. Every design is original. Every pixel serves a purpose.
               </p>
             </AnimateIn>

@@ -13,7 +13,7 @@ const cards = [
   {
     icon: Zap,
     title: "Delivered in Weeks",
-    text: "What takes traditional agencies months, we deliver in 1\u20134 weeks. You get a preview link before launch \u2014 no surprises.",
+    text: "What takes traditional agencies months, we deliver in 1–4 weeks. You get a preview link before launch — no surprises.",
     color: "#7C3AED",
   },
   {

@@ -50,7 +50,7 @@ const FAQS = [
   },
   {
     q: "What should I do in a dental emergency?",
-    a: "Call our emergency line immediately at +356 2123 4567 \u2014 it's available 24/7. For a knocked-out tooth, keep it moist (in milk or saliva) and get to us within 30 minutes if possible. For severe pain or swelling, take ibuprofen and apply a cold compress while you wait for your appointment.",
+    a: "Call our emergency line immediately at +356 2123 4567 — it's available 24/7. For a knocked-out tooth, keep it moist (in milk or saliva) and get to us within 30 minutes if possible. For severe pain or swelling, take ibuprofen and apply a cold compress while you wait for your appointment.",
   },
   {
     q: "Is Invisalign suitable for adults?",

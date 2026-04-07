@@ -44,7 +44,7 @@ const PLANS: Plan[] = [
     annual: 39,
     popular: false,
     features: [
-      "Gym access 6AM\u201310PM",
+      "Gym access 6AM–10PM",
       "Locker room",
       "Free WiFi",
       "1 guest pass / month",
@@ -60,7 +60,7 @@ const PLANS: Plan[] = [
     features: [
       "Everything in Basic",
       "Unlimited classes",
-      "Full 5AM\u201311PM hours",
+      "Full 5AM–11PM hours",
       "1 PT session / month",
       "Sauna & steam",
       "Towel service",

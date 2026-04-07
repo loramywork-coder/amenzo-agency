@@ -54,15 +54,15 @@ const GROUP = [
 
 const COLLECTIONS = [
   "Fondation Cartier pour l'Art Contemporain, Paris",
-  "MUDAM \u2014 Mus\u00e9e d'Art Moderne Grand-Duc Jean, Luxembourg",
+  "MUDAM — Musée d'Art Moderne Grand-Duc Jean, Luxembourg",
   "Centre Pompidou, Paris",
-  "MAXXI \u2014 Museo nazionale delle arti del XXI secolo, Rome",
+  "MAXXI — Museo nazionale delle arti del XXI secolo, Rome",
 ];
 
 const RESIDENCIES = [
-  { year: "2021", place: "K\u00fcnstlerhaus Bethanien, Berlin" },
+  { year: "2021", place: "Künstlerhaus Bethanien, Berlin" },
   { year: "2019", place: "Le 18, Marrakech" },
-  { year: "2017", place: "Residencia Art\u00edstica, S\u00e3o Paulo" },
+  { year: "2017", place: "Residencia Artística, S\u00e3o Paulo" },
 ];
 
 /* ─────────────────────────── NAV ─────────────────────────── */
@@ -226,9 +226,9 @@ export default function ArtistPage() {
             >
               Born in Marseille in 1987, Mara Delacroix grew up surrounded by the
               Mediterranean coastline that would come to define her visual
-              language. She studied at the \u00c9cole des Beaux-Arts de Marseille before
-              moving to Paris at twenty to complete her studies at the \u00c9cole
-              Nationale Sup\u00e9rieure des Beaux-Arts. It was during these formative
+              language. She studied at the École des Beaux-Arts de Marseille before
+              moving to Paris at twenty to complete her studies at the École
+              Nationale Supérieure des Beaux-Arts. It was during these formative
               years that she developed her distinctive approach to layered
               surfaces, building paintings through dozens of translucent glazes
               that capture and refract ambient light.
@@ -318,13 +318,13 @@ export default function ArtistPage() {
 
           <CvSection
             title="Solo Exhibitions"
-            items={SOLO.map((s) => ({ year: s.year, text: `${s.title} \u2014 ${s.venue}` }))}
+            items={SOLO.map((s) => ({ year: s.year, text: `${s.title} — ${s.venue}` }))}
             delay={0}
           />
 
           <CvSection
             title="Group Exhibitions"
-            items={GROUP.map((g) => ({ year: g.year, text: `${g.title} \u2014 ${g.venue}` }))}
+            items={GROUP.map((g) => ({ year: g.year, text: `${g.title} — ${g.venue}` }))}
             delay={0.05}
           />
 

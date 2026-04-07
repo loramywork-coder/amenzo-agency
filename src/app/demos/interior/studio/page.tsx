@@ -33,19 +33,19 @@ const TEAM = [
 ];
 
 const TIMELINE = [
-  { year: "2014", event: "Studio founded in Z\u00FCrich by Isabelle Morel" },
-  { year: "2017", event: "First AD Award \u2014 Residential Interior of the Year" },
+  { year: "2014", event: "Studio founded in Zürich by Isabelle Morel" },
+  { year: "2017", event: "First AD Award — Residential Interior of the Year" },
   { year: "2020", event: "Named to the AD100 list of top design firms" },
-  { year: "2023", event: "50th project completed \u2014 H\u00F4tel Noire, Geneva" },
-  { year: "2026", event: "80th project milestone \u2014 Atelier Noir, Z\u00FCrich" },
+  { year: "2023", event: "50th project completed — Hôtel Noire, Geneva" },
+  { year: "2026", event: "80th project milestone — Atelier Noir, Zürich" },
 ];
 
 const AWARDS = [
-  "AD100 \u2014 Architectural Digest, 2020\u20132026",
-  "Frame Awards \u2014 Residential Interior, 2021",
-  "Interior Design Best of Year \u2014 Hospitality, 2022",
-  "Frame Awards \u2014 Hospitality, 2023",
-  "Swiss Design Award \u2014 Interior Practice, 2024",
+  "AD100 — Architectural Digest, 2020–2026",
+  "Frame Awards — Residential Interior, 2021",
+  "Interior Design Best of Year — Hospitality, 2022",
+  "Frame Awards — Hospitality, 2023",
+  "Swiss Design Award — Interior Practice, 2024",
 ];
 
 /* ─── Nav ─── */
@@ -106,7 +106,7 @@ function Footer() {
         </div>
         <div>
           <p className="text-xs tracking-widest uppercase text-white/30 mb-4 font-[family-name:var(--font-body)]">Contact</p>
-          <p className="text-sm text-white/60 font-[family-name:var(--font-body)] leading-relaxed">L\u00F6wenstrasse 42<br />8001 Z\u00FCrich, Switzerland</p>
+          <p className="text-sm text-white/60 font-[family-name:var(--font-body)] leading-relaxed">Löwenstrasse 42<br />8001 Zürich, Switzerland</p>
           <p className="text-sm text-white/60 font-[family-name:var(--font-body)] mt-2">hello@studioelan.ch</p>
         </div>
       </div>
@@ -162,17 +162,17 @@ export default function StudioPage() {
           <div className="md:col-span-8">
             <Reveal type="slide-up" delay={0.2}>
               <p className="font-[family-name:var(--font-body)] text-base md:text-lg leading-[1.8] mb-8" style={{ color: P.textBody }}>
-                Studio Ēlan was founded in 2014 by Isabelle Morel, following a decade of practice at Yabu Pushelberg in Toronto and a formative period studying the quiet disciplines of Japanese spatial design. The studio operates from the conviction that interiors should not merely be decorated \u2014 they should be felt.
+                Studio Ēlan was founded in 2014 by Isabelle Morel, following a decade of practice at Yabu Pushelberg in Toronto and a formative period studying the quiet disciplines of Japanese spatial design. The studio operates from the conviction that interiors should not merely be decorated — they should be felt.
               </p>
             </Reveal>
             <Reveal type="slide-up" delay={0.3}>
               <p className="font-[family-name:var(--font-body)] text-base md:text-lg leading-[1.8] mb-8" style={{ color: P.textBody }}>
-                Based in Z\u00FCrich, the practice has grown to a team of seven, each bringing a distinct sensibility to the studio&rsquo;s interdisciplinary approach. We work across residential, hospitality, and commercial projects, united by a shared attention to light, material, and the emotional register of space.
+                Based in Zürich, the practice has grown to a team of seven, each bringing a distinct sensibility to the studio&rsquo;s interdisciplinary approach. We work across residential, hospitality, and commercial projects, united by a shared attention to light, material, and the emotional register of space.
               </p>
             </Reveal>
             <Reveal type="slide-up" delay={0.4}>
               <p className="font-[family-name:var(--font-body)] text-base md:text-lg leading-[1.8]" style={{ color: P.textBody }}>
-                Every project begins with listening \u2014 to the client, the site, the way light enters a room at different hours. We believe restraint is a form of generosity: each material chosen, each proportion calibrated, serves the life that will unfold within the space.
+                Every project begins with listening — to the client, the site, the way light enters a room at different hours. We believe restraint is a form of generosity: each material chosen, each proportion calibrated, serves the life that will unfold within the space.
               </p>
             </Reveal>
           </div>
@@ -226,7 +226,7 @@ export default function StudioPage() {
         </Reveal>
         <Reveal type="slide-up" delay={0.1}>
           <h2 className="font-[family-name:var(--font-heading)] text-3xl md:text-5xl font-light mb-16 leading-tight">
-            2014 \u2014 2026
+            2014 — 2026
           </h2>
         </Reveal>
         <div className="space-y-0">

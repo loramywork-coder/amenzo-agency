@@ -52,7 +52,7 @@ const TRAINERS: Trainer[] = [
     bio: [
       "Mia completed her advanced 500-hour yoga teacher training in Ubud, Bali, studying under master practitioners of Ashtanga and Hatha traditions.",
       "Her Yoga Flow class seamlessly blends breathwork, dynamic vinyasa sequences, and meditative stillness to create a transformative mind-body experience.",
-      "Beyond the mat, Mia leads FitZone\u2019s wellness program, integrating nutrition counseling and mindfulness practices into every member\u2019s journey.",
+      "Beyond the mat, Mia leads FitZone’s wellness program, integrating nutrition counseling and mindfulness practices into every member’s journey.",
     ],
     highlights: ["Bali Trained", "Breathwork Certified", "Wellness Program Director"],
   },
@@ -76,7 +76,7 @@ const TRAINERS: Trainer[] = [
     specialty: "SPIN & CARDIO",
     experience: "6 YEARS",
     bio: [
-      "Lisa\u2019s Spin Cycle classes are legendary at FitZone, known for killer playlists that perfectly sync with interval structures to maximize performance and motivation.",
+      "Lisa’s Spin Cycle classes are legendary at FitZone, known for killer playlists that perfectly sync with interval structures to maximize performance and motivation.",
       "ACE certified with additional specializations in indoor cycling and group fitness, she brings infectious energy that fills every class to capacity.",
       "Her approach combines rhythm-based cycling with science-backed heart rate training zones, ensuring every rider leaves having given their absolute best.",
     ],

@@ -113,7 +113,15 @@ h1, h2, h3, .font-display {
   font-family: var(--font-display);
   letter-spacing: -0.02em;
   line-height: 1.08;
-  color: #FFFFFF;
+  color: var(--color-text-primary);
+}
+
+.light-theme h1,
+.light-theme h2,
+.light-theme h3,
+.light-theme h4,
+.light-theme .font-display {
+  color: #111827;
 }
 
 /* Body text: normal tracking, generous leading */

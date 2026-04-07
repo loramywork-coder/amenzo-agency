@@ -90,10 +90,7 @@ function Nav() {
     <nav style={{ position: "fixed", top: 40, left: 0, right: 0, zIndex: 90, background: "transparent", borderBottom: "none", transition: "all 0.3s ease", fontFamily: FONT }}>
       <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px", height: 72, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
         <Link href="/demos/dental" style={{ display: "flex", alignItems: "center", gap: 10, textDecoration: "none" }}>
-          <div style={{ width: 36, height: 36, borderRadius: 10, background: `linear-gradient(135deg, ${C.teal}, ${C.tealDark})`, display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <SmilePlus size={20} color="#fff" strokeWidth={2} />
-          </div>
-          <span style={{ fontSize: 18, fontWeight: 700, color: C.white, letterSpacing: "-0.02em" }}>Dr. Vella Dental</span>
+          <span style={{ fontSize: 18, fontWeight: 300, color: C.white, letterSpacing: "0.05em", textTransform: "uppercase" as const }}>Dr. Vella <span style={{ fontWeight: 600 }}>Dental</span></span>
         </Link>
         <div style={{ display: "flex", alignItems: "center", gap: 32 }} className="dental-nav-desktop">
           {NAV_LINKS.map((l) => (
@@ -134,10 +131,7 @@ function Footer() {
       <div style={{ maxWidth: 1200, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 48 }}>
         <div>
           <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
-            <div style={{ width: 36, height: 36, borderRadius: 10, background: `linear-gradient(135deg, ${C.teal}, ${C.tealDark})`, display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <SmilePlus size={20} color="#fff" strokeWidth={2} />
-            </div>
-            <span style={{ fontSize: 18, fontWeight: 700, color: C.white }}>Dr. Vella Dental</span>
+            <span style={{ fontSize: 18, fontWeight: 300, color: C.white, letterSpacing: "0.05em", textTransform: "uppercase" as const }}>Dr. Vella <span style={{ fontWeight: 600 }}>Dental</span></span>
           </div>
           <div style={{ display: "flex", gap: 2, marginBottom: 12 }}>
             {[1, 2, 3, 4, 5].map((i) => (<Star key={i} size={16} fill={C.gold} color={C.gold} />))}
@@ -229,7 +223,7 @@ const PLANS = [
       "Custom-made aligners",
       "Regular progress check-ups",
       "Retainers included",
-      "12\u201318 month treatment",
+      "12–18 month treatment",
       "Flexible payment plans",
       "Free initial consultation",
     ],

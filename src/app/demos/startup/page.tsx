@@ -87,7 +87,7 @@ export default function StartupPage() {
   const heroScale = useTransform(scrollYProgress, [0, 0.6], [1, 1.05]);
 
   return (
-    <div style={{ background: P.bg, color: P.text, fontFamily: fBody }}>
+    <div className="light-theme" style={{ background: P.bg, color: P.text, fontFamily: fBody }}>
 
       {/* ═══ DEMO BANNER ═══ */}
       <DemoBanner />

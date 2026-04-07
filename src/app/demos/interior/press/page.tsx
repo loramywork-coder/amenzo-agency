@@ -25,20 +25,20 @@ const FEATURES = [
   { pub: "Architectural Digest", title: "The AD100: Designers Shaping the Future of Living", year: "2026" },
   { pub: "Wallpaper*", title: "Studio Ēlan and the New Swiss Restraint", year: "2025" },
   { pub: "Elle Decoration", title: "10 Interiors That Redefine Alpine Luxury", year: "2025" },
-  { pub: "Frame Magazine", title: "H\u00F4tel Noire: Where Darkness Becomes Warmth", year: "2024" },
-  { pub: "Dezeen", title: "Z\u00FCrich Penthouse by Studio Ēlan Embraces Raw Materiality", year: "2024" },
+  { pub: "Frame Magazine", title: "Hôtel Noire: Where Darkness Becomes Warmth", year: "2024" },
+  { pub: "Dezeen", title: "Zürich Penthouse by Studio Ēlan Embraces Raw Materiality", year: "2024" },
   { pub: "Interior Design Magazine", title: "Best of Year: Hospitality Shortlist", year: "2023" },
   { pub: "Monocle", title: "The Quiet Studios: Six Practices Redefining European Design", year: "2023" },
   { pub: "The New York Times Style", title: "Swiss Design Goes Warm: A New Generation of Interiors", year: "2022" },
 ];
 
 const AWARDS_LIST = [
-  { award: "AD100 \u2014 Architectural Digest", year: "2020\u20132026" },
-  { award: "Frame Awards \u2014 Residential Interior of the Year", year: "2021" },
-  { award: "Interior Design Best of Year \u2014 Hospitality", year: "2022" },
-  { award: "Frame Awards \u2014 Hospitality Interior", year: "2023" },
-  { award: "Swiss Design Award \u2014 Interior Practice", year: "2024" },
-  { award: "Wallpaper* Design Awards \u2014 Best Domestic Interior", year: "2025" },
+  { award: "AD100 — Architectural Digest", year: "2020–2026" },
+  { award: "Frame Awards — Residential Interior of the Year", year: "2021" },
+  { award: "Interior Design Best of Year — Hospitality", year: "2022" },
+  { award: "Frame Awards — Hospitality Interior", year: "2023" },
+  { award: "Swiss Design Award — Interior Practice", year: "2024" },
+  { award: "Wallpaper* Design Awards — Best Domestic Interior", year: "2025" },
 ];
 
 /* ─── Nav ─── */
@@ -99,7 +99,7 @@ function Footer() {
         </div>
         <div>
           <p className="text-xs tracking-widest uppercase text-white/30 mb-4 font-[family-name:var(--font-body)]">Contact</p>
-          <p className="text-sm text-white/60 font-[family-name:var(--font-body)] leading-relaxed">L\u00F6wenstrasse 42<br />8001 Z\u00FCrich, Switzerland</p>
+          <p className="text-sm text-white/60 font-[family-name:var(--font-body)] leading-relaxed">Löwenstrasse 42<br />8001 Zürich, Switzerland</p>
           <p className="text-sm text-white/60 font-[family-name:var(--font-body)] mt-2">hello@studioelan.ch</p>
         </div>
       </div>

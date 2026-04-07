@@ -74,38 +74,42 @@ function Footer() {
 const pressReleases = [
   { date: "Jan 15, 2025", title: "Nova Space Completes ESA OPS-SAT-2 Technology Validation", summary: "All flight objectives met as the NPX-200 thruster achieves ESA qualification milestone, confirming 210 m/s delta-v budget for the 20 kg spacecraft class." },
   { date: "Sep 22, 2024", title: "NOVA-2 Demonstrates First Electrospray Formation Flying", summary: "Two NPX-200-equipped CubeSats achieve 10 km inter-satellite spacing in a world-first for electrospray-propelled formation flying on Rocket Lab Electron." },
-  { date: "Jun 8, 2024", title: "Nova Space Closes \u20AC12M Series A Led by Lakestar", summary: "Funding to scale production to 200 thrusters per year and expand the team to 30 engineers at the Technopark Z\u00fcrich facility." },
-  { date: "Mar 4, 2024", title: "NPX-200 Fires in Orbit for the First Time on NOVA-1 Mission", summary: "Nova Space\u2019s flagship electrospray thruster ignites on SpaceX Transporter-10, delivering measured specific impulse of 1,185 seconds." },
+  { date: "Jun 8, 2024", title: "Nova Space Closes \u20AC12M Series A Led by Lakestar", summary: "Funding to scale production to 200 thrusters per year and expand the team to 30 engineers at the Technopark Zürich facility." },
+  { date: "Mar 4, 2024", title: "NPX-200 Fires in Orbit for the First Time on NOVA-1 Mission", summary: "Nova Space’s flagship electrospray thruster ignites on SpaceX Transporter-10, delivering measured specific impulse of 1,185 seconds." },
 ];
 
 const mediaCoverage = [
   { outlet: "SpaceNews", title: "Swiss startup Nova Space bets on electrospray for CubeSat propulsion", url: "#" },
   { outlet: "TechCrunch", title: "Nova Space raises \u20AC12M to put thrusters on every satellite", url: "#" },
   { outlet: "The Verge", title: "This tiny thruster could clean up space debris", url: "#" },
-  { outlet: "Handelszeitung", title: "Z\u00fcrcher Startup Nova Space startet ins All", url: "#" },
+  { outlet: "Handelszeitung", title: "Zürcher Startup Nova Space startet ins All", url: "#" },
   { outlet: "ESA Blog", title: "OPS-SAT-2 validates next-generation electric propulsion", url: "#" },
-  { outlet: "Ars Technica", title: "Electrospray thrusters: the propulsion revolution you haven\u2019t heard of", url: "#" },
+  { outlet: "Ars Technica", title: "Electrospray thrusters: the propulsion revolution you haven’t heard of", url: "#" },
 ];
 
 export default function PressPage() {
   return (
-    <div style={{ background: P.bg, color: P.white, fontFamily: "var(--font-body)" }}>
+    <div className="light-theme" style={{ background: P.bg, color: P.white, fontFamily: "var(--font-body)" }}>
       <DemoBanner />
       <Nav />
 
       {/* Hero */}
-      <section className="pt-40 pb-20 px-6 lg:px-12 max-w-4xl mx-auto text-center">
+      <section className="relative pt-48 pb-28 px-6 lg:px-12 text-center overflow-hidden">
+        <div aria-hidden className="absolute inset-0" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1495020689067-958852a7765e?auto=format&fit=crop&w=2400&q=85')", backgroundSize: "cover", backgroundPosition: "center" }} />
+        <div aria-hidden className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(10,12,16,0.2) 0%, rgba(10,12,16,0.4) 55%, rgba(10,12,16,0.85) 100%)" }} />
+        <div className="relative max-w-4xl mx-auto" style={{ color: "#FFFFFF" }}>
         <Reveal type="fade">
-          <span className="inline-block text-xs font-medium uppercase tracking-widest px-3 py-1 rounded-full mb-6" style={{ color: P.amber, border: `1px solid ${P.amber}33` }}>Press &amp; Media</span>
+          <span className="inline-block text-xs font-medium uppercase tracking-widest px-3 py-1 rounded-full mb-6" style={{ color: P.amber, border: `1px solid ${P.amber}33`, background: "rgba(10,12,16,0.4)", backdropFilter: "blur(8px)" }}>Press &amp; Media</span>
         </Reveal>
         <Reveal type="slide-up" delay={0.1}>
-          <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-6 tracking-tight">Newsroom</h1>
+          <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-6 tracking-tight" style={{ color: "#FFFFFF", textShadow: "0 2px 24px rgba(0,0,0,0.55)" }}>Newsroom</h1>
         </Reveal>
         <Reveal type="slide-up" delay={0.2}>
-          <p className="text-lg md:text-xl leading-relaxed" style={{ color: P.mutedLight }}>
+          <p className="text-lg md:text-xl leading-relaxed" style={{ color: "rgba(255,255,255,0.9)", textShadow: "0 1px 12px rgba(0,0,0,0.5)" }}>
             Press releases, media coverage, and resources for journalists covering Nova Space.
           </p>
         </Reveal>
+        </div>
       </section>
 
       {/* Press Releases */}

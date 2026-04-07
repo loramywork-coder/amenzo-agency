@@ -47,13 +47,13 @@ const TIMELINE = [
     year: "2015",
     title: "Return to Malta",
     description:
-      "Drawn by the pull of the island\u2019s terroir and the memory of his grandmother\u2019s kitchen, Marco returned home to build something deeply personal.",
+      "Drawn by the pull of the island’s terroir and the memory of his grandmother’s kitchen, Marco returned home to build something deeply personal.",
   },
   {
     year: "2017",
     title: "Porto Valletta Opens",
     description:
-      "On a quiet corner of Strait Street, Porto Valletta opened its doors. What began as a 28-seat dining room has since become one of Malta\u2019s most celebrated tables.",
+      "On a quiet corner of Strait Street, Porto Valletta opened its doors. What began as a 28-seat dining room has since become one of Malta’s most celebrated tables.",
   },
 ];
 

@@ -30,13 +30,13 @@ export const projects: Project[] = [
     category: "Hospitality",
     categoryTag: "HOSPITALITY",
     description:
-      "A complete digital transformation for one of Sliema\u2019s most prestigious hotels. From an outdated Wix site to a premium, trilingual booking experience.",
+      "A complete digital transformation for one of Sliema’s most prestigious hotels. From an outdated Wix site to a premium, trilingual booking experience.",
     challenge:
-      "The hotel had a Wix website that hadn\u2019t been updated in 4 years. It was slow, not mobile-friendly, and didn\u2019t reflect the luxury experience guests received on-site. They were losing direct bookings to OTAs because their own site was embarrassing.",
+      "The hotel had a Wix website that hadn’t been updated in 4 years. It was slow, not mobile-friendly, and didn’t reflect the luxury experience guests received on-site. They were losing direct bookings to OTAs because their own site was embarrassing.",
     approach:
-      "We started with a full brand audit and guest journey mapping. The design direction was luxury minimalism \u2014 letting the property speak for itself through large-format photography and seamless booking flows. We built a trilingual system (EN/DE/FR) to serve their core markets.",
+      "We started with a full brand audit and guest journey mapping. The design direction was luxury minimalism — letting the property speak for itself through large-format photography and seamless booking flows. We built a trilingual system (EN/DE/FR) to serve their core markets.",
     solution:
-      "A bespoke Next.js website with integrated booking engine, virtual room tours, and a content management system that lets staff update rates and availability in real-time. Performance was paramount \u2014 the site loads in under 1.5 seconds on mobile.",
+      "A bespoke Next.js website with integrated booking engine, virtual room tours, and a content management system that lets staff update rates and availability in real-time. Performance was paramount — the site loads in under 1.5 seconds on mobile.",
     results: [
       "Trilingual (EN/DE/FR)",
       "Room Gallery with Lightbox",
@@ -68,13 +68,13 @@ export const projects: Project[] = [
     category: "Gastro",
     categoryTag: "GASTRO",
     description:
-      "A moody, atmospheric website for Valletta\u2019s newest fine dining destination. The site needed to feel like walking into the restaurant.",
+      "A moody, atmospheric website for Valletta’s newest fine dining destination. The site needed to feel like walking into the restaurant.",
     challenge:
       "A brand-new restaurant with no online presence. They needed a website that captured the moody, intimate atmosphere of their venue while making it effortless to browse the menu and book a table.",
     approach:
       "Dark, rich design with cinematic photography. Every scroll feels intentional. We designed the menu as an experience, not a PDF download. The reservation system is integrated directly, no third-party redirects.",
     solution:
-      "A visually stunning single-scroll experience with parallax imagery, animated menu sections, and an integrated reservation system. The design uses dark backgrounds with warm accent lighting to mirror the restaurant\u2019s ambiance.",
+      "A visually stunning single-scroll experience with parallax imagery, animated menu sections, and an integrated reservation system. The design uses dark backgrounds with warm accent lighting to mirror the restaurant’s ambiance.",
     results: [
       "Dark Atmospheric Theme",
       "Full Interactive Menu",
@@ -238,11 +238,11 @@ export const projects: Project[] = [
     category: "E-Commerce",
     categoryTag: "E-COMMERCE",
     description:
-      "An artisan e-commerce platform for premium Maltese products. Olive oils, honey, ceramics, and local crafts \u2014 beautifully presented and shipped worldwide.",
+      "An artisan e-commerce platform for premium Maltese products. Olive oils, honey, ceramics, and local crafts — beautifully presented and shipped worldwide.",
     challenge:
       "A collection of Maltese artisans with no unified online shop. They were selling through Instagram DMs and local markets, missing out on the tourist and export market entirely.",
     approach:
-      "We created an e-commerce experience that tells the story behind every product. Each item has its maker\u2019s story, origin details, and craftsmanship process. The design is warm, Mediterranean, and premium.",
+      "We created an e-commerce experience that tells the story behind every product. Each item has its maker’s story, origin details, and craftsmanship process. The design is warm, Mediterranean, and premium.",
     solution:
       "A custom e-commerce platform with storytelling-driven product pages, gift box builder, subscription service for monthly Maltese products, and international shipping integration with real-time rates.",
     results: [

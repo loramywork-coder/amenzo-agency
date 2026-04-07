@@ -31,7 +31,7 @@ const rooms = [
     size: "28 m\u00B2",
     feature: "City View",
     img: "photo-1631049307264-da0ec9d70304",
-    desc: "Elegantly appointed with hand-selected furnishings, the Classic Room offers a tranquil retreat with views over Valletta\u2019s historic streets. Limestone floors, bespoke textiles, and a luxurious rain shower complete the experience.",
+    desc: "Elegantly appointed with hand-selected furnishings, the Classic Room offers a tranquil retreat with views over Valletta’s historic streets. Limestone floors, bespoke textiles, and a luxurious rain shower complete the experience.",
     amenities: ["King Bed", "Rain Shower", "City View", "Minibar"],
   },
   {

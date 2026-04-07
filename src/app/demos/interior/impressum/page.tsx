@@ -79,7 +79,7 @@ function Footer() {
         </div>
         <div>
           <p className="text-xs tracking-widest uppercase text-white/30 mb-4 font-[family-name:var(--font-body)]">Contact</p>
-          <p className="text-sm text-white/60 font-[family-name:var(--font-body)] leading-relaxed">L\u00F6wenstrasse 42<br />8001 Z\u00FCrich, Switzerland</p>
+          <p className="text-sm text-white/60 font-[family-name:var(--font-body)] leading-relaxed">Löwenstrasse 42<br />8001 Zürich, Switzerland</p>
           <p className="text-sm text-white/60 font-[family-name:var(--font-body)] mt-2">hello@studioelan.ch</p>
         </div>
       </div>
@@ -124,8 +124,8 @@ export default function ImpressumPage() {
                 <h2 className="font-[family-name:var(--font-heading)] text-2xl font-light mb-4">Company</h2>
                 <div className="font-[family-name:var(--font-body)] text-base leading-[1.9]" style={{ color: P.textBody }}>
                   <p>Studio Ēlan GmbH</p>
-                  <p>L\u00F6wenstrasse 42</p>
-                  <p>8001 Z\u00FCrich, Switzerland</p>
+                  <p>Löwenstrasse 42</p>
+                  <p>8001 Zürich, Switzerland</p>
                   <p className="mt-3">CHE-123.456.789</p>
                   <p>hello@studioelan.ch</p>
                   <p>+41 44 512 30 80</p>

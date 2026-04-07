@@ -1247,7 +1247,7 @@ function LoadingStatesSection() {
                 <motion.div key="content" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-2">
                   <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-[10px] text-white/50">A</div>
                   <p className="text-[11px] text-white/60 font-medium">Amenzo Studio</p>
-                  <p className="text-[10px] text-white/30">Web design agency</p>
+                  <p className="text-[10px] text-white/30">Web design studio</p>
                 </motion.div>
               )}
             </AnimatePresence>

@@ -93,10 +93,7 @@ function Nav() {
     <nav style={{ position: "fixed", top: 40, left: 0, right: 0, zIndex: 90, background: "transparent", borderBottom: "none", transition: "all 0.3s ease", fontFamily: FONT }}>
       <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px", height: 72, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
         <Link href="/demos/dental" style={{ display: "flex", alignItems: "center", gap: 10, textDecoration: "none" }}>
-          <div style={{ width: 36, height: 36, borderRadius: 10, background: `linear-gradient(135deg, ${C.teal}, ${C.tealDark})`, display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <SmilePlus size={20} color="#fff" strokeWidth={2} />
-          </div>
-          <span style={{ fontSize: 18, fontWeight: 700, color: C.white, letterSpacing: "-0.02em" }}>Dr. Vella Dental</span>
+          <span style={{ fontSize: 18, fontWeight: 300, color: C.white, letterSpacing: "0.05em", textTransform: "uppercase" as const }}>Dr. Vella <span style={{ fontWeight: 600 }}>Dental</span></span>
         </Link>
         <div style={{ display: "flex", alignItems: "center", gap: 32 }} className="dental-nav-desktop">
           {NAV_LINKS.map((l) => (
@@ -137,10 +134,7 @@ function Footer() {
       <div style={{ maxWidth: 1200, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 48 }}>
         <div>
           <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
-            <div style={{ width: 36, height: 36, borderRadius: 10, background: `linear-gradient(135deg, ${C.teal}, ${C.tealDark})`, display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <SmilePlus size={20} color="#fff" strokeWidth={2} />
-            </div>
-            <span style={{ fontSize: 18, fontWeight: 700, color: C.white }}>Dr. Vella Dental</span>
+            <span style={{ fontSize: 18, fontWeight: 300, color: C.white, letterSpacing: "0.05em", textTransform: "uppercase" as const }}>Dr. Vella <span style={{ fontWeight: 600 }}>Dental</span></span>
           </div>
           <div style={{ display: "flex", gap: 2, marginBottom: 12 }}>
             {[1, 2, 3, 4, 5].map((i) => (<Star key={i} size={16} fill={C.gold} color={C.gold} />))}
@@ -215,11 +209,11 @@ const SERVICE_CATEGORIES: ServiceCategory[] = [
     ],
     treatments: [
       { name: "Check-up & Clean", duration: "45 min", price: "\u20AC60" },
-      { name: "Dental Filling (composite)", duration: "30\u201360 min", price: "\u20AC80\u2013\u20AC150" },
-      { name: "Root Canal Treatment", duration: "60\u201390 min", price: "\u20AC350\u2013\u20AC600" },
-      { name: "Tooth Extraction (simple)", duration: "30 min", price: "\u20AC80\u2013\u20AC120" },
-      { name: "Dental Crown", duration: "2 visits", price: "\u20AC450\u2013\u20AC700" },
-      { name: "Night Guard / Splint", duration: "2 visits", price: "\u20AC200\u2013\u20AC350" },
+      { name: "Dental Filling (composite)", duration: "30–60 min", price: "\u20AC80–\u20AC150" },
+      { name: "Root Canal Treatment", duration: "60–90 min", price: "\u20AC350–\u20AC600" },
+      { name: "Tooth Extraction (simple)", duration: "30 min", price: "\u20AC80–\u20AC120" },
+      { name: "Dental Crown", duration: "2 visits", price: "\u20AC450–\u20AC700" },
+      { name: "Night Guard / Splint", duration: "2 visits", price: "\u20AC200–\u20AC350" },
     ],
   },
   {
@@ -237,12 +231,12 @@ const SERVICE_CATEGORIES: ServiceCategory[] = [
       "Aftercare support programme",
     ],
     treatments: [
-      { name: "Teeth Whitening (in-office)", duration: "60 min", price: "\u20AC250\u2013\u20AC400" },
-      { name: "Take-Home Whitening Kit", duration: "2 weeks", price: "\u20AC150\u2013\u20AC200" },
-      { name: "Porcelain Veneers (per tooth)", duration: "2\u20133 visits", price: "\u20AC600\u2013\u20AC900" },
-      { name: "Composite Bonding (per tooth)", duration: "30\u201360 min", price: "\u20AC150\u2013\u20AC300" },
+      { name: "Teeth Whitening (in-office)", duration: "60 min", price: "\u20AC250–\u20AC400" },
+      { name: "Take-Home Whitening Kit", duration: "2 weeks", price: "\u20AC150–\u20AC200" },
+      { name: "Porcelain Veneers (per tooth)", duration: "2–3 visits", price: "\u20AC600–\u20AC900" },
+      { name: "Composite Bonding (per tooth)", duration: "30–60 min", price: "\u20AC150–\u20AC300" },
       { name: "Smile Makeover Package", duration: "Multiple visits", price: "From \u20AC3,000" },
-      { name: "Gum Contouring", duration: "60 min", price: "\u20AC300\u2013\u20AC500" },
+      { name: "Gum Contouring", duration: "60 min", price: "\u20AC300–\u20AC500" },
     ],
   },
   {
@@ -260,11 +254,11 @@ const SERVICE_CATEGORIES: ServiceCategory[] = [
       "5-year implant warranty",
     ],
     treatments: [
-      { name: "Single Tooth Implant", duration: "2\u20134 months", price: "\u20AC1,200\u2013\u20AC1,800" },
-      { name: "Implant-Supported Bridge", duration: "3\u20136 months", price: "\u20AC3,500\u2013\u20AC5,500" },
-      { name: "All-on-4 (full arch)", duration: "3\u20136 months", price: "From \u20AC8,000" },
-      { name: "Bone Grafting", duration: "60\u201390 min", price: "\u20AC400\u2013\u20AC800" },
-      { name: "Sinus Lift", duration: "90 min", price: "\u20AC600\u2013\u20AC1,000" },
+      { name: "Single Tooth Implant", duration: "2–4 months", price: "\u20AC1,200–\u20AC1,800" },
+      { name: "Implant-Supported Bridge", duration: "3–6 months", price: "\u20AC3,500–\u20AC5,500" },
+      { name: "All-on-4 (full arch)", duration: "3–6 months", price: "From \u20AC8,000" },
+      { name: "Bone Grafting", duration: "60–90 min", price: "\u20AC400–\u20AC800" },
+      { name: "Sinus Lift", duration: "90 min", price: "\u20AC600–\u20AC1,000" },
       { name: "Implant Consultation", duration: "30 min", price: "Complimentary" },
     ],
   },
@@ -283,11 +277,11 @@ const SERVICE_CATEGORIES: ServiceCategory[] = [
       "Flexible payment options",
     ],
     treatments: [
-      { name: "Invisalign Full", duration: "12\u201318 months", price: "\u20AC3,500\u2013\u20AC5,000" },
-      { name: "Invisalign Lite", duration: "6\u20139 months", price: "\u20AC2,500\u2013\u20AC3,500" },
-      { name: "Fixed Braces (metal)", duration: "12\u201324 months", price: "\u20AC2,000\u2013\u20AC3,500" },
-      { name: "Ceramic Braces", duration: "12\u201324 months", price: "\u20AC2,500\u2013\u20AC4,000" },
-      { name: "Retainers (set)", duration: "1 visit", price: "\u20AC200\u2013\u20AC400" },
+      { name: "Invisalign Full", duration: "12–18 months", price: "\u20AC3,500–\u20AC5,000" },
+      { name: "Invisalign Lite", duration: "6–9 months", price: "\u20AC2,500–\u20AC3,500" },
+      { name: "Fixed Braces (metal)", duration: "12–24 months", price: "\u20AC2,000–\u20AC3,500" },
+      { name: "Ceramic Braces", duration: "12–24 months", price: "\u20AC2,500–\u20AC4,000" },
+      { name: "Retainers (set)", duration: "1 visit", price: "\u20AC200–\u20AC400" },
     ],
   },
   {
@@ -305,11 +299,11 @@ const SERVICE_CATEGORIES: ServiceCategory[] = [
       "Follow-up care included",
     ],
     treatments: [
-      { name: "Emergency Consultation", duration: "20\u201330 min", price: "\u20AC80" },
-      { name: "Toothache / Infection Treatment", duration: "30\u201360 min", price: "\u20AC80\u2013\u20AC200" },
-      { name: "Broken Tooth Repair", duration: "30\u201360 min", price: "\u20AC100\u2013\u20AC300" },
-      { name: "Lost Filling / Crown Recement", duration: "20\u201330 min", price: "\u20AC60\u2013\u20AC120" },
-      { name: "Emergency Extraction", duration: "30\u201345 min", price: "\u20AC100\u2013\u20AC200" },
+      { name: "Emergency Consultation", duration: "20–30 min", price: "\u20AC80" },
+      { name: "Toothache / Infection Treatment", duration: "30–60 min", price: "\u20AC80–\u20AC200" },
+      { name: "Broken Tooth Repair", duration: "30–60 min", price: "\u20AC100–\u20AC300" },
+      { name: "Lost Filling / Crown Recement", duration: "20–30 min", price: "\u20AC60–\u20AC120" },
+      { name: "Emergency Extraction", duration: "30–45 min", price: "\u20AC100–\u20AC200" },
     ],
   },
   {
@@ -328,10 +322,10 @@ const SERVICE_CATEGORIES: ServiceCategory[] = [
     ],
     treatments: [
       { name: "Children's Check-up & Clean", duration: "30 min", price: "\u20AC45" },
-      { name: "Fluoride Treatment", duration: "15 min", price: "\u20AC30\u2013\u20AC50" },
-      { name: "Fissure Sealants (per tooth)", duration: "15 min", price: "\u20AC35\u2013\u20AC50" },
-      { name: "Children's Filling", duration: "30 min", price: "\u20AC60\u2013\u20AC100" },
-      { name: "Space Maintainer", duration: "2 visits", price: "\u20AC150\u2013\u20AC250" },
+      { name: "Fluoride Treatment", duration: "15 min", price: "\u20AC30–\u20AC50" },
+      { name: "Fissure Sealants (per tooth)", duration: "15 min", price: "\u20AC35–\u20AC50" },
+      { name: "Children's Filling", duration: "30 min", price: "\u20AC60–\u20AC100" },
+      { name: "Space Maintainer", duration: "2 visits", price: "\u20AC150–\u20AC250" },
     ],
   },
 ];

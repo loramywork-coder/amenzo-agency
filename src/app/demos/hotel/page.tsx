@@ -61,19 +61,19 @@ const restaurants = [
   {
     name: "Harbour Grill",
     desc: "Wood-fired steaks and the freshest catch, served with harbour views.",
-    hours: "Dinner \u2014 Tue\u2013Sat 19:00\u201323:00",
+    hours: "Dinner — Tue–Sat 19:00–23:00",
     img: "photo-1559339352-11d035aa65de",
   },
   {
     name: "La Terrazza",
     desc: "Casual Mediterranean cuisine on our sunlit rooftop terrace.",
-    hours: "Lunch & Dinner \u2014 Daily 12:00\u201322:00",
+    hours: "Lunch & Dinner — Daily 12:00–22:00",
     img: "photo-1555396273-367ea4eb4db5",
   },
   {
     name: "Bar Azure",
     desc: "Signature cocktails and small plates with panoramic sunset views.",
-    hours: "Daily 16:00\u201301:00",
+    hours: "Daily 16:00–01:00",
     img: "photo-1470337458703-46ad1756a187",
   },
 ] as const;
@@ -127,10 +127,10 @@ const testimonials = [
   {
     text: "An experience that transcends hospitality. Every detail curated to perfection.",
     author: "Helena Cortez",
-    role: "Cond\u00E9 Nast Traveller",
+    role: "Condé Nast Traveller",
   },
   {
-    text: "The spa alone is worth the journey. Malta\u2019s finest hotel, without question.",
+    text: "The spa alone is worth the journey. Malta’s finest hotel, without question.",
     author: "James Whitfield",
     role: "The Sunday Times",
   },
@@ -185,14 +185,15 @@ function NavHeader() {
       >
         {/* Logo */}
         <Link href="/demos/hotel" style={{ textDecoration: "none" }}>
-          <div style={{ lineHeight: 1.1 }}>
+          <div style={{ lineHeight: 1.1, textShadow: "0 2px 12px rgba(0,0,0,0.6)" }}>
             <span
               style={{
                 display: "block",
                 fontFamily: fontDisplay,
-                fontWeight: 400,
-                fontSize: 20,
-                color: C.cream,
+                fontWeight: 500,
+                fontSize: 28,
+                color: "#FFFFFF",
+                letterSpacing: "0.01em",
               }}
             >
               Grand Harbour
@@ -202,15 +203,16 @@ function NavHeader() {
                 display: "block",
                 fontFamily: fontDisplay,
                 fontStyle: "italic",
-                fontWeight: 300,
-                fontSize: 13,
+                fontWeight: 400,
+                fontSize: 16,
                 color: C.gold,
-                letterSpacing: "0.08em",
+                letterSpacing: "0.1em",
+                marginTop: 2,
               }}
             >
               Hotel &amp; Spa
             </span>
-            <span style={{ display: "block", fontSize: 7, color: C.gold, letterSpacing: "0.25em", marginTop: 4 }}>
+            <span style={{ display: "block", fontSize: 9, color: C.gold, letterSpacing: "0.3em", marginTop: 5 }}>
               ★ ★ ★ ★ ★
             </span>
           </div>

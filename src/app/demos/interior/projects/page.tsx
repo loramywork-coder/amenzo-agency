@@ -28,11 +28,11 @@ const FILTERS = ["All", "Residential", "Hospitality", "Commercial"] as const;
 const PROJECTS = [
   { num: "01", title: "Lake House Lucerne", type: "Residential", area: "320 m\u00B2", year: "2024", slug: "lake-house", img: "/images/interior/project-01.jpg" },
   { num: "02", title: "Alpine Retreat Verbier", type: "Hospitality", area: "580 m\u00B2", year: "2023", slug: "alpine-retreat", img: "/images/interior/project-02.jpg" },
-  { num: "03", title: "Z\u00FCrich Penthouse", type: "Residential", area: "210 m\u00B2", year: "2024", slug: "zurich-penthouse", img: "/images/interior/project-03.jpg" },
-  { num: "04", title: "H\u00F4tel Noire Geneva", type: "Hospitality", area: "1,200 m\u00B2", year: "2022", slug: "hotel-noire", img: "/images/interior/project-04.jpg" },
+  { num: "03", title: "Zürich Penthouse", type: "Residential", area: "210 m\u00B2", year: "2024", slug: "zurich-penthouse", img: "/images/interior/project-03.jpg" },
+  { num: "04", title: "Hôtel Noire Geneva", type: "Hospitality", area: "1,200 m\u00B2", year: "2022", slug: "hotel-noire", img: "/images/interior/project-04.jpg" },
   { num: "05", title: "Gallery Loft Basel", type: "Commercial", area: "440 m\u00B2", year: "2023", slug: "gallery-loft", img: "/images/interior/project-05.jpg" },
   { num: "06", title: "Engadin Chalet", type: "Residential", area: "290 m\u00B2", year: "2025", slug: "engadin-chalet", img: "/images/interior/project-06.jpg" },
-  { num: "07", title: "Brasserie Z\u00FCri", type: "Hospitality", area: "350 m\u00B2", year: "2025", slug: "brasserie-zuri", img: "/images/interior/project-07.jpg" },
+  { num: "07", title: "Brasserie Züri", type: "Hospitality", area: "350 m\u00B2", year: "2025", slug: "brasserie-zuri", img: "/images/interior/project-07.jpg" },
   { num: "08", title: "Atelier Noir", type: "Commercial", area: "180 m\u00B2", year: "2026", slug: "atelier-noir", img: "/images/interior/project-08.jpg" },
 ];
 
@@ -99,7 +99,7 @@ function Footer() {
         <div>
           <p className="text-xs tracking-widest uppercase text-white/30 mb-4 font-[family-name:var(--font-body)]">Contact</p>
           <p className="text-sm text-white/60 font-[family-name:var(--font-body)] leading-relaxed">
-            L\u00F6wenstrasse 42<br />8001 Z\u00FCrich, Switzerland
+            Löwenstrasse 42<br />8001 Zürich, Switzerland
           </p>
           <p className="text-sm text-white/60 font-[family-name:var(--font-body)] mt-2">hello@studioelan.ch</p>
         </div>

@@ -55,9 +55,9 @@ const DISHES = [
 
 /* ─── reviews ─── */
 const REVIEWS = [
-  { text: "A meal at Porto Valletta isn\u2019t dinner, it\u2019s a memory etched in gold.", author: "Helena Cortez", role: "The Sunday Times", stars: 5 },
+  { text: "A meal at Porto Valletta isn’t dinner, it’s a memory etched in gold.", author: "Helena Cortez", role: "The Sunday Times", stars: 5 },
   { text: "Every course told a story. Impeccable technique, soul on every plate.", author: "James Whitfield", role: "Conde Nast Traveller", stars: 5 },
-  { text: "The wine pairing alone is worth the journey. Malta\u2019s finest table, without question.", author: "Sophia Laurent", role: "Michelin Guide", stars: 5 },
+  { text: "The wine pairing alone is worth the journey. Malta’s finest table, without question.", author: "Sophia Laurent", role: "Michelin Guide", stars: 5 },
 ];
 
 /* ─── instagram images ─── */

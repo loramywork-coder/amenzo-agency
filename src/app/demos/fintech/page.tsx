@@ -49,13 +49,20 @@ const GLOBE_MARKERS = [
   { id: "london", location: [51.5074, -0.1278] as [number, number], label: "London" },
   { id: "nyc", location: [40.7128, -74.006] as [number, number], label: "New York" },
   { id: "singapore", location: [1.3521, 103.8198] as [number, number], label: "Singapore" },
+  { id: "tokyo", location: [35.6762, 139.6503] as [number, number], label: "Tokyo" },
+  { id: "dubai", location: [25.2048, 55.2708] as [number, number], label: "Dubai" },
+  { id: "saopaulo", location: [-23.5505, -46.6333] as [number, number], label: "São Paulo" },
+  { id: "sydney", location: [-33.8688, 151.2093] as [number, number], label: "Sydney" },
 ];
 
 const GLOBE_ARCS = [
   { id: "zh-ld", from: [47.3769, 8.5417] as [number, number], to: [51.5074, -0.1278] as [number, number] },
   { id: "ld-ny", from: [51.5074, -0.1278] as [number, number], to: [40.7128, -74.006] as [number, number] },
-  { id: "ny-sg", from: [40.7128, -74.006] as [number, number], to: [1.3521, 103.8198] as [number, number] },
-  { id: "sg-zh", from: [1.3521, 103.8198] as [number, number], to: [47.3769, 8.5417] as [number, number] },
+  { id: "zh-du", from: [47.3769, 8.5417] as [number, number], to: [25.2048, 55.2708] as [number, number] },
+  { id: "du-sg", from: [25.2048, 55.2708] as [number, number], to: [1.3521, 103.8198] as [number, number] },
+  { id: "sg-tk", from: [1.3521, 103.8198] as [number, number], to: [35.6762, 139.6503] as [number, number] },
+  { id: "sg-sy", from: [1.3521, 103.8198] as [number, number], to: [-33.8688, 151.2093] as [number, number] },
+  { id: "ny-sp", from: [40.7128, -74.006] as [number, number], to: [-23.5505, -46.6333] as [number, number] },
 ];
 
 const OFFICES = [
@@ -121,7 +128,7 @@ export default function FintechDemo() {
   }, []);
 
   return (
-    <div style={{ fontFamily: fontBody, color: P.text, background: P.bg }}>
+    <div className="light-theme" style={{ fontFamily: fontBody, color: P.text, background: P.bg }}>
       <DemoBanner />
 
       {/* ═══════ NAV ═══════ */}
@@ -461,6 +468,8 @@ export default function FintechDemo() {
               dark={0}
               mapBrightness={8}
               markerSize={0.03}
+              arcHeight={0.6}
+              arcWidth={0.7}
               speed={0.002}
               className="w-full"
             />

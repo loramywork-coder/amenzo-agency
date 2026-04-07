@@ -73,23 +73,27 @@ function Footer() {
 
 export default function MissionPage() {
   return (
-    <div style={{ background: P.bg, color: P.white, fontFamily: "var(--font-body)" }}>
+    <div className="light-theme" style={{ background: P.bg, color: P.white, fontFamily: "var(--font-body)" }}>
       <DemoBanner />
       <Nav />
 
       {/* Hero */}
-      <section className="pt-40 pb-20 px-6 lg:px-12 max-w-4xl mx-auto text-center">
+      <section className="relative pt-48 pb-28 px-6 lg:px-12 text-center overflow-hidden">
+        <div aria-hidden className="absolute inset-0" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1614728263952-84ea256f9679?auto=format&fit=crop&w=2400&q=85')", backgroundSize: "cover", backgroundPosition: "center" }} />
+        <div aria-hidden className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(10,12,16,0.2) 0%, rgba(10,12,16,0.4) 55%, rgba(10,12,16,0.85) 100%)" }} />
+        <div className="relative max-w-4xl mx-auto" style={{ color: "#FFFFFF" }}>
         <Reveal type="fade">
-          <span className="inline-block text-xs font-medium uppercase tracking-widest px-3 py-1 rounded-full mb-6" style={{ color: P.blue, border: `1px solid ${P.blue}33` }}>Our Mission</span>
+          <span className="inline-block text-xs font-medium uppercase tracking-widest px-3 py-1 rounded-full mb-6" style={{ color: P.blue, border: `1px solid ${P.blue}33`, background: "rgba(10,12,16,0.4)", backdropFilter: "blur(8px)" }}>Our Mission</span>
         </Reveal>
         <Reveal type="slide-up" delay={0.1}>
-          <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-6 tracking-tight">Making orbit accessible to&nbsp;everyone</h1>
+          <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-6 tracking-tight" style={{ color: "#FFFFFF", textShadow: "0 2px 24px rgba(0,0,0,0.55)" }}>Making orbit accessible to&nbsp;everyone</h1>
         </Reveal>
         <Reveal type="slide-up" delay={0.2}>
-          <p className="text-lg md:text-xl leading-relaxed" style={{ color: P.mutedLight }}>
+          <p className="text-lg md:text-xl leading-relaxed" style={{ color: "rgba(255,255,255,0.9)", textShadow: "0 1px 12px rgba(0,0,0,0.5)" }}>
             We believe that space should not be the privilege of a few. Nova Space builds compact, affordable propulsion systems that give every satellite operator the power to manoeuvre, extend missions, and responsibly deorbit.
           </p>
         </Reveal>
+        </div>
       </section>
 
       {/* Vision */}
@@ -205,7 +209,7 @@ export default function MissionPage() {
         </Reveal>
         <Reveal type="fade" delay={0.2}>
           <div className="flex flex-wrap items-center justify-center gap-12">
-            {["ESA", "DLR", "ETH Z\u00fcrich", "Airbus Defence", "OHB SE"].map((name, i) => (
+            {["ESA", "DLR", "ETH Zürich", "Airbus Defence", "OHB SE"].map((name, i) => (
               <div key={i} className="text-xl md:text-2xl font-bold tracking-tight" style={{ color: P.muted, fontFamily: "var(--font-mono)" }}>{name}</div>
             ))}
           </div>

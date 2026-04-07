@@ -74,11 +74,11 @@ function Footer() {
 const specs = [
   { param: "Thruster Type", value: "Electrospray (colloid)" },
   { param: "Propellant", value: "EMI-BF\u2084 ionic liquid" },
-  { param: "Thrust", value: "0.3 \u2013 1.1 mN" },
+  { param: "Thrust", value: "0.3 – 1.1 mN" },
   { param: "Specific Impulse (Isp)", value: "1,200 s" },
   { param: "Total Impulse", value: "4,200 N\u00B7s" },
   { param: "Delta-V (20 kg s/c)", value: "> 200 m/s" },
-  { param: "Input Power", value: "8 \u2013 28 W" },
+  { param: "Input Power", value: "8 – 28 W" },
   { param: "Mass (dry)", value: "0.42 kg" },
   { param: "Volume", value: "0.3U (96 \u00D7 96 \u00D7 32 mm)" },
   { param: "Interface", value: "CAN bus / I\u00B2C" },
@@ -98,11 +98,11 @@ const steps = [
 
 const comparison = [
   { param: "Type", npx: "Electrospray", busek: "Hall-effect", enpulsion: "FEEP" },
-  { param: "Thrust (mN)", npx: "0.3 \u2013 1.1", busek: "12.8", enpulsion: "0.01 \u2013 0.5" },
-  { param: "Isp (s)", npx: "1,200", busek: "1,390", enpulsion: "2,000 \u2013 6,000" },
+  { param: "Thrust (mN)", npx: "0.3 – 1.1", busek: "12.8", enpulsion: "0.01 – 0.5" },
+  { param: "Isp (s)", npx: "1,200", busek: "1,390", enpulsion: "2,000 – 6,000" },
   { param: "Mass (kg)", npx: "0.42", busek: "1.35", enpulsion: "0.9" },
   { param: "Volume", npx: "0.3U", busek: "1U+", enpulsion: "0.8U" },
-  { param: "Power (W)", npx: "8 \u2013 28", busek: "200", enpulsion: "40" },
+  { param: "Power (W)", npx: "8 – 28", busek: "200", enpulsion: "40" },
   { param: "Propellant", npx: "Ionic liquid", busek: "Xenon", enpulsion: "Indium" },
   { param: "Toxic", npx: "No", busek: "No", enpulsion: "Low" },
   { param: "Price (approx.)", npx: "\u20AC 85k", busek: "\u20AC 150k+", enpulsion: "\u20AC 120k" },
@@ -117,23 +117,27 @@ const heritage = [
 
 export default function TechnologyPage() {
   return (
-    <div style={{ background: P.bg, color: P.white, fontFamily: "var(--font-body)" }}>
+    <div className="light-theme" style={{ background: P.bg, color: P.white, fontFamily: "var(--font-body)" }}>
       <DemoBanner />
       <Nav />
 
       {/* Hero */}
-      <section className="pt-40 pb-20 px-6 lg:px-12 max-w-4xl mx-auto text-center">
+      <section className="relative pt-48 pb-28 px-6 lg:px-12 text-center overflow-hidden">
+        <div aria-hidden className="absolute inset-0" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=2400&q=85')", backgroundSize: "cover", backgroundPosition: "center" }} />
+        <div aria-hidden className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(10,12,16,0.2) 0%, rgba(10,12,16,0.4) 55%, rgba(10,12,16,0.85) 100%)" }} />
+        <div className="relative max-w-4xl mx-auto" style={{ color: "#FFFFFF" }}>
         <Reveal type="fade">
-          <span className="inline-block text-xs font-medium uppercase tracking-widest px-3 py-1 rounded-full mb-6" style={{ color: P.cyan, border: `1px solid ${P.cyan}33` }}>Technology</span>
+          <span className="inline-block text-xs font-medium uppercase tracking-widest px-3 py-1 rounded-full mb-6" style={{ color: P.cyan, border: `1px solid ${P.cyan}33`, background: "rgba(10,12,16,0.4)", backdropFilter: "blur(8px)" }}>Technology</span>
         </Reveal>
         <Reveal type="slide-up" delay={0.1}>
-          <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-6 tracking-tight">NPX-200 Electrospray Thruster</h1>
+          <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-6 tracking-tight" style={{ color: "#FFFFFF", textShadow: "0 2px 24px rgba(0,0,0,0.55)" }}>NPX-200 Electrospray Thruster</h1>
         </Reveal>
         <Reveal type="slide-up" delay={0.2}>
-          <p className="text-lg md:text-xl leading-relaxed" style={{ color: P.mutedLight }}>
+          <p className="text-lg md:text-xl leading-relaxed" style={{ color: "rgba(255,255,255,0.9)", textShadow: "0 1px 12px rgba(0,0,0,0.5)" }}>
             Flight-proven compact propulsion for CubeSats and microsatellites. 0.3U form factor, 1,200&thinsp;s specific impulse, non-toxic propellant.
           </p>
         </Reveal>
+        </div>
       </section>
 
       {/* Full Spec Table */}

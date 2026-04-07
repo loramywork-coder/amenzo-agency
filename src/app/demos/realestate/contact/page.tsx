@@ -203,7 +203,7 @@ function SiteFooter() {
 /* ═══════════════════════════ PAGE ═══════════════════════════ */
 
 const enquiryTypes = ["Buying", "Selling", "Renting", "Investment", "Valuation"];
-const budgetOptions = ["Under \u20AC200,000", "\u20AC200,000 \u2013 \u20AC500,000", "\u20AC500,000 \u2013 \u20AC1,000,000", "\u20AC1,000,000 \u2013 \u20AC2,000,000", "Over \u20AC2,000,000"];
+const budgetOptions = ["Under \u20AC200,000", "\u20AC200,000 – \u20AC500,000", "\u20AC500,000 – \u20AC1,000,000", "\u20AC1,000,000 – \u20AC2,000,000", "Over \u20AC2,000,000"];
 
 export default function ContactPage() {
   const [enquiry, setEnquiry] = useState("Buying");

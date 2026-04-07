@@ -19,7 +19,7 @@ const PRESS = [
   },
   {
     publication: "Wallpaper*",
-    quote: "One of Europe\u2019s most intriguing gallery spaces",
+    quote: "One of Europe’s most intriguing gallery spaces",
     year: "2024",
   },
   {

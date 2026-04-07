@@ -38,14 +38,14 @@ const NAV_LINKS = [
 const SPACES = [
   {
     name: "The Vault",
-    capacity: "8\u201312 guests",
+    capacity: "8–12 guests",
     minSpend: "\u20AC600",
     description: "An intimate stone-walled cellar beneath Strait Street, ideal for private celebrations and tastings. Candlelit ambience with a curated wine wall.",
     image: img("photo-1559329007-40df8a9345d8", 800, 80),
   },
   {
     name: "The Terrace",
-    capacity: "20\u201330 guests",
+    capacity: "20–30 guests",
     minSpend: "\u20AC1,200",
     description: "Our open-air rooftop terrace overlooking the Grand Harbour. Lantern-lit evenings with panoramic views of the Three Cities and Fort St Angelo.",
     image: img("photo-1517248135467-4c7edcad34c4", 800, 80),

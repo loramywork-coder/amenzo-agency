@@ -404,7 +404,7 @@ export function HomePage() {
           <Reveal delay={0.2}>
             <p className="text-[14px] text-white/80 leading-relaxed max-w-lg mx-auto mb-8">
               We&apos;re a two-person studio working with clients worldwide. We pair modern AI
-              tools with hand-written code to deliver agency-quality websites at a fraction of
+              tools with hand-written code to deliver studio-quality websites at a fraction of
               the cost. Every pixel is intentional. Every interaction is considered.
             </p>
           </Reveal>

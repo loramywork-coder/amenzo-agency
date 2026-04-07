@@ -62,7 +62,7 @@ const properties: Property[] = [
     beds: 4,
     baths: 3,
     sqm: 220,
-    image: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c0?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=80",
     badge: "FOR SALE",
   },
   {

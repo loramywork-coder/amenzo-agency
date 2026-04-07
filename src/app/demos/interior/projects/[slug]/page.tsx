@@ -35,7 +35,7 @@ const PROJECTS: Record<string, {
     heroImg: "/images/interior/project-02.jpg",
     gallery: ["/images/interior/project-06.jpg", "/images/interior/project-07.jpg", "/images/interior/project-08.jpg", "/images/interior/project-01.jpg"],
     nextSlug: "zurich-penthouse",
-    nextTitle: "Z\u00FCrich Penthouse",
+    nextTitle: "Zürich Penthouse",
     materials: [
       { name: "Reclaimed Larch", color: "#8B7A65" },
       { name: "Vals Stone", color: "#5A5550" },
@@ -44,16 +44,16 @@ const PROJECTS: Record<string, {
     ],
   },
   "zurich-penthouse": {
-    title: "Z\u00FCrich Penthouse",
+    title: "Zürich Penthouse",
     client: "Private Residence",
-    location: "Z\u00FCrich, Switzerland",
+    location: "Zürich, Switzerland",
     area: "210 m\u00B2",
     year: "2024",
     scope: "Complete renovation, interior design, terrace landscaping",
     heroImg: "/images/interior/project-03.jpg",
     gallery: ["/images/interior/project-09.jpg", "/images/interior/project-10.jpg", "/images/interior/project-05.jpg", "/images/interior/project-06.jpg"],
     nextSlug: "hotel-noire",
-    nextTitle: "H\u00F4tel Noire Geneva",
+    nextTitle: "Hôtel Noire Geneva",
     materials: [
       { name: "Carrara Marble", color: "#E8E5E0" },
       { name: "Walnut", color: "#5C4A3A" },
@@ -62,7 +62,7 @@ const PROJECTS: Record<string, {
     ],
   },
   "hotel-noire": {
-    title: "H\u00F4tel Noire Geneva",
+    title: "Hôtel Noire Geneva",
     client: "Noire Hospitality Group",
     location: "Geneva, Switzerland",
     area: "1,200 m\u00B2",

@@ -39,7 +39,7 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: "Amenzo \u2014 Where Code Meets Craft",
+    default: "Amenzo — Where Code Meets Craft",
     template: "%s | Amenzo",
   },
   description: siteConfig.description,
@@ -67,7 +67,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: siteConfig.url,
     siteName: siteConfig.name,
-    title: "Amenzo \u2014 Where Code Meets Craft",
+    title: "Amenzo — Where Code Meets Craft",
     description: siteConfig.description,
     images: [
       {
@@ -80,7 +80,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Amenzo \u2014 Where Code Meets Craft",
+    title: "Amenzo — Where Code Meets Craft",
     description: siteConfig.description,
     images: ["/opengraph-image"],
   },

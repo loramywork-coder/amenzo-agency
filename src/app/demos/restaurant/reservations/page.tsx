@@ -39,7 +39,7 @@ const TIME_SLOTS = [
 const INFO_CARDS = [
   {
     title: "Opening Hours",
-    lines: ["Tue \u2013 Sat: 18:00 \u2013 23:00", "Sunday Brunch: 11:00 \u2013 15:00", "Monday: Closed"],
+    lines: ["Tue – Sat: 18:00 – 23:00", "Sunday Brunch: 11:00 – 15:00", "Monday: Closed"],
     icon: "\u231A",
   },
   {

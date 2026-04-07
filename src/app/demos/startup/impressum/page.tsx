@@ -73,7 +73,7 @@ function Footer() {
 
 export default function ImpressumPage() {
   return (
-    <div style={{ background: P.bg, color: P.white, fontFamily: "var(--font-body)" }}>
+    <div className="light-theme" style={{ background: P.bg, color: P.white, fontFamily: "var(--font-body)" }}>
       <DemoBanner />
       <Nav />
 

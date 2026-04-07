@@ -333,7 +333,7 @@ export default function InteriorPage() {
           </div>
           <div className="mt-6 flex items-baseline justify-between">
             <div>
-              <h3 className="text-[clamp(28px,3vw,44px)] font-light mb-2" style={{ fontFamily: fHead }}>
+              <h3 className="text-[clamp(28px,3vw,44px)] font-light mb-2" style={{ fontFamily: fHead, color: P.text }}>
                 {projects[2].title}
               </h3>
               <p className="text-[12px] tracking-[0.2em] uppercase" style={{ color: P.textMuted, fontFamily: fBody }}>
@@ -360,7 +360,7 @@ export default function InteriorPage() {
                 </motion.div>
               </div>
               <div className="mt-5">
-                <h3 className="text-[clamp(22px,2.5vw,36px)] font-light mb-2" style={{ fontFamily: fHead }}>
+                <h3 className="text-[clamp(22px,2.5vw,36px)] font-light mb-2" style={{ fontFamily: fHead, color: P.text }}>
                   {p.title}
                 </h3>
                 <p className="text-[12px] tracking-[0.2em] uppercase" style={{ color: P.textMuted, fontFamily: fBody }}>

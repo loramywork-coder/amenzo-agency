@@ -34,7 +34,7 @@ function Reveal({
 
 const UPCOMING = [
   {
-    date: "12 June \u2014 28 August 2026",
+    date: "12 June — 28 August 2026",
     month: "June 2026",
     title: "Echoes of Stone",
     type: "Group Exhibition",
@@ -43,30 +43,30 @@ const UPCOMING = [
     artists: "M. Delacroix, T. Borg, A. Khoury, L. Ferretti, N. Vassallo",
   },
   {
-    date: "15 September \u2014 30 November 2026",
+    date: "15 September — 30 November 2026",
     month: "September 2026",
     title: "New Materiality",
     type: "Solo Exhibition",
     description:
-      "Thomas Borg presents a new body of work investigating the boundaries between sculpture and painting. Raw industrial materials\u2014steel, concrete, salvaged glass\u2014are assembled into compositions that question the permanence of form.",
+      "Thomas Borg presents a new body of work investigating the boundaries between sculpture and painting. Raw industrial materials—steel, concrete, salvaged glass—are assembled into compositions that question the permanence of form.",
     artists: "Thomas Borg",
   },
   {
-    date: "10 December 2026 \u2014 15 February 2027",
+    date: "10 December 2026 — 15 February 2027",
     month: "December 2026",
     title: "Annual Open",
     type: "Open Call",
     description:
-      "Atelier Noir\u2019s annual open submission exhibition. Artists working in any medium are invited to submit proposals exploring the theme of threshold\u2014the spaces between interior and exterior, memory and forgetting, presence and absence.",
+      "Atelier Noir’s annual open submission exhibition. Artists working in any medium are invited to submit proposals exploring the theme of threshold—the spaces between interior and exterior, memory and forgetting, presence and absence.",
     artists: "Open submission",
   },
 ];
 
 const PAST = [
-  { year: "2025", title: "Palimpsest", artist: "Amira Khoury", dates: "Jan \u2014 Mar 2025" },
-  { year: "2025", title: "The Weight of Light", artist: "Jonas Eriksson", dates: "Apr \u2014 Jun 2025" },
-  { year: "2024", title: "Terra Incognita", artist: "Group show", dates: "Sep \u2014 Dec 2024" },
-  { year: "2024", title: "Harbour Variations", artist: "Mara Delacroix", dates: "Mar \u2014 Jun 2024" },
+  { year: "2025", title: "Palimpsest", artist: "Amira Khoury", dates: "Jan — Mar 2025" },
+  { year: "2025", title: "The Weight of Light", artist: "Jonas Eriksson", dates: "Apr — Jun 2025" },
+  { year: "2024", title: "Terra Incognita", artist: "Group show", dates: "Sep — Dec 2024" },
+  { year: "2024", title: "Harbour Variations", artist: "Mara Delacroix", dates: "Mar — Jun 2024" },
 ];
 
 /* ─────────────────────────── NAV ─────────────────────────── */

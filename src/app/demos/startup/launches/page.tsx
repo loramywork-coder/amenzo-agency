@@ -133,7 +133,7 @@ const missions = [
     inclination: "97.8\u00B0",
     units: 2,
     objectives: [
-      "Demonstrate NPX-200 on DLR\u2019s ERNST nanosatellite platform",
+      "Demonstrate NPX-200 on DLR’s ERNST nanosatellite platform",
       "Orbit-raising from 500 km to 600 km injection altitude",
       "German national frequency coordination experiment",
       "Deorbit to < 400 km at end of 2-year mission",
@@ -150,23 +150,27 @@ const upcoming = [
 
 export default function LaunchesPage() {
   return (
-    <div style={{ background: P.bg, color: P.white, fontFamily: "var(--font-body)" }}>
+    <div className="light-theme" style={{ background: P.bg, color: P.white, fontFamily: "var(--font-body)" }}>
       <DemoBanner />
       <Nav />
 
       {/* Hero */}
-      <section className="pt-40 pb-20 px-6 lg:px-12 max-w-4xl mx-auto text-center">
+      <section className="relative pt-48 pb-28 px-6 lg:px-12 text-center overflow-hidden">
+        <div aria-hidden className="absolute inset-0" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1457364887197-9150188c107b?auto=format&fit=crop&w=2400&q=85')", backgroundSize: "cover", backgroundPosition: "center" }} />
+        <div aria-hidden className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(10,12,16,0.2) 0%, rgba(10,12,16,0.4) 55%, rgba(10,12,16,0.85) 100%)" }} />
+        <div className="relative max-w-4xl mx-auto" style={{ color: "#FFFFFF" }}>
         <Reveal type="fade">
-          <span className="inline-block text-xs font-medium uppercase tracking-widest px-3 py-1 rounded-full mb-6" style={{ color: P.green, border: `1px solid ${P.green}33` }}>Launches</span>
+          <span className="inline-block text-xs font-medium uppercase tracking-widest px-3 py-1 rounded-full mb-6" style={{ color: "#34D399", border: "1px solid rgba(52,211,153,0.4)", background: "rgba(10,12,16,0.45)", backdropFilter: "blur(8px)" }}>Launches</span>
         </Reveal>
         <Reveal type="slide-up" delay={0.1}>
-          <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-6 tracking-tight">Launch Schedule &amp; Heritage</h1>
+          <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-6 tracking-tight" style={{ color: "#FFFFFF", textShadow: "0 2px 24px rgba(0,0,0,0.55)" }}>Launch Schedule &amp; Heritage</h1>
         </Reveal>
         <Reveal type="slide-up" delay={0.2}>
-          <p className="text-lg md:text-xl leading-relaxed" style={{ color: P.mutedLight }}>
+          <p className="text-lg md:text-xl leading-relaxed" style={{ color: "rgba(255,255,255,0.9)", textShadow: "0 1px 12px rgba(0,0,0,0.5)" }}>
             8 thruster units across 4 missions. Every unit nominal. Explore our flight heritage and upcoming launches below.
           </p>
         </Reveal>
+        </div>
       </section>
 
       {/* Mission Timeline */}

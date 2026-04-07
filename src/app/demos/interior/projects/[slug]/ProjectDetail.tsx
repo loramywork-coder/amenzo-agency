@@ -80,7 +80,7 @@ function Footer() {
         </div>
         <div>
           <p className="text-xs tracking-widest uppercase text-white/30 mb-4 font-[family-name:var(--font-body)]">Contact</p>
-          <p className="text-sm text-white/60 font-[family-name:var(--font-body)] leading-relaxed">L\u00F6wenstrasse 42<br />8001 Z\u00FCrich, Switzerland</p>
+          <p className="text-sm text-white/60 font-[family-name:var(--font-body)] leading-relaxed">Löwenstrasse 42<br />8001 Zürich, Switzerland</p>
           <p className="text-sm text-white/60 font-[family-name:var(--font-body)] mt-2">hello@studioelan.ch</p>
         </div>
       </div>
@@ -172,7 +172,7 @@ export default function ProjectDetail({ project, slug }: { project: ProjectData;
         <div className="h-px w-full" style={{ background: P.border }} />
       </div>
 
-      {/* Editorial Gallery \u2014 4 images */}
+      {/* Editorial Gallery — 4 images */}
       <section className="max-w-[1400px] mx-auto px-6 md:px-10 py-20 md:py-28">
         {/* Row 1: large left + small right */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 mb-6">

@@ -9,7 +9,7 @@ import { DemoBanner } from "@/components/demos/demo-banner";
 const EDITIONS = [
   {
     title: "Harbour Study III",
-    medium: "Gicl\u00e9e print",
+    medium: "Giclée print",
     edition: "Ed. of 25",
     price: "\u20ac480",
   },

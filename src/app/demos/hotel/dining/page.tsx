@@ -28,15 +28,15 @@ const unsplash = (id: string, w = 1200) =>
 const harbourGrillDishes = [
   { name: "Dry-Aged Ribeye", desc: "Bone marrow butter, charred leek, red wine jus", price: "\u20AC52" },
   { name: "Grilled Mediterranean Lobster", desc: "Garlic herb butter, saffron risotto, micro greens", price: "\u20AC58" },
-  { name: "Pan-Seared Sea Bass", desc: "Fennel pur\u00E9e, saffron beurre blanc, samphire", price: "\u20AC38" },
-  { name: "Wagyu Tartare", desc: "Truffle a\u00EFoli, quail egg, sourdough crisps", price: "\u20AC42" },
+  { name: "Pan-Seared Sea Bass", desc: "Fennel purée, saffron beurre blanc, samphire", price: "\u20AC38" },
+  { name: "Wagyu Tartare", desc: "Truffle aïoli, quail egg, sourdough crisps", price: "\u20AC42" },
   { name: "Rack of Maltese Lamb", desc: "Herb crust, pommes dauphine, rosemary jus", price: "\u20AC44" },
-  { name: "Cr\u00E8me Br\u00FBl\u00E9e", desc: "Tahitian vanilla, caramelised figs, almond tuile", price: "\u20AC18" },
+  { name: "Crème Brûlée", desc: "Tahitian vanilla, caramelised figs, almond tuile", price: "\u20AC18" },
 ] as const;
 
 const laTerrazzaDishes = [
   { name: "Burrata Caprese", desc: "Heirloom tomatoes, basil oil, aged balsamic", price: "\u20AC22" },
-  { name: "Hand-Made Pappardelle", desc: "Slow-braised rabbit rag\u00F9, pecorino, sage", price: "\u20AC28" },
+  { name: "Hand-Made Pappardelle", desc: "Slow-braised rabbit ragù, pecorino, sage", price: "\u20AC28" },
   { name: "Grilled Octopus", desc: "Crispy potatoes, nduja, roasted peppers", price: "\u20AC32" },
   { name: "Margherita DOC", desc: "San Marzano, fior di latte, fresh basil", price: "\u20AC18" },
   { name: "Branzino al Cartoccio", desc: "Oven-baked whole fish, capers, cherry tomatoes", price: "\u20AC34" },
@@ -46,9 +46,9 @@ const laTerrazzaDishes = [
 const barAzureCocktails = [
   { name: "Mediterranean Sunset", desc: "Aperol, blood orange, prosecco, rosemary", price: "\u20AC16" },
   { name: "Maltese Negroni", desc: "Gin, bitter liqueur, local vermouth, orange peel", price: "\u20AC18" },
-  { name: "Azure Spritz", desc: "Blue cura\u00E7ao, elderflower, champagne, lime", price: "\u20AC17" },
+  { name: "Azure Spritz", desc: "Blue curaçao, elderflower, champagne, lime", price: "\u20AC17" },
   { name: "Harbour Old Fashioned", desc: "Bourbon, demerara, Angostura, smoked orange", price: "\u20AC19" },
-  { name: "La Vie en Ros\u00E9", desc: "Ros\u00E9 gin, lychee, rose water, sparkling", price: "\u20AC16" },
+  { name: "La Vie en Rosé", desc: "Rosé gin, lychee, rose water, sparkling", price: "\u20AC16" },
   { name: "Espresso Martini", desc: "Vodka, fresh espresso, coffee liqueur, vanilla", price: "\u20AC17" },
 ] as const;
 

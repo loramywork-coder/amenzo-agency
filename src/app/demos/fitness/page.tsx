@@ -21,7 +21,7 @@ const BORDER  = "#27272A";
 /* ------------------------------------------------------------------ */
 /*  DATA                                                              */
 /* ------------------------------------------------------------------ */
-const MARQUEE_TEXT = "500+ MEMBERS \u00B7 40+ CLASSES \u00B7 15 TRAINERS \u00B7 2,000 SQM \u00B7 5AM\u201311PM";
+const MARQUEE_TEXT = "500+ MEMBERS \u00B7 40+ CLASSES \u00B7 15 TRAINERS \u00B7 2,000 SQM \u00B7 5AM–11PM";
 
 interface GymClass {
   name: string;
@@ -397,7 +397,7 @@ export default function FitnessHomePage() {
                 className="whitespace-nowrap text-[13px] font-bold uppercase tracking-[0.25em]"
                 style={{ color: GREEN }}
               >
-                {MARQUEE_TEXT}&nbsp;&nbsp;&nbsp;\u00B7&nbsp;&nbsp;&nbsp;{MARQUEE_TEXT}&nbsp;&nbsp;&nbsp;\u00B7&nbsp;&nbsp;&nbsp;
+                {MARQUEE_TEXT}&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;&nbsp;{MARQUEE_TEXT}&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;&nbsp;
               </span>
             ))}
           </div>

@@ -140,7 +140,7 @@ export default function ImpressumPage() {
   };
 
   return (
-    <div style={{ background: P.bg, color: P.text, fontFamily: "var(--font-body)", minHeight: "100vh" }}>
+    <div className="light-theme" style={{ background: P.bg, color: P.text, fontFamily: "var(--font-body)", minHeight: "100vh" }}>
       <DemoBanner />
       <Nav />
 

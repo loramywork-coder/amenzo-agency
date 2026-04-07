@@ -46,7 +46,7 @@ const EXPERIENCES = [
   },
   {
     title: "Wine Tasting",
-    desc: "Journey through Malta\u2019s native grape varieties with our sommelier. Five-wine flight paired with local cheeses and sundried tomatoes.",
+    desc: "Journey through Malta’s native grape varieties with our sommelier. Five-wine flight paired with local cheeses and sundried tomatoes.",
     price: "\u20AC65 / person",
     img: "photo-1510812431401-41d2bd2722f3",
   },
@@ -58,13 +58,13 @@ const EXPERIENCES = [
   },
   {
     title: "Temple Visit",
-    desc: "Exclusive early-morning access to \u0126a\u0121ar Qim, one of the world\u2019s oldest free-standing structures, before the crowds arrive.",
+    desc: "Exclusive early-morning access to \u0126a\u0121ar Qim, one of the world’s oldest free-standing structures, before the crowds arrive.",
     price: "\u20AC90 / person",
     img: "photo-1585208798174-6cedd86e019a",
   },
   {
     title: "Island Hopping",
-    desc: "A full day aboard a private yacht visiting Gozo\u2019s Citadel, Comino\u2019s Blue Lagoon, and hidden sea caves. Lunch on board included.",
+    desc: "A full day aboard a private yacht visiting Gozo’s Citadel, Comino’s Blue Lagoon, and hidden sea caves. Lunch on board included.",
     price: "\u20AC250 / person",
     img: "photo-1507525428034-b723cf961d3e",
   },

@@ -153,8 +153,9 @@ function StartProjectWizard() {
     let baseMin = 0;
     let baseMax = 0;
 
-    // From selected services
+    // From selected services ("not-sure" doesn't contribute to estimate)
     selectedServices.forEach((svc) => {
+      if (svc === "not-sure") return;
       const price = SERVICE_BASE_PRICES[svc] || 2000;
       baseMin += price * 0.8;
       baseMax += price * 1.3;
@@ -209,20 +210,13 @@ function StartProjectWizard() {
       baseMax += 800;
     }
 
-    // If budget is selected, use that as a floor
-    const budgetOpt = budgetOptions.find((b) => b.label === formData.budget);
-    if (budgetOpt && budgetOpt.min > 0) {
-      baseMin = Math.max(baseMin, budgetOpt.min);
-      baseMax = Math.max(baseMax, budgetOpt.max);
-    }
-
     return {
       min: Math.round(baseMin / 100) * 100,
       max: Math.round(baseMax / 100) * 100,
       recurring: addOnRecurring,
-      hasEstimate: selectedServices.length > 0,
+      hasEstimate: selectedServices.some((s) => s !== "not-sure"),
     };
-  }, [selectedServices, selectedAddOns, formData.pageCount, formData.budget, formData.needsCms, formData.multilingual, formData.hasBranding, formData.hasContent]);
+  }, [selectedServices, selectedAddOns, formData.pageCount, formData.needsCms, formData.multilingual, formData.hasBranding, formData.hasContent]);
 
   const canProceed = () => {
     switch (step) {
@@ -976,7 +970,21 @@ function FormField({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-white/30 focus:border-white/30 focus:outline-none transition-colors"
+        onFocus={(e) => {
+          if (type === "date") {
+            const el = e.currentTarget as HTMLInputElement & { showPicker?: () => void };
+            try { el.showPicker?.(); } catch {}
+          }
+        }}
+        onClick={(e) => {
+          if (type === "date") {
+            const el = e.currentTarget as HTMLInputElement & { showPicker?: () => void };
+            try { el.showPicker?.(); } catch {}
+          }
+        }}
+        className={`w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-white/30 focus:border-white/30 focus:outline-none transition-colors ${
+          type === "date" ? "cursor-pointer [color-scheme:dark]" : ""
+        }`}
       />
     </div>
   );

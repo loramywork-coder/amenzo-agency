@@ -36,9 +36,9 @@ const FAQ_ITEMS = [
       "Yes. If you start with Basic and want to add languages, a blog, or more pages later, we quote the additional work separately. Many clients start Basic and upgrade to Standard within 6 months.",
   },
   {
-    question: "How do you compare to other agencies?",
+    question: "How do you compare to other studios?",
     answer:
-      "Most agencies typically charge EUR 775 to EUR 2,600 or more for similar work, often using WordPress templates. We build everything custom with modern technology (Next.js, React) — faster sites, better SEO, no plugin bloat. You get agency-quality output at competitive prices.",
+      "Most studios typically charge EUR 775 to EUR 2,600 or more for similar work, often using WordPress templates. We build everything custom with modern technology (Next.js, React) — faster sites, better SEO, no plugin bloat. You get studio-quality output at competitive prices.",
   },
   {
     question: "Do I own the code and design files?",

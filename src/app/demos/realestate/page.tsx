@@ -65,7 +65,7 @@ const featuredProperties: Property[] = [
     beds: 4,
     baths: 3,
     sqm: 220,
-    image: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c0?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=80",
     badge: "FOR SALE",
   },
   {
@@ -138,6 +138,7 @@ function SiteNav() {
   ];
 
   return (
+    <>
     <nav
       className="fixed left-0 right-0 z-50 transition-all duration-500"
       style={{
@@ -168,41 +169,57 @@ function SiteNav() {
         </button>
       </div>
 
-      {/* Mobile menu */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="overflow-hidden"
-            style={{ background: "rgba(10,15,28,0.98)", borderBottom: `1px solid ${C.border}` }}
-          >
-            <div className="px-6 py-6 flex flex-col gap-4">
-              {links.map((l) => (
-                <a
-                  key={l.label}
-                  href={l.href}
-                  onClick={() => setMobileOpen(false)}
-                  className="text-base font-medium py-2"
-                  style={{ color: C.muted }}
-                >
-                  {l.label}
-                </a>
-              ))}
-              <a
-                href="#contact"
-                onClick={() => setMobileOpen(false)}
-                className="px-5 py-3 text-sm font-semibold text-center mt-2"
-                style={{ background: C.gold, color: C.bg, borderRadius: 10 }}
-              >
-                Get in Touch
-              </a>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </nav>
+    {/* Full-screen mobile menu */}
+    <AnimatePresence>
+      {mobileOpen && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
+          className="fixed inset-0 z-[100] flex flex-col"
+          style={{ background: "rgba(10,15,28,0.98)", backdropFilter: "blur(8px)" }}
+        >
+          <div className="flex items-center justify-between px-6" style={{ height: 80, paddingTop: 40 }}>
+            <span className="text-base font-bold tracking-[0.15em]" style={{ color: C.white }}>
+              MEDITERRANEAN <span style={{ color: C.gold }}>LIVING</span>
+            </span>
+            <button onClick={() => setMobileOpen(false)} aria-label="Close menu" className="p-2">
+              <X size={24} style={{ color: C.white }} />
+            </button>
+          </div>
+          <div className="flex-1 flex flex-col items-center justify-center gap-8 px-6">
+            {links.map((l, i) => (
+              <motion.a
+                key={l.label}
+                href={l.href}
+                onClick={() => setMobileOpen(false)}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 + i * 0.06, duration: 0.4 }}
+                className="text-3xl font-light tracking-tight"
+                style={{ color: C.white }}
+              >
+                {l.label}
+              </motion.a>
+            ))}
+            <motion.a
+              href="#contact"
+              onClick={() => setMobileOpen(false)}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 + links.length * 0.06, duration: 0.4 }}
+              className="mt-6 px-8 py-4 text-sm font-semibold tracking-wide"
+              style={{ background: C.gold, color: C.bg, borderRadius: 999 }}
+            >
+              Get in Touch
+            </motion.a>
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+    </>
   );
 }
 
@@ -508,30 +525,27 @@ export default function RealEstatePage() {
 
         <div className="relative z-10 w-full max-w-5xl mx-auto px-6 text-center" style={{ position: "relative", zIndex: 2 }}>
           <Reveal type="fade" duration={1}>
-            <p className="text-sm uppercase tracking-[0.3em] mb-6" style={{ color: C.gold, fontFamily: "var(--font-display), system-ui" }}>
+            <p className="text-[11px] sm:text-sm uppercase tracking-[0.25em] sm:tracking-[0.3em] mb-7 sm:mb-6" style={{ color: C.gold, fontFamily: "var(--font-display), system-ui" }}>
               Mediterranean Property Specialists
             </p>
           </Reveal>
 
           <Reveal type="slide-up" delay={0.15}>
             <h1
-              className="font-bold leading-tight mb-6"
+              className="font-bold mb-7 sm:mb-6"
               style={{
-                fontSize: "clamp(32px, 5vw, 56px)",
+                fontSize: "clamp(36px, 7vw, 56px)",
+                lineHeight: 1.1,
                 fontFamily: "var(--font-display), system-ui",
+                color: "#FFFFFF",
               }}
             >
               Find Your Dream{" "}
-              <br />
-              <span style={{ color: C.gold }}>Home in the Mediterranean</span>
+              <span className="block sm:inline" style={{ color: C.gold }}>Home in the Mediterranean</span>
             </h1>
           </Reveal>
 
-          <Reveal type="fade" delay={0.3}>
-            <p className="text-lg mb-12 max-w-2xl mx-auto" style={{ color: "rgba(255,255,255,0.6)" }}>
-              Discover exceptional properties across the Maltese islands. From historic townhouses to contemporary penthouses with Mediterranean views.
-            </p>
-          </Reveal>
+          <div className="mb-12" />
 
           {/* ── SEARCH BAR ─────────────────────── */}
           <Reveal type="slide-up" delay={0.45}>

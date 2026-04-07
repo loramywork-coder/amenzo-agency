@@ -14,43 +14,43 @@ export const blogPosts: BlogPost[] = [
     slug: "why-speed-is-the-most-underrated-conversion-tool",
     title: "Why Speed Is the Most Underrated Conversion Tool",
     excerpt:
-      "A 1-second delay costs you 7% of conversions. Here\u2019s how modern sites load in under 1.5 seconds \u2014 and why it matters more than your headline.",
+      "A 1-second delay costs you 7% of conversions. Here’s how modern sites load in under 1.5 seconds — and why it matters more than your headline.",
     category: "Performance",
     date: "2026-03-31",
     readTime: "6 min read",
     image:
       "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=3840&q=90",
-    content: `Your headline doesn\u2019t matter if nobody waits to read it.
+    content: `Your headline doesn’t matter if nobody waits to read it.
 
-## The Numbers Don\u2019t Lie
+## The Numbers Don’t Lie
 
-Google\u2019s research is clear: 53% of mobile visitors abandon a page that takes longer than 3 seconds to load. For every additional second, conversion rates drop by 7%.
+Google’s research is clear: 53% of mobile visitors abandon a page that takes longer than 3 seconds to load. For every additional second, conversion rates drop by 7%.
 
 That means a site loading in 5 seconds instead of 1.5 seconds is losing roughly 25% of potential conversions before anyone reads a word.
 
-**This isn\u2019t a design problem. It\u2019s a revenue problem.**
+**This isn’t a design problem. It’s a revenue problem.**
 
 ## What Slows Sites Down
 
 Most performance issues come from three places:
 
 1. **Unoptimised images.** A single hero image at 4MB will kill your load time. WebP format, responsive sizing, and lazy loading solve this overnight.
-2. **Too much JavaScript.** WordPress plugins, analytics scripts, chat widgets, cookie banners \u2014 each one adds weight. A typical WordPress site ships 2-3MB of JavaScript. A well-built Next.js site ships under 150KB.
+2. **Too much JavaScript.** WordPress plugins, analytics scripts, chat widgets, cookie banners — each one adds weight. A typical WordPress site ships 2-3MB of JavaScript. A well-built Next.js site ships under 150KB.
 3. **Bad hosting.** Shared hosting with a server in another continent adds hundreds of milliseconds. Edge deployment (Vercel, Cloudflare) serves your site from the nearest data centre.
 
 ## How to Hit Sub-1.5 Seconds
 
 The best approach is a stack built for speed from the ground up:
 
-- **Next.js** with automatic code splitting \u2014 each page loads only what it needs
-- **Static generation** where possible \u2014 pages are pre-built at deploy time
-- **Image optimisation** via Next.js Image \u2014 automatic WebP, responsive sizes, blur placeholders
-- **Edge deployment** on Vercel \u2014 your site is served from 30+ global locations
-- **Zero bloat** \u2014 no jQuery, no unnecessary libraries, no plugin soup
+- **Next.js** with automatic code splitting — each page loads only what it needs
+- **Static generation** where possible — pages are pre-built at deploy time
+- **Image optimisation** via Next.js Image — automatic WebP, responsive sizes, blur placeholders
+- **Edge deployment** on Vercel — your site is served from 30+ global locations
+- **Zero bloat** — no jQuery, no unnecessary libraries, no plugin soup
 
 ## The Lighthouse Standard
 
-Every site built this way scores 95+ on Google Lighthouse. That\u2019s not a nice-to-have \u2014 it\u2019s the minimum standard.
+Every site built this way scores 95+ on Google Lighthouse. That’s not a nice-to-have — it’s the minimum standard.
 
 - Performance: 95+
 - Accessibility: 95+
@@ -61,11 +61,11 @@ These scores directly influence your Google ranking. A faster site ranks higher.
 
 ## What You Can Do Right Now
 
-Run your site through PageSpeed Insights. If your mobile score is below 60, you\u2019re losing customers every day.
+Run your site through PageSpeed Insights. If your mobile score is below 60, you’re losing customers every day.
 
 The fix might be as simple as optimising images and removing unused plugins. Or it might mean rebuilding from scratch with modern technology.
 
-Either way, speed is the cheapest conversion improvement you\u2019ll ever make.`,
+Either way, speed is the cheapest conversion improvement you’ll ever make.`,
   },
   {
     slug: "the-real-cost-of-a-custom-website",
@@ -79,29 +79,29 @@ Either way, speed is the cheapest conversion improvement you\u2019ll ever make.`
       "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=3840&q=90",
     content: `Nobody in the web industry wants to talk honestly about pricing. Every agency says "contact for a quote." Nobody tells you what you actually get for your money.
 
-Here\u2019s the real breakdown.
+Here’s the real breakdown.
 
-## The \u20AC500\u2013\u20AC1,000 Range: Templates
+## The \u20AC500–\u20AC1,000 Range: Templates
 
-At this price, you\u2019re getting a WordPress theme or a Wix site. Someone installs a template, swaps in your logo, adds your text, and hands it over.
+At this price, you’re getting a WordPress theme or a Wix site. Someone installs a template, swaps in your logo, adds your text, and hands it over.
 
-**What you get:** A functional website that\u2019s responsive (because the template is), a basic contact form, and limited customisation.
+**What you get:** A functional website that’s responsive (because the template is), a basic contact form, and limited customisation.
 
-**What you don\u2019t get:** Custom design, performance optimisation, serious SEO, or anything unique. Your site will look like thousands of others.
+**What you don’t get:** Custom design, performance optimisation, serious SEO, or anything unique. Your site will look like thousands of others.
 
-**Right for:** Businesses that just need a basic online presence and don\u2019t compete on digital experience.
+**Right for:** Businesses that just need a basic online presence and don’t compete on digital experience.
 
-## The \u20AC750\u2013\u20AC2,000 Range: Basic to Standard
+## The \u20AC750–\u20AC2,000 Range: Basic to Standard
 
 This is where real design begins. A good agency will design your site from scratch, build it with modern technology, and deliver something that genuinely represents your brand.
 
-**What you get:** Custom design tailored to your brand, mobile-first development, SEO foundation, 2 languages, and 1\u201310 pages.
+**What you get:** Custom design tailored to your brand, mobile-first development, SEO foundation, 2 languages, and 1–10 pages.
 
-**What you don\u2019t get:** Complex functionality like booking systems, e-commerce, or user accounts.
+**What you don’t get:** Complex functionality like booking systems, e-commerce, or user accounts.
 
 **Right for:** Small to medium businesses serious about standing out.
 
-## The \u20AC2,000\u2013\u20AC4,000 Range: Premium Solutions
+## The \u20AC2,000–\u20AC4,000 Range: Premium Solutions
 
 Sites that actively drive business results. Advanced features, multilingual support, and design that makes competitors nervous.
 
@@ -109,7 +109,7 @@ Sites that actively drive business results. Advanced features, multilingual supp
 
 **Right for:** Businesses that see their website as a primary revenue driver.
 
-## The \u20AC5,000\u2013\u20AC8,000 Range: Custom Builds
+## The \u20AC5,000–\u20AC8,000 Range: Custom Builds
 
 E-commerce platforms, marketplace sites, and complex builds with payment processing, API integrations, and architecture built for scale.
 
@@ -126,37 +126,37 @@ The difference comes down to four things:
 
 ## The Best Advice
 
-Don\u2019t buy the cheapest option just because it\u2019s cheap. And don\u2019t buy the most expensive assuming it\u2019s better.
+Don’t buy the cheapest option just because it’s cheap. And don’t buy the most expensive assuming it’s better.
 
-Buy the option where the agency clearly explains what they\u2019ll build, why it\u2019ll help your business, and what the ongoing costs look like. Transparency is the signal.`,
+Buy the option where the agency clearly explains what they’ll build, why it’ll help your business, and what the ongoing costs look like. Transparency is the signal.`,
   },
   {
     slug: "why-we-dont-use-wordpress-anymore",
     title: "Why WordPress Is No Longer the Best Choice",
     excerpt:
-      "WordPress used to be the go-to. Here\u2019s why many have moved on \u2014 and why businesses\u2019 sites are faster, safer, and cheaper to maintain because of it.",
+      "WordPress used to be the go-to. Here’s why many have moved on — and why businesses’ sites are faster, safer, and cheaper to maintain because of it.",
     category: "Technology",
     date: "2026-03-29",
     readTime: "7 min read",
     image:
       "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=3840&q=90",
-    content: `Here\u2019s a common story: many agencies used to build WordPress sites.
+    content: `Here’s a common story: many agencies used to build WordPress sites.
 
 They were fine. They worked. Clients could edit content. Everyone was happy enough.
 
-But "fine" isn\u2019t a high enough standard. The move to Next.js has been a game changer.
+But "fine" isn’t a high enough standard. The move to Next.js has been a game changer.
 
 ## The Problem with WordPress
 
-WordPress powers 40% of the web. That\u2019s both its strength and its biggest vulnerability.
+WordPress powers 40% of the web. That’s both its strength and its biggest vulnerability.
 
-**Performance.** A typical WordPress site loads in 3\u20135 seconds after caching plugins and optimisation prayers. A comparable Next.js site loads in under 1.5 seconds out of the box.
+**Performance.** A typical WordPress site loads in 3–5 seconds after caching plugins and optimisation prayers. A comparable Next.js site loads in under 1.5 seconds out of the box.
 
 **Security.** WordPress is the most attacked CMS in the world. Every plugin is a potential entry point. Teams spend more time patching vulnerabilities than building features.
 
 **Maintenance.** Core updates, theme updates, plugin updates. Each one can break something. The maintenance overhead eats into development time.
 
-**Design ceiling.** WordPress themes give you a head start and a ceiling. The moment you need something the theme doesn\u2019t support, you\u2019re fighting its architecture.
+**Design ceiling.** WordPress themes give you a head start and a ceiling. The moment you need something the theme doesn’t support, you’re fighting its architecture.
 
 ## Why Next.js
 
@@ -170,15 +170,15 @@ Next.js gives us complete control over every aspect of the website.
 
 **Better developer experience.** TypeScript catches errors before production. Component architecture ensures consistency.
 
-## "But I Can\u2019t Edit Content"
+## "But I Can’t Edit Content"
 
-Actually, you can. Headless CMS platforms like Sanity give clients an editing experience better than WordPress \u2014 a clean interface for exactly the content you manage, without 47 confusing menu items.
+Actually, you can. Headless CMS platforms like Sanity give clients an editing experience better than WordPress — a clean interface for exactly the content you manage, without 47 confusing menu items.
 
 ## The Measurable Difference
 
 After switching to Next.js, companies typically see:
 
-- **Pages load 3\u20134x faster**
+- **Pages load 3–4x faster**
 - **99.99% uptime** vs. WordPress average of 99.5%
 - **Better Google rankings** from improved Core Web Vitals
 - **Zero security incidents**
@@ -186,7 +186,7 @@ After switching to Next.js, companies typically see:
 
 ## Is WordPress Dead?
 
-No. It\u2019s still fine for simple blogs where budget is the primary constraint. But for businesses that compete on their digital experience, it\u2019s no longer the right tool.
+No. It’s still fine for simple blogs where budget is the primary constraint. But for businesses that compete on their digital experience, it’s no longer the right tool.
 
 The web has moved on. Smart businesses are moving with it.`,
   },
@@ -194,24 +194,24 @@ The web has moved on. Smart businesses are moving with it.`,
     slug: "design-systems-why-your-brand-needs-one",
     title: "Design Systems: Why Your Brand Needs One",
     excerpt:
-      "A design system isn\u2019t a luxury for big companies. It\u2019s the reason some brands look polished everywhere and others look like they\u2019re winging it.",
+      "A design system isn’t a luxury for big companies. It’s the reason some brands look polished everywhere and others look like they’re winging it.",
     category: "Design",
     date: "2026-03-28",
     readTime: "5 min read",
     image:
       "https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?w=3840&q=90",
-    content: `You\u2019ve seen the difference. Some brands look polished on every touchpoint \u2014 their website, their Instagram, their emails, their proposals. Others look like each piece was designed by a different person on a different day.
+    content: `You’ve seen the difference. Some brands look polished on every touchpoint — their website, their Instagram, their emails, their proposals. Others look like each piece was designed by a different person on a different day.
 
 The difference is a design system.
 
 ## What Is a Design System?
 
-A design system is the single source of truth for your brand\u2019s visual language. It defines:
+A design system is the single source of truth for your brand’s visual language. It defines:
 
 - **Colours.** Not just "blue" but the exact hex codes, when to use each shade, and what each colour communicates.
-- **Typography.** Which fonts, at what sizes, for what purpose. Headings, body text, captions, buttons \u2014 all defined.
+- **Typography.** Which fonts, at what sizes, for what purpose. Headings, body text, captions, buttons — all defined.
 - **Spacing.** Consistent padding, margins, and gaps that create visual rhythm.
-- **Components.** Buttons, cards, forms, navigation \u2014 designed once, used everywhere.
+- **Components.** Buttons, cards, forms, navigation — designed once, used everywhere.
 - **Tone of voice.** How you write, not just how you look.
 
 ## Why It Matters
@@ -222,7 +222,7 @@ A design system is the single source of truth for your brand\u2019s visual langu
 
 **Scalability.** As your team grows, the design system ensures everyone produces work that looks on-brand without constant design reviews.
 
-**Cost savings.** Decisions made once don\u2019t need to be made again. No more debating which blue to use or what size the heading should be.
+**Cost savings.** Decisions made once don’t need to be made again. No more debating which blue to use or what size the heading should be.
 
 ## What a Good Brand Package Includes
 
@@ -232,26 +232,26 @@ A solid design system covers:
 2. **Typography scale** with font families, weights, and sizes for every context
 3. **Spacing system** based on a consistent base unit
 4. **Component library** for web (buttons, forms, cards, navigation, footers)
-5. **Icon style** \u2014 consistent stroke weight, size, and visual language
-6. **Photography direction** \u2014 colour treatment, composition style, mood
+5. **Icon style** — consistent stroke weight, size, and visual language
+6. **Photography direction** — colour treatment, composition style, mood
 7. **Brand guidelines document** that any designer or developer can follow
 
-## You Don\u2019t Need to Be Big
+## You Don’t Need to Be Big
 
-Design systems aren\u2019t just for enterprises. A solo business with a clear design system looks more professional than a 50-person company winging it.
+Design systems aren’t just for enterprises. A solo business with a clear design system looks more professional than a 50-person company winging it.
 
-The investment pays for itself the first time you need a new landing page, a social template, or a presentation deck \u2014 and it takes 30 minutes instead of 3 hours because every decision is already made.
+The investment pays for itself the first time you need a new landing page, a social template, or a presentation deck — and it takes 30 minutes instead of 3 hours because every decision is already made.
 
 ## Start Simple
 
-You don\u2019t need a 200-page brand bible on day one. Start with:
+You don’t need a 200-page brand bible on day one. Start with:
 
 - 5 colours (2 primary, 2 neutral, 1 accent)
 - 2 fonts (one for headings, one for body)
 - A consistent button and link style
 - A document that records these decisions
 
-Then build from there. The key is documenting decisions so they don\u2019t need to be made twice.`,
+Then build from there. The key is documenting decisions so they don’t need to be made twice.`,
   },
   {
     slug: "anatomy-of-a-high-converting-landing-page",
@@ -274,7 +274,7 @@ Not what you do. What the visitor gets.
 **Bad:** "Professional Web Design Services"
 **Good:** "A Website That Turns Visitors Into Customers"
 
-The headline should make someone think "that\u2019s exactly what I need" within 3 seconds.
+The headline should make someone think "that’s exactly what I need" within 3 seconds.
 
 ## 2. Social Proof Above the Fold
 
@@ -295,11 +295,11 @@ Three bullet points or a short paragraph that answers: "Why should I choose you 
 Focus on outcomes, not features:
 - "Launch in 3 weeks, not 3 months"
 - "Lighthouse score 95+ guaranteed"
-- "Fixed pricing \u2014 no surprise invoices"
+- "Fixed pricing — no surprise invoices"
 
 ## 4. Visual Proof
 
-Show, don\u2019t just tell. Screenshots, before/after comparisons, demo videos, or live interactive previews of your work.
+Show, don’t just tell. Screenshots, before/after comparisons, demo videos, or live interactive previews of your work.
 
 Pages with visual proof convert 40% better than text-only pages. People believe their eyes more than your words.
 
@@ -309,23 +309,23 @@ Vague testimonials ("Great service!") are worthless. Specific ones sell:
 
 "Our organic traffic increased 180% in 4 months. The site loads in 1.2 seconds and we rank on page 1 for our primary keywords."
 
-Numbers, timelines, and measurable results. That\u2019s what builds trust.
+Numbers, timelines, and measurable results. That’s what builds trust.
 
 ## 6. A Single, Unmissable CTA
 
-One call to action. Repeated 2\u20133 times on the page. Visually dominant \u2014 gradient background, large text, impossible to miss.
+One call to action. Repeated 2–3 times on the page. Visually dominant — gradient background, large text, impossible to miss.
 
-Don\u2019t give people choices. "Get a Free Quote" or "Book a Consultation." Not both.
+Don’t give people choices. "Get a Free Quote" or "Book a Consultation." Not both.
 
 ## 7. Urgency or Scarcity (Honest)
 
 Not fake countdown timers. Real urgency:
 
 - "We take on 3 new projects per month"
-- "Free consultation \u2014 limited availability this quarter"
+- "Free consultation — limited availability this quarter"
 - "Prices increase April 1st"
 
-If the urgency is real, state it. If it\u2019s not, skip this element entirely. Fake urgency destroys trust.
+If the urgency is real, state it. If it’s not, skip this element entirely. Fake urgency destroys trust.
 
 ## The Layout
 
@@ -355,13 +355,13 @@ Then iterate. The first version is never the best version.`,
     slug: "accessibility-is-not-optional",
     title: "Web Accessibility Is Not Optional Anymore",
     excerpt:
-      "The European Accessibility Act takes effect in 2025. Here\u2019s what it means for your website and why accessibility is good business, not just compliance.",
+      "The European Accessibility Act takes effect in 2025. Here’s what it means for your website and why accessibility is good business, not just compliance.",
     category: "Accessibility",
     date: "2026-03-26",
     readTime: "6 min read",
     image:
       "https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=3840&q=90",
-    content: `Web accessibility used to be a nice-to-have. As of 2025, it\u2019s the law.
+    content: `Web accessibility used to be a nice-to-have. As of 2025, it’s the law.
 
 The European Accessibility Act (EAA) requires websites and digital services to meet accessibility standards. Non-compliance carries real penalties. But beyond compliance, accessibility is simply good business.
 
@@ -385,15 +385,15 @@ WCAG 2.1 AA is the standard. In practical terms:
 
 **Operable.** Everything works with a keyboard. No interactions require a mouse. Focus indicators are visible. Time limits are adjustable.
 
-**Understandable.** Text is readable. Navigation is consistent. Error messages are clear and helpful. Forms explain what\u2019s needed.
+**Understandable.** Text is readable. Navigation is consistent. Error messages are clear and helpful. Forms explain what’s needed.
 
-**Robust.** The site works with assistive technology \u2014 screen readers, voice control, switch devices.
+**Robust.** The site works with assistive technology — screen readers, voice control, switch devices.
 
 ## The Business Case
 
-Accessibility isn\u2019t just about compliance. It\u2019s about reach.
+Accessibility isn’t just about compliance. It’s about reach.
 
-- **15% of the world\u2019s population** has some form of disability
+- **15% of the world’s population** has some form of disability
 - **Accessible sites rank better** on Google (semantic HTML, proper headings, and alt text are SEO fundamentals)
 - **Accessible sites are faster** (clean code, proper structure, optimised media)
 - **Accessible sites convert better** (clear navigation, readable text, obvious CTAs help everyone)
@@ -402,16 +402,16 @@ Accessibility isn\u2019t just about compliance. It\u2019s about reach.
 
 When auditing websites, these issues appear on nearly every one:
 
-1. **Missing alt text** on images (screen readers can\u2019t describe what they can\u2019t read)
-2. **Low colour contrast** (light grey text on white backgrounds \u2014 fails WCAG 4.5:1 ratio)
-3. **No keyboard navigation** (try pressing Tab through your site \u2014 can you reach everything?)
+1. **Missing alt text** on images (screen readers can’t describe what they can’t read)
+2. **Low colour contrast** (light grey text on white backgrounds — fails WCAG 4.5:1 ratio)
+3. **No keyboard navigation** (try pressing Tab through your site — can you reach everything?)
 4. **Missing form labels** (inputs without labels are invisible to screen readers)
 5. **Auto-playing media** (disorienting for users with cognitive disabilities)
 6. **No skip navigation** (keyboard users must tab through the entire header on every page)
 
 ## What to Build Into Every Project
 
-Accessibility isn\u2019t an add-on. It should be built into the process from day one:
+Accessibility isn’t an add-on. It should be built into the process from day one:
 
 - Semantic HTML structure (proper headings, landmarks, and roles)
 - Colour contrast ratios that exceed WCAG AA requirements
@@ -424,10 +424,10 @@ Accessibility isn\u2019t an add-on. It should be built into the process from day
 
 ## Start With an Audit
 
-If your current site wasn\u2019t built with accessibility in mind, start with an audit. Tools like axe DevTools, WAVE, and Lighthouse accessibility audits can identify the most critical issues.
+If your current site wasn’t built with accessibility in mind, start with an audit. Tools like axe DevTools, WAVE, and Lighthouse accessibility audits can identify the most critical issues.
 
 Fix the high-impact items first: alt text, colour contrast, keyboard navigation, and form labels. These four changes alone will address 80% of common accessibility failures.
 
-Accessibility makes your site better for everyone \u2014 not just users with disabilities. Clear navigation, readable text, and logical structure benefit every visitor.`,
+Accessibility makes your site better for everyone — not just users with disabilities. Clear navigation, readable text, and logical structure benefit every visitor.`,
   },
 ];

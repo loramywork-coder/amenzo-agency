@@ -194,13 +194,15 @@ function PersonCard({ initials, name, role, bio, color }: { initials: string; na
    ═══════════════════════════════════════════════════════════ */
 export default function TeamPage() {
   return (
-    <div style={{ background: P.bg, color: P.text, fontFamily: "var(--font-body)", minHeight: "100vh" }}>
+    <div className="light-theme" style={{ background: P.bg, color: P.text, fontFamily: "var(--font-body)", minHeight: "100vh" }}>
       <DemoBanner />
       <Nav />
 
       {/* HERO */}
-      <section className="pt-40 pb-20 px-6 md:px-10">
-        <div className="max-w-5xl mx-auto text-center">
+      <section className="relative pt-48 pb-28 px-6 md:px-10 overflow-hidden">
+        <div aria-hidden className="absolute inset-0" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=2400&q=85')", backgroundSize: "cover", backgroundPosition: "center" }} />
+        <div aria-hidden className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(10,12,16,0.2) 0%, rgba(10,12,16,0.4) 55%, rgba(10,12,16,0.85) 100%)" }} />
+        <div className="relative max-w-5xl mx-auto text-center" style={{ color: "#FFFFFF" }}>
           <Reveal>
             <span className="inline-block px-3 py-1 rounded-full text-[11px] font-medium mb-6"
               style={{ background: `${P.accent}18`, color: P.accentLight, fontFamily: "var(--font-mono)", letterSpacing: "0.06em", border: `1px solid ${P.accent}30` }}>
@@ -208,12 +210,12 @@ export default function TeamPage() {
             </span>
           </Reveal>
           <Reveal delay={0.1}>
-            <h1 className="text-3xl md:text-5xl lg:text-6xl font-semibold mb-6" style={{ letterSpacing: "-0.025em", lineHeight: 1.1 }}>
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-semibold mb-6" style={{ letterSpacing: "-0.025em", lineHeight: 1.1, color: "#FFFFFF", textShadow: "0 2px 24px rgba(0,0,0,0.55)" }}>
               The team behind<br /><span style={{ color: P.accent }}>Meridian</span>
             </h1>
           </Reveal>
           <Reveal delay={0.2}>
-            <p className="text-base md:text-lg max-w-2xl mx-auto" style={{ color: P.textSecondary, lineHeight: 1.7 }}>
+            <p className="text-base md:text-lg max-w-2xl mx-auto" style={{ color: "rgba(255,255,255,0.9)", lineHeight: 1.7, textShadow: "0 1px 12px rgba(0,0,0,0.5)" }}>
               Banking veterans, infrastructure engineers, and regulatory experts building the next generation of financial infrastructure.
             </p>
           </Reveal>

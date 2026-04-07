@@ -74,38 +74,42 @@ function Footer() {
 const benefits = [
   { icon: TrendingUp, title: "Meaningful Equity", desc: "Every team member receives a significant stock option grant. We want everyone to share in the upside of what we build together.", color: P.blue },
   { icon: Globe, title: "ESA & Agency Access", desc: "Work directly with ESA, DLR, JAXA, and other space agencies. Attend launches, test campaigns, and international conferences.", color: P.cyan },
-  { icon: MapPin, title: "Z\u00fcrich, Switzerland", desc: "Our office is in Technopark Z\u00fcrich, one of Europe\u2019s leading innovation hubs. World-class transit, mountains on your doorstep, and a thriving deep-tech community.", color: P.green },
+  { icon: MapPin, title: "Zürich, Switzerland", desc: "Our office is in Technopark Zürich, one of Europe’s leading innovation hubs. World-class transit, mountains on your doorstep, and a thriving deep-tech community.", color: P.green },
   { icon: Heart, title: "Real Impact", desc: "Your work will fly in space. Every thruster we ship makes orbit safer, more accessible, and more sustainable for everyone.", color: P.amber },
 ];
 
 const positions = [
-  { title: "Senior Propulsion Engineer", dept: "Engineering", location: "Z\u00fcrich", type: "Full-time" },
-  { title: "Embedded Systems Engineer", dept: "Engineering", location: "Z\u00fcrich", type: "Full-time" },
-  { title: "MEMS Fabrication Technician", dept: "Manufacturing", location: "Z\u00fcrich", type: "Full-time" },
-  { title: "Mission Operations Analyst", dept: "Operations", location: "Z\u00fcrich / Remote", type: "Full-time" },
-  { title: "Product Manager \u2014 Propulsion Systems", dept: "Product", location: "Z\u00fcrich", type: "Full-time" },
-  { title: "Technical Sales Engineer", dept: "Business Development", location: "Z\u00fcrich / Remote", type: "Full-time" },
+  { title: "Senior Propulsion Engineer", dept: "Engineering", location: "Zürich", type: "Full-time" },
+  { title: "Embedded Systems Engineer", dept: "Engineering", location: "Zürich", type: "Full-time" },
+  { title: "MEMS Fabrication Technician", dept: "Manufacturing", location: "Zürich", type: "Full-time" },
+  { title: "Mission Operations Analyst", dept: "Operations", location: "Zürich / Remote", type: "Full-time" },
+  { title: "Product Manager — Propulsion Systems", dept: "Product", location: "Zürich", type: "Full-time" },
+  { title: "Technical Sales Engineer", dept: "Business Development", location: "Zürich / Remote", type: "Full-time" },
 ];
 
 export default function CareersPage() {
   return (
-    <div style={{ background: P.bg, color: P.white, fontFamily: "var(--font-body)" }}>
+    <div className="light-theme" style={{ background: P.bg, color: P.white, fontFamily: "var(--font-body)" }}>
       <DemoBanner />
       <Nav />
 
       {/* Hero */}
-      <section className="pt-40 pb-20 px-6 lg:px-12 max-w-4xl mx-auto text-center">
+      <section className="relative pt-48 pb-28 px-6 lg:px-12 text-center overflow-hidden">
+        <div aria-hidden className="absolute inset-0" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=2400&q=85')", backgroundSize: "cover", backgroundPosition: "center" }} />
+        <div aria-hidden className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(10,12,16,0.2) 0%, rgba(10,12,16,0.4) 55%, rgba(10,12,16,0.85) 100%)" }} />
+        <div className="relative max-w-4xl mx-auto" style={{ color: "#FFFFFF" }}>
         <Reveal type="fade">
-          <span className="inline-block text-xs font-medium uppercase tracking-widest px-3 py-1 rounded-full mb-6" style={{ color: P.green, border: `1px solid ${P.green}33` }}>Careers</span>
+          <span className="inline-block text-xs font-medium uppercase tracking-widest px-3 py-1 rounded-full mb-6" style={{ color: "#34D399", border: "1px solid rgba(52,211,153,0.4)", background: "rgba(10,12,16,0.45)", backdropFilter: "blur(8px)" }}>Careers</span>
         </Reveal>
         <Reveal type="slide-up" delay={0.1}>
-          <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-6 tracking-tight">Join the Mission</h1>
+          <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-6 tracking-tight" style={{ color: "#FFFFFF", textShadow: "0 2px 24px rgba(0,0,0,0.55)" }}>Join the Mission</h1>
         </Reveal>
         <Reveal type="slide-up" delay={0.2}>
-          <p className="text-lg md:text-xl leading-relaxed" style={{ color: P.mutedLight }}>
+          <p className="text-lg md:text-xl leading-relaxed" style={{ color: "rgba(255,255,255,0.9)", textShadow: "0 1px 12px rgba(0,0,0,0.5)" }}>
             We&apos;re building the propulsion standard for the next generation of satellites. Join 22 engineers and operators in Z&uuml;rich making orbit accessible to everyone.
           </p>
         </Reveal>
+        </div>
       </section>
 
       {/* Benefits */}

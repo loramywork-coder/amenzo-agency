@@ -48,7 +48,7 @@ export const SERVICES = [
     title: "E-Commerce",
     slug: "ecommerce",
     shortDesc:
-      "Online stores with custom code and Stripe. Product pages, cart, checkout \u2014 built to convert.",
+      "Online stores with custom code and Stripe. Product pages, cart, checkout — built to convert.",
     tags: ["Next.js", "Stripe", "Custom Cart", "Product Pages"],
     price: "4,000",
     icon: "ShoppingBag",
@@ -139,7 +139,7 @@ export const INDUSTRIES = [
 export const TESTIMONIALS = [
   {
     quote:
-      "They didn\u2019t just redesign our website \u2014 they redesigned how our customers see us. Bookings tripled in the first month.",
+      "They didn’t just redesign our website — they redesigned how our customers see us. Bookings tripled in the first month.",
     name: "James Borg",
     title: "General Manager",
     company: "Grand Harbour Hotel",
@@ -167,11 +167,11 @@ export const TESTIMONIALS = [
     name: "Diana Fenech",
     title: "Marketing Director",
     company: "Mediterranean Living",
-    location: "St Julian\u2019s",
+    location: "St Julian’s",
   },
   {
     quote:
-      "They built our entire e-commerce platform in 4 weeks. We\u2019ve done \u20AC200K in sales in the first year.",
+      "They built our entire e-commerce platform in 4 weeks. We’ve done \u20AC200K in sales in the first year.",
     name: "Luca Vella",
     title: "Founder",
     company: "Olive & Stone",
@@ -180,10 +180,10 @@ export const TESTIMONIALS = [
   {
     quote:
       "The NGO world is used to ugly websites. They gave us something that finally matches the importance of our mission.",
-    name: "Dr. Anna M\u00fcller",
+    name: "Dr. Anna Müller",
     title: "Director",
     company: "Swiss Health Alliance",
-    location: "Z\u00fcrich",
+    location: "Zürich",
   },
   {
     quote:

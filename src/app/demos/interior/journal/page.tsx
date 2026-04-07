@@ -28,7 +28,7 @@ const POSTS = [
     tag: "Materials",
     title: "The Quiet Power of Lime Plaster",
     date: "March 2026",
-    excerpt: "Why we keep returning to this ancient finish \u2014 and the Swiss artisan who taught us to see its imperfections as poetry.",
+    excerpt: "Why we keep returning to this ancient finish — and the Swiss artisan who taught us to see its imperfections as poetry.",
   },
   {
     img: "/images/interior/project-02.jpg",
@@ -40,16 +40,16 @@ const POSTS = [
   {
     img: "/images/interior/project-04.jpg",
     tag: "Projects",
-    title: "Inside H\u00F4tel Noire: A Year Later",
+    title: "Inside Hôtel Noire: A Year Later",
     date: "January 2026",
-    excerpt: "Revisiting our Geneva hospitality project twelve months after handover \u2014 how the spaces have evolved with their inhabitants.",
+    excerpt: "Revisiting our Geneva hospitality project twelve months after handover — how the spaces have evolved with their inhabitants.",
   },
   {
     img: "/images/interior/project-05.jpg",
     tag: "Materials",
     title: "Bronze, Patina, and the Beauty of Age",
     date: "December 2025",
-    excerpt: "A meditation on materials that improve with time \u2014 and why we specify them for every project.",
+    excerpt: "A meditation on materials that improve with time — and why we specify them for every project.",
   },
   {
     img: "/images/interior/project-07.jpg",
@@ -63,7 +63,7 @@ const POSTS = [
     tag: "Projects",
     title: "Five Lessons from the Engadin",
     date: "October 2025",
-    excerpt: "Mountain light, local stone, and the challenge of designing warmth at altitude \u2014 reflections from our latest residential project.",
+    excerpt: "Mountain light, local stone, and the challenge of designing warmth at altitude — reflections from our latest residential project.",
   },
 ];
 
@@ -125,7 +125,7 @@ function Footer() {
         </div>
         <div>
           <p className="text-xs tracking-widest uppercase text-white/30 mb-4 font-[family-name:var(--font-body)]">Contact</p>
-          <p className="text-sm text-white/60 font-[family-name:var(--font-body)] leading-relaxed">L\u00F6wenstrasse 42<br />8001 Z\u00FCrich, Switzerland</p>
+          <p className="text-sm text-white/60 font-[family-name:var(--font-body)] leading-relaxed">Löwenstrasse 42<br />8001 Zürich, Switzerland</p>
           <p className="text-sm text-white/60 font-[family-name:var(--font-body)] mt-2">hello@studioelan.ch</p>
         </div>
       </div>

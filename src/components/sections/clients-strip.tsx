@@ -185,7 +185,7 @@ function TrustedBadge() {
         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
         <polyline points="9 12 11 14 15 10"/>
       </svg>
-      <span className="text-[10px] uppercase tracking-[0.2em] text-white/25 font-medium">Verified Agency Partner</span>
+      <span className="text-[10px] uppercase tracking-[0.2em] text-white/25 font-medium">Verified Studio Partner</span>
     </div>
   );
 }

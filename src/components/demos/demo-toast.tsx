@@ -6,7 +6,7 @@ export function useDemoToast() {
   const [toast, setToast] = useState<string | null>(null);
 
   const showToast = useCallback((msg?: string) => {
-    setToast(msg || "This is a demo \u2014 your message was not sent. In a real site, this would reach the business owner.");
+    setToast(msg || "This is a demo — your message was not sent. In a real site, this would reach the business owner.");
     setTimeout(() => setToast(null), 4000);
   }, []);
 

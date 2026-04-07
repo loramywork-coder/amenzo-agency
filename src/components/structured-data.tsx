@@ -272,12 +272,12 @@ export const faqData = [
     a: "Delivery depends on the package: Basic sites take 1-2 weeks, Standard 2-3 weeks, Premium 3-4 weeks, and Custom builds 4-6 weeks. We provide a preview link before launch so you can review everything before going live.",
   },
   {
-    q: "Do I own my website after it\u2019s built?",
-    a: "Yes, you own everything. We hand over the full source code and all assets. There is no vendor lock-in \u2014 you are free to host it anywhere, modify it, or hire another developer. Your website is yours.",
+    q: "Do I own my website after it’s built?",
+    a: "Yes, you own everything. We hand over the full source code and all assets. There is no vendor lock-in — you are free to host it anywhere, modify it, or hire another developer. Your website is yours.",
   },
   {
     q: "Do you use WordPress?",
-    a: "No. We build every website from scratch using Next.js, React, and Tailwind CSS \u2014 the same technology used by Netflix, Nike, and TikTok. Custom code means faster loading, better SEO, and a unique design that is not shared with thousands of other sites.",
+    a: "No. We build every website from scratch using Next.js, React, and Tailwind CSS — the same technology used by Netflix, Nike, and TikTok. Custom code means faster loading, better SEO, and a unique design that is not shared with thousands of other sites.",
   },
   {
     q: "Can you build multilingual websites?",

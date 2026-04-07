@@ -84,13 +84,13 @@ function PersonCard({ name, role, bio, initials, color }: { name: string; role: 
 
 const founders = [
   { name: "Dr. Elena Vasquez", role: "CEO & Co-Founder", initials: "EV", color: P.blue, bio: "Former ESA electric propulsion engineer with 12 years in thruster development. Led the LISA Pathfinder micronewton thruster qualification. PhD in Aerospace Engineering from TU Delft. Elena founded Nova Space in 2022 with a conviction that every satellite deserves propulsion." },
-  { name: "Dr. Marcus Chen", role: "CTO & Co-Founder", initials: "MC", color: P.cyan, bio: "Electrochemist and MEMS fabrication specialist. Invented the NPX emitter architecture during his postdoc at ETH Z\u00fcrich. 14 patents in microfluidics and ion optics. Marcus leads the R&D team that took the NPX-200 from lab prototype to flight hardware in under 18 months." },
-  { name: "Lena Hofmann", role: "COO & Co-Founder", initials: "LH", color: P.green, bio: "Former McKinsey engagement manager specialising in deep-tech scale-ups. MBA from INSEAD. Lena built Nova Space\u2019s operations from scratch\u2014supply chain, quality management, and the clean-room facility in Technopark Z\u00fcrich that produces 50 thrusters per quarter." },
+  { name: "Dr. Marcus Chen", role: "CTO & Co-Founder", initials: "MC", color: P.cyan, bio: "Electrochemist and MEMS fabrication specialist. Invented the NPX emitter architecture during his postdoc at ETH Zürich. 14 patents in microfluidics and ion optics. Marcus leads the R&D team that took the NPX-200 from lab prototype to flight hardware in under 18 months." },
+  { name: "Lena Hofmann", role: "COO & Co-Founder", initials: "LH", color: P.green, bio: "Former McKinsey engagement manager specialising in deep-tech scale-ups. MBA from INSEAD. Lena built Nova Space’s operations from scratch—supply chain, quality management, and the clean-room facility in Technopark Zürich that produces 50 thrusters per quarter." },
 ];
 
 const keyTeam = [
   { name: "Dr. Amir Patel", role: "Head of Propulsion Engineering", initials: "AP", color: P.amber, bio: "15 years at Airbus Defence & Space. Led ion engine development for Eurostar Neo. Oversees all thruster design, testing, and qualification at Nova Space." },
-  { name: "Sofia Lindqvist", role: "Head of Flight Software", initials: "SL", color: P.blue, bio: "Former CERN controls engineer. Expert in real-time embedded systems for safety-critical applications. Architected the NPX-200\u2019s autonomous fault-handling firmware." },
+  { name: "Sofia Lindqvist", role: "Head of Flight Software", initials: "SL", color: P.blue, bio: "Former CERN controls engineer. Expert in real-time embedded systems for safety-critical applications. Architected the NPX-200’s autonomous fault-handling firmware." },
   { name: "James Okafor", role: "Head of Business Development", initials: "JO", color: P.cyan, bio: "10 years at OneWeb and Telesat. Deep relationships across the constellation and launch provider ecosystem. Leads commercial partnerships and government contracts." },
   { name: "Dr. Yuki Tanaka", role: "Head of Quality & Compliance", initials: "YT", color: P.green, bio: "Former JAXA quality assurance lead. ECSS and ISO 9001 certified auditor. Ensures every NPX-200 meets the most demanding space-grade qualification standards." },
 ];
@@ -98,34 +98,38 @@ const keyTeam = [
 const advisors = [
   { name: "Prof. Jean-Pierre Lebreton", role: "Scientific Advisor", initials: "JL", color: P.mutedLight, bio: "Former ESA Chief Scientist. Led the Huygens probe mission to Titan. Advises on mission architecture and ESA programme alignment." },
   { name: "Dr. Sarah Mitchell", role: "Commercial Advisor", initials: "SM", color: P.mutedLight, bio: "Managing Partner at SpaceFund. Early investor in Rocket Lab, Planet, and Spire. Guides Nova Space on fundraising strategy and market positioning." },
-  { name: "Prof. Andreas M\u00fcller", role: "Technical Advisor", initials: "AM", color: P.mutedLight, bio: "Chair of Plasma Physics at ETH Z\u00fcrich. Pioneer in FEEP and electrospray propulsion research. Co-inventor of the ionic liquid propellant used in the NPX-200." },
+  { name: "Prof. Andreas Müller", role: "Technical Advisor", initials: "AM", color: P.mutedLight, bio: "Chair of Plasma Physics at ETH Zürich. Pioneer in FEEP and electrospray propulsion research. Co-inventor of the ionic liquid propellant used in the NPX-200." },
 ];
 
 const board = [
   { name: "Dr. Elena Vasquez", role: "Chair & CEO", initials: "EV", color: P.blue, bio: "Co-Founder of Nova Space. Represents the founding team on the board." },
   { name: "Thomas Keller", role: "Board Member (Lakestar)", initials: "TK", color: P.mutedLight, bio: "Partner at Lakestar, lead investor in Series A. Board experience with Lilium, Isar Aerospace, and Volocopter." },
-  { name: "Maria Gonzalez", role: "Board Member (ESA BIC)", initials: "MG", color: P.mutedLight, bio: "Director of ESA Business Incubation Centre Switzerland. Represents ESA BIC\u2019s strategic interest in Nova Space\u2019s technology development." },
+  { name: "Maria Gonzalez", role: "Board Member (ESA BIC)", initials: "MG", color: P.mutedLight, bio: "Director of ESA Business Incubation Centre Switzerland. Represents ESA BIC’s strategic interest in Nova Space’s technology development." },
 ];
 
 export default function TeamPage() {
   return (
-    <div style={{ background: P.bg, color: P.white, fontFamily: "var(--font-body)" }}>
+    <div className="light-theme" style={{ background: P.bg, color: P.white, fontFamily: "var(--font-body)" }}>
       <DemoBanner />
       <Nav />
 
       {/* Hero */}
-      <section className="pt-40 pb-20 px-6 lg:px-12 max-w-4xl mx-auto text-center">
+      <section className="relative pt-48 pb-28 px-6 lg:px-12 text-center overflow-hidden">
+        <div aria-hidden className="absolute inset-0" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=2400&q=85')", backgroundSize: "cover", backgroundPosition: "center" }} />
+        <div aria-hidden className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(10,12,16,0.2) 0%, rgba(10,12,16,0.4) 55%, rgba(10,12,16,0.85) 100%)" }} />
+        <div className="relative max-w-4xl mx-auto" style={{ color: "#FFFFFF" }}>
         <Reveal type="fade">
-          <span className="inline-block text-xs font-medium uppercase tracking-widest px-3 py-1 rounded-full mb-6" style={{ color: P.blue, border: `1px solid ${P.blue}33` }}>Team</span>
+          <span className="inline-block text-xs font-medium uppercase tracking-widest px-3 py-1 rounded-full mb-6" style={{ color: P.blue, border: `1px solid ${P.blue}33`, background: "rgba(10,12,16,0.4)", backdropFilter: "blur(8px)" }}>Team</span>
         </Reveal>
         <Reveal type="slide-up" delay={0.1}>
-          <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-6 tracking-tight">The People Behind Nova Space</h1>
+          <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-6 tracking-tight" style={{ color: "#FFFFFF", textShadow: "0 2px 24px rgba(0,0,0,0.55)" }}>The People Behind Nova Space</h1>
         </Reveal>
         <Reveal type="slide-up" delay={0.2}>
-          <p className="text-lg md:text-xl leading-relaxed" style={{ color: P.mutedLight }}>
+          <p className="text-lg md:text-xl leading-relaxed" style={{ color: "rgba(255,255,255,0.9)", textShadow: "0 1px 12px rgba(0,0,0,0.5)" }}>
             22 engineers, scientists, and operators building the propulsion layer for the new space economy from Z&uuml;rich, Switzerland.
           </p>
         </Reveal>
+        </div>
       </section>
 
       {/* Founders */}

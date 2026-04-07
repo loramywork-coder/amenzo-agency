@@ -26,32 +26,32 @@ const PILLARS = [
   {
     title: "Light",
     img: "/images/interior/project-01.jpg",
-    text: "Light is the first material we design with. Before selecting a single finish, we study how sunlight enters a room across the seasons \u2014 the warm wash of morning, the sharp geometry of noon, the amber dissolution of evening. Every window becomes a frame for this daily performance. We layer artificial light to echo these natural rhythms, creating spaces that breathe with the passage of hours. A room that honours its light needs very little else.",
+    text: "Light is the first material we design with. Before selecting a single finish, we study how sunlight enters a room across the seasons — the warm wash of morning, the sharp geometry of noon, the amber dissolution of evening. Every window becomes a frame for this daily performance. We layer artificial light to echo these natural rhythms, creating spaces that breathe with the passage of hours. A room that honours its light needs very little else.",
   },
   {
     title: "Material",
     img: "/images/interior/project-03.jpg",
-    text: "We choose materials not for their novelty, but for their honesty. A hand-trowelled lime plaster wall carries the memory of its maker; a slab of Vals quartzite speaks of geological time. Our material palette is deliberately restrained \u2014 stone, timber, linen, bronze, plaster \u2014 because restraint allows each surface to be truly noticed. We source directly from quarries, mills, and workshops, building relationships with artisans who share our belief that craft is a form of care.",
+    text: "We choose materials not for their novelty, but for their honesty. A hand-trowelled lime plaster wall carries the memory of its maker; a slab of Vals quartzite speaks of geological time. Our material palette is deliberately restrained — stone, timber, linen, bronze, plaster — because restraint allows each surface to be truly noticed. We source directly from quarries, mills, and workshops, building relationships with artisans who share our belief that craft is a form of care.",
   },
   {
     title: "Proportion",
     img: "/images/interior/project-05.jpg",
-    text: "Proportion is the invisible architecture of comfort. A ceiling height that makes you stand taller. A corridor width that invites you to slow down. The distance between a sofa and a fireplace that creates intimacy without confinement. These calibrations are felt before they are understood. We work in physical models and full-scale mock-ups, testing spatial relationships with our bodies before committing them to construction drawings. The best proportions disappear \u2014 you simply feel at ease.",
+    text: "Proportion is the invisible architecture of comfort. A ceiling height that makes you stand taller. A corridor width that invites you to slow down. The distance between a sofa and a fireplace that creates intimacy without confinement. These calibrations are felt before they are understood. We work in physical models and full-scale mock-ups, testing spatial relationships with our bodies before committing them to construction drawings. The best proportions disappear — you simply feel at ease.",
   },
   {
     title: "Time",
     img: "/images/interior/project-08.jpg",
-    text: "We design for the long view. Oak floors that will patina over decades. Brass hardware that deepens with each touch. Linen upholstery that softens with every season. Trends are temporary; the qualities we seek \u2014 warmth, dignity, quietude \u2014 are permanent. A Studio Ēlan interior should feel more beautiful in ten years than it does on the day of handover. This is our deepest measure of success: spaces that age with the same grace as the lives lived within them.",
+    text: "We design for the long view. Oak floors that will patina over decades. Brass hardware that deepens with each touch. Linen upholstery that softens with every season. Trends are temporary; the qualities we seek — warmth, dignity, quietude — are permanent. A Studio Ēlan interior should feel more beautiful in ten years than it does on the day of handover. This is our deepest measure of success: spaces that age with the same grace as the lives lived within them.",
   },
 ];
 
 const PROCESS = [
   { step: "01", title: "First Meeting", desc: "A conversation about how you live, what you value, and what the space should feel like." },
-  { step: "02", title: "Site Reading", desc: "We study the architecture, the light, the neighbourhood \u2014 everything the space already knows." },
+  { step: "02", title: "Site Reading", desc: "We study the architecture, the light, the neighbourhood — everything the space already knows." },
   { step: "03", title: "Concept", desc: "A material and spatial narrative distilled into mood boards, sketches, and sample palettes." },
   { step: "04", title: "Design Development", desc: "Detailed drawings, specifications, and 3D visualisations refined through close dialogue." },
   { step: "05", title: "Realisation", desc: "On-site supervision ensuring every joint, finish, and detail meets our shared standard." },
-  { step: "06", title: "Handover", desc: "The moment the space becomes yours \u2014 ready to be lived in, not just admired." },
+  { step: "06", title: "Handover", desc: "The moment the space becomes yours — ready to be lived in, not just admired." },
 ];
 
 /* ─── Nav ─── */
@@ -112,7 +112,7 @@ function Footer() {
         </div>
         <div>
           <p className="text-xs tracking-widest uppercase text-white/30 mb-4 font-[family-name:var(--font-body)]">Contact</p>
-          <p className="text-sm text-white/60 font-[family-name:var(--font-body)] leading-relaxed">L\u00F6wenstrasse 42<br />8001 Z\u00FCrich, Switzerland</p>
+          <p className="text-sm text-white/60 font-[family-name:var(--font-body)] leading-relaxed">Löwenstrasse 42<br />8001 Zürich, Switzerland</p>
           <p className="text-sm text-white/60 font-[family-name:var(--font-body)] mt-2">hello@studioelan.ch</p>
         </div>
       </div>

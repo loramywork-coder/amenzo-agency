@@ -90,7 +90,7 @@ const ARTWORKS: Artwork[] = [
     dimensions: "100 \u00d7 140 cm",
     year: "2026",
     price: "\u20ac12,500",
-    src: "https://images.unsplash.com/photo-1531913764164-f85c3e01b5e0?w=800&q=80",
+    src: "https://images.unsplash.com/photo-1518562180175-34a163b1a9a6?w=800&q=80",
     aspect: "5/6",
     category: "Painting",
     sold: false,
