@@ -179,7 +179,7 @@ export function HomePage() {
           <Reveal type="fade" delay={0.65}>
             <div className="flex items-center justify-center gap-4 mt-10">
               <Link
-                href="/contact"
+                href="/start-project"
                 className="inline-flex items-center gap-2 bg-white text-black text-sm font-medium px-7 py-3 rounded-full hover:bg-white/90 transition-colors"
               >
                 Start a Project <ArrowRight size={14} />
@@ -472,7 +472,7 @@ export function HomePage() {
           <Reveal delay={0.25}>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10">
               <Link
-                href="/contact"
+                href="/start-project"
                 className="inline-flex items-center gap-2 bg-white text-black text-sm font-medium px-8 py-3.5 rounded-full hover:bg-white/90 transition-colors"
               >
                 Start a Project <ArrowRight size={14} />

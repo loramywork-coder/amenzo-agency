@@ -22,23 +22,17 @@ export const metadata = generatePageMeta({
 const TIERS = [
   {
     name: "Startup Launch",
-    price: "500",
+    price: "750",
     period: "one-time",
     description:
       "Launch-ready in 10 days. Hand-coded, fully responsive, and built on the same stack we use for every client. Because every great company starts with a great website.",
     features: [
       { text: "1-5 page website", included: true },
       { text: "Custom design (no templates)", included: true },
-      { text: "Mobile responsive", included: true },
-      { text: "Lighthouse 90+", included: true },
+      { text: "Mobile responsive, Lighthouse 90+", included: true },
       { text: "Basic SEO setup", included: true },
       { text: "Deployed on Vercel", included: true },
-      { text: "1 round of revisions", included: true },
       { text: "Delivered in 10 days", included: true },
-      { text: "Preview link before launch", included: false },
-      { text: "Content guidance", included: false },
-      { text: "Multilingual support", included: false },
-      { text: "Blog or dynamic sections", included: false },
     ],
     cta: "Start a Project",
     ctaHref: "/start-project",
@@ -53,20 +47,13 @@ const TIERS = [
     description:
       "A clean, professional website built from your content. You provide the text, images, and logo — we handle everything else.",
     features: [
-      { text: "1-5 custom responsive pages", included: true },
-      { text: "Mobile-first design (desktop, tablet, phone)", included: true },
+      { text: "Everything in Startup Launch, plus:", included: true },
       { text: "Contact form with email delivery", included: true },
-      { text: "Basic SEO setup (meta tags, sitemap)", included: true },
       { text: "SSL certificate and hosting setup", included: true },
       { text: "Google Analytics configuration", included: true },
-      { text: "1 round of revisions", included: true },
       { text: "1-2 week delivery", included: true },
-      { text: "Preview link before launch", included: false },
-      { text: "Content guidance", included: false },
-      { text: "Multilingual support", included: false },
-      { text: "Blog or dynamic sections", included: false },
     ],
-    cta: "Get Started",
+    cta: "Start a Project",
     ctaHref: "/start-project",
     highlighted: false,
   },
@@ -77,20 +64,15 @@ const TIERS = [
     description:
       "A custom-designed website that stands out from your competitors. We help structure your content and deliver in 2-3 weeks.",
     features: [
+      { text: "Everything in Basic, plus:", included: true },
       { text: "5-10 custom responsive pages", included: true },
-      { text: "Bespoke design tailored to your brand", included: true },
       { text: "Full SEO setup (meta, schema, sitemap)", included: true },
       { text: "2 languages included", included: true },
       { text: "Blog or news section", included: true },
-      { text: "Social media integration", included: true },
-      { text: "Image sourcing (Unsplash)", included: true },
-      { text: "Content structuring guidance", included: true },
-      { text: "Preview link before launch", included: true },
-      { text: "2 rounds of revisions", included: true },
+      { text: "Preview link + 2 revision rounds", included: true },
       { text: "2-3 week delivery", included: true },
-      { text: "E-commerce or payments", included: false },
     ],
-    cta: "Get a Quote",
+    cta: "Start a Project",
     ctaHref: "/start-project",
     highlighted: true,
   },
@@ -101,20 +83,15 @@ const TIERS = [
     description:
       "A premium website with advanced features, multilingual support, and polished animations. Built for competitive advantage.",
     features: [
+      { text: "Everything in Standard, plus:", included: true },
       { text: "10-20 custom pages", included: true },
       { text: "Premium design with animations", included: true },
       { text: "3+ languages", included: true },
-      { text: "Full SEO with schema markup", included: true },
       { text: "Galleries, booking forms, donations", included: true },
       { text: "Lighthouse score 95+ guaranteed", included: true },
-      { text: "Professional stock imagery", included: true },
-      { text: "Content guidance and structuring", included: true },
-      { text: "Preview link + dedicated revision", included: true },
       { text: "3-4 week delivery", included: true },
-      { text: "E-commerce (see Custom)", included: false },
-      { text: "Custom web applications", included: false },
     ],
-    cta: "Get a Quote",
+    cta: "Start a Project",
     ctaHref: "/start-project",
     highlighted: false,
   },
@@ -126,19 +103,15 @@ const TIERS = [
     description:
       "For complex projects. E-commerce, marketplace platforms, custom integrations — scoped and priced to your exact requirements.",
     features: [
-      { text: "Unlimited pages", included: true },
-      { text: "Fully bespoke design and functionality", included: true },
+      { text: "Everything in Premium, plus:", included: true },
+      { text: "Unlimited pages, fully bespoke", included: true },
       { text: "E-commerce with Stripe / PayPal", included: true },
       { text: "Custom integrations and APIs", included: true },
-      { text: "Multi-language, multi-region", included: true },
-      { text: "Full content collaboration", included: true },
-      { text: "Interactive demo before launch", included: true },
-      { text: "2 rounds of revisions", included: true },
-      { text: "4-6 week delivery", included: true },
       { text: "Priority support during build", included: true },
+      { text: "4-6 week delivery", included: true },
     ],
-    cta: "Book a Consultation",
-    ctaHref: "/contact",
+    cta: "Start a Project",
+    ctaHref: "/start-project",
     highlighted: false,
   },
 ] as const;
@@ -150,12 +123,6 @@ const ADD_ONS = [
     description: "Add an extra language to your website.",
   },
   {
-    name: "E-Commerce Setup",
-    price: "1,500",
-    description:
-      "Full online store with checkout, product management, and payment processing.",
-  },
-  {
     name: "Logo & Branding",
     price: "800",
     description:
@@ -165,12 +132,6 @@ const ADD_ONS = [
     name: "Copywriting (per page)",
     price: "100",
     description: "Professional website copy, SEO-optimised and on-brand.",
-  },
-  {
-    name: "Professional Photography",
-    price: "400",
-    description:
-      "Art direction for a professional photo shoot, moodboard and shot list.",
   },
   {
     name: "Monthly SEO",
@@ -189,11 +150,6 @@ const ADD_ONS = [
     price: "200/mo",
     description:
       "Weekly content updates (~8hrs/month), 12hr response, quarterly review.",
-  },
-  {
-    name: "Additional Work",
-    price: "120/hr",
-    description: "Extra development or design work billed hourly.",
   },
 ] as const;
 
@@ -292,7 +248,7 @@ export default function PricingPage() {
           staggerDelay={0.1}
         >
           {TIERS.map((tier) => (
-            <StaggerItem key={tier.name}>
+            <StaggerItem key={tier.name} className="h-full">
               <div
                 className={`relative flex flex-col h-full rounded-2xl border p-8 transition-all duration-500 ${
                   tier.highlighted
@@ -322,7 +278,6 @@ export default function PricingPage() {
                         <span className="font-display text-2xl md:text-3xl font-bold text-text-primary">
                           &euro;{tier.price}{tier.priceNote}
                         </span>
-                        <span className="text-sm text-text-muted ml-1">custom</span>
                       </>
                     ) : (
                       <>
@@ -372,19 +327,21 @@ export default function PricingPage() {
 
 
                 {/* CTA */}
-                <Button
-                  href={tier.ctaHref}
-                  variant={tier.highlighted ? "primary" : "secondary"}
-                  className="w-full justify-center"
-                  magnetic
-                >
-                  {tier.cta} <ArrowRight className="w-4 h-4" />
-                </Button>
-                {"footnote" in tier && tier.footnote && (
-                  <p className="text-[9px] text-text-muted text-center mt-3 italic">
-                    {tier.footnote}
-                  </p>
-                )}
+                <div className="mt-auto">
+                  <Button
+                    href={tier.ctaHref}
+                    variant={tier.highlighted ? "primary" : "secondary"}
+                    className="w-full justify-center"
+                    magnetic
+                  >
+                    {tier.cta} <ArrowRight className="w-4 h-4" />
+                  </Button>
+                  {"footnote" in tier && tier.footnote && (
+                    <p className="text-[9px] text-text-muted text-center mt-3 italic">
+                      {tier.footnote}
+                    </p>
+                  )}
+                </div>
               </div>
             </StaggerItem>
           ))}

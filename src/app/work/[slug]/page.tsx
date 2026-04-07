@@ -418,7 +418,7 @@ export default async function CaseStudyPage({ params }: Props) {
               and we&apos;ll show you what&apos;s possible.
             </p>
             <div className="mt-8 flex gap-4 justify-center">
-              <Button href="/contact" variant="primary" size="lg" magnetic>
+              <Button href="/start-project" variant="primary" size="lg" magnetic>
                 Start a Project
               </Button>
               <Button href="/work" variant="secondary" size="lg">

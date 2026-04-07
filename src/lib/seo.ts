@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const siteConfig = {
   name: "Amenzo",
-  legalName: "Amenzo",
+  legalName: "ProgressPro",
   url: "https://amenzo.co",
   description:
     "Amenzo builds custom, hand-coded websites for businesses worldwide. No templates, no WordPress. Professional web design from EUR 750.",
@@ -10,7 +10,8 @@ export const siteConfig = {
   phoneDisplay: "+31 62 831 8123",
   email: "info@amenzo.co",
   founder: "Amenzo Studio",
-  foundingYear: 2026,
+  founders: ["Amy de Boers", "Lorenzo Senn"],
+  foundingYear: 2024,
   address: {
     street: "Dammerweg 81",
     locality: "Nederhorst den Berg",
@@ -21,9 +22,9 @@ export const siteConfig = {
   },
   geo: { lat: 52.2636, lng: 5.0419 },
   social: {
-    linkedin: "https://linkedin.com/company/amenzo",
+    linkedin: "https://www.linkedin.com/company/amenzo-studio/",
   },
-  priceRange: "From \u20AC5,000",
+  priceRange: "\u20AC750 - \u20AC8,000+",
   currency: "EUR",
   keywords: {
     primary: [

@@ -26,7 +26,7 @@ import {
 
 export const metadata = generatePageMeta({
   title: "About Amenzo — Web Design Studio",
-  description: "Amenzo is a web design agency founded in 2026. We build custom websites with Next.js — no templates, no WordPress. Based in the Netherlands, serving businesses across Europe and internationally.",
+  description: "Meet the team behind Amenzo Studio. A two-person web design studio building custom Next.js websites for businesses worldwide — no templates, no WordPress.",
   path: "/about",
 });
 
@@ -80,9 +80,9 @@ export default function AboutPage() {
             <p className="caption mb-6 text-violet">About AMENZO</p>
           </AnimateIn>
           <TextReveal>
-            <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold text-text-primary leading-tight">
+            <p className="font-display text-5xl md:text-7xl lg:text-8xl font-bold text-text-primary leading-tight">
               The Agency
-            </h1>
+            </p>
           </TextReveal>
           <TextReveal delay={0.15}>
             <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold leading-tight mt-2">

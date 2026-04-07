@@ -82,9 +82,28 @@ export function Footer() {
               {CONTACT_EMAIL}
             </a>
             <div className="flex items-center gap-4 mt-5">
-              <span className="text-xs text-white/20 cursor-default">LinkedIn</span>
-              <span className="text-xs text-white/20 cursor-default">Instagram</span>
-              <span className="text-xs text-white/20 cursor-default">Facebook</span>
+              <a
+                href="https://www.linkedin.com/company/amenzo-studio/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs text-white/40 hover:text-white/80 transition-colors"
+              >
+                LinkedIn
+              </a>
+              <a
+                href="#"
+                aria-label="Instagram"
+                className="text-xs text-white/40 hover:text-white/80 transition-colors"
+              >
+                Instagram
+              </a>
+              <a
+                href="#"
+                aria-label="Facebook"
+                className="text-xs text-white/40 hover:text-white/80 transition-colors"
+              >
+                Facebook
+              </a>
             </div>
             <p className="text-xs text-white/15 mt-5 italic">
               Currently booking for{" "}

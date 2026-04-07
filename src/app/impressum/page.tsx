@@ -11,7 +11,7 @@ export default function ImpressumPage() {
   return (
     <div className="min-h-screen pt-32 pb-20 relative">
       {/* Solid bg to cover the global swirly gradient */}
-      <div className="fixed inset-0 bg-bg" style={{ zIndex: -1 }} />
+      <div className="fixed inset-0 bg-bg pointer-events-none" style={{ zIndex: -1 }} aria-hidden="true" />
       <div className="container-wide max-w-3xl">
         <h1 className="font-display text-4xl md:text-5xl font-bold text-text-primary mb-4">
           Impressum

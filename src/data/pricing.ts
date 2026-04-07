@@ -31,14 +31,11 @@ export const budgetOptions = [
 
 export const addOns = [
   { id: "multilingual", name: "Additional Language", price: 250, description: "Reach customers in their language", recurring: false, category: "language" as const },
-  { id: "ecommerce", name: "E-Commerce Setup", price: 1500, description: "Full online store with checkout", recurring: false, category: "feature" as const },
   { id: "branding", name: "Logo & Branding", price: 800, description: "Complete visual identity package", recurring: false, category: "branding" as const },
   { id: "copywriting", name: "Copywriting (per page)", price: 100, description: "Professional copy for one page", recurring: false, category: "branding" as const },
-  { id: "photography", name: "Professional Photography", price: 400, description: "Art direction for a photo shoot", recurring: false, category: "branding" as const },
   { id: "seo", name: "Monthly SEO", price: 300, description: "Ongoing SEO, keyword tracking, reports", recurring: true, category: "feature" as const },
   { id: "maintenance", name: "Hosting & Maintenance", price: 80, description: "Hosting, SSL, backups, monitoring, updates", recurring: true, category: "foundation" as const },
   { id: "priority", name: "Priority Support", price: 200, description: "Weekly content updates, 12hr response, quarterly review", recurring: true, category: "foundation" as const },
-  { id: "hourly", name: "Additional Work (hourly)", price: 120, description: "Extra development or design work per hour", recurring: false, category: "feature" as const },
 ] as const;
 
 export const SERVICE_BASE_PRICES: Record<string, number> = {
