@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { generatePageMeta } from "@/lib/seo";
 import { BreadcrumbSchema } from "@/components/structured-data";
 
@@ -191,8 +192,8 @@ export default function AboutPage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-xl mx-auto">
           <AnimateIn delay={0.1}>
             <div className="rounded-xl border border-border bg-surface-elevated p-6 text-center">
-              <div className="w-14 h-14 rounded-full bg-white/[0.06] border border-white/10 flex items-center justify-center mx-auto mb-4">
-                <span className="text-xl font-bold text-white">A</span>
+              <div className="w-28 h-28 rounded-full overflow-hidden border border-white/10 mx-auto mb-4 relative">
+                <Image src="/images/team/amy.png" alt="Amy de Boers" fill sizes="112px" className="object-cover" style={{objectPosition:"center 12%", transform:"scale(1.22)"}} />
               </div>
               <h3 className="font-display text-lg font-semibold text-text-primary">Amy de Boers</h3>
               <p className="text-sm text-violet mt-0.5">Operations &amp; Strategy</p>
@@ -201,8 +202,8 @@ export default function AboutPage() {
           </AnimateIn>
           <AnimateIn delay={0.2}>
             <div className="rounded-xl border border-border bg-surface-elevated p-6 text-center">
-              <div className="w-14 h-14 rounded-full bg-white/[0.06] border border-white/10 flex items-center justify-center mx-auto mb-4">
-                <span className="text-xl font-bold text-white">L</span>
+              <div className="w-28 h-28 rounded-full overflow-hidden border border-white/10 mx-auto mb-4 relative">
+                <Image src="/images/team/lorenzo.png" alt="Lorenzo Senn" fill sizes="112px" className="object-cover" style={{objectPosition:"center 20%"}} />
               </div>
               <h3 className="font-display text-lg font-semibold text-text-primary">Lorenzo Senn</h3>
               <p className="text-sm text-violet mt-0.5">Design &amp; Engineering</p>
