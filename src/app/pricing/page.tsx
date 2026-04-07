@@ -327,11 +327,9 @@ export default function PricingPage() {
                   >
                     {tier.cta} <ArrowRight className="w-4 h-4" />
                   </Button>
-                  {"footnote" in tier && tier.footnote && (
-                    <p className="text-[9px] text-text-muted text-center mt-3 italic">
-                      {tier.footnote}
-                    </p>
-                  )}
+                  <p className="text-[9px] text-text-muted text-center mt-3 italic min-h-[14px]">
+                    {"footnote" in tier && tier.footnote ? tier.footnote : "\u00A0"}
+                  </p>
                 </div>
               </div>
             </StaggerItem>
