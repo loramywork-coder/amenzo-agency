@@ -70,6 +70,10 @@ const OFFICES = [
   { city: "London", role: "EMEA Operations", detail: "FCA-regulated trading desk" },
   { city: "New York", role: "Americas", detail: "Institutional partnerships" },
   { city: "Singapore", role: "APAC Hub", detail: "MAS-licensed custody" },
+  { city: "Tokyo", role: "Japan Desk", detail: "JFSA-registered operations" },
+  { city: "Dubai", role: "MENA Gateway", detail: "DFSA-licensed treasury" },
+  { city: "São Paulo", role: "LATAM Office", detail: "BCB-supervised partnerships" },
+  { city: "Sydney", role: "Oceania", detail: "ASIC-registered custody" },
 ];
 
 const SERVICES = [
@@ -161,7 +165,7 @@ export default function FintechDemo() {
               <rect x="1" y="1" width="30" height="30" rx="8" stroke={P.accent} strokeWidth="1.5" fill="none"/>
               <path d="M9 22V10l7 6 7-6v12" stroke={P.accent} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
             </svg>
-            <span style={{ fontSize: 15, fontWeight: 600, letterSpacing: "-0.02em", color: P.text }}>
+            <span style={{ fontSize: 15, fontWeight: 600, letterSpacing: "-0.02em", color: "#FFFFFF", textShadow: "0 1px 12px rgba(0,0,0,0.5)" }}>
               Meridian Capital
             </span>
           </Link>
@@ -208,7 +212,7 @@ export default function FintechDemo() {
           <button
             className="md:hidden"
             onClick={() => setMenuOpen(!menuOpen)}
-            style={{ background: "none", border: "none", cursor: "pointer", color: P.text, padding: 4 }}
+            style={{ background: "none", border: "none", cursor: "pointer", color: "#FFFFFF", padding: 4 }}
           >
             {menuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
@@ -437,7 +441,7 @@ export default function FintechDemo() {
       </section>
 
       {/* ═══════ GLOBE ═══════ */}
-      <section style={{ background: P.bgAlt, padding: "120px clamp(20px, 4vw, 64px) 80px" }}>
+      <section style={{ background: P.bgAlt, padding: "140px clamp(20px, 4vw, 64px) 140px" }}>
         <div style={{ maxWidth: 1440, margin: "0 auto" }}>
           <Reveal type="slide-up">
             <h2
@@ -480,19 +484,19 @@ export default function FintechDemo() {
             <div
               style={{
                 display: "grid",
-                gridTemplateColumns: "repeat(4, 1fr)",
-                gap: 0,
+                gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
+                gap: 24,
                 marginTop: 64,
-                maxWidth: 960,
-                margin: "64px auto 0",
+                maxWidth: 1200,
+                margin: "80px auto 0",
               }}
             >
-              {OFFICES.map((o, i) => (
+              {OFFICES.map((o) => (
                 <div
                   key={o.city}
                   style={{
-                    borderLeft: i > 0 ? `1px solid ${P.bgAlt === P.bgAlt ? "rgba(0,0,0,0.06)" : "transparent"}` : "none",
-                    paddingLeft: i > 0 ? 24 : 0,
+                    paddingLeft: 16,
+                    borderLeft: "1px solid rgba(0,0,0,0.08)",
                   }}
                 >
                   <span style={{ fontSize: 16, fontWeight: 500, color: P.text, display: "block" }}>{o.city}</span>
@@ -910,8 +914,8 @@ export default function FintechDemo() {
             maxWidth: 1440,
             margin: "0 auto",
             display: "grid",
-            gridTemplateColumns: "2fr repeat(3, 1fr)",
-            gap: 48,
+            gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
+            gap: 40,
           }}
         >
           {/* brand col */}
@@ -970,6 +974,8 @@ export default function FintechDemo() {
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
+            flexWrap: "wrap",
+            gap: 12,
           }}
         >
           <span style={{ fontSize: 11, color: "rgba(255,255,255,0.2)" }}>
