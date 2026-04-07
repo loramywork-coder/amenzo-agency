@@ -1362,7 +1362,7 @@ function MarqueesSection() {
         <div className="whitespace-nowrap" style={{ animation: "marquee 40s linear infinite" }}>
           {[0, 1].map(i => (
             <span key={i} className="text-[11px] text-white/15 tracking-[0.3em] uppercase">
-              Design & Development ✦ Clients Worldwide ✦ Lighthouse 95+ ✦ Hand-Crafted Code ✦ No Templates ✦ Delivered in Weeks ✦&nbsp;
+              Design & Development ✦ Clients Worldwide ✦ Lighthouse 95+ ✦ Custom-Built Code ✦ No Templates ✦ Delivered in Weeks ✦&nbsp;
             </span>
           ))}
         </div>

@@ -23,7 +23,7 @@ export function Footer() {
           <div className="lg:col-span-1">
             <Logo color="white" showGradientAccent={false} />
             <p className="mt-5 text-[13px] text-white/50 max-w-xs leading-relaxed">
-              Web design &amp; development studio. Hand-coded websites that make businesses impossible to ignore.
+              Web design &amp; development studio. Custom-built websites that make businesses impossible to ignore.
             </p>
           </div>
 

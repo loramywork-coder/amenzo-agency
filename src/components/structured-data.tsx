@@ -8,7 +8,7 @@ export function LocalBusinessSchema() {
     name: siteConfig.name,
     legalName: siteConfig.legalName,
     description:
-      "Custom web design studio specialising in hand-coded Next.js websites. We build fast, responsive, multilingual websites for businesses worldwide — no templates, no WordPress.",
+      "Custom web design studio specialising in custom Next.js websites. We build fast, responsive, multilingual websites for businesses worldwide — no templates, no WordPress.",
     url: siteConfig.url,
     telephone: siteConfig.phone,
     email: siteConfig.email,
@@ -62,7 +62,7 @@ export function LocalBusinessSchema() {
             "@type": "Service",
             name: "Startup Launch Package",
             description:
-              "Hand-coded 1-5 page website for founders. Custom design, mobile responsive, Lighthouse 90+, deployed on Vercel. Delivered in 10 days.",
+              "Custom-built 1-5 page website for founders. Custom design, mobile responsive, Lighthouse 90+, deployed on Vercel. Delivered in 10 days.",
           },
           price: "750",
           priceCurrency: "EUR",

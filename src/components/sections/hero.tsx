@@ -43,7 +43,7 @@ export function HeroSection() {
           transition={{ duration: 0.6, delay: 0.9 }}
           className="mt-6 text-base md:text-lg text-white/40 tracking-wide uppercase font-medium mb-10"
         >
-          Hand-coded websites that make businesses impossible to ignore
+          Custom-built websites that make businesses impossible to ignore
         </motion.p>
 
         <motion.div

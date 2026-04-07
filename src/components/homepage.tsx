@@ -141,7 +141,7 @@ const techStack = [
 ];
 
 const trustItems = [
-  { label: "Hand-Crafted Code", icon: CodeXml },
+  { label: "Custom-Built Code", icon: CodeXml },
   { label: "No Templates", icon: LayoutTemplate },
   { label: "No WordPress", icon: CircleSlash },
   { label: "Lighthouse 95+", icon: Gauge },
@@ -236,7 +236,7 @@ export function HomePage() {
           />
           <Reveal delay={0.15}>
             <p className="text-[14px] text-white/80 leading-relaxed max-w-md mb-16">
-              Interactive, hand-coded websites built for real industries. Each one is a fully navigable demo.
+              Interactive, custom-built websites built for real industries. Each one is a fully navigable demo.
             </p>
           </Reveal>
           <div>

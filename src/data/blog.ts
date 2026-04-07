@@ -120,7 +120,7 @@ E-commerce platforms, marketplace sites, and complex builds with payment process
 The difference comes down to four things:
 
 1. **Design quality.** Templates vs. custom design is the biggest factor.
-2. **Code quality.** WordPress with plugins vs. hand-crafted code in Next.js. This affects speed, security, and long-term maintenance costs.
+2. **Code quality.** WordPress with plugins vs. custom-built code in Next.js. This affects speed, security, and long-term maintenance costs.
 3. **Strategy.** Does the agency build what you ask for, or challenge you to build what works?
 4. **Support.** What happens after launch?
 

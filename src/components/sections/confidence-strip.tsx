@@ -1,6 +1,6 @@
 export function ConfidenceStrip() {
   const items = [
-    "Hand-Crafted Code",
+    "Custom-Built Code",
     "No Templates",
     "No WordPress",
     "Lighthouse 95+",

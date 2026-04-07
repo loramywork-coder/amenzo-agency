@@ -15,7 +15,7 @@ import { PricingFAQ } from "./faq";
 
 export const metadata = generatePageMeta({
   title: "Web Design Pricing — Transparent Packages from €750",
-  description: "Transparent web design pricing. Startup Launch €750, Basic €1,000, Standard €2,000 (bilingual), Premium €4,000, Custom from €5,000+. Hand-coded with Next.js. No templates.",
+  description: "Transparent web design pricing. Startup Launch €750, Basic €1,000, Standard €2,000 (bilingual), Premium €4,000, Custom from €5,000+. Built with Next.js. No templates.",
   path: "/pricing",
 });
 
@@ -25,7 +25,7 @@ const TIERS = [
     price: "750",
     period: "one-time",
     description:
-      "Launch-ready in 10 days. Hand-coded, fully responsive, and built on the same stack we use for every client. Because every great company starts with a great website.",
+      "Launch-ready in 10 days. Custom-built, fully responsive, and built on the same stack we use for every client. Because every great company starts with a great website.",
     features: [
       { text: "1-5 page website", included: true },
       { text: "Custom design (no templates)", included: true },

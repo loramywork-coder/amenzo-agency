@@ -5,7 +5,7 @@ export const siteConfig = {
   legalName: "ProgressPro",
   url: "https://amenzo.co",
   description:
-    "Amenzo builds custom, hand-coded websites for businesses worldwide. No templates, no WordPress. Professional web design from EUR 750.",
+    "Amenzo builds custom, custom-built websites for businesses worldwide. No templates, no WordPress. Professional web design from EUR 750.",
   phone: "+31628318123",
   phoneDisplay: "+31 62 831 8123",
   email: "info@amenzo.co",
