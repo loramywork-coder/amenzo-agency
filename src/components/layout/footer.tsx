@@ -16,7 +16,7 @@ const serviceLinks = SERVICES.map((s) => ({
 
 export function Footer() {
   return (
-    <footer className="bg-[#050505] border-t border-white/[0.04] relative">
+    <footer className="bg-[#050505] border-t border-white/[0.04] relative z-10">
       <div className="container-wide py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
           {/* Brand */}

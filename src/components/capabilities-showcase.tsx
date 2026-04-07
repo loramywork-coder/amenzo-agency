@@ -1525,47 +1525,7 @@ function ResponsivePreviewSection() {
 
 export function CapabilitiesShowcase() {
   return (
-    <div
-      className="relative min-h-screen"
-      style={{
-        background:
-          "radial-gradient(ellipse 80% 60% at 50% 0%, #1a1530 0%, #0b0b14 45%, #050508 100%)",
-      }}
-    >
-      {/* Ambient accent glows */}
-      <div
-        aria-hidden
-        className="pointer-events-none fixed inset-0 -z-10"
-        style={{
-          background:
-            "radial-gradient(circle at 15% 20%, rgba(99,102,241,0.18), transparent 45%), radial-gradient(circle at 85% 40%, rgba(236,72,153,0.12), transparent 45%), radial-gradient(circle at 50% 90%, rgba(16,185,129,0.12), transparent 50%)",
-        }}
-      />
-      {/* Subtle grid pattern */}
-      <div
-        aria-hidden
-        className="pointer-events-none fixed inset-0 -z-10 opacity-[0.035]"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(255,255,255,0.9) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.9) 1px, transparent 1px)",
-          backgroundSize: "56px 56px",
-          maskImage:
-            "radial-gradient(ellipse 70% 60% at 50% 30%, #000 40%, transparent 85%)",
-          WebkitMaskImage:
-            "radial-gradient(ellipse 70% 60% at 50% 30%, #000 40%, transparent 85%)",
-        }}
-      />
-      {/* Grain */}
-      <div
-        aria-hidden
-        className="pointer-events-none fixed inset-0 -z-10 opacity-[0.06] mix-blend-overlay"
-        style={{
-          backgroundImage:
-            "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
-          backgroundSize: "180px",
-        }}
-      />
-
+    <div className="relative min-h-screen">
       {/* HERO */}
       <section className="relative pt-40 pb-16 px-6">
         <div className="max-w-4xl mx-auto text-center">
