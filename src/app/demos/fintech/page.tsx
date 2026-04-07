@@ -518,14 +518,14 @@ export default function FintechDemo() {
             maxWidth: 1440,
             margin: "0 auto",
             display: "grid",
-            gridTemplateColumns: "4fr 8fr",
+            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
             gap: "clamp(40px, 6vw, 120px)",
             alignItems: "start",
           }}
         >
           {/* left: heading */}
           <Reveal type="slide-up">
-            <div style={{ position: "sticky", top: 120 }}>
+            <div style={{ minWidth: 0 }}>
               <span
                 style={{
                   fontFamily: fontMono,
@@ -559,7 +559,7 @@ export default function FintechDemo() {
           </Reveal>
 
           {/* right: numbered list */}
-          <div>
+          <div style={{ minWidth: 0 }}>
             {SERVICES.map((s, i) => (
               <Reveal key={s.num} type="fade" delay={i * 0.06}>
                 <div
