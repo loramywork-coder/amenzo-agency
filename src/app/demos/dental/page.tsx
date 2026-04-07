@@ -108,6 +108,7 @@ function Nav() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
+    <>
     <nav
       style={{
         position: "fixed",
@@ -169,29 +170,44 @@ function Nav() {
         </button>
       </div>
 
-      {/* Mobile menu */}
-      {mobileOpen && (
-        <div
-          className="dental-nav-mobile-menu"
-          style={{
-            background: C.surface,
-            borderTop: `1px solid ${C.border}`,
-            padding: "16px 24px 24px",
-          }}
-        >
+    </nav>
+    {/* Full-screen mobile menu */}
+    {mobileOpen && (
+      <div
+        style={{
+          position: "fixed",
+          inset: 0,
+          zIndex: 100,
+          background: "rgba(10,16,21,0.98)",
+          backdropFilter: "blur(8px)",
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 24px", height: 80, paddingTop: 40 }}>
+          <span style={{ fontSize: 18, fontWeight: 300, color: C.white, letterSpacing: "0.05em", textTransform: "uppercase" as const }}>
+            Dr. Vella <span style={{ fontWeight: 600 }}>Dental</span>
+          </span>
+          <button
+            onClick={() => setMobileOpen(false)}
+            aria-label="Close menu"
+            style={{ background: "none", border: "none", color: C.white, cursor: "pointer", padding: 8 }}
+          >
+            <X size={24} />
+          </button>
+        </div>
+        <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 28, padding: "0 24px" }}>
           {NAV_LINKS.map((l) => (
             <Link
               key={l.label}
               href={l.href}
               onClick={() => setMobileOpen(false)}
               style={{
-                display: "block",
-                padding: "12px 0",
-                fontSize: 15,
-                fontWeight: 500,
-                color: C.mutedLight,
+                fontSize: 28,
+                fontWeight: 300,
+                color: C.white,
                 textDecoration: "none",
-                borderBottom: `1px solid ${C.border}`,
+                letterSpacing: "-0.01em",
               }}
             >
               {l.label}
@@ -203,24 +219,25 @@ function Nav() {
             style={{
               display: "inline-flex",
               alignItems: "center",
-              gap: 8,
-              marginTop: 16,
-              padding: "12px 24px",
-              borderRadius: 10,
+              gap: 10,
+              marginTop: 24,
+              padding: "16px 36px",
+              borderRadius: 999,
               background: `linear-gradient(135deg, ${C.teal}, ${C.tealDark})`,
               color: "#fff",
               fontSize: 14,
               fontWeight: 600,
               textDecoration: "none",
+              letterSpacing: "0.04em",
             }}
           >
-            <Phone size={15} />
+            <Phone size={16} />
             Book Appointment
           </Link>
         </div>
-      )}
-
-    </nav>
+      </div>
+    )}
+    </>
   );
 }
 
@@ -519,21 +536,6 @@ export default function DentalHomePage() {
         >
         {/* Left 55% */}
         <div style={{ flex: "1 1 520px", minWidth: 300 }}>
-          <Reveal>
-            <span
-              style={{
-                display: "inline-block",
-                fontSize: 12,
-                fontWeight: 700,
-                letterSpacing: "0.15em",
-                textTransform: "uppercase",
-                color: C.teal,
-                marginBottom: 20,
-              }}
-            >
-              DR. VELLA DENTAL
-            </span>
-          </Reveal>
           <Reveal delay={0.1}>
             <h1
               style={{
@@ -553,7 +555,7 @@ export default function DentalHomePage() {
               style={{
                 fontSize: 17,
                 lineHeight: 1.7,
-                color: C.mutedLight,
+                color: "#FFFFFF",
                 maxWidth: 480,
                 marginBottom: 36,
               }}
@@ -593,12 +595,12 @@ export default function DentalHomePage() {
                   padding: "14px 28px",
                   borderRadius: 999,
                   background: "transparent",
-                  color: "rgba(255,255,255,0.7)",
+                  color: "#FFFFFF",
                   fontSize: 14,
                   fontWeight: 500,
                   textDecoration: "none",
                   letterSpacing: "0.03em",
-                  border: "1px solid rgba(255,255,255,0.2)",
+                  border: "1px solid rgba(255,255,255,0.5)",
                   transition: "all 0.2s",
                 }}
               >
@@ -619,7 +621,7 @@ export default function DentalHomePage() {
                     {stat.icon}
                     <span style={{ fontSize: 22, fontWeight: 800, color: C.white }}>{stat.value}</span>
                   </div>
-                  <span style={{ fontSize: 12, color: C.muted, textTransform: "uppercase", letterSpacing: "0.05em" }}>
+                  <span style={{ fontSize: 12, color: "rgba(255,255,255,0.85)", textTransform: "uppercase", letterSpacing: "0.05em" }}>
                     {stat.label}
                   </span>
                 </div>
