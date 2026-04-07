@@ -109,7 +109,7 @@ const services = [
   { title: "Website Redesign", price: "From \u20AC1,500", icon: RefreshCw },
   { title: "E-Commerce", price: "From \u20AC2,500", icon: ShoppingCart },
   { title: "SEO Optimisation", price: "\u20AC300/mo", icon: Search },
-  { title: "Hosting & Support", price: "\u20AC50/mo", icon: Server },
+  { title: "Hosting & Support", price: "\u20AC80/mo", icon: Server },
 ];
 
 const stats = [

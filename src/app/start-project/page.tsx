@@ -182,6 +182,33 @@ function StartProjectWizard() {
     baseMin += addOnOneTime;
     baseMax += addOnOneTime;
 
+    // CMS adds backend setup, editor UI, and frontend wiring
+    if (formData.needsCms === "Yes") {
+      baseMin += 600;
+      baseMax += 1200;
+    }
+
+    // Multilingual scoping
+    if (formData.multilingual === "2 languages") {
+      baseMin += 250;
+      baseMax += 500;
+    } else if (formData.multilingual === "3+ languages") {
+      baseMin += 600;
+      baseMax += 1200;
+    }
+
+    // Branding work
+    if (formData.hasBranding === "Need new branding") {
+      baseMin += 600;
+      baseMax += 1000;
+    }
+
+    // Content help
+    if (formData.hasContent === "No, I need help") {
+      baseMin += 400;
+      baseMax += 800;
+    }
+
     // If budget is selected, use that as a floor
     const budgetOpt = budgetOptions.find((b) => b.label === formData.budget);
     if (budgetOpt && budgetOpt.min > 0) {
@@ -195,7 +222,7 @@ function StartProjectWizard() {
       recurring: addOnRecurring,
       hasEstimate: selectedServices.length > 0,
     };
-  }, [selectedServices, selectedAddOns, formData.pageCount, formData.budget]);
+  }, [selectedServices, selectedAddOns, formData.pageCount, formData.budget, formData.needsCms, formData.multilingual, formData.hasBranding, formData.hasContent]);
 
   const canProceed = () => {
     switch (step) {
