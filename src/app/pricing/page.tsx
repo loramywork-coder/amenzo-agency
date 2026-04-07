@@ -253,11 +253,13 @@ export default function PricingPage() {
 
                 {/* Header */}
                 <div className="mb-6">
-                  {"badge" in tier && tier.badge && (
-                    <span className="inline-block text-[10px] tracking-[0.15em] uppercase text-success bg-success/10 px-2.5 py-1 rounded-full font-medium mb-3">
-                      {tier.badge}
-                    </span>
-                  )}
+                  <div className="h-7 mb-3">
+                    {"badge" in tier && tier.badge && (
+                      <span className="inline-block text-[10px] tracking-[0.15em] uppercase text-success bg-success/10 px-2.5 py-1 rounded-full font-medium">
+                        {tier.badge}
+                      </span>
+                    )}
+                  </div>
                   <h3 className="font-display text-xl font-semibold text-text-primary mb-2">
                     {tier.name}
                   </h3>
