@@ -159,20 +159,20 @@ export function HomePage() {
         <HeroBackground />
         <div className="relative z-10 w-full max-w-4xl mx-auto px-6 text-center">
           <Reveal type="fade" delay={0.1}>
-            <p className="text-[9px] text-white/60 tracking-[0.6em] uppercase font-medium mb-8">
+            <p className="text-[12px] sm:text-[11px] text-white/70 tracking-[0.3em] sm:tracking-[0.5em] uppercase font-semibold mb-10 sm:mb-8">
               Web Design Studio
             </p>
           </Reveal>
           <Reveal type="fade" delay={0.2}>
             <h1
-              className="font-bold text-white tracking-tight leading-[1.05] font-display"
-              style={{ fontSize: "clamp(48px, 10vw, 90px)" }}
+              className="font-bold text-white tracking-[-0.01em] leading-[1.02] font-display"
+              style={{ fontSize: "clamp(54px, 14vw, 90px)" }}
             >
               Where Code<br />Meets Craft
             </h1>
           </Reveal>
           <Reveal type="fade" delay={0.5}>
-            <p className="text-sm text-white/75 max-w-xs mx-auto mt-8 tracking-wide">
+            <p className="text-base sm:text-sm text-white/75 max-w-[300px] sm:max-w-xs mx-auto mt-7 sm:mt-8 leading-relaxed tracking-wide">
               We build websites that make businesses impossible to ignore
             </p>
           </Reveal>
