@@ -133,24 +133,6 @@ const ADD_ONS = [
     price: "100",
     description: "Professional website copy, SEO-optimised and on-brand.",
   },
-  {
-    name: "Monthly SEO",
-    price: "300/mo",
-    description:
-      "Ongoing technical SEO, keyword tracking, monthly reports.",
-  },
-  {
-    name: "Hosting & Maintenance",
-    price: "80/mo",
-    description:
-      "Managed hosting, SSL, backups, monitoring, updates, bug fixes.",
-  },
-  {
-    name: "Priority Support",
-    price: "200/mo",
-    description:
-      "Weekly content updates (~8hrs/month), 12hr response, quarterly review.",
-  },
 ] as const;
 
 const MONTHLY_SERVICES = [
@@ -160,6 +142,13 @@ const MONTHLY_SERVICES = [
     period: "mo",
     description:
       "Managed hosting, SSL certificates, daily backups, uptime monitoring, dependency updates, and bug fixes. Everything you need to keep your site fast, secure, and online.",
+  },
+  {
+    name: "Monthly SEO",
+    price: "300",
+    period: "mo",
+    description:
+      "Ongoing technical SEO, keyword research and tracking, content recommendations, and monthly performance reports to grow your organic traffic over time.",
   },
   {
     name: "Priority Support",

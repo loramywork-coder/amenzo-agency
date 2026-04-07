@@ -59,7 +59,7 @@ const FAQ_ITEMS = [
 
 export function PricingFAQ() {
   return (
-    <Accordion.Root type="single" collapsible className="space-y-3">
+    <Accordion.Root type="multiple" className="space-y-3">
       {FAQ_ITEMS.map((item, index) => (
         <AnimateIn key={index} animation="fadeUp" delay={index * 0.05}>
           <Accordion.Item
