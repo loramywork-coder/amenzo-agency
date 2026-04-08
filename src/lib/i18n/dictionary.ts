@@ -214,8 +214,8 @@ export const dictionary = {
   "home.about.eyebrow": { en: "About", de: "Über uns" },
   "home.about.title": { en: "Two people. One obsession.", de: "Zwei Menschen. Eine Leidenschaft." },
   "home.about.body": {
-    en: "We're a two-person studio working with clients worldwide. We pair modern AI tools with hand-written code to deliver studio-quality websites at a fraction of the cost. Every pixel is intentional. Every interaction is considered.",
-    de: "Wir sind ein Zwei-Personen-Studio mit Kunden weltweit. Wir kombinieren moderne KI-Tools mit handgeschriebenem Code, um Websites in Studioqualität zum Bruchteil der Kosten zu liefern. Jedes Pixel ist gewollt. Jede Interaktion ist durchdacht.",
+    en: "We're a two-person studio working with clients worldwide. We deliver studio-quality websites at a fraction of the cost — every pixel is intentional, every interaction is considered.",
+    de: "Wir sind ein Zwei-Personen-Studio mit Kunden weltweit. Wir liefern Websites in Studioqualität zum Bruchteil der Kosten — jedes Pixel ist gewollt, jede Interaktion ist durchdacht.",
   },
   "home.about.cta": { en: "Learn more about us", de: "Mehr über uns erfahren" },
   "home.viewAllCapabilities": { en: "View all capabilities", de: "Alle Fähigkeiten ansehen" },
@@ -241,8 +241,8 @@ export const dictionary = {
   "about.hero.line1": { en: "The Studio", de: "Das Studio" },
   "about.hero.line2": { en: "Behind the Craft", de: "Hinter dem Handwerk" },
   "about.hero.subtitle": {
-    en: "We build premium digital experiences for businesses that refuse to blend in. Powered by AI automation, driven by craft, measured by results.",
-    de: "Wir entwickeln Premium-Digitalerlebnisse für Unternehmen, die sich nicht verstecken wollen. Angetrieben von KI-Automatisierung, geleitet von Handwerk, gemessen an Ergebnissen.",
+    en: "We build premium digital experiences for businesses that refuse to blend in. Driven by craft, measured by results.",
+    de: "Wir entwickeln Premium-Digitalerlebnisse für Unternehmen, die sich nicht verstecken wollen. Geleitet von Handwerk, gemessen an Ergebnissen.",
   },
 
   // About page extra
@@ -255,8 +255,8 @@ export const dictionary = {
   },
   "about.values.v2.title": { en: "Speed Without Shortcuts", de: "Geschwindigkeit ohne Abkürzungen" },
   "about.values.v2.desc": {
-    en: "We leverage AI-powered development tools to move fast without cutting corners. What takes traditional agencies 12 weeks, we ship in 3 with higher quality code.",
-    de: "Wir nutzen KI-gestützte Entwicklungstools, um schnell zu liefern, ohne Kompromisse einzugehen. Was traditionelle Agenturen in 12 Wochen schaffen, liefern wir in 3 — mit besserem Code.",
+    en: "We move fast without cutting corners. What takes traditional agencies 12 weeks, we ship in 3 — with higher quality code.",
+    de: "Wir liefern schnell, ohne Kompromisse einzugehen. Was traditionelle Agenturen in 12 Wochen schaffen, liefern wir in 3 — mit besserem Code.",
   },
   "about.values.v3.title": { en: "Results Not Vanity", de: "Ergebnisse statt Eitelkeit" },
   "about.values.v3.desc": {
@@ -275,8 +275,8 @@ export const dictionary = {
     de: "AMENZO wurde aus einer einfachen Beobachtung heraus gegründet: Das traditionelle Webstudio-Modell ist kaputt. Kunden zahlen für Stunden, nicht für Ergebnisse. Projekte ziehen sich monatelang. Budgets explodieren. Und das Ergebnis ist oft nur ein Template mit frischem Anstrich.",
   },
   "about.story.p2": {
-    en: "We took a different path. By integrating AI-powered automation into our workflow, we deliver studio-quality work at startup speed. Every line of code is custom. Every design is original. Every pixel serves a purpose.",
-    de: "Wir gehen einen anderen Weg. Indem wir KI-gestützte Automatisierung in unseren Workflow integrieren, liefern wir Studio-Qualität in Startup-Geschwindigkeit. Jede Codezeile ist individuell. Jedes Design ist original. Jedes Pixel hat einen Zweck.",
+    en: "We took a different path. With a tightly engineered workflow, we deliver studio-quality work at startup speed. Every line of code is custom. Every design is original. Every pixel serves a purpose.",
+    de: "Wir gehen einen anderen Weg. Mit einem präzise abgestimmten Workflow liefern wir Studio-Qualität in Startup-Geschwindigkeit. Jede Codezeile ist individuell. Jedes Design ist original. Jedes Pixel hat einen Zweck.",
   },
   "about.story.p3": {
     en: "We charge for results, not hours. Our clients get premium websites that load in under two seconds, score 95+ on Lighthouse, and are built on a modern stack that scales with their business. No bloated WordPress installs, no maintenance nightmares, no technical debt.",
