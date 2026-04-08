@@ -169,7 +169,7 @@ export default function PricingPage() {
                 }`}
               >
                 {tier.highlighted && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm text-white/90 text-xs font-semibold uppercase tracking-wider">
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm text-white/90 text-[10px] font-semibold uppercase tracking-wider whitespace-nowrap">
                     <T k="pricing.mostPopular" />
                   </div>
                 )}
