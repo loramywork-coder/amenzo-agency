@@ -99,22 +99,45 @@ function CasaContactInner() {
                     <Field label={bi("Email", "E-Mail", locale)} type="email" required />
                   </div>
                   <Field label={bi("Phone", "Telefon", locale)} type="tel" />
-                  <div className="grid grid-cols-3 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     <Field label={bi("Date", "Datum", locale)} type="date" required />
                     <Field label={bi("Time", "Uhrzeit", locale)} type="time" defaultValue="19:00" required />
                     <div>
                       <label className="block text-[11px] tracking-[0.15em] uppercase mb-2 font-semibold" style={{ color: C.muted }}>
                         {bi("Guests", "Gäste", locale)}
                       </label>
-                      <select
-                        className="w-full px-4 py-3 bg-white outline-none transition-colors"
-                        style={{ border: `1px solid ${C.border}`, borderRadius: 2, color: C.dark, fontFamily: fBody }}
-                        defaultValue="2"
-                      >
-                        {[1, 2, 3, 4, 5, 6, 7, 8].map((n) => (
-                          <option key={n} value={n}>{n}</option>
-                        ))}
-                      </select>
+                      <div className="relative">
+                        <select
+                          className="w-full bg-white outline-none appearance-none cursor-pointer"
+                          style={{
+                            border: `1px solid ${C.border}`,
+                            borderRadius: 2,
+                            color: C.dark,
+                            fontFamily: fBody,
+                            height: 46,
+                            padding: "0 40px 0 14px",
+                            fontSize: 15,
+                          }}
+                          defaultValue="2"
+                        >
+                          {[1, 2, 3, 4, 5, 6, 7, 8].map((n) => (
+                            <option key={n} value={n}>
+                              {n} {n === 1 ? bi("guest", "Gast", locale) : bi("guests", "Gäste", locale)}
+                            </option>
+                          ))}
+                        </select>
+                        <svg
+                          aria-hidden
+                          width="12"
+                          height="8"
+                          viewBox="0 0 12 8"
+                          fill="none"
+                          className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2"
+                          style={{ color: C.terra }}
+                        >
+                          <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      </div>
                     </div>
                   </div>
                   <div>
@@ -269,8 +292,16 @@ function Field({
         type={type}
         required={required}
         defaultValue={defaultValue}
-        className="w-full px-4 py-3 bg-white outline-none transition-colors"
-        style={{ border: `1px solid ${C.border}`, borderRadius: 2, color: C.dark, fontFamily: fBody }}
+        className="w-full bg-white outline-none transition-colors"
+        style={{
+          border: `1px solid ${C.border}`,
+          borderRadius: 2,
+          color: C.dark,
+          fontFamily: fBody,
+          height: 46,
+          padding: "0 14px",
+          fontSize: 15,
+        }}
       />
     </div>
   );
