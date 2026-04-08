@@ -22,96 +22,50 @@ export const metadata = generatePageMeta({
 
 const TIERS = [
   {
-    name: "Startup Launch",
+    nameKey: "tier.startup.name" as const,
     price: "750",
     period: "one-time",
-    description:
-      "Launch-ready in 10 days. Custom-built, fully responsive, and built on the same stack we use for every client. Because every great company starts with a great website.",
-    features: [
-      { text: "1-5 page website", included: true },
-      { text: "Custom design (no templates)", included: true },
-      { text: "Mobile responsive, Lighthouse 90+", included: true },
-      { text: "Basic SEO setup", included: true },
-      { text: "Deployed on Vercel", included: true },
-      { text: "Delivered in 10 days", included: true },
-    ],
-    cta: "Start a Project",
+    descKey: "tier.startup.desc" as const,
+    featureKeys: ["tier.startup.f1","tier.startup.f2","tier.startup.f3","tier.startup.f4","tier.startup.f5","tier.startup.f6"] as const,
     ctaHref: "/start-project",
     highlighted: false,
-    badge: "For Founders",
-    footnote: "Amenzo backlink in footer · 1 public review required",
+    badgeKey: "pricing.forFounders" as const,
+    footnoteKey: "tier.startup.footnote" as const,
   },
   {
-    name: "Basic",
+    nameKey: "tier.basic.name" as const,
     price: "1,000",
     period: "one-time",
-    description:
-      "A clean, professional website built from your content. You provide the text, images, and logo — we handle everything else.",
-    features: [
-      { text: "Everything in Startup Launch, plus:", included: true },
-      { text: "Contact form with email delivery", included: true },
-      { text: "SSL certificate and hosting setup", included: true },
-      { text: "Google Analytics configuration", included: true },
-      { text: "1-2 week delivery", included: true },
-    ],
-    cta: "Start a Project",
+    descKey: "tier.basic.desc" as const,
+    featureKeys: ["tier.basic.f1","tier.basic.f2","tier.basic.f3","tier.basic.f4","tier.basic.f5"] as const,
     ctaHref: "/start-project",
     highlighted: false,
   },
   {
-    name: "Standard",
+    nameKey: "tier.standard.name" as const,
     price: "2,000",
     period: "one-time",
-    description:
-      "A custom-designed website that stands out from your competitors. We help structure your content and deliver in 2-3 weeks.",
-    features: [
-      { text: "Everything in Basic, plus:", included: true },
-      { text: "5-10 custom responsive pages", included: true },
-      { text: "Full SEO setup (meta, schema, sitemap)", included: true },
-      { text: "2 languages included", included: true },
-      { text: "Blog or news section", included: true },
-      { text: "Preview link + 2 revision rounds", included: true },
-      { text: "2-3 week delivery", included: true },
-    ],
-    cta: "Start a Project",
+    descKey: "tier.standard.desc" as const,
+    featureKeys: ["tier.standard.f1","tier.standard.f2","tier.standard.f3","tier.standard.f4","tier.standard.f5","tier.standard.f6","tier.standard.f7"] as const,
     ctaHref: "/start-project",
     highlighted: true,
   },
   {
-    name: "Premium",
+    nameKey: "tier.premium.name" as const,
     price: "4,000",
     period: "one-time",
-    description:
-      "A premium website with advanced features, multilingual support, and polished animations. Built for competitive advantage.",
-    features: [
-      { text: "Everything in Standard, plus:", included: true },
-      { text: "10-20 custom pages", included: true },
-      { text: "Premium design with animations", included: true },
-      { text: "3+ languages", included: true },
-      { text: "Galleries, booking forms, donations", included: true },
-      { text: "Lighthouse score 95+ guaranteed", included: true },
-      { text: "3-4 week delivery", included: true },
-    ],
-    cta: "Start a Project",
+    descKey: "tier.premium.desc" as const,
+    featureKeys: ["tier.premium.f1","tier.premium.f2","tier.premium.f3","tier.premium.f4","tier.premium.f5","tier.premium.f6","tier.premium.f7"] as const,
     ctaHref: "/start-project",
     highlighted: false,
   },
   {
-    name: "Custom",
+    nameKey: "tier.custom.name" as const,
     price: "5,000",
     period: "custom",
     priceNote: "+",
-    description:
-      "For complex projects. E-commerce, marketplace platforms, custom integrations — scoped and priced to your exact requirements.",
-    features: [
-      { text: "Everything in Premium, plus:", included: true },
-      { text: "Unlimited pages, fully bespoke", included: true },
-      { text: "E-commerce with Stripe / PayPal", included: true },
-      { text: "Custom integrations and APIs", included: true },
-      { text: "Priority support during build", included: true },
-      { text: "4-6 week delivery", included: true },
-    ],
-    cta: "Start a Project",
+    descKey: "tier.custom.desc" as const,
+    featureKeys: ["tier.custom.f1","tier.custom.f2","tier.custom.f3","tier.custom.f4","tier.custom.f5","tier.custom.f6"] as const,
     ctaHref: "/start-project",
     highlighted: false,
   },
@@ -242,21 +196,21 @@ export default function PricingPage() {
               >
                 {tier.highlighted && (
                   <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm text-white/90 text-xs font-semibold uppercase tracking-wider">
-                    Most Popular
+                    <T k="pricing.mostPopular" />
                   </div>
                 )}
 
                 {/* Header */}
                 <div className="mb-6">
                   <div className="h-7 mb-3">
-                    {"badge" in tier && tier.badge && (
+                    {"badgeKey" in tier && tier.badgeKey && (
                       <span className="inline-block text-[10px] tracking-[0.15em] uppercase text-success bg-success/10 px-2.5 py-1 rounded-full font-medium">
-                        {tier.badge}
+                        <T k={tier.badgeKey} />
                       </span>
                     )}
                   </div>
                   <h3 className="font-display text-xl font-semibold text-text-primary mb-2">
-                    {tier.name}
+                    <T k={tier.nameKey} />
                   </h3>
                   <div className="flex items-baseline gap-1 mb-3 flex-wrap">
                     {"priceNote" in tier && tier.priceNote ? (
@@ -272,40 +226,28 @@ export default function PricingPage() {
                           {tier.price}
                         </span>
                         {tier.period === "one-time" && (
-                          <span className="text-sm text-text-muted ml-1">one-time</span>
+                          <span className="text-sm text-text-muted ml-1"><T k="pricing.oneTime" /></span>
                         )}
                         {tier.period === "custom" && (
-                          <span className="text-sm text-text-muted ml-1">custom</span>
+                          <span className="text-sm text-text-muted ml-1"><T k="tier.custom.name" /></span>
                         )}
                       </>
                     )}
                   </div>
                   <p className="text-sm text-text-secondary leading-relaxed">
-                    {tier.description}
+                    <T k={tier.descKey} />
                   </p>
                 </div>
 
                 {/* Features */}
                 <ul className="space-y-3 mb-8 flex-1">
-                  {tier.features.map((feature) => (
-                    <li key={feature.text} className="flex items-start gap-3">
-                      {feature.included ? (
-                        <div className="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full bg-violet/10 flex items-center justify-center">
-                          <Check className="w-3 h-3 text-violet" />
-                        </div>
-                      ) : (
-                        <div className="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full bg-surface-elevated flex items-center justify-center">
-                          <Minus className="w-3 h-3 text-text-muted" />
-                        </div>
-                      )}
-                      <span
-                        className={`text-sm leading-relaxed ${
-                          feature.included
-                            ? "text-text-secondary"
-                            : "text-text-muted"
-                        }`}
-                      >
-                        {feature.text}
+                  {tier.featureKeys.map((fk) => (
+                    <li key={fk} className="flex items-start gap-3">
+                      <div className="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full bg-violet/10 flex items-center justify-center">
+                        <Check className="w-3 h-3 text-violet" />
+                      </div>
+                      <span className="text-sm leading-relaxed text-text-secondary">
+                        <T k={fk} />
                       </span>
                     </li>
                   ))}
@@ -320,10 +262,10 @@ export default function PricingPage() {
                     className="w-full justify-center"
                     magnetic
                   >
-                    {tier.cta} <ArrowRight className="w-4 h-4" />
+                    <T k="cta.startProject" /> <ArrowRight className="w-4 h-4" />
                   </Button>
                   <p className="text-[9px] text-text-muted text-center mt-3 italic min-h-[14px]">
-                    {"footnote" in tier && tier.footnote ? tier.footnote : "\u00A0"}
+                    {"footnoteKey" in tier && tier.footnoteKey ? <T k={tier.footnoteKey} /> : "\u00A0"}
                   </p>
                 </div>
               </div>

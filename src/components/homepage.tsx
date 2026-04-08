@@ -13,24 +13,24 @@ import { useLocale } from "@/lib/i18n/locale-context";
 /* ─── data ─── */
 
 const projects = [
-  { num: "01", name: "Grand Harbour Hotel", desc: "10-page luxury hotel with virtual tours & booking", cat: "HOSPITALITY", slug: "hotel" },
-  { num: "02", name: "Porto Valletta", desc: "9-page fine dining with reservations & tasting menus", cat: "GASTRO", slug: "restaurant" },
-  { num: "03", name: "Mediterranean Living", desc: "8-page property agency with listings & area guides", cat: "REAL ESTATE", slug: "realestate" },
-  { num: "04", name: "Dr. Vella Dental", desc: "8-page dental clinic with booking & treatments", cat: "HEALTHCARE", slug: "dental" },
-  { num: "05", name: "FitZone", desc: "8-page fitness gym with classes & membership", cat: "FITNESS", slug: "fitness" },
-  { num: "06", name: "Atelier Noir", desc: "7-page art gallery with exhibitions & artists", cat: "ART & CULTURE", slug: "gallery" },
-  { num: "07", name: "Nova Space", desc: "9-page deep-tech startup with mission log & investor deck", cat: "SPACE TECH", slug: "startup" },
-  { num: "08", name: "Meridian Capital", desc: "9-page global fintech with 3D globe & live data", cat: "FINTECH", slug: "fintech" },
-  { num: "09", name: "Studio Ēlan", desc: "9-page editorial interior design portfolio", cat: "INTERIOR", slug: "interior" },
+  { num: "01", name: "Grand Harbour Hotel", descKey: "proj.hotel.desc" as const, catKey: "cat.hospitality" as const, slug: "hotel" },
+  { num: "02", name: "Porto Valletta", descKey: "proj.restaurant.desc" as const, catKey: "cat.gastro" as const, slug: "restaurant" },
+  { num: "03", name: "Mediterranean Living", descKey: "proj.realestate.desc" as const, catKey: "cat.realestate" as const, slug: "realestate" },
+  { num: "04", name: "Dr. Vella Dental", descKey: "proj.dental.desc" as const, catKey: "cat.healthcare" as const, slug: "dental" },
+  { num: "05", name: "FitZone", descKey: "proj.fitness.desc" as const, catKey: "cat.fitness" as const, slug: "fitness" },
+  { num: "06", name: "Atelier Noir", descKey: "proj.gallery.desc" as const, catKey: "cat.artculture" as const, slug: "gallery" },
+  { num: "07", name: "Nova Space", descKey: "proj.startup.desc" as const, catKey: "cat.spacetech" as const, slug: "startup" },
+  { num: "08", name: "Meridian Capital", descKey: "proj.fintech.desc" as const, catKey: "cat.fintech" as const, slug: "fintech" },
+  { num: "09", name: "Studio Ēlan", descKey: "proj.interior.desc" as const, catKey: "cat.interior" as const, slug: "interior" },
 ];
 
 const showcases = [
-  { name: "Liquid Aurora", technique: "WebGL Shader", slug: "aurora", desc: "GPU-powered flowing gradients that react to your cursor" },
-  { name: "Constellation", technique: "Particle Field", slug: "particles", desc: "400 interactive particles with real-time connections" },
-  { name: "Topography", technique: "Three.js 3D", slug: "terrain", desc: "Procedural wireframe terrain generated on the GPU" },
-  { name: "Chronology", technique: "Scroll Cinema", slug: "scroll", desc: "5-phase scroll-driven cinematic storytelling" },
-  { name: "Spotlight Cards", technique: "9 Hover Effects", slug: "cards", desc: "Interactive card patterns with cursor-reactive effects" },
-  { name: "Film Noir", technique: "Cinematic B&W", slug: "noir", desc: "High-contrast monochrome with animated film grain" },
+  { nameKey: "show.aurora.name" as const, techKey: "show.aurora.tech" as const, descKey: "show.aurora.desc" as const, slug: "aurora" },
+  { nameKey: "show.particles.name" as const, techKey: "show.particles.tech" as const, descKey: "show.particles.desc" as const, slug: "particles" },
+  { nameKey: "show.terrain.name" as const, techKey: "show.terrain.tech" as const, descKey: "show.terrain.desc" as const, slug: "terrain" },
+  { nameKey: "show.scroll.name" as const, techKey: "show.scroll.tech" as const, descKey: "show.scroll.desc" as const, slug: "scroll" },
+  { nameKey: "show.cards.name" as const, techKey: "show.cards.tech" as const, descKey: "show.cards.desc" as const, slug: "cards" },
+  { nameKey: "show.noir.name" as const, techKey: "show.noir.tech" as const, descKey: "show.noir.desc" as const, slug: "noir" },
 ];
 
 /* Mini animated CSS previews for showcase cards */
@@ -107,10 +107,10 @@ const steps = [
 ];
 
 const services = [
-  { title: "Website Redesign", price: "From \u20AC1,500", icon: RefreshCw },
-  { title: "E-Commerce", price: "From \u20AC2,500", icon: ShoppingCart },
-  { title: "SEO Optimisation", price: "\u20AC300/mo", icon: Search },
-  { title: "Hosting & Support", price: "\u20AC80/mo", icon: Server },
+  { titleKey: "svc.redesign.title" as const, descKey: "svc.redesign.desc" as const, priceKey: "svc.redesign.price" as const, icon: RefreshCw },
+  { titleKey: "svc.ecommerce.title" as const, descKey: "svc.ecommerce.desc" as const, priceKey: "svc.ecommerce.price" as const, icon: ShoppingCart },
+  { titleKey: "svc.seo.title" as const, descKey: "svc.seo.desc" as const, priceKey: "svc.seo.price" as const, icon: Search },
+  { titleKey: "svc.hosting.title" as const, descKey: "svc.hosting.desc" as const, priceKey: "svc.hosting.price" as const, icon: Server },
 ];
 
 const stats = [
@@ -142,12 +142,12 @@ const techStack = [
 ];
 
 const trustItems = [
-  { label: "Custom-Built Code", icon: CodeXml },
-  { label: "No Templates", icon: LayoutTemplate },
-  { label: "No WordPress", icon: CircleSlash },
-  { label: "Lighthouse 95+", icon: Gauge },
-  { label: "Delivered in Weeks", icon: Clock },
-  { label: "Clients Worldwide", icon: Globe },
+  { labelKey: "trust.customCode" as const, icon: CodeXml },
+  { labelKey: "trust.noTemplates" as const, icon: LayoutTemplate },
+  { labelKey: "trust.noWordPress" as const, icon: CircleSlash },
+  { labelKey: "trust.lighthouse" as const, icon: Gauge },
+  { labelKey: "trust.delivery" as const, icon: Clock },
+  { labelKey: "trust.worldwide" as const, icon: Globe },
 ];
 
 /* ─── component ─── */
@@ -217,7 +217,7 @@ export function HomePage() {
                 <div key={i} className="flex flex-col items-center gap-1.5 text-center">
                   <Icon size={14} className="text-white/40" strokeWidth={1.5} />
                   <span className="text-[10px] text-white/60 tracking-[0.15em] uppercase font-medium leading-tight">
-                    {item.label}
+                    {t(item.labelKey)}
                   </span>
                 </div>
               );
@@ -252,8 +252,8 @@ export function HomePage() {
                   <span className="text-xl md:text-2xl font-bold text-white/90 group-hover:text-white transition-colors w-[200px] md:w-[280px] shrink-0">
                     {p.name}
                   </span>
-                  <span className="hidden md:block text-xs text-white/75 flex-1 min-w-0 truncate text-right">{p.desc}</span>
-                  <span className="text-[10px] text-white/65 tracking-[0.15em] uppercase shrink-0 w-[100px] text-right">{p.cat}</span>
+                  <span className="hidden md:block text-xs text-white/75 flex-1 min-w-0 truncate text-right">{t(p.descKey)}</span>
+                  <span className="text-[10px] text-white/65 tracking-[0.15em] uppercase shrink-0 w-[100px] text-right">{t(p.catKey)}</span>
                   <span className="w-8 h-8 rounded-full border border-white/[0.06] flex items-center justify-center group-hover:bg-white/[0.05] group-hover:border-white/[0.12] transition-all shrink-0">
                     <ArrowUpRight size={12} className="text-white/50 group-hover:text-white/70 transition-colors" />
                   </span>
@@ -290,9 +290,9 @@ export function HomePage() {
                     <ArrowUpRight className="w-4 h-4 text-white/40" />
                   </div>
                   <div className="relative z-10">
-                    <span className="text-[10px] text-white/65 tracking-[0.15em] uppercase">{s.technique}</span>
-                    <h3 className="text-lg font-bold text-white/90 group-hover:text-white transition-colors mt-1">{s.name}</h3>
-                    <p className="text-xs text-white/70 mt-1.5 leading-relaxed">{s.desc}</p>
+                    <span className="text-[10px] text-white/65 tracking-[0.15em] uppercase">{t(s.techKey)}</span>
+                    <h3 className="text-lg font-bold text-white/90 group-hover:text-white transition-colors mt-1">{t(s.nameKey)}</h3>
+                    <p className="text-xs text-white/70 mt-1.5 leading-relaxed">{t(s.descKey)}</p>
                   </div>
                 </Link>
               </Reveal>
@@ -349,22 +349,17 @@ export function HomePage() {
                 <div>
                   <Code size={24} className="text-white/50" />
                   <p className="text-[9px] text-white/25 tracking-[0.3em] uppercase mt-4">
-                    Core Service
+                    {t("svc.coreLabel")}
                   </p>
                 </div>
                 <div>
                   <h3 className="text-xl font-bold text-white/90 mb-2">
-                    Web Design &amp; Development
+                    {t("svc.web.title")}
                   </h3>
-                  <p className="text-[13px] text-white/80 leading-relaxed mb-1">
-                    Custom-coded websites built from scratch with React and
-                    Next.js. No templates, no page builders, no compromises.
-                  </p>
                   <p className="text-[13px] text-white/80 leading-relaxed mb-5">
-                    Fully responsive, SEO-ready, and performance-optimised
-                    out of the box.
+                    {t("svc.web.desc")}
                   </p>
-                  <p className="text-sm text-white/75 font-medium">From &euro;1,000</p>
+                  <p className="text-sm text-white/75 font-medium">{t("svc.web.price")}</p>
                 </div>
               </div>
             </Reveal>
@@ -373,11 +368,12 @@ export function HomePage() {
             {services.map((s, i) => {
               const Icon = s.icon;
               return (
-                <Reveal key={s.title} delay={0.2 + i * 0.05}>
-                  <div className="bg-[#0A0A0A] border border-white/[0.04] rounded-2xl p-8 hover:border-white/[0.08] transition-colors h-full">
+                <Reveal key={s.titleKey} delay={0.2 + i * 0.05}>
+                  <div className="bg-[#0A0A0A] border border-white/[0.04] rounded-2xl p-8 hover:border-white/[0.08] transition-colors h-full flex flex-col">
                     <Icon size={20} className="text-white/35 mb-6" />
-                    <h3 className="text-[15px] font-bold text-white/90 mb-1">{s.title}</h3>
-                    <p className="text-sm text-white/75">{s.price}</p>
+                    <h3 className="text-[15px] font-bold text-white/90 mb-2">{t(s.titleKey)}</h3>
+                    <p className="text-[12px] text-white/70 leading-relaxed mb-3 flex-1">{t(s.descKey)}</p>
+                    <p className="text-sm text-white/75 font-medium">{t(s.priceKey)}</p>
                   </div>
                 </Reveal>
               );

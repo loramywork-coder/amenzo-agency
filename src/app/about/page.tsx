@@ -33,41 +33,21 @@ export const metadata = generatePageMeta({
 });
 
 const VALUES = [
-  {
-    icon: Sparkles,
-    title: "Craft Over Templates",
-    description:
-      "Every project is built from scratch. No WordPress themes, no page builders, no recycled layouts. Your brand deserves original work, and that is exactly what we deliver.",
-  },
-  {
-    icon: Zap,
-    title: "Speed Without Shortcuts",
-    description:
-      "We leverage AI-powered development tools to move fast without cutting corners. What takes traditional agencies 12 weeks, we ship in 3 with higher quality code.",
-  },
-  {
-    icon: Target,
-    title: "Results Not Vanity",
-    description:
-      "A beautiful website that does not convert is just expensive art. Every design decision we make is tied to a business outcome: more leads, more sales, more growth.",
-  },
-  {
-    icon: Handshake,
-    title: "Partners Not Vendors",
-    description:
-      "We do not disappear after launch. Your success is our success. We stay invested in your growth and treat every project as if our own reputation depends on it, because it does.",
-  },
+  { icon: Sparkles, titleKey: "about.values.v1.title" as const, descKey: "about.values.v1.desc" as const },
+  { icon: Zap, titleKey: "about.values.v2.title" as const, descKey: "about.values.v2.desc" as const },
+  { icon: Target, titleKey: "about.values.v3.title" as const, descKey: "about.values.v3.desc" as const },
+  { icon: Handshake, titleKey: "about.values.v4.title" as const, descKey: "about.values.v4.desc" as const },
 ] as const;
 
 const TECH_STACK = [
-  { name: "Next.js", icon: Globe, color: "#000000", hoverBg: "hover:bg-white/5", hoverBorder: "hover:border-white/30", hoverText: "group-hover:text-white", desc: "React framework for production. Server rendering, routing, and performance out of the box." },
-  { name: "React", icon: Code2, color: "#61DAFB", hoverBg: "hover:bg-[#61DAFB]/5", hoverBorder: "hover:border-[#61DAFB]/40", hoverText: "group-hover:text-[#61DAFB]", desc: "Component-based UI library. Reusable, testable, and powers the world's best interfaces." },
-  { name: "TypeScript", icon: Code2, color: "#3178C6", hoverBg: "hover:bg-[#3178C6]/5", hoverBorder: "hover:border-[#3178C6]/40", hoverText: "group-hover:text-[#3178C6]", desc: "Type-safe JavaScript. Catches bugs before they ship and makes refactoring fearless." },
-  { name: "Tailwind CSS", icon: Wind, color: "#06B6D4", hoverBg: "hover:bg-[#06B6D4]/5", hoverBorder: "hover:border-[#06B6D4]/40", hoverText: "group-hover:text-[#06B6D4]", desc: "Utility-first CSS. Rapid styling with zero bloat — every class is purposeful." },
-  { name: "Vercel", icon: Server, color: "#FFFFFF", hoverBg: "hover:bg-white/5", hoverBorder: "hover:border-white/30", hoverText: "group-hover:text-white", desc: "Edge deployment platform. Global CDN, instant deploys, and automatic HTTPS." },
-  { name: "Supabase", icon: Server, color: "#3FCF8E", hoverBg: "hover:bg-[#3FCF8E]/5", hoverBorder: "hover:border-[#3FCF8E]/40", hoverText: "group-hover:text-[#3FCF8E]", desc: "Open-source backend. Auth, database, storage, and real-time — all in one." },
-  { name: "Stripe", icon: CreditCard, color: "#635BFF", hoverBg: "hover:bg-[#635BFF]/5", hoverBorder: "hover:border-[#635BFF]/40", hoverText: "group-hover:text-[#635BFF]", desc: "Payment infrastructure. Secure checkout, subscriptions, and invoicing for any business." },
-  { name: "Framer Motion", icon: Wind, color: "#FF0055", hoverBg: "hover:bg-[#FF0055]/5", hoverBorder: "hover:border-[#FF0055]/40", hoverText: "group-hover:text-[#FF0055]", desc: "Animation library. Smooth scroll reveals, transitions, and micro-interactions." },
+  { name: "Next.js", icon: Globe, hoverBg: "hover:bg-white/5", hoverBorder: "hover:border-white/30", hoverText: "group-hover:text-white", descKey: "about.stack.next" as const },
+  { name: "React", icon: Code2, hoverBg: "hover:bg-[#61DAFB]/5", hoverBorder: "hover:border-[#61DAFB]/40", hoverText: "group-hover:text-[#61DAFB]", descKey: "about.stack.react" as const },
+  { name: "TypeScript", icon: Code2, hoverBg: "hover:bg-[#3178C6]/5", hoverBorder: "hover:border-[#3178C6]/40", hoverText: "group-hover:text-[#3178C6]", descKey: "about.stack.ts" as const },
+  { name: "Tailwind CSS", icon: Wind, hoverBg: "hover:bg-[#06B6D4]/5", hoverBorder: "hover:border-[#06B6D4]/40", hoverText: "group-hover:text-[#06B6D4]", descKey: "about.stack.tw" as const },
+  { name: "Vercel", icon: Server, hoverBg: "hover:bg-white/5", hoverBorder: "hover:border-white/30", hoverText: "group-hover:text-white", descKey: "about.stack.vercel" as const },
+  { name: "Supabase", icon: Server, hoverBg: "hover:bg-[#3FCF8E]/5", hoverBorder: "hover:border-[#3FCF8E]/40", hoverText: "group-hover:text-[#3FCF8E]", descKey: "about.stack.supabase" as const },
+  { name: "Stripe", icon: CreditCard, hoverBg: "hover:bg-[#635BFF]/5", hoverBorder: "hover:border-[#635BFF]/40", hoverText: "group-hover:text-[#635BFF]", descKey: "about.stack.stripe" as const },
+  { name: "Framer Motion", icon: Wind, hoverBg: "hover:bg-[#FF0055]/5", hoverBorder: "hover:border-[#FF0055]/40", hoverText: "group-hover:text-[#FF0055]", descKey: "about.stack.framer" as const },
 ] as const;
 
 export default function AboutPage() {
@@ -79,23 +59,21 @@ export default function AboutPage() {
         
         <div className="container-wide relative z-10 pt-40 pb-24">
           <AnimateIn animation="fadeIn" delay={0.1}>
-            <p className="caption mb-6 text-violet">About AMENZO</p>
+            <p className="caption mb-6 text-violet"><T k="about.hero.eyebrow" /></p>
           </AnimateIn>
           <TextReveal>
             <p className="font-display text-5xl md:text-7xl lg:text-8xl font-bold text-text-primary leading-tight">
-              The Studio
+              <T k="about.hero.line1" />
             </p>
           </TextReveal>
           <TextReveal delay={0.15}>
             <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold leading-tight mt-2">
-              <span className="gradient-text">Behind the Craft</span>
+              <span className="gradient-text"><T k="about.hero.line2" /></span>
             </h1>
           </TextReveal>
           <AnimateIn animation="fadeUp" delay={0.5}>
             <p className="mt-8 max-w-2xl text-lg md:text-xl text-white/90 leading-relaxed">
-              We build premium digital experiences for businesses that refuse to
-              blend in. Powered by AI automation, driven by craft, measured by
-              results.
+              <T k="about.hero.subtitle" />
             </p>
           </AnimateIn>
         </div>
@@ -113,35 +91,16 @@ export default function AboutPage() {
           </AnimateIn>
           <div className="space-y-6">
             <AnimateIn animation="fadeUp" delay={0.1}>
-              <p className="text-lg text-white leading-relaxed">
-                AMENZO was founded on a simple observation: the traditional web studio model
-                is broken. Clients pay for hours, not outcomes. Projects drag on
-                for months. Budgets balloon. And the end result is often a
-                template with a fresh coat of paint.
-              </p>
+              <p className="text-lg text-white leading-relaxed"><T k="about.story.p1" /></p>
             </AnimateIn>
             <AnimateIn animation="fadeUp" delay={0.2}>
-              <p className="text-lg text-white leading-relaxed">
-                We took a different path. By integrating AI-powered automation into
-                our workflow, we deliver studio-quality work at startup speed. Every line of code is
-                custom. Every design is original. Every pixel serves a purpose.
-              </p>
+              <p className="text-lg text-white leading-relaxed"><T k="about.story.p2" /></p>
             </AnimateIn>
             <AnimateIn animation="fadeUp" delay={0.3}>
-              <p className="text-lg text-white leading-relaxed">
-                We charge for results, not hours. Our clients get premium
-                websites that load in under two seconds, score 95+ on Lighthouse,
-                and are built on a modern stack that scales with their business.
-                No bloated WordPress installs, no maintenance nightmares, no
-                technical debt.
-              </p>
+              <p className="text-lg text-white leading-relaxed"><T k="about.story.p3" /></p>
             </AnimateIn>
             <AnimateIn animation="fadeUp" delay={0.4}>
-              <p className="text-lg text-white leading-relaxed">
-                The future of web development is not about bigger teams. It is
-                about sharper tools, deeper expertise, and relentless focus on
-                what matters: your business growth.
-              </p>
+              <p className="text-lg text-white leading-relaxed"><T k="about.story.p4" /></p>
             </AnimateIn>
           </div>
         </div>
@@ -158,16 +117,16 @@ export default function AboutPage() {
         </AnimateIn>
         <StaggerContainer className="grid md:grid-cols-2 gap-8" staggerDelay={0.15}>
           {VALUES.map((value) => (
-            <StaggerItem key={value.title}>
+            <StaggerItem key={value.titleKey}>
               <div className="group relative rounded-2xl border border-border bg-surface-elevated p-8 md:p-10 transition-all duration-500 hover:border-violet/30 hover:shadow-lg hover:shadow-violet/5">
                 <div className="mb-6 inline-flex items-center justify-center w-14 h-14 rounded-xl bg-violet/10 text-violet transition-colors duration-300 group-hover:bg-violet/20">
                   <value.icon className="w-6 h-6" />
                 </div>
                 <h3 className="font-display text-2xl font-semibold text-text-primary mb-3">
-                  {value.title}
+                  <T k={value.titleKey} />
                 </h3>
                 <p className="text-white/85 leading-relaxed">
-                  {value.description}
+                  <T k={value.descKey} />
                 </p>
               </div>
             </StaggerItem>
@@ -196,8 +155,8 @@ export default function AboutPage() {
                 <Image src="/images/team/amy.png" alt="Amy de Boers" fill sizes="112px" className="object-cover" style={{objectPosition:"center 12%", transform:"scale(1.22)"}} />
               </div>
               <h3 className="font-display text-lg font-semibold text-text-primary">Amy de Boers</h3>
-              <p className="text-sm text-violet mt-0.5">Operations &amp; Strategy</p>
-              <p className="text-xs text-text-muted mt-2 leading-relaxed">Client success, business operations, and project delivery</p>
+              <p className="text-sm text-violet mt-0.5"><T k="about.team.amy.role" /></p>
+              <p className="text-xs text-text-muted mt-2 leading-relaxed"><T k="about.team.amy.desc" /></p>
             </div>
           </AnimateIn>
           <AnimateIn delay={0.2}>
@@ -206,8 +165,8 @@ export default function AboutPage() {
                 <Image src="/images/team/lorenzo.png" alt="Lorenzo Senn" fill sizes="112px" className="object-cover" style={{objectPosition:"center 20%"}} />
               </div>
               <h3 className="font-display text-lg font-semibold text-text-primary">Lorenzo Senn</h3>
-              <p className="text-sm text-violet mt-0.5">Design &amp; Engineering</p>
-              <p className="text-xs text-text-muted mt-2 leading-relaxed">Design, development, and technical architecture</p>
+              <p className="text-sm text-violet mt-0.5"><T k="about.team.lorenzo.role" /></p>
+              <p className="text-xs text-text-muted mt-2 leading-relaxed"><T k="about.team.lorenzo.desc" /></p>
             </div>
           </AnimateIn>
         </div>
@@ -216,18 +175,18 @@ export default function AboutPage() {
         <AnimateIn delay={0.3}>
           <div className="mt-14 max-w-xl mx-auto">
             <div className="rounded-xl border border-border bg-surface-elevated/50 p-6 sm:p-8">
-              <h3 className="text-[11px] uppercase tracking-[0.2em] text-white/40 mb-5">Registered Information</h3>
+              <h3 className="text-[11px] uppercase tracking-[0.2em] text-white/40 mb-5"><T k="about.registered" /></h3>
               <dl className="space-y-0 text-sm">
                 <div className="flex flex-col sm:flex-row sm:justify-between py-3 border-b border-white/[0.06]">
-                  <dt className="text-text-muted">Trade Name</dt>
+                  <dt className="text-text-muted"><T k="about.reg.tradeName" /></dt>
                   <dd className="text-text-primary font-medium">Amenzo Studio</dd>
                 </div>
                 <div className="flex flex-col sm:flex-row sm:justify-between py-3 border-b border-white/[0.06]">
-                  <dt className="text-text-muted">Legal Entity</dt>
+                  <dt className="text-text-muted"><T k="about.reg.legalEntity" /></dt>
                   <dd className="text-text-primary font-medium">ProgressPro</dd>
                 </div>
                 <div className="flex flex-col sm:flex-row sm:justify-between py-3 border-b border-white/[0.06]">
-                  <dt className="text-text-muted">Represented by</dt>
+                  <dt className="text-text-muted"><T k="about.reg.representedBy" /></dt>
                   <dd className="text-text-secondary">Amy de Boers</dd>
                 </div>
                 <div className="flex flex-col sm:flex-row sm:justify-between py-3 border-b border-white/[0.06]">
@@ -235,12 +194,12 @@ export default function AboutPage() {
                   <dd className="text-text-secondary">84642920</dd>
                 </div>
                 <div className="flex flex-col sm:flex-row sm:justify-between py-3 border-b border-white/[0.06]">
-                  <dt className="text-text-muted">Location</dt>
-                  <dd className="text-text-secondary sm:text-right">Nederhorst den Berg, Netherlands</dd>
+                  <dt className="text-text-muted"><T k="about.reg.location" /></dt>
+                  <dd className="text-text-secondary sm:text-right"><T k="about.reg.locationValue" /></dd>
                 </div>
                 <div className="flex flex-col sm:flex-row sm:justify-between py-3">
-                  <dt className="text-text-muted">Clients</dt>
-                  <dd className="text-text-secondary sm:text-right">SMBs across Europe and beyond</dd>
+                  <dt className="text-text-muted"><T k="about.reg.clients" /></dt>
+                  <dd className="text-text-secondary sm:text-right"><T k="about.reg.clientsValue" /></dd>
                 </div>
               </dl>
             </div>
@@ -252,9 +211,9 @@ export default function AboutPage() {
       <Section className="">
         <AnimateIn animation="fadeUp">
           <SectionHeader
-            caption="Our Stack"
-            title="Modern Tools, Modern Results"
-            subtitle="We use the best tools in the industry. No legacy baggage, no technical debt."
+            caption={<T k="about.stack.eyebrow" />}
+            title={<T k="about.stack.title" />}
+            subtitle={<T k="about.stack.subtitle" />}
             align="center"
           />
         </AnimateIn>
@@ -273,7 +232,7 @@ export default function AboutPage() {
                 <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 translate-y-full opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none z-20 w-[220px]">
                   <div className="bg-[#1a1a1a] border border-[#2a2a2a] rounded-lg px-4 py-3 shadow-xl">
                     <p className="text-[11px] text-white/70 leading-relaxed text-center">
-                      {tech.desc}
+                      <T k={tech.descKey} />
                     </p>
                   </div>
                   <div className="w-2 h-2 bg-[#1a1a1a] border-l border-t border-[#2a2a2a] rotate-45 absolute -top-1 left-1/2 -translate-x-1/2" />
@@ -288,22 +247,19 @@ export default function AboutPage() {
       <Section className="">
         <div className="text-center max-w-3xl mx-auto">
           <AnimateIn animation="fadeUp">
-            <p className="caption mb-4 text-violet">Ready to Start?</p>
+            <p className="caption mb-4 text-violet"><T k="about.cta.eyebrow" /></p>
             <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-text-primary leading-tight mb-6">
-              Let&apos;s Build Something{" "}
-              <span className="gradient-text">Extraordinary</span>
+              <T k="about.cta.title" />
             </h2>
             <p className="text-lg md:text-xl text-text-secondary mb-10 leading-relaxed">
-              Whether you need a new website, a rebrand, or a complete digital
-              overhaul, we are ready to make it happen. No fluff, no filler, just
-              results.
+              <T k="about.cta.subtitle" />
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button href="/start-project" size="lg" magnetic>
-                Start a Project <ArrowRight className="w-5 h-5" />
+                <T k="cta.startProject" /> <ArrowRight className="w-5 h-5" />
               </Button>
               <Button href={`mailto:${CONTACT_EMAIL}`} variant="secondary" size="lg">
-                Send Us an Email
+                <T k="about.cta.email" />
               </Button>
             </div>
           </AnimateIn>

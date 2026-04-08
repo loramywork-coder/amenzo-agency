@@ -40,100 +40,52 @@ const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
 
 const SERVICE_DETAILS = [
   {
-    title: "Web Design & Development",
+    slug: "web-design-development",
+    titleKey: "svcd.web.title" as const,
     icon: "Monitor",
-    description:
-      "Custom websites built from scratch. No templates. No WordPress themes. Hand-crafted code that performs. Every site we build is a bespoke creation designed around your brand, your audience, and your goals.",
-    included: [
-      "Discovery workshop and brand deep-dive",
-      "Custom UI/UX design in Figma",
-      "Responsive development in Next.js and React",
-      "CMS integration (headless or traditional)",
-      "Performance optimisation (95+ Lighthouse)",
-      "SEO foundation and meta setup",
-      "Analytics and conversion tracking",
-      "Launch support and post-launch QA",
-    ],
-    timeline: "1-4 weeks",
+    descKey: "svcd.web.desc" as const,
+    includedKeys: ["svcd.web.i1","svcd.web.i2","svcd.web.i3","svcd.web.i4","svcd.web.i5","svcd.web.i6","svcd.web.i7","svcd.web.i8"] as const,
+    timelineKey: "svcd.web.timeline" as const,
     price: "1,000",
     tags: ["Next.js", "React", "Tailwind", "TypeScript", "Vercel"],
   },
   {
-    title: "Website Redesign",
+    slug: "website-redesign",
+    titleKey: "svcd.redesign.title" as const,
     icon: "RefreshCw",
-    description:
-      "Your current site not cutting it? We take what you have and transform it into something extraordinary. A redesign is not just a facelift. It is a strategic rethink of how your digital presence serves your business.",
-    included: [
-      "Current site audit and performance review",
-      "Content audit and migration plan",
-      "New information architecture",
-      "Complete UI/UX redesign",
-      "Full-stack development on modern platform",
-      "SEO preservation and 301 redirect mapping",
-      "Data migration and content transfer",
-      "A/B testing setup for key pages",
-      "Launch plan and rollback strategy",
-    ],
-    timeline: "2-4 weeks",
+    descKey: "svcd.redesign.desc" as const,
+    includedKeys: ["svcd.redesign.i1","svcd.redesign.i2","svcd.redesign.i3","svcd.redesign.i4","svcd.redesign.i5","svcd.redesign.i6","svcd.redesign.i7","svcd.redesign.i8","svcd.redesign.i9"] as const,
+    timelineKey: "svcd.redesign.timeline" as const,
     price: "750",
     tags: ["Audit", "Redesign", "Migration", "Optimisation"],
   },
   {
-    title: "E-Commerce",
+    slug: "e-commerce",
+    titleKey: "svcd.ecom.title" as const,
     icon: "ShoppingBag",
-    description:
-      "Online stores that convert. From boutique shops to full-scale retail platforms, we build beautiful storefronts that are engineered to sell. Every product page, every checkout flow, every upsell is designed for maximum revenue.",
-    included: [
-      "Custom storefront design and development",
-      "Product catalogue setup and management",
-      "Shopping cart and checkout optimisation",
-      "Payment gateway integration (Stripe, PayPal)",
-      "Inventory management system",
-      "Order notification and email flows",
-      "Shipping and tax configuration",
-      "Mobile-first responsive design",
-      "Conversion rate optimisation",
-    ],
-    timeline: "4-6 weeks",
+    descKey: "svcd.ecom.desc" as const,
+    includedKeys: ["svcd.ecom.i1","svcd.ecom.i2","svcd.ecom.i3","svcd.ecom.i4","svcd.ecom.i5","svcd.ecom.i6","svcd.ecom.i7","svcd.ecom.i8","svcd.ecom.i9"] as const,
+    timelineKey: "svcd.ecom.timeline" as const,
     price: "4,000",
     tags: ["Shopify", "WooCommerce", "Stripe", "Custom"],
   },
   {
-    title: "SEO & Performance",
+    slug: "seo-performance",
+    titleKey: "svcd.seo.title" as const,
     icon: "TrendingUp",
-    description:
-      "Beautiful means nothing if nobody finds it. We build fast, accessible, and search-engine-optimised from day one. Our technical SEO ensures your site not only ranks, but dominates your niche in search results.",
-    included: [
-      "Technical SEO audit and roadmap",
-      "Core Web Vitals optimisation",
-      "Schema markup and structured data",
-      "On-page SEO (titles, meta, headings)",
-      "Site speed and performance tuning",
-      "Google Search Console setup and monitoring",
-      "Analytics dashboard and monthly reporting",
-      "Keyword research and content strategy",
-      "Local SEO optimisation (Google Business)",
-    ],
-    timeline: "Ongoing monthly",
+    descKey: "svcd.seo.desc" as const,
+    includedKeys: ["svcd.seo.i1","svcd.seo.i2","svcd.seo.i3","svcd.seo.i4","svcd.seo.i5","svcd.seo.i6","svcd.seo.i7","svcd.seo.i8","svcd.seo.i9"] as const,
+    timelineKey: "svcd.seo.timeline" as const,
     price: "300/mo",
     tags: ["Technical SEO", "Core Web Vitals", "Schema", "Analytics"],
   },
   {
-    title: "Hosting & Maintenance",
+    slug: "hosting-maintenance",
+    titleKey: "svcd.host.title" as const,
     icon: "Server",
-    description:
-      "Launch is just the beginning. We keep your site fast, secure, updated, and backed up. Our maintenance packages give you peace of mind so you can focus on running your business, not worrying about your website.",
-    included: [
-      "Managed hosting on Vercel edge network",
-      "99.9% uptime guarantee",
-      "Daily automated backups",
-      "Security monitoring and SSL management",
-      "Monthly software and dependency updates",
-      "Performance monitoring and alerts",
-      "Priority bug fixes (24-hour response)",
-      "Monthly health report and recommendations",
-    ],
-    timeline: "Ongoing monthly",
+    descKey: "svcd.host.desc" as const,
+    includedKeys: ["svcd.host.i1","svcd.host.i2","svcd.host.i3","svcd.host.i4","svcd.host.i5","svcd.host.i6","svcd.host.i7","svcd.host.i8"] as const,
+    timelineKey: "svcd.host.timeline" as const,
     price: "80/mo",
     tags: ["Vercel", "Monitoring", "Backups", "Updates"],
   },
@@ -171,8 +123,8 @@ export default function ServicesPage() {
 
         return (
           <Section
-            key={service.title}
-            id={service.title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}
+            key={service.slug}
+            id={service.slug}
             className={isEven ? "" : ""}
           >
             <div className="grid lg:grid-cols-2 gap-12 lg:gap-20">
@@ -183,10 +135,10 @@ export default function ServicesPage() {
                     <IconComponent className="w-7 h-7" />
                   </div>
                   <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-text-primary leading-tight mb-4">
-                    {service.title}
+                    <T k={service.titleKey} />
                   </h2>
                   <p className="text-lg text-text-secondary leading-relaxed mb-8">
-                    {service.description}
+                    <T k={service.descKey} />
                   </p>
 
                   {/* Meta: Timeline & Price */}
@@ -194,13 +146,13 @@ export default function ServicesPage() {
                     <div className="flex items-center gap-2 text-text-secondary">
                       <Clock className="w-5 h-5 text-cyan" />
                       <span className="text-sm font-medium">
-                        {service.timeline}
+                        <T k={service.timelineKey} />
                       </span>
                     </div>
                     <div className="flex items-center gap-2 text-text-secondary">
                       <CreditCard className="w-5 h-5 text-cyan" />
                       <span className="text-sm font-medium">
-                        From &euro;{service.price}
+                        <T k="services.startingFrom" /> &euro;{service.price}
                       </span>
                     </div>
                   </div>
@@ -222,7 +174,7 @@ export default function ServicesPage() {
                   </div>
 
                   <Button href="/start-project" magnetic>
-                    Get a Quote <ArrowRight className="w-4 h-4" />
+                    <T k="cta.getQuote" /> <ArrowRight className="w-4 h-4" />
                   </Button>
                 </div>
               </AnimateIn>
@@ -231,16 +183,16 @@ export default function ServicesPage() {
               <AnimateIn animation="fadeUp" delay={0.2}>
                 <div className="rounded-2xl border border-border bg-surface-elevated p-8 md:p-10">
                   <h3 className="font-display text-xl font-semibold text-text-primary mb-6">
-                    What&apos;s Included
+                    <T k="services.included" />
                   </h3>
                   <ul className="space-y-4">
-                    {service.included.map((item) => (
-                      <li key={item} className="flex items-start gap-3">
+                    {service.includedKeys.map((ik) => (
+                      <li key={ik} className="flex items-start gap-3">
                         <div className="mt-1 flex-shrink-0 w-5 h-5 rounded-full bg-violet/10 flex items-center justify-center">
                           <Check className="w-3 h-3 text-violet" />
                         </div>
                         <span className="text-text-secondary leading-relaxed">
-                          {item}
+                          <T k={ik} />
                         </span>
                       </li>
                     ))}
@@ -256,26 +208,23 @@ export default function ServicesPage() {
       <Section className="bg-bg">
         <div className="text-center max-w-3xl mx-auto">
           <AnimateIn animation="fadeUp">
-            <p className="caption mb-4 text-violet">Not Sure What You Need?</p>
+            <p className="caption mb-4 text-violet"><T k="services.cta.eyebrow" /></p>
             <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-text-primary leading-tight mb-6">
-              Let&apos;s Figure It Out{" "}
-              <span className="gradient-text">Together</span>
+              <T k="services.cta.title" />
             </h2>
             <p className="text-lg md:text-xl text-text-secondary mb-10 leading-relaxed">
-              Book a free 30-minute strategy call. We will review your current
-              digital presence, discuss your goals, and recommend the right
-              services for your budget and timeline.
+              <T k="services.cta.subtitle" />
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button href="/start-project" size="lg" magnetic>
-                Start a Project <ArrowRight className="w-5 h-5" />
+                <T k="cta.startProject" /> <ArrowRight className="w-5 h-5" />
               </Button>
               <Button
                 href={`mailto:${CONTACT_EMAIL}`}
                 variant="secondary"
                 size="lg"
               >
-                Email Us Directly
+                <T k="about.cta.email" />
               </Button>
             </div>
           </AnimateIn>
