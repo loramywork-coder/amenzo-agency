@@ -20,6 +20,7 @@ import {
   CONTACT_WHATSAPP,
 } from "@/lib/constants";
 import { cn } from "@/lib/utils";
+import { useLocale } from "@/lib/i18n/locale-context";
 
 const contactSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -33,6 +34,7 @@ const contactSchema = z.object({
 type ContactFormData = z.infer<typeof contactSchema>;
 
 export default function ContactPage() {
+  const { t } = useLocale();
   const {
     register,
     handleSubmit,
@@ -57,7 +59,7 @@ export default function ContactPage() {
         body: JSON.stringify(data),
       });
       if (!res.ok) throw new Error("Failed to send");
-      toast.success("Message sent successfully! We'll get back to you within 24 hours.");
+      toast.success(t("contact.toast"));
       reset();
     } catch {
       toast.error("Something went wrong. Please try again or email us directly at info@amenzo.co.");
@@ -71,17 +73,16 @@ export default function ContactPage() {
         
         <div className="container-wide relative z-10">
           <AnimateIn animation="fadeUp">
-            <p className="caption mb-4 text-white/70">CONTACT</p>
+            <p className="caption mb-4 text-white/70">{t("contact.eyebrow")}</p>
           </AnimateIn>
           <AnimateIn animation="fadeUp" delay={0.1}>
             <h1 className="font-display text-5xl md:text-7xl font-bold text-text-primary leading-tight">
-              Let&apos;s Talk
+              {t("contact.title")}
             </h1>
           </AnimateIn>
           <AnimateIn animation="fadeUp" delay={0.2}>
             <p className="mt-6 text-xl text-text-secondary max-w-2xl">
-              Whether you have a project in mind or just want to explore what&apos;s
-              possible, we&apos;d love to hear from you.
+              {t("contact.subtitle")}
             </p>
           </AnimateIn>
         </div>
@@ -101,7 +102,7 @@ export default function ContactPage() {
                   {/* Enquiry Type Toggle */}
                   <div>
                     <label className="block text-sm font-medium text-text-secondary mb-3">
-                      What can we help with?
+                      {t("contact.help")}
                     </label>
                     <div className="flex gap-3">
                       <button
@@ -114,7 +115,7 @@ export default function ContactPage() {
                             : "bg-white/5 text-white/60 border border-white/10 hover:border-white/30"
                         )}
                       >
-                        Start a Project
+                        {t("contact.startProject")}
                       </button>
                       <button
                         type="button"
@@ -126,7 +127,7 @@ export default function ContactPage() {
                             : "bg-white/5 text-white/60 border border-white/10 hover:border-white/30"
                         )}
                       >
-                        General Enquiry
+                        {t("contact.general")}
                       </button>
                     </div>
                   </div>
@@ -138,13 +139,13 @@ export default function ContactPage() {
                         htmlFor="name"
                         className="block text-sm font-medium text-text-secondary mb-2"
                       >
-                        Name *
+                        {t("contact.field.name")} *
                       </label>
                       <input
                         id="name"
                         type="text"
                         {...register("name")}
-                        placeholder="John Doe"
+                        placeholder={t("contact.placeholder.name")}
                         className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-white/30 transition-colors"
                       />
                       {errors.name && (
@@ -158,13 +159,13 @@ export default function ContactPage() {
                         htmlFor="email"
                         className="block text-sm font-medium text-text-secondary mb-2"
                       >
-                        Email *
+                        {t("contact.field.email")} *
                       </label>
                       <input
                         id="email"
                         type="email"
                         {...register("email")}
-                        placeholder="john@company.com"
+                        placeholder={t("contact.placeholder.email")}
                         className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-white/30 transition-colors"
                       />
                       {errors.email && (
@@ -182,7 +183,7 @@ export default function ContactPage() {
                         htmlFor="phone"
                         className="block text-sm font-medium text-text-secondary mb-2"
                       >
-                        Phone
+                        {t("contact.field.phone")}
                       </label>
                       <input
                         id="phone"
@@ -197,13 +198,13 @@ export default function ContactPage() {
                         htmlFor="company"
                         className="block text-sm font-medium text-text-secondary mb-2"
                       >
-                        Company
+                        {t("contact.field.company")}
                       </label>
                       <input
                         id="company"
                         type="text"
                         {...register("company")}
-                        placeholder="Your company name"
+                        placeholder={t("contact.placeholder.company")}
                         className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-white/30 transition-colors"
                       />
                     </div>
@@ -215,13 +216,13 @@ export default function ContactPage() {
                       htmlFor="message"
                       className="block text-sm font-medium text-text-secondary mb-2"
                     >
-                      Message *
+                      {t("contact.field.message")} *
                     </label>
                     <textarea
                       id="message"
                       rows={6}
                       {...register("message")}
-                      placeholder="Tell us about your project, timeline, and budget..."
+                      placeholder={t("contact.placeholder.message")}
                       className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-white/30 transition-colors resize-none"
                     />
                     {errors.message && (
@@ -239,11 +240,11 @@ export default function ContactPage() {
                       className="mt-1 accent-white"
                     />
                     <span className="text-sm text-white/60">
-                      I agree to the{" "}
+                      {t("contact.consent")}{" "}
                       <a href="/privacy" className="text-white/70 hover:underline">
-                        Privacy Policy
+                        {t("contact.privacyLink")}
                       </a>
-                      . AMENZO will use this information to respond to my enquiry.
+                      {t("contact.consentSuffix")}
                     </span>
                   </label>
 
@@ -256,24 +257,24 @@ export default function ContactPage() {
                     className="w-full"
                   >
                     {isSubmitting ? (
-                      "Sending..."
+                      t("contact.sending")
                     ) : (
                       <>
                         <Send className="w-4 h-4" />
-                        Send Message
+                        {t("contact.send")}
                       </>
                     )}
                   </Button>
 
                   <p className="text-xs text-text-muted text-center">
-                    Need a detailed brief?{" "}
+                    {t("contact.needBrief")}{" "}
                     <a
                       href="/start-project"
                       className="text-white/70 hover:underline"
                     >
-                      Use our project wizard
-                    </a>{" "}
-                    instead.
+                      {t("contact.useWizard")}
+                    </a>
+                    {t("contact.useWizardSuffix")}
                   </p>
                 </form>
               </AnimateIn>
@@ -284,7 +285,7 @@ export default function ContactPage() {
               <AnimateIn animation="fadeUp" delay={0.4}>
                 <div className="space-y-6">
                   <h3 className="font-display text-xl font-semibold text-text-primary">
-                    Get in Touch
+                    {t("contact.getInTouch")}
                   </h3>
 
                   {/* Email */}
@@ -296,7 +297,7 @@ export default function ContactPage() {
                       <Mail className="w-5 h-5 text-white/70" />
                     </div>
                     <div>
-                      <p className="text-sm text-text-secondary">Email</p>
+                      <p className="text-sm text-text-secondary">{t("contact.label.email")}</p>
                       <p className="text-text-primary group-hover:text-white/70 transition-colors">
                         {CONTACT_EMAIL}
                       </p>
@@ -312,7 +313,7 @@ export default function ContactPage() {
                       <Phone className="w-5 h-5 text-cyan" />
                     </div>
                     <div>
-                      <p className="text-sm text-text-secondary">Phone</p>
+                      <p className="text-sm text-text-secondary">{t("contact.label.phone")}</p>
                       <p className="text-text-primary group-hover:text-cyan transition-colors">
                         {CONTACT_PHONE}
                       </p>
@@ -330,9 +331,9 @@ export default function ContactPage() {
                       <MessageCircle className="w-5 h-5 text-success" />
                     </div>
                     <div>
-                      <p className="text-sm text-text-secondary">WhatsApp</p>
+                      <p className="text-sm text-text-secondary">{t("contact.label.whatsapp")}</p>
                       <p className="text-text-primary group-hover:text-success transition-colors">
-                        Chat with us
+                        {t("contact.chatWithUs")}
                       </p>
                     </div>
                   </a>
@@ -343,12 +344,12 @@ export default function ContactPage() {
                       <Clock className="w-5 h-5 text-warning" />
                     </div>
                     <div>
-                      <p className="text-sm text-text-secondary">Hours</p>
+                      <p className="text-sm text-text-secondary">{t("contact.label.hours")}</p>
                       <p className="text-text-primary">
-                        Mon &ndash; Fri: 9:00 &ndash; 18:00
+                        {t("contact.weekdays")}
                       </p>
                       <p className="text-text-muted text-sm">
-                        Weekend by appointment
+                        {t("contact.weekend")}
                       </p>
                     </div>
                   </div>
@@ -359,17 +360,16 @@ export default function ContactPage() {
               <AnimateIn animation="fadeUp" delay={0.6}>
                 <div className="p-6 rounded-2xl bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10">
                   <h3 className="font-display text-lg font-semibold text-text-primary mb-2">
-                    Have a detailed brief?
+                    {t("contact.brief.title")}
                   </h3>
                   <p className="text-sm text-text-secondary mb-4">
-                    Use our project wizard to walk us through your requirements
-                    step by step.
+                    {t("contact.brief.desc")}
                   </p>
                   <a
                     href="/start-project"
                     className="inline-flex items-center gap-2 text-sm font-medium text-white/70 hover:gap-3 transition-all"
                   >
-                    Start Project Wizard
+                    {t("contact.brief.cta")}
                     <ArrowRight className="w-4 h-4" />
                   </a>
                 </div>
