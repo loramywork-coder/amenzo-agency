@@ -1,5 +1,6 @@
 import { generatePageMeta } from "@/lib/seo";
 import { T } from "@/lib/i18n/T";
+import type { TranslationKey } from "@/lib/i18n/dictionary";
 import { FAQSchema, BreadcrumbSchema, faqData } from "@/components/structured-data";
 import { CONTACT_EMAIL } from "@/lib/constants";
 import {
@@ -72,67 +73,39 @@ const TIERS = [
 ] as const;
 
 const ADD_ONS = [
-  {
-    name: "Additional Language",
-    price: "250",
-    description: "Add an extra language to your website.",
-  },
-  {
-    name: "Logo & Branding",
-    price: "800",
-    description:
-      "Professional logo, colour palette, typography, and brand guidelines.",
-  },
-  {
-    name: "Copywriting (per page)",
-    price: "100",
-    description: "Professional website copy, SEO-optimised and on-brand.",
-  },
+  { nameKey: "addon.lang.name" as const, price: "250", descKey: "addon.lang.desc" as const },
+  { nameKey: "addon.logo.name" as const, price: "800", descKey: "addon.logo.desc" as const },
+  { nameKey: "addon.copy.name" as const, price: "100", descKey: "addon.copy.desc" as const },
 ] as const;
 
 const MONTHLY_SERVICES = [
-  {
-    name: "Hosting & Maintenance",
-    price: "80",
-    period: "mo",
-    description:
-      "Managed hosting, SSL certificates, daily backups, uptime monitoring, dependency updates, and bug fixes. Everything you need to keep your site fast, secure, and online.",
-  },
-  {
-    name: "Monthly SEO",
-    price: "300",
-    period: "mo",
-    description:
-      "Ongoing technical SEO, keyword research and tracking, content recommendations, and monthly performance reports to grow your organic traffic over time.",
-  },
-  {
-    name: "Priority Support",
-    price: "200",
-    period: "mo",
-    description:
-      "Weekly content updates (approximately 8 hours per month), 12-hour response time, and a quarterly strategy review. Perfect for businesses that need ongoing changes without the overhead of a full-time developer.",
-  },
+  { nameKey: "month.host.name" as const, price: "80", period: "mo", descKey: "month.host.desc" as const },
+  { nameKey: "month.seo.name" as const, price: "300", period: "mo", descKey: "month.seo.desc" as const },
+  { nameKey: "month.priority.name" as const, price: "200", period: "mo", descKey: "month.priority.desc" as const },
 ] as const;
 
-const COMPARISON_ROWS = [
-  { label: "Price", startup: "€750", basic: "€1,000", standard: "€2,000", premium: "€4,000", custom: "From €5,000+" },
-  { label: "Pages", startup: "1-5", basic: "1-5", standard: "5-10", premium: "10-20", custom: "Unlimited" },
-  { label: "Delivery", startup: "10 days", basic: "1-2 weeks", standard: "2-3 weeks", premium: "3-4 weeks", custom: "4-6 weeks" },
-  { label: "Design", startup: "Custom", basic: "Clean & responsive", standard: "Custom branded", premium: "Premium + animations", custom: "Fully bespoke" },
-  { label: "Languages", startup: "1", basic: "1", standard: "2", premium: "3+", custom: "Unlimited" },
-  { label: "SEO", startup: "Basic", basic: "Basic", standard: "Full", premium: "Full + schema", custom: "Full + advanced" },
-  { label: "Blog / News", startup: null, basic: null, standard: true, premium: true, custom: true },
-  { label: "E-commerce", startup: null, basic: null, standard: null, premium: null, custom: true },
-  { label: "Booking / Donations", startup: null, basic: null, standard: null, premium: true, custom: true },
-  { label: "Image sourcing", startup: null, basic: null, standard: true, premium: true, custom: true },
-  { label: "Content guidance", startup: null, basic: null, standard: true, premium: true, custom: "Full collaboration" },
-  { label: "Preview / Demo", startup: null, basic: null, standard: "Preview link", premium: "Preview + revisions", custom: "Full demo + 2 rounds" },
-  { label: "Revisions", startup: "1 round", basic: "1 round", standard: "2 rounds", premium: "Dedicated round", custom: "2 dedicated rounds" },
-  { label: "Lighthouse 95+", startup: null, basic: null, standard: null, premium: "Guaranteed", custom: "Guaranteed" },
-  { label: "Priority support", startup: null, basic: null, standard: null, premium: null, custom: true },
-] as const;
+type CmpVal = boolean | null | { key: TranslationKey } | string;
+const v = (key: TranslationKey): { key: TranslationKey } => ({ key });
 
-function ComparisonCell({ value }: { value: boolean | string | null }) {
+const COMPARISON_ROWS: ReadonlyArray<{ labelKey: TranslationKey; startup: CmpVal; basic: CmpVal; standard: CmpVal; premium: CmpVal; custom: CmpVal }> = [
+  { labelKey: "cmp.row.price", startup: "€750", basic: "€1,000", standard: "€2,000", premium: "€4,000", custom: v("cmp.val.from5k") },
+  { labelKey: "cmp.row.pages", startup: "1-5", basic: "1-5", standard: "5-10", premium: "10-20", custom: v("cmp.val.unlimited") },
+  { labelKey: "cmp.row.delivery", startup: v("cmp.val.10days"), basic: v("cmp.val.1to2"), standard: v("cmp.val.2to3"), premium: v("cmp.val.3to4"), custom: v("cmp.val.4to6") },
+  { labelKey: "cmp.row.design", startup: v("cmp.val.custom"), basic: v("cmp.val.cleanResponsive"), standard: v("cmp.val.customBranded"), premium: v("cmp.val.premiumAnimations"), custom: v("cmp.val.fullyBespoke") },
+  { labelKey: "cmp.row.languages", startup: "1", basic: "1", standard: "2", premium: "3+", custom: v("cmp.val.unlimited") },
+  { labelKey: "cmp.row.seo", startup: v("cmp.val.basic"), basic: v("cmp.val.basic"), standard: v("cmp.val.full"), premium: v("cmp.val.fullSchema"), custom: v("cmp.val.fullAdvanced") },
+  { labelKey: "cmp.row.blog", startup: null, basic: null, standard: true, premium: true, custom: true },
+  { labelKey: "cmp.row.ecommerce", startup: null, basic: null, standard: null, premium: null, custom: true },
+  { labelKey: "cmp.row.booking", startup: null, basic: null, standard: null, premium: true, custom: true },
+  { labelKey: "cmp.row.images", startup: null, basic: null, standard: true, premium: true, custom: true },
+  { labelKey: "cmp.row.content", startup: null, basic: null, standard: true, premium: true, custom: v("cmp.val.fullCollab") },
+  { labelKey: "cmp.row.preview", startup: null, basic: null, standard: v("cmp.val.previewLink"), premium: v("cmp.val.previewRevisions"), custom: v("cmp.val.fullDemo2") },
+  { labelKey: "cmp.row.revisions", startup: v("cmp.val.1round"), basic: v("cmp.val.1round"), standard: v("cmp.val.2rounds"), premium: v("cmp.val.dedRound"), custom: v("cmp.val.2dedRounds") },
+  { labelKey: "cmp.row.lighthouse", startup: null, basic: null, standard: null, premium: v("cmp.val.guaranteed"), custom: v("cmp.val.guaranteed") },
+  { labelKey: "cmp.row.priority", startup: null, basic: null, standard: null, premium: null, custom: true },
+];
+
+function ComparisonCell({ value }: { value: CmpVal }) {
   if (value === null) {
     return (
       <div className="flex items-center justify-center">
@@ -149,9 +122,10 @@ function ComparisonCell({ value }: { value: boolean | string | null }) {
       </div>
     );
   }
-  return (
-    <span className="text-sm text-text-secondary">{value}</span>
-  );
+  if (typeof value === "object" && "key" in value) {
+    return <span className="text-sm text-text-secondary"><T k={value.key} /></span>;
+  }
+  return <span className="text-sm text-text-secondary">{value}</span>;
 }
 
 export default function PricingPage() {
@@ -186,7 +160,7 @@ export default function PricingPage() {
           staggerDelay={0.1}
         >
           {TIERS.map((tier) => (
-            <StaggerItem key={tier.name} className="h-full">
+            <StaggerItem key={tier.nameKey} className="h-full">
               <div
                 className={`relative flex flex-col h-full rounded-2xl border p-8 transition-all duration-500 ${
                   tier.highlighted
@@ -286,9 +260,9 @@ export default function PricingPage() {
       <Section className="">
         <AnimateIn animation="fadeUp">
           <SectionHeader
-            caption="Compare"
-            title="Feature Comparison"
-            subtitle="See exactly what is included in each package at a glance."
+            caption={<T k="pricing.compare.eyebrow" />}
+            title={<T k="cmp.title" />}
+            subtitle={<T k="cmp.subtitle" />}
             align="center"
           />
         </AnimateIn>
@@ -298,33 +272,33 @@ export default function PricingPage() {
               <thead>
                 <tr className="border-b border-border">
                   <th className="text-left py-4 px-4 text-sm font-semibold text-text-primary w-[160px]">
-                    Feature
+                    <T k="cmp.feature" />
                   </th>
                   <th className="text-center py-4 px-3 text-sm font-semibold text-success">
-                    Startup
+                    <T k="tier.startup.name" />
                   </th>
                   <th className="text-center py-4 px-3 text-sm font-semibold text-text-primary">
-                    Basic
+                    <T k="tier.basic.name" />
                   </th>
                   <th className="text-center py-4 px-3 text-sm font-semibold text-violet">
-                    Standard
+                    <T k="tier.standard.name" />
                   </th>
                   <th className="text-center py-4 px-3 text-sm font-semibold text-text-primary">
-                    Premium
+                    <T k="tier.premium.name" />
                   </th>
                   <th className="text-center py-4 px-3 text-sm font-semibold text-text-primary">
-                    Custom
+                    <T k="tier.custom.name" />
                   </th>
                 </tr>
               </thead>
               <tbody>
                 {COMPARISON_ROWS.map((row) => (
                   <tr
-                    key={row.label}
+                    key={row.labelKey}
                     className="border-b border-border/50 hover:bg-surface-elevated/50 transition-colors"
                   >
                     <td className="py-3 px-4 text-sm font-medium text-text-primary">
-                      {row.label}
+                      <T k={row.labelKey} />
                     </td>
                     <td className="py-3 px-3 text-center">
                       <ComparisonCell value={row.startup} />
@@ -353,7 +327,7 @@ export default function PricingPage() {
       <Section>
         <AnimateIn animation="fadeUp">
           <SectionHeader
-            caption="Add-Ons"
+            caption={<T k="addon.eyebrow" />}
             title={<T k="pricing.addons.title" />}
             subtitle={<T k="pricing.addons.subtitle" />}
             align="center"
@@ -364,16 +338,16 @@ export default function PricingPage() {
           staggerDelay={0.1}
         >
           {ADD_ONS.map((addon) => (
-            <StaggerItem key={addon.name}>
+            <StaggerItem key={addon.nameKey}>
               <div className="rounded-2xl border border-border bg-surface-elevated p-6 md:p-8 transition-all duration-500 hover:border-violet/30 hover:-translate-y-1 hover:shadow-lg hover:shadow-black/20 h-full flex flex-col">
                 <h3 className="font-display text-lg font-semibold text-text-primary mb-1">
-                  {addon.name}
+                  <T k={addon.nameKey} />
                 </h3>
                 <p className="text-violet font-semibold text-lg mb-3">
                   &euro;{addon.price}
                 </p>
                 <p className="text-text-secondary text-sm leading-relaxed flex-1">
-                  {addon.description}
+                  <T k={addon.descKey} />
                 </p>
               </div>
             </StaggerItem>
@@ -385,7 +359,7 @@ export default function PricingPage() {
       <Section className="">
         <AnimateIn animation="fadeUp">
           <SectionHeader
-            caption="Monthly Services"
+            caption={<T k="month.eyebrow" />}
             title={<T k="pricing.ongoing.title" />}
             subtitle={<T k="pricing.ongoing.subtitle" />}
             align="center"
@@ -396,10 +370,10 @@ export default function PricingPage() {
           staggerDelay={0.1}
         >
           {MONTHLY_SERVICES.map((service) => (
-            <StaggerItem key={service.name}>
+            <StaggerItem key={service.nameKey}>
               <div className="rounded-2xl border border-border bg-surface-elevated p-8 transition-all duration-500 hover:border-violet/30 hover:-translate-y-1 hover:shadow-lg hover:shadow-black/20 h-full flex flex-col">
                 <h3 className="font-display text-xl font-semibold text-text-primary mb-2">
-                  {service.name}
+                  <T k={service.nameKey} />
                 </h3>
                 <div className="flex items-baseline gap-1 mb-4">
                   <span className="text-sm text-text-muted">&euro;</span>
@@ -411,7 +385,7 @@ export default function PricingPage() {
                   </span>
                 </div>
                 <p className="text-text-secondary text-sm leading-relaxed flex-1">
-                  {service.description}
+                  <T k={service.descKey} />
                 </p>
               </div>
             </StaggerItem>
@@ -438,27 +412,24 @@ export default function PricingPage() {
         <div className="text-center max-w-3xl mx-auto">
           <AnimateIn animation="fadeUp">
             <p className="caption mb-4 text-violet">
-              Ready to Invest in Growth?
+              <T k="pricing.cta.eyebrow" />
             </p>
             <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-text-primary leading-tight mb-6">
-              Let&apos;s Build Your{" "}
-              <span className="gradient-text">Competitive Edge</span>
+              <T k="pricing.cta.title" />
             </h2>
             <p className="text-lg md:text-xl text-text-secondary mb-10 leading-relaxed">
-              Every day without a high-performing website is a day your
-              competitors are winning customers that should be yours. Let us
-              change that.
+              <T k="pricing.cta.subtitle" />
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button href="/start-project" size="lg" magnetic>
-                Start a Project <ArrowRight className="w-5 h-5" />
+                <T k="cta.startProject" /> <ArrowRight className="w-5 h-5" />
               </Button>
               <Button
                 href={`mailto:${CONTACT_EMAIL}`}
                 variant="secondary"
                 size="lg"
               >
-                Ask a Question
+                <T k="pricing.cta.ask" />
               </Button>
             </div>
           </AnimateIn>

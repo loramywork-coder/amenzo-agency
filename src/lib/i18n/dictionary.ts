@@ -604,6 +604,95 @@ export const dictionary = {
   "cmp.val.guaranteed": { en: "Guaranteed", de: "Garantiert" },
   "cmp.val.from5k": { en: "From €5,000+", de: "Ab €5.000+" },
 
+  // Add-ons
+  "addon.lang.name": { en: "Additional Language", de: "Zusätzliche Sprache" },
+  "addon.lang.desc": { en: "Add an extra language to your website.", de: "Fügen Sie Ihrer Website eine weitere Sprache hinzu." },
+  "addon.logo.name": { en: "Logo & Branding", de: "Logo & Branding" },
+  "addon.logo.desc": { en: "Professional logo, colour palette, typography, and brand guidelines.", de: "Professionelles Logo, Farbpalette, Typografie und Brand Guidelines." },
+  "addon.copy.name": { en: "Copywriting (per page)", de: "Texterstellung (pro Seite)" },
+  "addon.copy.desc": { en: "Professional website copy, SEO-optimised and on-brand.", de: "Professionelle Website-Texte, SEO-optimiert und markenkonform." },
+
+  // Monthly services
+  "month.host.name": { en: "Hosting & Maintenance", de: "Hosting & Wartung" },
+  "month.host.desc": {
+    en: "Managed hosting, SSL certificates, daily backups, uptime monitoring, dependency updates, and bug fixes. Everything you need to keep your site fast, secure, and online.",
+    de: "Managed Hosting, SSL-Zertifikate, tägliche Backups, Verfügbarkeits-Monitoring, Abhängigkeits-Updates und Bugfixes. Alles, was Sie brauchen, damit Ihre Website schnell, sicher und online bleibt.",
+  },
+  "month.seo.name": { en: "Monthly SEO", de: "Monatliches SEO" },
+  "month.seo.desc": {
+    en: "Ongoing technical SEO, keyword research and tracking, content recommendations, and monthly performance reports to grow your organic traffic over time.",
+    de: "Laufende technische SEO, Keyword-Recherche und -Tracking, Content-Empfehlungen und monatliche Performance-Berichte, um Ihren organischen Traffic langfristig zu steigern.",
+  },
+  "month.priority.name": { en: "Priority Support", de: "Priority-Support" },
+  "month.priority.desc": {
+    en: "Weekly content updates (approximately 8 hours per month), 12-hour response time, and a quarterly strategy review. Perfect for businesses that need ongoing changes without the overhead of a full-time developer.",
+    de: "Wöchentliche Content-Updates (ca. 8 Stunden pro Monat), Reaktionszeit von 12 Stunden und vierteljährliche Strategiebesprechung. Ideal für Unternehmen, die laufende Änderungen brauchen, ohne einen Vollzeit-Entwickler einstellen zu müssen.",
+  },
+  "addon.eyebrow": { en: "Add-Ons", de: "Add-Ons" },
+  "month.eyebrow": { en: "Monthly Services", de: "Monatliche Leistungen" },
+  "pricing.compare.eyebrow": { en: "Compare", de: "Vergleich" },
+
+  // FAQ
+  "faq.q1": { en: "How much does a website cost?", de: "Wie viel kostet eine Website?" },
+  "faq.a1": {
+    en: "Our packages start at EUR 750 for a basic 5-page website. A standard business website with custom design and 2 languages is EUR 2,000. Premium multilingual sites with advanced features are EUR 4,000. Complex projects like e-commerce platforms start from EUR 5,000. Every project gets a fixed quote — no hourly billing, no surprises.",
+    de: "Unsere Pakete beginnen bei 750 EUR für eine einfache 5-seitige Website. Eine Standard-Business-Website mit individuellem Design und 2 Sprachen kostet 2.000 EUR. Premium-Mehrsprachenseiten mit erweiterten Funktionen kosten 4.000 EUR. Komplexe Projekte wie E-Commerce-Plattformen starten ab 5.000 EUR. Jedes Projekt erhält ein Festpreis-Angebot — keine Stundenabrechnung, keine Überraschungen.",
+  },
+  "faq.q2": { en: "What's the difference between Basic and Standard?", de: "Was ist der Unterschied zwischen Basic und Standard?" },
+  "faq.a2": {
+    en: "Basic (EUR 750) is a clean, professional site built from content you provide. No demo, no design consultation — just fast, quality output. Standard (EUR 2,000) includes custom design, we help structure your content, you get a preview before launch, and 2 rounds of revisions. Standard is our most popular package.",
+    de: "Basic (750 EUR) ist eine saubere, professionelle Seite, die auf von Ihnen gelieferten Inhalten aufbaut. Keine Demo, keine Design-Beratung — einfach schnelle, hochwertige Auslieferung. Standard (2.000 EUR) umfasst individuelles Design, wir helfen bei der Inhaltsstruktur, Sie erhalten eine Vorschau vor dem Launch und 2 Revisionsrunden. Standard ist unser beliebtestes Paket.",
+  },
+  "faq.q3": { en: "Do I get to see the site before it goes live?", de: "Sehe ich die Website vor dem Launch?" },
+  "faq.a3": {
+    en: "For Basic: no — you provide content, we build, you review and approve. For Standard: yes, you get a preview link. For Premium and Custom: yes, plus dedicated revision rounds to refine everything before launch.",
+    de: "Bei Basic: nein — Sie liefern Inhalte, wir bauen, Sie prüfen und genehmigen. Bei Standard: ja, Sie erhalten einen Vorschau-Link. Bei Premium und Individuell: ja, zusätzlich dedizierte Revisionsrunden, um alles vor dem Launch zu verfeinern.",
+  },
+  "faq.q4": { en: "Do you take a deposit?", de: "Verlangen Sie eine Anzahlung?" },
+  "faq.a4": {
+    en: "For Basic (EUR 750): full payment on signing — it is a small, fast project. For Standard and above: 50% deposit on signing, 50% on launch.",
+    de: "Bei Basic (750 EUR): vollständige Zahlung bei Vertragsunterzeichnung — es ist ein kleines, schnelles Projekt. Bei Standard und höher: 50 % Anzahlung bei Vertragsunterzeichnung, 50 % beim Launch.",
+  },
+  "faq.q5": { en: "What about ongoing costs?", de: "Was ist mit laufenden Kosten?" },
+  "faq.a5": {
+    en: "After launch, we offer optional hosting and maintenance (EUR 80/month) and priority support (EUR 200/month). You can choose one, both, or neither. If you choose no ongoing services, we hand over everything and you manage it yourself.",
+    de: "Nach dem Launch bieten wir optionales Hosting und Wartung (80 EUR/Monat) sowie Priority-Support (200 EUR/Monat) an. Sie können eines, beides oder nichts wählen. Wenn Sie keine laufenden Leistungen wählen, übergeben wir alles und Sie verwalten es selbst.",
+  },
+  "faq.q6": { en: "Can I upgrade my package later?", de: "Kann ich später auf ein größeres Paket wechseln?" },
+  "faq.a6": {
+    en: "Yes. If you start with Basic and want to add languages, a blog, or more pages later, we quote the additional work separately. Many clients start Basic and upgrade to Standard within 6 months.",
+    de: "Ja. Wenn Sie mit Basic starten und später Sprachen, einen Blog oder mehr Seiten hinzufügen möchten, kalkulieren wir die zusätzliche Arbeit separat. Viele Kunden beginnen mit Basic und wechseln innerhalb von 6 Monaten auf Standard.",
+  },
+  "faq.q7": { en: "How do you compare to other studios?", de: "Wie vergleichen Sie sich mit anderen Studios?" },
+  "faq.a7": {
+    en: "Most studios typically charge EUR 775 to EUR 2,600 or more for similar work, often using WordPress templates. We build everything custom with modern technology (Next.js, React) — faster sites, better SEO, no plugin bloat. You get studio-quality output at competitive prices.",
+    de: "Die meisten Studios berechnen typischerweise 775 bis 2.600 EUR oder mehr für ähnliche Arbeit, oft mit WordPress-Templates. Wir bauen alles individuell mit moderner Technologie (Next.js, React) — schnellere Seiten, besseres SEO, kein Plugin-Ballast. Sie erhalten Studio-Qualität zu wettbewerbsfähigen Preisen.",
+  },
+  "faq.q8": { en: "Do I own the code and design files?", de: "Gehören mir Code und Design-Dateien?" },
+  "faq.a8": {
+    en: "Absolutely. Once the project is paid in full, you own 100% of the code, design files, and all assets we create for you. We provide full access to the Git repository, Figma files, and any other deliverables. No lock-in, no proprietary systems, no hostage situations.",
+    de: "Absolut. Sobald das Projekt vollständig bezahlt ist, gehören Ihnen 100 % des Codes, der Design-Dateien und aller von uns erstellten Assets. Wir geben vollen Zugriff auf das Git-Repository, Figma-Dateien und alle anderen Lieferobjekte. Keine Abhängigkeit, keine proprietären Systeme, keine Geiselhaft.",
+  },
+  "faq.q9": { en: "What technologies do you use?", de: "Welche Technologien nutzen Sie?" },
+  "faq.a9": {
+    en: "We build with Next.js, React, TypeScript, and Tailwind CSS, deployed on Vercel. For backend needs, we use Supabase, and for payments, Stripe. This modern stack ensures your site is fast, secure, accessible, and easy to maintain. No WordPress, no page builders, no technical debt.",
+    de: "Wir bauen mit Next.js, React, TypeScript und Tailwind CSS, deployt auf Vercel. Für Backend-Anforderungen nutzen wir Supabase, für Zahlungen Stripe. Dieser moderne Stack sorgt dafür, dass Ihre Website schnell, sicher, zugänglich und einfach zu warten ist. Kein WordPress, keine Page-Builder, keine technischen Schulden.",
+  },
+  "faq.q10": { en: "Do you work with international clients?", de: "Arbeiten Sie mit internationalen Kunden?" },
+  "faq.a10": {
+    en: "We work with clients across Europe, the UK, and beyond. All communication happens over video calls, Slack, and email. Our process is designed for remote collaboration, and timezone differences have never been an issue.",
+    de: "Wir arbeiten mit Kunden in ganz Europa, dem Vereinigten Königreich und darüber hinaus. Die gesamte Kommunikation läuft über Videoanrufe, Slack und E-Mail. Unser Prozess ist für Remote-Zusammenarbeit ausgelegt und Zeitzonenunterschiede waren nie ein Problem.",
+  },
+
+  // Pricing CTA
+  "pricing.cta.eyebrow": { en: "Ready to Invest in Growth?", de: "Bereit, in Wachstum zu investieren?" },
+  "pricing.cta.title": { en: "Let's Build Your Competitive Edge", de: "Lassen Sie uns Ihren Wettbewerbsvorteil bauen" },
+  "pricing.cta.subtitle": {
+    en: "Every day without a high-performing website is a day your competitors are winning customers that should be yours. Let us change that.",
+    de: "Jeder Tag ohne hochperformante Website ist ein Tag, an dem Ihre Konkurrenz Kunden gewinnt, die eigentlich Ihre sein sollten. Lassen Sie uns das ändern.",
+  },
+  "pricing.cta.ask": { en: "Ask a Question", de: "Frage stellen" },
+
   // Footer legal
   "footer.privacy": { en: "Privacy Policy", de: "Datenschutz" },
   "footer.terms": { en: "Terms", de: "AGB" },
