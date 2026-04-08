@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { Logo } from "@/components/ui/logo";
 import {
@@ -8,13 +10,25 @@ import {
   NAV_LINKS,
   SERVICES,
 } from "@/lib/constants";
+import { useLocale } from "@/lib/i18n/locale-context";
+import type { TranslationKey } from "@/lib/i18n/dictionary";
 
 const serviceLinks = SERVICES.map((s) => ({
   label: s.title,
   href: `/services#${s.slug}`,
 }));
 
+const LINK_LABEL_KEYS: Record<string, TranslationKey> = {
+  Work: "nav.work",
+  Services: "nav.services",
+  Pricing: "nav.pricing",
+  About: "nav.about",
+  Insights: "nav.insights",
+  Contact: "nav.contact",
+};
+
 export function Footer() {
+  const { t, locale } = useLocale();
   return (
     <footer className="bg-[#050505] border-t border-white/[0.04] relative z-10">
       <div className="container-wide py-20">
@@ -23,14 +37,14 @@ export function Footer() {
           <div className="lg:col-span-1">
             <Logo color="white" showGradientAccent={false} />
             <p className="mt-5 text-[13px] text-white/50 max-w-xs leading-relaxed">
-              Web design &amp; development studio. Custom-built websites that make businesses impossible to ignore.
+              {t("footer.tagline")}
             </p>
           </div>
 
           {/* Navigation */}
           <div>
             <h4 className="text-[11px] uppercase tracking-[0.15em] text-white/40 mb-5">
-              Navigation
+              {t("footer.explore")}
             </h4>
             <ul className="space-y-3">
               {NAV_LINKS.map((link) => (
@@ -39,7 +53,7 @@ export function Footer() {
                     href={link.href}
                     className="text-[14px] text-white/60 hover:text-white transition-colors duration-300"
                   >
-                    {link.label}
+                    {LINK_LABEL_KEYS[link.label] ? t(LINK_LABEL_KEYS[link.label]) : link.label}
                   </Link>
                 </li>
               ))}
@@ -48,7 +62,7 @@ export function Footer() {
                   href="/start-project"
                   className="text-[14px] text-white/60 hover:text-white transition-colors duration-300"
                 >
-                  Start a Project
+                  {t("cta.startProject")}
                 </Link>
               </li>
             </ul>
@@ -57,7 +71,7 @@ export function Footer() {
           {/* Services */}
           <div>
             <h4 className="text-[11px] uppercase tracking-[0.15em] text-white/40 mb-5">
-              Services
+              {t("nav.services")}
             </h4>
             <ul className="space-y-3">
               {serviceLinks.map((link) => (
@@ -76,7 +90,7 @@ export function Footer() {
           {/* Contact */}
           <div>
             <h4 className="text-[10px] tracking-[0.25em] text-white/30 uppercase mb-5 font-medium">
-              Contact
+              {t("nav.contact")}
             </h4>
             <a href={`mailto:${CONTACT_EMAIL}`} className="text-sm text-white/50 hover:text-white transition-colors duration-300 block">
               {CONTACT_EMAIL}
@@ -108,7 +122,7 @@ export function Footer() {
             <p className="text-xs text-white/15 mt-5 italic">
               Currently booking for{" "}
               <span className="text-white/30">
-                {new Date(new Date().setMonth(new Date().getMonth() + 1)).toLocaleString("en-US", { month: "long", year: "numeric" })}
+                {new Date(new Date().setMonth(new Date().getMonth() + 1)).toLocaleString(locale === "de" ? "de-DE" : "en-US", { month: "long", year: "numeric" })}
               </span>
             </p>
           </div>

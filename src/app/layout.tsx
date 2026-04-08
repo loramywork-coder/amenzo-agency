@@ -8,6 +8,7 @@ import { ScrollProgress } from "@/components/ui/scroll-progress";
 import { ScrollToTop } from "@/components/ui/scroll-to-top";
 import { LocalBusinessSchema } from "@/components/structured-data";
 import { SmokeBackground } from "@/components/ui/spooky-smoke-animation";
+import { LocaleProvider } from "@/lib/i18n/locale-context";
 import WhatsAppButton from "@/components/whatsapp-button";
 
 
@@ -122,9 +123,11 @@ export default function RootLayout({
         <SmokeBackground smokeColor="#FFFFFF" />
         <ScrollProgress />
         <ScrollToTop />
-        <Navigation />
-        <main id="main" className="relative z-10 bg-black/40">{children}</main>
-        <FooterWrapper />
+        <LocaleProvider>
+          <Navigation />
+          <main id="main" className="relative z-10 bg-black/40">{children}</main>
+          <FooterWrapper />
+        </LocaleProvider>
         <WhatsAppButton />
 
         <ExitIntent />

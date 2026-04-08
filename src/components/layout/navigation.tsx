@@ -8,6 +8,18 @@ import { Menu, X, ChevronDown } from "lucide-react";
 import { Logo } from "@/components/ui/logo";
 import { HEADER_LINKS, SERVICES } from "@/lib/constants";
 import { cn } from "@/lib/utils";
+import { useLocale } from "@/lib/i18n/locale-context";
+import type { TranslationKey } from "@/lib/i18n/dictionary";
+
+const LINK_LABEL_KEYS: Record<string, TranslationKey> = {
+  Work: "nav.work",
+  Capabilities: "nav.capabilities",
+  Services: "nav.services",
+  Pricing: "nav.pricing",
+  About: "nav.about",
+  Insights: "nav.insights",
+  Contact: "nav.contact",
+};
 
 const SERVICE_DROPDOWN = SERVICES.map((s) => ({
   label: s.title,
@@ -20,6 +32,7 @@ export function Navigation() {
   const [scrolled, setScrolled] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+  const { locale, setLocale, t } = useLocale();
   const pathname = usePathname();
   const isDemo = pathname.startsWith("/demos") || pathname.startsWith("/showcases");
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -88,14 +101,44 @@ export function Navigation() {
             <Logo color="white" />
           </Link>
 
-          {/* Menu toggle — visible on all screens */}
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="relative z-50 p-2 text-text-primary"
-            aria-label={isOpen ? "Close menu" : "Open menu"}
-          >
-            {isOpen ? <X size={22} /> : <Menu size={22} />}
-          </button>
+          <div className="flex items-center gap-2 relative z-50">
+            {/* Language toggle */}
+            <div
+              className="flex items-center text-[11px] font-medium tracking-wider border border-white/15 rounded-full overflow-hidden"
+              role="group"
+              aria-label="Language"
+            >
+              <button
+                onClick={() => setLocale("en")}
+                className={cn(
+                  "px-2.5 py-1 transition-colors",
+                  locale === "en" ? "bg-white text-black" : "text-text-secondary hover:text-text-primary"
+                )}
+                aria-pressed={locale === "en"}
+              >
+                EN
+              </button>
+              <button
+                onClick={() => setLocale("de")}
+                className={cn(
+                  "px-2.5 py-1 transition-colors",
+                  locale === "de" ? "bg-white text-black" : "text-text-secondary hover:text-text-primary"
+                )}
+                aria-pressed={locale === "de"}
+              >
+                DE
+              </button>
+            </div>
+
+            {/* Menu toggle — visible on all screens */}
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="p-2 text-text-primary"
+              aria-label={isOpen ? "Close menu" : "Open menu"}
+            >
+              {isOpen ? <X size={22} /> : <Menu size={22} />}
+            </button>
+          </div>
         </nav>
       </header>
 
@@ -129,7 +172,7 @@ export function Navigation() {
                             : "text-text-secondary"
                         )}
                       >
-                        Services
+                        {t("nav.services")}
                         <ChevronDown
                           size={14}
                           className={cn(
@@ -180,7 +223,7 @@ export function Navigation() {
                           : "text-text-secondary"
                       )}
                     >
-                      {link.label}
+                      {LINK_LABEL_KEYS[link.label] ? t(LINK_LABEL_KEYS[link.label]) : link.label}
                     </Link>
                   </motion.div>
                 );
@@ -195,7 +238,7 @@ export function Navigation() {
                   href="/start-project"
                   className="px-9 py-4 bg-white text-[#0A0A0A] text-[13px] uppercase tracking-[0.15em] font-medium rounded-full"
                 >
-                  Start a Project
+                  {t("cta.startProject")}
                 </Link>
               </motion.div>
             </nav>

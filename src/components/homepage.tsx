@@ -8,6 +8,7 @@ import HeroBackground from "@/components/hero-background";
 import Reveal from "@/components/demos/Reveal";
 import Counter from "@/components/demos/Counter";
 import { GooeyReveal } from "@/components/ui/gooey-reveal";
+import { useLocale } from "@/lib/i18n/locale-context";
 
 /* ─── data ─── */
 
@@ -152,6 +153,7 @@ const trustItems = [
 /* ─── component ─── */
 
 export function HomePage() {
+  const { t } = useLocale();
   return (
     <>
       {/* ── 1. HERO ── */}
@@ -160,7 +162,7 @@ export function HomePage() {
         <div className="relative z-10 w-full max-w-4xl mx-auto px-6 text-center">
           <Reveal type="fade" delay={0.1}>
             <p className="text-[12px] sm:text-[11px] text-white/70 tracking-[0.3em] sm:tracking-[0.5em] uppercase font-semibold mb-10 sm:mb-8">
-              Web Design Studio
+              {t("home.hero.eyebrow")}
             </p>
           </Reveal>
           <Reveal type="fade" delay={0.2}>
@@ -168,12 +170,12 @@ export function HomePage() {
               className="font-bold text-white tracking-[-0.01em] leading-[1.02] font-display"
               style={{ fontSize: "clamp(54px, 14vw, 90px)" }}
             >
-              Where Code<br />Meets Craft
+              {t("home.hero.title.line1")}<br />{t("home.hero.title.line2")}
             </h1>
           </Reveal>
           <Reveal type="fade" delay={0.5}>
             <p className="text-base sm:text-sm text-white/75 max-w-[300px] sm:max-w-xs mx-auto mt-7 sm:mt-8 leading-relaxed tracking-wide">
-              We build websites that make businesses impossible to ignore
+              {t("home.hero.subtitle")}
             </p>
           </Reveal>
           <Reveal type="fade" delay={0.65}>
@@ -182,20 +184,20 @@ export function HomePage() {
                 href="/start-project"
                 className="inline-flex items-center gap-2 bg-white text-black text-sm font-medium px-7 py-3 rounded-full hover:bg-white/90 transition-colors"
               >
-                Start a Project <ArrowRight size={14} />
+                {t("cta.startProject")} <ArrowRight size={14} />
               </Link>
               <Link
                 href="#work"
                 className="inline-flex items-center gap-2 border border-white/10 text-white/60 text-sm font-medium px-7 py-3 rounded-full hover:border-white/20 hover:text-white/80 transition-colors"
               >
-                View Work
+                {t("cta.viewWork")}
               </Link>
             </div>
           </Reveal>
         </div>
         {/* scroll indicator */}
         <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3">
-          <span className="text-[8px] text-white/45 tracking-[0.3em] uppercase">Scroll</span>
+          <span className="text-[8px] text-white/45 tracking-[0.3em] uppercase">{t("home.hero.scroll")}</span>
           <motion.div
             className="w-px h-8 bg-white/10 origin-top"
             initial={{ scaleY: 0 }}
@@ -228,15 +230,15 @@ export function HomePage() {
       <section id="work" className="py-28 md:py-36">
         <div className="max-w-6xl mx-auto px-6">
           <Reveal>
-            <p className="text-[9px] text-white/60 tracking-[0.5em] uppercase font-medium mb-4">Portfolio</p>
+            <p className="text-[9px] text-white/60 tracking-[0.5em] uppercase font-medium mb-4">{t("home.portfolio.eyebrow")}</p>
           </Reveal>
           <GooeyReveal
-            text="Selected Work"
+            text={t("home.portfolio.title")}
             className="text-[52px] font-bold text-white tracking-tight leading-none mb-4"
           />
           <Reveal delay={0.15}>
             <p className="text-[14px] text-white/80 leading-relaxed max-w-md mb-16">
-              Interactive, custom-built websites built for real industries. Each one is a fully navigable demo.
+              {t("home.portfolio.subtitle")}
             </p>
           </Reveal>
           <div>
@@ -266,14 +268,14 @@ export function HomePage() {
       <section className="py-28 md:py-36">
         <div className="max-w-6xl mx-auto px-6">
           <Reveal>
-            <p className="text-[9px] text-white/60 tracking-[0.5em] uppercase font-medium mb-4">Capabilities</p>
+            <p className="text-[9px] text-white/60 tracking-[0.5em] uppercase font-medium mb-4">{t("home.capabilities.eyebrow")}</p>
           </Reveal>
           <GooeyReveal
-            text="Design Possibilities"
+            text={t("home.capabilities.title")}
             className="text-[44px] font-bold text-white tracking-tight leading-none mb-6"
           />
           <Reveal delay={0.15}>
-            <p className="text-sm text-white/75 max-w-lg mb-14">Interactive experiments that push what&apos;s possible in the browser. Click any to experience it live.</p>
+            <p className="text-sm text-white/75 max-w-lg mb-14">{t("home.capabilities.subtitle")}</p>
           </Reveal>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {showcases.map((s, i) => (
@@ -310,10 +312,10 @@ export function HomePage() {
       <section className="py-28 md:py-36">
         <div className="max-w-6xl mx-auto px-6">
           <Reveal>
-            <p className="text-[9px] text-white/60 tracking-[0.5em] uppercase font-medium mb-4">Process</p>
+            <p className="text-[9px] text-white/60 tracking-[0.5em] uppercase font-medium mb-4">{t("home.process.eyebrow")}</p>
           </Reveal>
           <GooeyReveal
-            text="How We Build"
+            text={t("home.process.title")}
             className="text-[44px] font-bold text-white tracking-tight leading-none mb-14"
           />
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-6">
@@ -321,8 +323,8 @@ export function HomePage() {
               <Reveal key={s.num} delay={i * 0.1}>
                 <div className="space-y-4">
                   <span className="block text-[48px] font-bold text-white/40 leading-none">{s.num}</span>
-                  <h3 className="text-[16px] font-bold text-white/90">{s.title}</h3>
-                  <p className="text-[13px] text-white/80 leading-relaxed">{s.desc}</p>
+                  <h3 className="text-[16px] font-bold text-white/90">{t(`steps.${s.num}.title` as never)}</h3>
+                  <p className="text-[13px] text-white/80 leading-relaxed">{t(`steps.${s.num}.desc` as never)}</p>
                 </div>
               </Reveal>
             ))}
@@ -334,10 +336,10 @@ export function HomePage() {
       <section className="py-28 md:py-36">
         <div className="max-w-6xl mx-auto px-6">
           <Reveal>
-            <p className="text-[9px] text-white/60 tracking-[0.5em] uppercase font-medium mb-4">Services</p>
+            <p className="text-[9px] text-white/60 tracking-[0.5em] uppercase font-medium mb-4">{t("home.services.eyebrow")}</p>
           </Reveal>
           <GooeyReveal
-            text="What We Build"
+            text={t("home.services.title")}
             className="text-[44px] font-bold text-white tracking-tight leading-none mb-14"
           />
           <div className="grid grid-cols-1 md:grid-cols-2 md:grid-rows-[auto_auto] gap-3">
@@ -384,7 +386,7 @@ export function HomePage() {
           <Reveal delay={0.4}>
             <div className="mt-8">
               <Link href="/pricing" className="text-[13px] text-white/60 hover:text-white/80 transition-colors inline-flex items-center gap-1">
-                View full pricing <ArrowRight size={12} />
+                {t("cta.viewPricing")} <ArrowRight size={12} />
               </Link>
             </div>
           </Reveal>
@@ -444,10 +446,10 @@ export function HomePage() {
           </Reveal>
           <Reveal delay={0.1}>
             <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-5">
-              {techStack.map((t) => (
-                <div key={t.name} className="flex items-center gap-2 text-white/60">
-                  {t.icon}
-                  <span className="text-[12px] tracking-wider">{t.name}</span>
+              {techStack.map((tech) => (
+                <div key={tech.name} className="flex items-center gap-2 text-white/60">
+                  {tech.icon}
+                  <span className="text-[12px] tracking-wider">{tech.name}</span>
                 </div>
               ))}
             </div>
@@ -460,13 +462,12 @@ export function HomePage() {
         <div className="max-w-4xl mx-auto px-6 text-center">
           <Reveal>
             <h2 className="text-[40px] md:text-[52px] font-bold text-white tracking-tight leading-tight">
-              Ready to build something{" "}
-              <span className="text-white/70">extraordinary?</span>
+              {t("home.cta.title")}
             </h2>
           </Reveal>
           <Reveal delay={0.15}>
             <p className="text-[14px] text-white/80 leading-relaxed max-w-md mx-auto mt-6">
-              Tell us about your project and we&apos;ll respond within 24 hours with a free proposal.
+              {t("home.cta.subtitle")}
             </p>
           </Reveal>
           <Reveal delay={0.25}>
@@ -475,7 +476,7 @@ export function HomePage() {
                 href="/start-project"
                 className="inline-flex items-center gap-2 bg-white text-black text-sm font-medium px-8 py-3.5 rounded-full hover:bg-white/90 transition-colors"
               >
-                Start a Project <ArrowRight size={14} />
+                {t("cta.startProject")} <ArrowRight size={14} />
               </Link>
               <Link
                 href="mailto:info@amenzo.co"
