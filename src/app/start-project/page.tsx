@@ -80,7 +80,10 @@ export default function StartProjectPage() {
 }
 
 function StartProjectWizard() {
-  const { t } = useLocale();
+  const { t, locale } = useLocale();
+  const L = <T extends { label: string; labelDe?: string }>(o: T) => (locale === "de" && o.labelDe ? o.labelDe : o.label);
+  const N = <T extends { name: string; nameDe?: string }>(o: T) => (locale === "de" && o.nameDe ? o.nameDe : o.name);
+  const D = <T extends { description: string; descriptionDe?: string }>(o: T) => (locale === "de" && o.descriptionDe ? o.descriptionDe : o.description);
   const searchParams = useSearchParams();
   const [step, setStep] = useState(1);
   const [submitted, setSubmitted] = useState(false);
@@ -445,8 +448,8 @@ function StartProjectWizard() {
               {step === 2 && (
                 <div>
                   <StepTitle
-                    title="What do you need?"
-                    subtitle="Select all that apply"
+                    title={t("wiz.services.title")}
+                    subtitle={t("wiz.services.subtitle")}
                   />
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {serviceOptions.map((opt) => {
@@ -474,7 +477,7 @@ function StartProjectWizard() {
                             )}
                           />
                           <span className="text-sm font-medium relative z-10">
-                            {opt.label}
+                            {L(opt)}
                           </span>
                           {selected && (
                             <Check
@@ -493,41 +496,37 @@ function StartProjectWizard() {
               {step === 3 && (
                 <div>
                   <StepTitle
-                    title="Tell us more"
-                    subtitle="Help us understand the scope"
+                    title={t("wiz.tellMore.title")}
+                    subtitle={t("wiz.tellMore.subtitle")}
                   />
                   <div className="space-y-6">
                     <RadioGroup
-                      label="How many pages do you need?"
-                      options={["1-5", "5-10", "10-20", "20+", "Not sure"]}
+                      label={t("wiz.q.pages")}
+                      options={["1-5", "5-10", "10-20", "20+", t("wiz.opt.notSure")]}
                       value={formData.pageCount}
                       onChange={(v) => updateField("pageCount", v)}
                     />
                     <RadioGroup
-                      label="Do you need multilingual support?"
-                      options={["No", "2 languages", "3+ languages"]}
+                      label={t("wiz.q.multilingual")}
+                      options={[t("wiz.opt.no"), t("wiz.opt.2lang"), t("wiz.opt.3lang")]}
                       value={formData.multilingual}
                       onChange={(v) => updateField("multilingual", v)}
                     />
                     <RadioGroup
-                      label="Do you need a CMS (content management)?"
-                      options={["Yes", "No", "What's a CMS?"]}
+                      label={t("wiz.q.cms")}
+                      options={[t("wiz.opt.yes"), t("wiz.opt.no"), t("wiz.opt.whatsCms")]}
                       value={formData.needsCms}
                       onChange={(v) => updateField("needsCms", v)}
                     />
                     <RadioGroup
-                      label="Do you have existing branding?"
-                      options={["Yes", "No", "Need new branding"]}
+                      label={t("wiz.q.branding")}
+                      options={[t("wiz.opt.yes"), t("wiz.opt.no"), t("wiz.opt.needBranding")]}
                       value={formData.hasBranding}
                       onChange={(v) => updateField("hasBranding", v)}
                     />
                     <RadioGroup
-                      label="Do you have content ready?"
-                      options={[
-                        "Yes, all ready",
-                        "Some of it",
-                        "No, I need help",
-                      ]}
+                      label={t("wiz.q.content")}
+                      options={[t("wiz.opt.contentYes"), t("wiz.opt.contentSome"), t("wiz.opt.contentNo")]}
                       value={formData.hasContent}
                       onChange={(v) => updateField("hasContent", v)}
                     />
@@ -539,31 +538,31 @@ function StartProjectWizard() {
               {step === 4 && (
                 <div>
                   <StepTitle
-                    title="Inspiration"
-                    subtitle="Share websites you admire"
+                    title={t("wiz.inspo.title")}
+                    subtitle={t("wiz.inspo.subtitle2")}
                   />
                   <div className="space-y-6">
                     <FormField
-                      label="Website 1"
+                      label={`${t("wiz.inspo.website")} 1`}
                       value={formData.inspirationUrl1}
                       onChange={(v) => updateField("inspirationUrl1", v)}
                       placeholder="https://example.com"
                     />
                     <FormField
-                      label="Website 2"
+                      label={`${t("wiz.inspo.website")} 2`}
                       value={formData.inspirationUrl2}
                       onChange={(v) => updateField("inspirationUrl2", v)}
                       placeholder="https://example.com"
                     />
                     <FormField
-                      label="Website 3"
+                      label={`${t("wiz.inspo.website")} 3`}
                       value={formData.inspirationUrl3}
                       onChange={(v) => updateField("inspirationUrl3", v)}
                       placeholder="https://example.com"
                     />
                     <div>
                       <label className="block text-sm font-medium text-white mb-2">
-                        What do you like about them?
+                        {t("wiz.inspo.likeLabel")}
                       </label>
                       <textarea
                         value={formData.inspirationNotes}
@@ -572,18 +571,18 @@ function StartProjectWizard() {
                         }
                         rows={4}
                         className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-white/30 focus:border-white/30 focus:outline-none transition-colors resize-none"
-                        placeholder="I like the clean design of site 1, the animations on site 2..."
+                        placeholder={t("wiz.inspo.phNotes")}
                       />
                     </div>
                     <p className="text-sm text-white/40">
-                      Or{" "}
+                      {t("wiz.inspo.or")}{" "}
                       <Link
                         href="/work"
                         className="text-white/70 hover:underline"
                       >
-                        browse our portfolio
+                        {t("wiz.inspo.browse")}
                       </Link>{" "}
-                      for inspiration.
+                      {t("wiz.inspo.forInspo")}
                     </p>
                   </div>
                 </div>
@@ -593,24 +592,24 @@ function StartProjectWizard() {
               {step === 5 && (
                 <div>
                   <StepTitle
-                    title="Timeline & Budget"
-                    subtitle="Help us plan the project"
+                    title={t("wiz.budget.title")}
+                    subtitle={t("wiz.budget.subtitle2")}
                   />
                   <div className="space-y-6">
                     <RadioGroup
-                      label="When do you need this?"
+                      label={t("wiz.budget.when")}
                       options={[
-                        "ASAP",
-                        "Within 1 month",
-                        "Within 3 months",
-                        "No rush — planning ahead",
+                        t("wiz.budget.asap"),
+                        t("wiz.budget.1month"),
+                        t("wiz.budget.3month"),
+                        t("wiz.budget.noRush"),
                       ]}
                       value={formData.timeline}
                       onChange={(v) => updateField("timeline", v)}
                     />
                     <div>
                       <label className="block text-sm font-medium text-white mb-3">
-                        Budget range
+                        {t("wiz.budget.range")}
                       </label>
                       <div className="flex flex-wrap gap-2">
                         {budgetOptions.map((opt) => (
@@ -624,13 +623,13 @@ function StartProjectWizard() {
                                 : "border-white/[0.06] bg-white/[0.03] text-white/60 hover:border-white/20"
                             )}
                           >
-                            {opt.label}
+                            {L(opt)}
                           </button>
                         ))}
                       </div>
                     </div>
                     <FormField
-                      label="Any specific deadline? (optional)"
+                      label={t("wiz.budget.deadline")}
                       type="date"
                       value={formData.deadline}
                       onChange={(v) => updateField("deadline", v)}
@@ -643,8 +642,8 @@ function StartProjectWizard() {
               {step === 6 && (
                 <div>
                   <StepTitle
-                    title="Build Your Package"
-                    subtitle="Toggle add-ons to customize your project"
+                    title={t("wiz.pkg.title")}
+                    subtitle={t("wiz.pkg.subtitle2")}
                   />
                   <div className="space-y-3 mb-6">
                     {addOns.map((addon) => {
@@ -666,16 +665,16 @@ function StartProjectWizard() {
                           <div className="flex-1 relative z-10">
                             <div className="flex items-center gap-2">
                               <span className="text-sm font-semibold text-white">
-                                {addon.name}
+                                {N(addon)}
                               </span>
                               {addon.recurring && (
                                 <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-white/10 text-white/70 font-medium">
-                                  Monthly
+                                  {t("wiz.pkg.monthly")}
                                 </span>
                               )}
                             </div>
                             <p className="text-xs text-white/40 mt-0.5">
-                              {addon.description}
+                              {D(addon)}
                             </p>
                           </div>
                           <div className="text-right relative z-10 shrink-0">
@@ -763,8 +762,8 @@ function StartProjectWizard() {
               {step === 7 && (
                 <div>
                   <StepTitle
-                    title="Anything else?"
-                    subtitle="Tell us anything about your project, goals, or concerns"
+                    title={t("wiz.notes.title2")}
+                    subtitle={t("wiz.notes.subtitle2")}
                   />
                   <textarea
                     value={formData.additionalNotes}
@@ -773,7 +772,7 @@ function StartProjectWizard() {
                     }
                     rows={8}
                     className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-white/30 focus:border-white/30 focus:outline-none transition-colors resize-none"
-                    placeholder="We're launching a new product line in Q3 and need the site live by..."
+                    placeholder={t("wiz.notes.placeholder")}
                   />
                 </div>
               )}
@@ -782,72 +781,79 @@ function StartProjectWizard() {
               {step === 8 && (
                 <div>
                   <StepTitle
-                    title="Review your brief"
-                    subtitle="Make sure everything looks good"
+                    title={t("wiz.review.title")}
+                    subtitle={t("wiz.review.subtitle2")}
                   />
                   <div className="space-y-4">
                     <ReviewItem
-                      label="Name"
+                      label={t("wiz.review.name")}
                       value={formData.name}
                       step={1}
                       onEdit={setStep}
                     />
                     <ReviewItem
-                      label="Company"
+                      label={t("wiz.review.company")}
                       value={formData.company || "—"}
                       step={1}
                       onEdit={setStep}
                     />
                     <ReviewItem
-                      label="Email"
+                      label={t("wiz.review.email")}
                       value={formData.email}
                       step={1}
                       onEdit={setStep}
                     />
                     <ReviewItem
-                      label="Phone"
+                      label={t("wiz.review.phone")}
                       value={formData.phone || "—"}
                       step={1}
                       onEdit={setStep}
                     />
                     <ReviewItem
-                      label="Services"
+                      label={t("wiz.review.services")}
                       value={
                         selectedServices
                           .map(
-                            (id) =>
-                              serviceOptions.find((s) => s.id === id)?.label
+                            (id) => {
+                              const o = serviceOptions.find((s) => s.id === id);
+                              return o ? L(o) : undefined;
+                            }
                           )
+                          .filter(Boolean)
                           .join(", ") || "—"
                       }
                       step={2}
                       onEdit={setStep}
                     />
                     <ReviewItem
-                      label="Pages"
+                      label={t("wiz.review.pages")}
                       value={formData.pageCount || "—"}
                       step={3}
                       onEdit={setStep}
                     />
                     <ReviewItem
-                      label="Budget"
+                      label={t("wiz.review.budget")}
                       value={formData.budget || "—"}
                       step={5}
                       onEdit={setStep}
                     />
                     <ReviewItem
-                      label="Timeline"
+                      label={t("wiz.review.timeline")}
                       value={formData.timeline || "—"}
                       step={5}
                       onEdit={setStep}
                     />
                     {selectedAddOns.length > 0 && (
                       <ReviewItem
-                        label="Add-ons"
+                        label={t("wiz.review.addons")}
                         value={selectedAddOns
                           .map(
-                            (id) => addOns.find((a) => a.id === id)?.name
+                            (id) => {
+                              const a = addOns.find((a) => a.id === id);
+                              return a ? N(a) : undefined;
+                            }
                           )
+                          .filter(Boolean)
                           .join(", ")}
                         step={6}
                         onEdit={setStep}
@@ -862,15 +868,14 @@ function StartProjectWizard() {
                         className="mt-1 accent-white"
                       />
                       <span className="text-sm text-white/60">
-                        I agree to the{" "}
+                        {t("contact.consent")}{" "}
                         <Link
                           href="/privacy"
                           className="text-white/70 hover:underline"
                         >
-                          Privacy Policy
+                          {t("contact.privacyLink")}
                         </Link>
-                        . AMENZO will use this information to contact me about
-                        my project.
+                        {t("contact.consentSuffix")}
                       </span>
                     </label>
                   </div>

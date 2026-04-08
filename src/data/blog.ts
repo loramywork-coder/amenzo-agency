@@ -1,23 +1,33 @@
 export interface BlogPost {
   slug: string;
   title: string;
+  titleDe?: string;
   excerpt: string;
+  excerptDe?: string;
   category: string;
+  categoryDe?: string;
   date: string;
   readTime: string;
+  readTimeDe?: string;
   image: string;
   content: string;
+  contentDe?: string;
 }
 
 export const blogPosts: BlogPost[] = [
   {
     slug: "why-speed-is-the-most-underrated-conversion-tool",
     title: "Why Speed Is the Most Underrated Conversion Tool",
+    titleDe: "Warum Geschwindigkeit das unterschätzteste Conversion-Tool ist",
     excerpt:
       "A 1-second delay costs you 7% of conversions. Here’s how modern sites load in under 1.5 seconds — and why it matters more than your headline.",
+    excerptDe:
+      "Eine Sekunde Verzögerung kostet Sie 7 % Ihrer Conversions. So laden moderne Websites in unter 1,5 Sekunden — und warum das wichtiger ist als Ihre Überschrift.",
     category: "Performance",
+    categoryDe: "Performance",
     date: "2026-03-31",
     readTime: "6 min read",
+    readTimeDe: "6 Min. Lesezeit",
     image:
       "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=3840&q=90",
     content: `Your headline doesn’t matter if nobody waits to read it.
@@ -70,11 +80,16 @@ Either way, speed is the cheapest conversion improvement you’ll ever make.`,
   {
     slug: "the-real-cost-of-a-custom-website",
     title: "The Real Cost of a Custom Website in 2026",
+    titleDe: "Was eine individuelle Website 2026 wirklich kostet",
     excerpt:
       "From \u20AC500 templates to \u20AC50,000 platforms. An honest breakdown of what websites cost, why, and what you actually get at each price point.",
+    excerptDe:
+      "Von 500-€-Templates bis zu 50.000-€-Plattformen. Eine ehrliche Aufschlüsselung, was Websites kosten, warum — und was Sie auf jeder Preisstufe wirklich bekommen.",
     category: "Business",
+    categoryDe: "Business",
     date: "2026-03-30",
     readTime: "8 min read",
+    readTimeDe: "8 Min. Lesezeit",
     image:
       "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=3840&q=90",
     content: `Nobody in the web industry wants to talk honestly about pricing. Every agency says "contact for a quote." Nobody tells you what you actually get for your money.
@@ -133,11 +148,16 @@ Buy the option where the agency clearly explains what they’ll build, why it’
   {
     slug: "why-we-dont-use-wordpress-anymore",
     title: "Why WordPress Is No Longer the Best Choice",
+    titleDe: "Warum WordPress nicht mehr die beste Wahl ist",
     excerpt:
       "WordPress used to be the go-to. Here’s why many have moved on — and why businesses’ sites are faster, safer, and cheaper to maintain because of it.",
+    excerptDe:
+      "WordPress war einmal die Standardwahl. Warum viele weitergezogen sind — und warum Unternehmens-Websites dadurch schneller, sicherer und günstiger im Betrieb sind.",
     category: "Technology",
+    categoryDe: "Technologie",
     date: "2026-03-29",
     readTime: "7 min read",
+    readTimeDe: "7 Min. Lesezeit",
     image:
       "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=3840&q=90",
     content: `Here’s a common story: many agencies used to build WordPress sites.
@@ -193,11 +213,16 @@ The web has moved on. Smart businesses are moving with it.`,
   {
     slug: "design-systems-why-your-brand-needs-one",
     title: "Design Systems: Why Your Brand Needs One",
+    titleDe: "Design Systems: Warum Ihre Marke eines braucht",
     excerpt:
       "A design system isn’t a luxury for big companies. It’s the reason some brands look polished everywhere and others look like they’re winging it.",
+    excerptDe:
+      "Ein Design-System ist kein Luxus für Großunternehmen. Es ist der Grund, warum manche Marken überall poliert wirken und andere wie aus dem Stegreif aussehen.",
     category: "Design",
+    categoryDe: "Design",
     date: "2026-03-28",
     readTime: "5 min read",
+    readTimeDe: "5 Min. Lesezeit",
     image:
       "https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?w=3840&q=90",
     content: `You’ve seen the difference. Some brands look polished on every touchpoint — their website, their Instagram, their emails, their proposals. Others look like each piece was designed by a different person on a different day.
@@ -256,11 +281,16 @@ Then build from there. The key is documenting decisions so they don’t need to 
   {
     slug: "anatomy-of-a-high-converting-landing-page",
     title: "Anatomy of a High-Converting Landing Page",
+    titleDe: "Anatomie einer hochkonvertierenden Landing Page",
     excerpt:
       "After studying hundreds of high-converting landing pages, here are the 7 elements that separate pages that convert at 2% from pages that convert at 12%.",
+    excerptDe:
+      "Nach der Analyse hunderter hochkonvertierender Landing Pages: die 7 Elemente, die Seiten mit 2 % Conversion von Seiten mit 12 % unterscheiden.",
     category: "Strategy",
+    categoryDe: "Strategie",
     date: "2026-03-27",
     readTime: "7 min read",
+    readTimeDe: "7 Min. Lesezeit",
     image:
       "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=3840&q=90",
     content: `A landing page has one job: convert a visitor into a lead or customer. No navigation distractions, no blog sidebar, no "explore our services." One page. One goal.
@@ -354,11 +384,16 @@ Then iterate. The first version is never the best version.`,
   {
     slug: "accessibility-is-not-optional",
     title: "Web Accessibility Is Not Optional Anymore",
+    titleDe: "Web-Barrierefreiheit ist nicht mehr optional",
     excerpt:
       "The European Accessibility Act takes effect in 2025. Here’s what it means for your website and why accessibility is good business, not just compliance.",
+    excerptDe:
+      "Der European Accessibility Act tritt 2025 in Kraft. Was das für Ihre Website bedeutet — und warum Barrierefreiheit gutes Geschäft ist, nicht nur Pflichterfüllung.",
     category: "Accessibility",
+    categoryDe: "Barrierefreiheit",
     date: "2026-03-26",
     readTime: "6 min read",
+    readTimeDe: "6 Min. Lesezeit",
     image:
       "https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=3840&q=90",
     content: `Web accessibility used to be a nice-to-have. As of 2025, it’s the law.
