@@ -58,7 +58,7 @@ function Inner({ slug }: { slug: string }) {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7 }}
               className="mb-12"
-              style={{ fontFamily: fHead, fontSize: "clamp(40px, 5vw, 72px)", lineHeight: 1, fontWeight: 400, letterSpacing: "-0.02em" }}
+              style={{ fontFamily: fHead, fontSize: "clamp(40px, 5vw, 72px)", lineHeight: 1, fontWeight: 400, letterSpacing: "-0.02em", color: C.dark }}
             >
               {tri(a.titleEn, a.titleDe, a.titleFr, lang)}
             </motion.h1>

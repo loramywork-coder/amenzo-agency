@@ -97,7 +97,7 @@ function HaleHomeInner() {
                 <p className="text-[10px] tracking-[0.3em] uppercase mb-6" style={{ color: C.grey, fontFamily: fMono }}>
                   — {tri("Selected Projects", "Ausgewählte Projekte", "Projets sélectionnés", lang)}
                 </p>
-                <h2 style={{ fontFamily: fHead, fontSize: "clamp(44px, 6vw, 88px)", lineHeight: 0.95, fontWeight: 400, letterSpacing: "-0.02em" }}>
+                <h2 style={{ fontFamily: fHead, fontSize: "clamp(44px, 6vw, 88px)", lineHeight: 0.95, fontWeight: 400, letterSpacing: "-0.02em", color: C.dark }}>
                   {tri("Selected work,", "Ausgewählte Arbeiten,", "Travaux choisis,", lang)}<br />
                   <em style={{ fontStyle: "italic", color: C.grey }}>
                     {tri("2022 — 2025.", "2022 — 2025.", "2022 — 2025.", lang)}
@@ -158,7 +158,7 @@ function HaleHomeInner() {
             <p className="text-[10px] tracking-[0.3em] uppercase mb-6" style={{ color: C.grey, fontFamily: fMono }}>
               — {tri("Approach", "Ansatz", "Approche", lang)}
             </p>
-            <h2 className="mb-16 max-w-4xl" style={{ fontFamily: fHead, fontSize: "clamp(38px, 5vw, 72px)", lineHeight: 0.98, fontWeight: 400, letterSpacing: "-0.02em" }}>
+            <h2 className="mb-16 max-w-4xl" style={{ fontFamily: fHead, fontSize: "clamp(38px, 5vw, 72px)", lineHeight: 0.98, fontWeight: 400, letterSpacing: "-0.02em", color: C.dark }}>
               {tri(
                 "Three ideas at the heart of every project.",
                 "Drei Ideen im Zentrum jedes Projekts.",
@@ -175,7 +175,7 @@ function HaleHomeInner() {
                   <p className="text-[11px] mb-5" style={{ color: C.dark, fontFamily: fMono }}>
                     — {a.num}
                   </p>
-                  <h3 style={{ fontFamily: fHead, fontSize: 32, lineHeight: 1.05, fontWeight: 400 }}>
+                  <h3 style={{ fontFamily: fHead, fontSize: 32, lineHeight: 1.05, fontWeight: 400, color: C.dark }}>
                     {tri(a.en.title, a.de.title, a.fr.title, lang)}
                   </h3>
                   <p className="mt-4 text-[14px] leading-[1.75]" style={{ color: C.grey }}>
@@ -201,7 +201,7 @@ function HaleHomeInner() {
             {awards.map((a, i) => (
               <Reveal key={a} delay={i * 0.05}>
                 <div className="flex items-center justify-between py-6 text-[14px] md:text-[16px]" style={{ borderTop: `1px solid ${C.border}` }}>
-                  <span style={{ fontFamily: fHead }}>{a}</span>
+                  <span style={{ fontFamily: fHead, color: C.dark }}>{a}</span>
                   <span className="text-[11px] tracking-wider uppercase" style={{ color: C.grey, fontFamily: fMono }}>
                     — Award
                   </span>
@@ -220,7 +220,7 @@ function HaleHomeInner() {
           </p>
           <div className="flex flex-wrap items-center justify-center gap-x-14 gap-y-6">
             {press.map((p) => (
-              <span key={p} className="text-[20px] md:text-[28px] opacity-80" style={{ fontFamily: fHead, fontWeight: 400, fontStyle: "italic" }}>
+              <span key={p} className="text-[20px] md:text-[28px] opacity-80" style={{ fontFamily: fHead, fontWeight: 400, fontStyle: "italic", color: C.bg }}>
                 {p}
               </span>
             ))}

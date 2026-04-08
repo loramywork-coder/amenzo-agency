@@ -30,7 +30,7 @@ function Inner() {
           <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6 }} className="text-[10px] tracking-[0.3em] uppercase mb-6" style={{ color: C.grey, fontFamily: fMono }}>
             — {tri("Careers", "Karriere", "Carrières", lang)}
           </motion.p>
-          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.1 }} className="max-w-4xl" style={{ fontFamily: fHead, fontSize: "clamp(48px, 7vw, 110px)", lineHeight: 0.92, fontWeight: 400, letterSpacing: "-0.02em" }}>
+          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.1 }} className="max-w-4xl" style={{ fontFamily: fHead, fontSize: "clamp(48px, 7vw, 110px)", lineHeight: 0.92, fontWeight: 400, letterSpacing: "-0.02em", color: C.dark }}>
             {tri("Join a small studio", "Mitarbeit in einem kleinen Büro", "Rejoindre un petit studio", lang)}<br />
             <em style={{ fontStyle: "italic" }}>{tri("drawing every detail.", "das jedes Detail zeichnet.", "qui dessine chaque détail.", lang)}</em>
           </motion.h1>
@@ -77,7 +77,7 @@ function Inner() {
                   <p className="text-[11px] tracking-wider uppercase mb-3" style={{ color: C.grey, fontFamily: fMono }}>
                     — {tri(p.en.type, p.de.type, p.fr.type, lang)}
                   </p>
-                  <h2 style={{ fontFamily: fHead, fontSize: "clamp(32px, 4vw, 54px)", lineHeight: 1, fontWeight: 400 }}>
+                  <h2 style={{ fontFamily: fHead, fontSize: "clamp(32px, 4vw, 54px)", lineHeight: 1, fontWeight: 400, color: C.dark }}>
                     {tri(p.en.title, p.de.title, p.fr.title, lang)}
                   </h2>
                 </div>
@@ -103,7 +103,7 @@ function Inner() {
             <p className="text-[10px] tracking-[0.3em] uppercase mb-6" style={{ color: C.grey, fontFamily: fMono }}>
               — {tri("Spontaneous applications", "Initiativbewerbung", "Candidatures spontanées", lang)}
             </p>
-            <h2 className="max-w-3xl mx-auto mb-8" style={{ fontFamily: fHead, fontSize: "clamp(32px, 4vw, 56px)", lineHeight: 1.05, fontWeight: 400 }}>
+            <h2 className="max-w-3xl mx-auto mb-8" style={{ fontFamily: fHead, fontSize: "clamp(32px, 4vw, 56px)", lineHeight: 1.05, fontWeight: 400, color: C.dark }}>
               {tri(
                 "Don't see a role that fits? Write to us anyway.",
                 "Keine passende Stelle? Schreiben Sie uns trotzdem.",

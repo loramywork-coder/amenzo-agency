@@ -36,7 +36,7 @@ function Inner() {
           <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6 }} className="text-[10px] tracking-[0.3em] uppercase mb-6" style={{ color: C.grey, fontFamily: fMono }}>
             — {tri("Press & Awards", "Presse & Auszeichnungen", "Presse & Prix", lang)}
           </motion.p>
-          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.1 }} style={{ fontFamily: fHead, fontSize: "clamp(48px, 8vw, 130px)", lineHeight: 0.92, fontWeight: 400, letterSpacing: "-0.02em" }}>
+          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.1 }} style={{ fontFamily: fHead, fontSize: "clamp(48px, 8vw, 130px)", lineHeight: 0.92, fontWeight: 400, letterSpacing: "-0.02em", color: C.dark }}>
             {tri("Recognition.", "Anerkennung.", "Reconnaissance.", lang)}
           </motion.h1>
         </div>
@@ -56,7 +56,7 @@ function Inner() {
               <Reveal key={i} delay={i * 0.04}>
                 <div className="grid grid-cols-12 gap-4 py-5 items-baseline" style={{ borderBottom: `1px solid ${C.border}` }}>
                   <span className="col-span-2 md:col-span-1" style={{ fontFamily: fMono, color: C.grey, fontSize: 12 }}>— {a.year}</span>
-                  <span className="col-span-10 md:col-span-5" style={{ fontFamily: fHead, fontSize: 22, lineHeight: 1.2 }}>{a.title}</span>
+                  <span className="col-span-10 md:col-span-5" style={{ fontFamily: fHead, fontSize: 22, lineHeight: 1.2, color: C.dark }}>{a.title}</span>
                   <span className="col-span-8 md:col-span-4 text-[11px] tracking-wider uppercase" style={{ color: C.grey, fontFamily: fMono }}>{a.category}</span>
                   <span className="col-span-4 md:col-span-2 text-right md:text-left text-[11px] tracking-wider uppercase" style={{ color: C.grey, fontFamily: fMono }}>{a.project}</span>
                 </div>
@@ -79,8 +79,8 @@ function Inner() {
             {features.map((f, i) => (
               <Reveal key={i} delay={i * 0.05}>
                 <a href="#" className="grid grid-cols-12 gap-4 py-8 items-baseline no-underline transition-opacity hover:opacity-60" style={{ borderBottom: `1px solid ${C.border}`, color: C.dark }}>
-                  <span className="col-span-2" style={{ fontFamily: fHead, fontSize: 22, fontStyle: "italic" }}>{f.pub}</span>
-                  <span className="col-span-9" style={{ fontFamily: fHead, fontSize: 20, lineHeight: 1.3 }}>
+                  <span className="col-span-2" style={{ fontFamily: fHead, fontSize: 22, fontStyle: "italic", color: C.dark }}>{f.pub}</span>
+                  <span className="col-span-9" style={{ fontFamily: fHead, fontSize: 20, lineHeight: 1.3, color: C.dark }}>
                     {tri(f.titleEn, f.titleDe, f.titleFr, lang)}
                   </span>
                   <span className="col-span-1 text-right" style={{ color: C.grey, fontFamily: fMono, fontSize: 11 }}>

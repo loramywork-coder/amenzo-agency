@@ -18,7 +18,7 @@ function Inner() {
           <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6 }} className="text-[10px] tracking-[0.3em] uppercase mb-6" style={{ color: C.grey, fontFamily: fMono }}>
             — {tri("Contact", "Kontakt", "Contact", lang)}
           </motion.p>
-          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.1 }} className="max-w-4xl" style={{ fontFamily: fHead, fontSize: "clamp(48px, 7vw, 120px)", lineHeight: 0.92, fontWeight: 400, letterSpacing: "-0.02em" }}>
+          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.1 }} className="max-w-4xl" style={{ fontFamily: fHead, fontSize: "clamp(48px, 7vw, 120px)", lineHeight: 0.92, fontWeight: 400, letterSpacing: "-0.02em", color: C.dark }}>
             {tri("Tell us about", "Erzählen Sie uns", "Parlez-nous de", lang)}<br />
             <em style={{ fontStyle: "italic" }}>{tri("the project.", "Ihr Projekt.", "votre projet.", lang)}</em>
           </motion.h1>
@@ -33,7 +33,7 @@ function Inner() {
               <Rule className="opacity-25 mb-10" />
               {sent ? (
                 <div className="py-16 text-center">
-                  <p className="text-2xl mb-3" style={{ fontFamily: fHead }}>
+                  <p className="text-2xl mb-3" style={{ fontFamily: fHead, color: C.dark }}>
                     {tri("Thank you.", "Danke.", "Merci.", lang)}
                   </p>
                   <p className="text-[13px] tracking-wider uppercase" style={{ color: C.grey, fontFamily: fMono }}>

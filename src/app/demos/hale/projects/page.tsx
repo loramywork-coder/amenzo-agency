@@ -46,7 +46,7 @@ function HaleProjectsInner() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.1 }}
-            style={{ fontFamily: fHead, fontSize: "clamp(52px, 9vw, 140px)", lineHeight: 0.92, fontWeight: 400, letterSpacing: "-0.02em" }}
+            style={{ fontFamily: fHead, fontSize: "clamp(52px, 9vw, 140px)", lineHeight: 0.92, fontWeight: 400, letterSpacing: "-0.02em", color: C.dark }}
           >
             {tri("Projects.", "Projekte.", "Projets.", lang)}
           </motion.h1>
@@ -116,7 +116,7 @@ function HaleProjectsInner() {
                     style={{ borderBottom: `1px solid ${C.border}`, color: C.dark }}
                   >
                     <span className="col-span-1 text-[12px]" style={{ color: C.grey, fontFamily: fMono }}>— {p.num}</span>
-                    <span className="col-span-5" style={{ fontFamily: fHead, fontSize: 26, lineHeight: 1.1 }}>
+                    <span className="col-span-5" style={{ fontFamily: fHead, fontSize: 26, lineHeight: 1.1, color: C.dark }}>
                       {tri(p.titleEn, p.titleDe, p.titleFr, lang)}
                     </span>
                     <span className="col-span-3 text-[11px] tracking-wider uppercase" style={{ color: C.grey, fontFamily: fMono }}>

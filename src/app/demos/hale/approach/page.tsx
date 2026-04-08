@@ -48,7 +48,7 @@ function Inner() {
           <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6 }} className="text-[10px] tracking-[0.3em] uppercase mb-6" style={{ color: C.grey, fontFamily: fMono }}>
             — {tri("Approach", "Ansatz", "Approche", lang)}
           </motion.p>
-          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.1 }} className="max-w-4xl" style={{ fontFamily: fHead, fontSize: "clamp(48px, 7vw, 120px)", lineHeight: 0.92, fontWeight: 400, letterSpacing: "-0.02em" }}>
+          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.1 }} className="max-w-4xl" style={{ fontFamily: fHead, fontSize: "clamp(48px, 7vw, 120px)", lineHeight: 0.92, fontWeight: 400, letterSpacing: "-0.02em", color: C.dark }}>
             {tri("Four phases,", "Vier Phasen,", "Quatre phases,", lang)}<br />
             <em style={{ fontStyle: "italic" }}>{tri("one continuous thought.", "ein fortlaufender Gedanke.", "une pensée continue.", lang)}</em>
           </motion.h1>
@@ -69,7 +69,7 @@ function Inner() {
                 <p className="text-[96px] md:text-[160px] leading-[0.85] mb-4" style={{ fontFamily: fHead, fontWeight: 400, color: C.grey, opacity: 0.35 }}>
                   {p.num}
                 </p>
-                <h2 style={{ fontFamily: fHead, fontSize: "clamp(36px, 4.5vw, 64px)", lineHeight: 1, fontWeight: 400, letterSpacing: "-0.015em" }}>
+                <h2 style={{ fontFamily: fHead, fontSize: "clamp(36px, 4.5vw, 64px)", lineHeight: 1, fontWeight: 400, letterSpacing: "-0.015em", color: C.dark }}>
                   {tri(p.en.title, p.de.title, p.fr.title, lang)}
                 </h2>
                 <p className="mt-6 text-[17px] leading-[1.75]" style={{ color: C.grey }}>

@@ -43,7 +43,7 @@ function HaleProjectDetailInner({ slug }: { slug: string }) {
               <p className="text-[10px] tracking-[0.25em] uppercase mb-2" style={{ color: C.grey, fontFamily: fMono }}>
                 — {row.label}
               </p>
-              <p style={{ fontFamily: fHead, fontSize: 20, lineHeight: 1.1 }}>{row.value}</p>
+              <p style={{ fontFamily: fHead, fontSize: 20, lineHeight: 1.1, color: C.dark }}>{row.value}</p>
             </div>
           ))}
         </div>
@@ -56,7 +56,7 @@ function HaleProjectDetailInner({ slug }: { slug: string }) {
             <p className="text-[10px] tracking-[0.25em] uppercase mb-5" style={{ color: C.grey, fontFamily: fMono }}>
               — {p.num}
             </p>
-            <h1 style={{ fontFamily: fHead, fontSize: "clamp(48px, 7vw, 110px)", lineHeight: 0.92, fontWeight: 400, letterSpacing: "-0.02em" }}>
+            <h1 style={{ fontFamily: fHead, fontSize: "clamp(48px, 7vw, 110px)", lineHeight: 0.92, fontWeight: 400, letterSpacing: "-0.02em", color: C.dark }}>
               {tri(p.titleEn, p.titleDe, p.titleFr, lang)}
             </h1>
           </Reveal>
@@ -121,7 +121,7 @@ function HaleProjectDetailInner({ slug }: { slug: string }) {
                 <p className="text-[10px] tracking-[0.25em] uppercase mb-1" style={{ color: C.grey, fontFamily: fMono }}>
                   — {tri("Previous", "Vorheriges", "Précédent", lang)}
                 </p>
-                <p style={{ fontFamily: fHead, fontSize: 22, lineHeight: 1.1 }}>
+                <p style={{ fontFamily: fHead, fontSize: 22, lineHeight: 1.1, color: C.dark }}>
                   {tri(prev.titleEn, prev.titleDe, prev.titleFr, lang)}
                 </p>
               </div>
@@ -136,7 +136,7 @@ function HaleProjectDetailInner({ slug }: { slug: string }) {
                 <p className="text-[10px] tracking-[0.25em] uppercase mb-1" style={{ color: C.grey, fontFamily: fMono }}>
                   — {tri("Next", "Nächstes", "Suivant", lang)}
                 </p>
-                <p style={{ fontFamily: fHead, fontSize: 22, lineHeight: 1.1 }}>
+                <p style={{ fontFamily: fHead, fontSize: 22, lineHeight: 1.1, color: C.dark }}>
                   {tri(next.titleEn, next.titleDe, next.titleFr, lang)}
                 </p>
               </div>

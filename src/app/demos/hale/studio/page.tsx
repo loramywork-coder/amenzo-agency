@@ -37,7 +37,7 @@ function Inner() {
           <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6 }} className="text-[10px] tracking-[0.3em] uppercase mb-6" style={{ color: C.grey, fontFamily: fMono }}>
             — {tri("Studio", "Studio", "Studio", lang)}
           </motion.p>
-          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.1 }} className="max-w-5xl" style={{ fontFamily: fHead, fontSize: "clamp(48px, 8vw, 130px)", lineHeight: 0.92, fontWeight: 400, letterSpacing: "-0.02em" }}>
+          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.1 }} className="max-w-5xl" style={{ fontFamily: fHead, fontSize: "clamp(48px, 8vw, 130px)", lineHeight: 0.92, fontWeight: 400, letterSpacing: "-0.02em", color: C.dark }}>
             {tri("Six people,", "Sechs Menschen,", "Six personnes,", lang)}<br />
             <em style={{ fontStyle: "italic" }}>{tri("one studio.", "ein Studio.", "un studio.", lang)}</em>
           </motion.h1>
@@ -56,7 +56,7 @@ function Inner() {
               <p className="text-[10px] tracking-[0.25em] uppercase mb-4" style={{ color: C.grey, fontFamily: fMono }}>
                 — {tri("Philosophy", "Philosophie", "Philosophie", lang)}
               </p>
-              <p className="text-[22px] md:text-[26px] leading-[1.4]" style={{ fontFamily: fHead }}>
+              <p className="text-[22px] md:text-[26px] leading-[1.4]" style={{ fontFamily: fHead, color: C.dark }}>
                 {tri(
                   "We believe architecture is a craft of consequences, not gestures. Every decision should be defensible. Every detail should earn its place. Every room should work before it tries to impress.",
                   "Wir glauben, Architektur ist ein Handwerk der Konsequenzen, nicht der Gesten. Jede Entscheidung muss begründbar sein. Jedes Detail muss seinen Platz verdienen. Jeder Raum muss funktionieren, bevor er beeindrucken will.",
@@ -93,7 +93,7 @@ function Inner() {
                   <div className="relative aspect-[4/5] mb-5">
                     <Image src={`/images/hale/${m.img}`} alt={m.name} fill className="object-cover" />
                   </div>
-                  <p style={{ fontFamily: fHead, fontSize: 22, lineHeight: 1.1 }}>{m.name}</p>
+                  <p style={{ fontFamily: fHead, fontSize: 22, lineHeight: 1.1, color: C.dark }}>{m.name}</p>
                   <p className="text-[11px] tracking-wider uppercase mt-1.5" style={{ color: C.grey, fontFamily: fMono }}>
                     {tri(m.role.en, m.role.de, m.role.fr, lang)}
                   </p>
@@ -111,7 +111,7 @@ function Inner() {
             <p className="text-[10px] tracking-[0.3em] uppercase mb-6" style={{ color: C.grey, fontFamily: fMono }}>
               — {tri("Timeline", "Zeitstrahl", "Chronologie", lang)}
             </p>
-            <h2 className="mb-14 max-w-3xl" style={{ fontFamily: fHead, fontSize: "clamp(36px, 5vw, 64px)", lineHeight: 0.98, fontWeight: 400, letterSpacing: "-0.02em" }}>
+            <h2 className="mb-14 max-w-3xl" style={{ fontFamily: fHead, fontSize: "clamp(36px, 5vw, 64px)", lineHeight: 0.98, fontWeight: 400, letterSpacing: "-0.02em", color: C.dark }}>
               {tri("Fourteen years,", "Vierzehn Jahre,", "Quatorze ans,", lang)}<br />
               <em style={{ fontStyle: "italic", color: C.grey }}>{tri("one idea.", "eine Idee.", "une idée.", lang)}</em>
             </h2>
@@ -122,7 +122,7 @@ function Inner() {
               <Reveal key={t.year} delay={i * 0.06}>
                 <div className="grid grid-cols-12 gap-4 py-6 text-[14px]" style={{ borderBottom: `1px solid ${C.border}` }}>
                   <span className="col-span-2 md:col-span-1" style={{ fontFamily: fMono, color: C.grey }}>— {t.year}</span>
-                  <span className="col-span-10 md:col-span-11" style={{ fontFamily: fHead, fontSize: 20, lineHeight: 1.4 }}>
+                  <span className="col-span-10 md:col-span-11" style={{ fontFamily: fHead, fontSize: 20, lineHeight: 1.4, color: C.dark }}>
                     {tri(t.en, t.de, t.fr, lang)}
                   </span>
                 </div>

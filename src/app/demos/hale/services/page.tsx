@@ -55,7 +55,7 @@ function Inner() {
           <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6 }} className="text-[10px] tracking-[0.3em] uppercase mb-6" style={{ color: C.grey, fontFamily: fMono }}>
             — {tri("Services", "Leistungen", "Services", lang)} / 05
           </motion.p>
-          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.1 }} style={{ fontFamily: fHead, fontSize: "clamp(48px, 8vw, 130px)", lineHeight: 0.92, fontWeight: 400, letterSpacing: "-0.02em" }}>
+          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.1 }} style={{ fontFamily: fHead, fontSize: "clamp(48px, 8vw, 130px)", lineHeight: 0.92, fontWeight: 400, letterSpacing: "-0.02em", color: C.dark }}>
             {tri("What we do.", "Was wir tun.", "Ce que nous faisons.", lang)}
           </motion.h1>
         </div>
@@ -73,7 +73,7 @@ function Inner() {
                     <p style={{ fontFamily: fMono, color: C.grey, fontSize: 12 }}>— {s.num}</p>
                   </div>
                   <div className="col-span-12 md:col-span-6">
-                    <h2 style={{ fontFamily: fHead, fontSize: "clamp(32px, 4vw, 52px)", lineHeight: 1.02, fontWeight: 400, letterSpacing: "-0.015em" }}>
+                    <h2 style={{ fontFamily: fHead, fontSize: "clamp(32px, 4vw, 52px)", lineHeight: 1.02, fontWeight: 400, letterSpacing: "-0.015em", color: C.dark }}>
                       {tri(s.en.title, s.de.title, s.fr.title, lang)}
                     </h2>
                   </div>

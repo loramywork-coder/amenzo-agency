@@ -211,7 +211,7 @@ export function HaleFooter() {
           <p className="text-[11px] tracking-[0.3em] uppercase mb-6" style={{ color: C.grey, fontFamily: fMono }}>
             — {tri("Studio", "Studio", "Studio", lang)}
           </p>
-          <p className="text-[42px] md:text-[56px] leading-[0.95] mb-8" style={{ fontFamily: fHead, fontWeight: 400 }}>
+          <p className="text-[42px] md:text-[56px] leading-[0.95] mb-8" style={{ fontFamily: fHead, fontWeight: 400, color: C.dark }}>
             Hale <em style={{ fontStyle: "italic" }}>& Partners</em>
           </p>
         </div>
