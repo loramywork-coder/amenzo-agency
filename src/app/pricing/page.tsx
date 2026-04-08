@@ -32,6 +32,7 @@ const TIERS = [
     highlighted: false,
     badgeKey: "pricing.forFounders" as const,
     footnoteKey: "tier.startup.footnote" as const,
+    demoHref: "/demos/kova",
   },
   {
     nameKey: "tier.basic.name" as const,
@@ -41,6 +42,7 @@ const TIERS = [
     featureKeys: ["tier.basic.f1","tier.basic.f2","tier.basic.f3","tier.basic.f4","tier.basic.f5"] as const,
     ctaHref: "/start-project",
     highlighted: false,
+    demoHref: "/demos/flux",
   },
   {
     nameKey: "tier.standard.name" as const,
@@ -50,6 +52,7 @@ const TIERS = [
     featureKeys: ["tier.standard.f1","tier.standard.f2","tier.standard.f3","tier.standard.f4","tier.standard.f5","tier.standard.f6","tier.standard.f7"] as const,
     ctaHref: "/start-project",
     highlighted: true,
+    demoHref: "/demos/casa",
   },
   {
     nameKey: "tier.premium.name" as const,
@@ -59,6 +62,7 @@ const TIERS = [
     featureKeys: ["tier.premium.f1","tier.premium.f2","tier.premium.f3","tier.premium.f4","tier.premium.f5","tier.premium.f6","tier.premium.f7"] as const,
     ctaHref: "/start-project",
     highlighted: false,
+    demoHref: "/demos/hale",
   },
   {
     nameKey: "tier.custom.name" as const,
@@ -69,6 +73,7 @@ const TIERS = [
     featureKeys: ["tier.custom.f1","tier.custom.f2","tier.custom.f3","tier.custom.f4","tier.custom.f5","tier.custom.f6"] as const,
     ctaHref: "/start-project",
     highlighted: false,
+    demoHref: "/demos/maison",
   },
 ] as const;
 
@@ -238,6 +243,16 @@ export default function PricingPage() {
                   >
                     <T k="cta.startProject" /> <ArrowRight className="w-4 h-4" />
                   </Button>
+                  {"demoHref" in tier && tier.demoHref && (
+                    <a
+                      href={tier.demoHref}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-3 block text-center text-[11px] text-violet hover:text-violet/80 transition-colors underline underline-offset-4"
+                    >
+                      View live demo →
+                    </a>
+                  )}
                   <p className="text-[9px] text-text-muted text-center mt-3 italic min-h-[14px]">
                     {"footnoteKey" in tier && tier.footnoteKey ? <T k={tier.footnoteKey} /> : "\u00A0"}
                   </p>
