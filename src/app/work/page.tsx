@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLocale } from "@/lib/i18n/locale-context";
 
 const projects = [
   { num: "01", name: "Grand Harbour Hotel", category: "Hospitality", href: "/demos/hotel" },
@@ -21,6 +22,7 @@ const categories = ["All", "Hospitality", "Gastro", "Real Estate", "Healthcare",
 
 export default function WorkPage() {
   const [filter, setFilter] = useState("All");
+  const { t } = useLocale();
 
   const filtered = filter === "All"
     ? projects
@@ -33,10 +35,10 @@ export default function WorkPage() {
         
         <div className="container-wide relative z-10">
           <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight">
-            Selected Work
+            {t("work.title")}
           </h1>
           <p className="mt-6 text-base md:text-lg text-white/50 max-w-xl">
-            Design showcases across 6 industries. Each project is a fully interactive website you can explore.
+            {t("work.subtitle")}
           </p>
         </div>
       </section>

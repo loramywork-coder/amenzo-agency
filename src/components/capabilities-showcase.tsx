@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLocale } from "@/lib/i18n/locale-context";
 import {
   ArrowRight,
   Check,
@@ -1524,25 +1525,24 @@ function ResponsivePreviewSection() {
    ═══════════════════════════════════════════════════════════════════ */
 
 export function CapabilitiesShowcase() {
+  const { t } = useLocale();
   return (
     <div className="relative min-h-screen">
       {/* HERO */}
       <section className="relative pt-40 pb-16 px-6">
         <div className="max-w-4xl mx-auto text-center">
           <p className="text-[9px] tracking-[0.6em] uppercase text-white/15 font-medium mb-6">
-            Design Capabilities
+            {t("cap.eyebrow")}
           </p>
           <h1 className="text-3xl md:text-6xl font-bold text-white tracking-tight leading-[1.05]">
-            Tap. Swipe. Scroll<span className="text-white/15">.</span>
+            {t("cap.title")}<span className="text-white/15">.</span>
           </h1>
           <p className="mt-6 text-sm text-white/30 max-w-md mx-auto leading-relaxed">
-            Every component below is live and interactive.
-            Touch it on your phone. Hover it on desktop.
-            These are the building blocks of your next website.
+            {t("cap.subtitle")}
           </p>
           <p className="mt-3 text-[10px] text-white/15 tracking-wider uppercase">
-            <span className="hidden md:inline">Hover and click to interact</span>
-            <span className="md:hidden">Tap and swipe to interact</span>
+            <span className="hidden md:inline">{t("cap.hoverHint")}</span>
+            <span className="md:hidden">{t("cap.tapHint")}</span>
           </p>
         </div>
       </section>
@@ -1570,21 +1570,20 @@ export function CapabilitiesShowcase() {
       <section className="py-28 md:py-36 px-6">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tight leading-tight">
-            Seen enough<span className="text-white/15">?</span>
+            {t("cap.finalTitle")}
           </h2>
           <p className="mt-6 text-sm text-white/30 max-w-md mx-auto">
-            Every component on this page can be part of your website.
-            Tell us what you need.
+            {t("cap.finalSubtitle")}
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-10">
             <a href="/start-project"
               className="w-full sm:w-auto text-center group inline-flex items-center justify-center gap-2 px-10 py-4 bg-white text-black text-[11px] font-bold uppercase tracking-[0.15em] rounded-full active:scale-95 transition-transform">
-              Start a Project
+              {t("cta.startProject")}
               <ArrowRight className="w-3.5 h-3.5 group-active:translate-x-1 transition-transform" />
             </a>
             <a href="/pricing"
               className="w-full sm:w-auto text-center px-10 py-4 border border-white/10 text-white/50 text-[11px] font-medium uppercase tracking-[0.15em] rounded-full active:bg-white/5 transition-all">
-              View Pricing
+              {t("cta.viewPricing")}
             </a>
           </div>
         </div>

@@ -1,4 +1,5 @@
 import { generatePageMeta } from "@/lib/seo";
+import { T } from "@/lib/i18n/T";
 import { BreadcrumbSchema } from "@/components/structured-data";
 
 import { CONTACT_EMAIL } from "@/lib/constants";
@@ -148,18 +149,16 @@ export default function ServicesPage() {
         
         <div className="container-wide relative z-10 pt-40 pb-24">
           <AnimateIn animation="fadeIn" delay={0.1}>
-            <p className="caption mb-6 text-violet">What We Do</p>
+            <p className="caption mb-6 text-violet"><T k="services.intro.eyebrow" /></p>
           </AnimateIn>
           <TextReveal>
             <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold text-text-primary leading-[0.95]">
-              Our Services
+              <T k="services.intro.title" />
             </h1>
           </TextReveal>
           <AnimateIn animation="fadeUp" delay={0.4}>
             <p className="mt-8 max-w-2xl text-lg md:text-xl text-text-secondary leading-relaxed">
-              End-to-end digital services from strategy to launch. Every service
-              is priced transparently, delivered on time, and built to generate
-              real business results.
+              <T k="services.intro.subtitle" />
             </p>
           </AnimateIn>
         </div>

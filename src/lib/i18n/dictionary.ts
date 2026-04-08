@@ -180,6 +180,69 @@ export const dictionary = {
     de: "Voll navigierbare Demo-Websites für echte Branchen.",
   },
 
+  // Homepage — additional
+  "home.about.eyebrow": { en: "About", de: "Über uns" },
+  "home.about.title": { en: "Two people. One obsession.", de: "Zwei Menschen. Eine Leidenschaft." },
+  "home.about.body": {
+    en: "We're a two-person studio working with clients worldwide. We pair modern AI tools with hand-written code to deliver studio-quality websites at a fraction of the cost. Every pixel is intentional. Every interaction is considered.",
+    de: "Wir sind ein Zwei-Personen-Studio mit Kunden weltweit. Wir kombinieren moderne KI-Tools mit handgeschriebenem Code, um Websites in Studioqualität zum Bruchteil der Kosten zu liefern. Jedes Pixel ist gewollt. Jede Interaktion ist durchdacht.",
+  },
+  "home.about.cta": { en: "Learn more about us", de: "Mehr über uns erfahren" },
+  "home.viewAllCapabilities": { en: "View all capabilities", de: "Alle Fähigkeiten ansehen" },
+  "home.builtWith": { en: "Built With", de: "Gebaut mit" },
+  "home.cta.replyTime": {
+    en: "Tell us about your project and we'll respond within 24 hours with a free proposal.",
+    de: "Erzählen Sie uns von Ihrem Projekt — wir antworten innerhalb von 24 Stunden mit einem kostenlosen Angebot.",
+  },
+
+  // Pricing page extra
+  "pricing.tier.startup": { en: "Startup Launch", de: "Startup Launch" },
+  "pricing.tier.basic": { en: "Basic", de: "Basic" },
+  "pricing.tier.standard": { en: "Standard", de: "Standard" },
+  "pricing.tier.premium": { en: "Premium", de: "Premium" },
+  "pricing.tier.custom": { en: "Custom", de: "Individuell" },
+  "pricing.oneTime": { en: "one-time", de: "einmalig" },
+  "pricing.forFounders": { en: "For Founders", de: "Für Gründer" },
+  "pricing.cta": { en: "Start a Project", de: "Projekt starten" },
+  "pricing.compare.title": { en: "Compare Packages", de: "Pakete vergleichen" },
+  "pricing.compare.feature": { en: "Feature", de: "Funktion" },
+
+  // About page extra
+  "about.values.title": { en: "What We Believe", de: "Woran wir glauben" },
+  "about.values.eyebrow": { en: "Our Values", de: "Unsere Werte" },
+  "about.story.title": { en: "Our Story", de: "Unsere Geschichte" },
+  "about.story.eyebrow": { en: "How It Started", de: "Wie alles begann" },
+  "about.team.eyebrow": { en: "The Team", de: "Das Team" },
+  "about.team.title": { en: "Who We Are", de: "Wer wir sind" },
+  "about.team.subtitle": {
+    en: "A lean, focused studio where every project gets senior-level attention from day one.",
+    de: "Ein schlankes, fokussiertes Studio, in dem jedes Projekt von Anfang an Senior-Aufmerksamkeit erhält.",
+  },
+  "about.registered": { en: "Registered Information", de: "Eingetragene Informationen" },
+
+  // Services page extra
+  "services.intro.eyebrow": { en: "Services", de: "Leistungen" },
+  "services.intro.title": { en: "Everything You Need to Launch", de: "Alles, was Sie zum Launch brauchen" },
+  "services.intro.subtitle": {
+    en: "From custom design and development to SEO, hosting, and ongoing support — one studio, one point of contact.",
+    de: "Von individuellem Design und Entwicklung bis hin zu SEO, Hosting und laufendem Support — ein Studio, ein Ansprechpartner.",
+  },
+
+  // Capabilities page extra
+  "cap.section.buttons": { en: "Buttons", de: "Schaltflächen" },
+  "cap.section.cards": { en: "Card Interactions", de: "Karten-Interaktionen" },
+  "cap.section.scroll": { en: "Scroll Animations", de: "Scroll-Animationen" },
+  "cap.section.text": { en: "Text Effects", de: "Text-Effekte" },
+  "cap.section.glass": { en: "Glassmorphism", de: "Glassmorphismus" },
+  "cap.section.nav": { en: "Navigation", de: "Navigation" },
+  "cap.section.testimonials": { en: "Testimonials", de: "Stimmen" },
+  "cap.section.forms": { en: "Forms", de: "Formulare" },
+  "cap.section.micro": { en: "Micro-Interactions", de: "Mikro-Interaktionen" },
+  "cap.section.loading": { en: "Loading States", de: "Ladezustände" },
+
+  // Work page
+  "work.intro.title": { en: "Selected Work", de: "Ausgewählte Projekte" },
+
   // Start project
   "start.eyebrow": { en: "Start a Project", de: "Projekt starten" },
   "start.title": { en: "Let's Build Something", de: "Lassen Sie uns etwas Gemeinsames bauen" },

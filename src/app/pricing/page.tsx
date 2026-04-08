@@ -1,4 +1,5 @@
 import { generatePageMeta } from "@/lib/seo";
+import { T } from "@/lib/i18n/T";
 import { FAQSchema, BreadcrumbSchema, faqData } from "@/components/structured-data";
 import { CONTACT_EMAIL } from "@/lib/constants";
 import {
@@ -209,22 +210,16 @@ export default function PricingPage() {
         
         <div className="container-wide relative z-10 pt-40 pb-24">
           <AnimateIn animation="fadeIn" delay={0.1}>
-            <p className="caption mb-6 text-violet">Pricing</p>
+            <p className="caption mb-6 text-violet"><T k="pricing.eyebrow" /></p>
           </AnimateIn>
           <TextReveal className="pb-3">
             <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold text-text-primary leading-[0.95]">
-              Transparent Packages,
-            </h1>
-          </TextReveal>
-          <TextReveal delay={0.15} className="pb-3">
-            <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.95] mt-2">
-              <span className="gradient-text">Real Results</span>
+              <T k="pricing.title" />
             </h1>
           </TextReveal>
           <AnimateIn animation="fadeUp" delay={0.4}>
             <p className="mt-8 max-w-2xl text-lg md:text-xl text-text-secondary leading-relaxed">
-              Transparent pricing. No hidden fees. No hourly billing. You know
-              exactly what you are getting before we write a single line of code.
+              <T k="pricing.subtitle" />
             </p>
           </AnimateIn>
         </div>
@@ -417,8 +412,8 @@ export default function PricingPage() {
         <AnimateIn animation="fadeUp">
           <SectionHeader
             caption="Add-Ons"
-            title="Enhance Your Package"
-            subtitle="Mix and match these add-ons with any tier to build exactly the solution your business needs."
+            title={<T k="pricing.addons.title" />}
+            subtitle={<T k="pricing.addons.subtitle" />}
             align="center"
           />
         </AnimateIn>
@@ -449,8 +444,8 @@ export default function PricingPage() {
         <AnimateIn animation="fadeUp">
           <SectionHeader
             caption="Monthly Services"
-            title="Ongoing Support"
-            subtitle="Keep your site performing at its best with our monthly packages."
+            title={<T k="pricing.ongoing.title" />}
+            subtitle={<T k="pricing.ongoing.subtitle" />}
             align="center"
           />
         </AnimateIn>
@@ -487,8 +482,7 @@ export default function PricingPage() {
         <AnimateIn animation="fadeUp">
           <SectionHeader
             caption="FAQ"
-            title="Common Questions"
-            subtitle="Everything you need to know about working with us. If your question is not here, just ask."
+            title={<T k="pricing.faq.title" />}
             align="center"
           />
         </AnimateIn>

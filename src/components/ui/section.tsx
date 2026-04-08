@@ -34,9 +34,9 @@ export function SectionHeader({
   align = "left",
   dark = true,
 }: {
-  caption?: string;
-  title: string;
-  subtitle?: string;
+  caption?: ReactNode;
+  title: ReactNode;
+  subtitle?: ReactNode;
   className?: string;
   align?: "left" | "center";
   dark?: boolean;

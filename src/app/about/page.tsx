@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { generatePageMeta } from "@/lib/seo";
+import { T } from "@/lib/i18n/T";
 import { BreadcrumbSchema } from "@/components/structured-data";
 
 import { CONTACT_EMAIL } from "@/lib/constants";
@@ -105,8 +106,8 @@ export default function AboutPage() {
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
           <AnimateIn animation="fadeUp">
             <SectionHeader
-              caption="Our Story"
-              title="Built Different. On Purpose."
+              caption={<T k="about.story.eyebrow" />}
+              title={<T k="about.story.title" />}
               className="mb-0"
             />
           </AnimateIn>
@@ -150,9 +151,8 @@ export default function AboutPage() {
       <Section className="">
         <AnimateIn animation="fadeUp">
           <SectionHeader
-            caption="Our Values"
-            title="What We Stand For"
-            subtitle="Four principles that guide every decision, every design, and every line of code."
+            caption={<T k="about.values.eyebrow" />}
+            title={<T k="about.values.title" />}
             align="center"
           />
         </AnimateIn>
@@ -179,14 +179,14 @@ export default function AboutPage() {
       <Section>
         <AnimateIn>
           <SectionHeader
-            caption="The Team"
-            title="Who We Are"
+            caption={<T k="about.team.eyebrow" />}
+            title={<T k="about.team.title" />}
             align="center"
           />
         </AnimateIn>
         <AnimateIn delay={0.05}>
           <p className="text-center text-lg text-text-secondary max-w-2xl mx-auto mb-12">
-            A lean, focused studio where every project gets senior-level attention from day one.
+            <T k="about.team.subtitle" />
           </p>
         </AnimateIn>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-xl mx-auto">

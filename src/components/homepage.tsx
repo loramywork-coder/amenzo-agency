@@ -114,10 +114,10 @@ const services = [
 ];
 
 const stats = [
-  { target: 95, suffix: "+", label: "LIGHTHOUSE SCORE" },
-  { target: 2, label: "WEEK DELIVERY", suffix: "" },
-  { target: 5, label: "SERVICES", suffix: "" },
-  { target: 100, suffix: "%", label: "CUSTOM CODE" },
+  { target: 95, suffix: "+", labelKey: "stat.lighthouse" as const },
+  { target: 2, labelKey: "stat.delivery" as const, suffix: "" },
+  { target: 5, labelKey: "stat.services" as const, suffix: "" },
+  { target: 100, suffix: "%", labelKey: "stat.customCode" as const },
 ];
 
 const techStack = [
@@ -301,7 +301,7 @@ export function HomePage() {
           <Reveal delay={0.4}>
             <p className="text-center mt-10">
               <Link href="/capabilities" className="text-[11px] text-white/40 hover:text-white/60 tracking-[0.15em] uppercase transition-colors">
-                View all capabilities &rarr;
+                {t("home.viewAllCapabilities")} &rarr;
               </Link>
             </p>
           </Reveal>
@@ -397,22 +397,20 @@ export function HomePage() {
       <section className="py-28 md:py-36">
         <div className="max-w-6xl mx-auto px-6 text-center">
           <Reveal>
-            <p className="text-[9px] text-white/60 tracking-[0.5em] uppercase font-medium mb-4">About</p>
+            <p className="text-[9px] text-white/60 tracking-[0.5em] uppercase font-medium mb-4">{t("home.about.eyebrow")}</p>
           </Reveal>
           <GooeyReveal
-            text="Two people. One obsession."
+            text={t("home.about.title")}
             className="text-[36px] font-bold text-white tracking-tight leading-tight mb-8 max-w-lg mx-auto"
           />
           <Reveal delay={0.2}>
             <p className="text-[14px] text-white/80 leading-relaxed max-w-lg mx-auto mb-8">
-              We&apos;re a two-person studio working with clients worldwide. We pair modern AI
-              tools with hand-written code to deliver studio-quality websites at a fraction of
-              the cost. Every pixel is intentional. Every interaction is considered.
+              {t("home.about.body")}
             </p>
           </Reveal>
           <Reveal delay={0.3}>
             <Link href="/about" className="text-[13px] text-white/60 hover:text-white/80 transition-colors inline-flex items-center gap-1">
-              Learn more about us <ArrowRight size={12} />
+              {t("home.about.cta")} <ArrowRight size={12} />
             </Link>
           </Reveal>
         </div>
@@ -423,14 +421,14 @@ export function HomePage() {
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-10 text-center">
             {stats.map((s, i) => (
-              <Reveal key={s.label} delay={i * 0.1}>
+              <Reveal key={s.labelKey} delay={i * 0.1}>
                 <div>
                   <Counter
                     target={s.target}
                     suffix={s.suffix}
                     className="text-[44px] md:text-[50px] font-bold text-white tracking-tight"
                   />
-                  <p className="text-[11px] text-white/35 tracking-[0.2em] uppercase mt-2">{s.label}</p>
+                  <p className="text-[11px] text-white/35 tracking-[0.2em] uppercase mt-2">{t(s.labelKey)}</p>
                 </div>
               </Reveal>
             ))}
@@ -442,7 +440,7 @@ export function HomePage() {
       <section className="py-16">
         <div className="max-w-6xl mx-auto px-6 text-center">
           <Reveal>
-            <p className="text-[9px] text-white/55 tracking-[0.5em] uppercase font-medium mb-6">Built With</p>
+            <p className="text-[9px] text-white/55 tracking-[0.5em] uppercase font-medium mb-6">{t("home.builtWith")}</p>
           </Reveal>
           <Reveal delay={0.1}>
             <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-5">
