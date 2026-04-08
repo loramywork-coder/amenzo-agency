@@ -120,7 +120,7 @@ export function Footer() {
               </a>
             </div>
             <p className="text-xs text-white/15 mt-5 italic">
-              Currently booking for{" "}
+              {t("footer.bookingFor")}{" "}
               <span className="text-white/30">
                 {new Date(new Date().setMonth(new Date().getMonth() + 1)).toLocaleString(locale === "de" ? "de-DE" : "en-US", { month: "long", year: "numeric" })}
               </span>
@@ -134,15 +134,15 @@ export function Footer() {
         <div className="container-wide py-8 flex flex-wrap items-center justify-center gap-8 md:gap-12">
           <div className="flex items-center gap-2 text-white/35">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/><circle cx="12" cy="16" r="1"/></svg>
-            <span className="text-[10px] uppercase tracking-[0.15em] font-medium">SSL Secured</span>
+            <span className="text-[10px] uppercase tracking-[0.15em] font-medium">{t("footer.sslSecured")}</span>
           </div>
           <div className="flex items-center gap-2 text-white/35">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
-            <span className="text-[10px] uppercase tracking-[0.15em] font-medium">GDPR Compliant</span>
+            <span className="text-[10px] uppercase tracking-[0.15em] font-medium">{t("footer.gdpr")}</span>
           </div>
           <div className="flex items-center gap-2 text-white/35">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            <span className="text-[10px] uppercase tracking-[0.15em] font-medium">99.9% Uptime</span>
+            <span className="text-[10px] uppercase tracking-[0.15em] font-medium">{t("footer.uptime")}</span>
           </div>
         </div>
       </div>
@@ -154,10 +154,10 @@ export function Footer() {
             &copy; {new Date().getFullYear()} Amenzo Studio
           </p>
           <div className="flex items-center gap-6 text-xs text-white/40">
-            <Link href="/privacy" className="hover:text-white/70 transition-colors">Privacy Policy</Link>
-            <Link href="/terms" className="hover:text-white/70 transition-colors">Terms</Link>
-            <Link href="/cookies" className="hover:text-white/70 transition-colors">Cookies</Link>
-            <Link href="/impressum" className="hover:text-white/70 transition-colors">Impressum</Link>
+            <Link href="/privacy" className="hover:text-white/70 transition-colors">{t("footer.privacy")}</Link>
+            <Link href="/terms" className="hover:text-white/70 transition-colors">{t("footer.terms")}</Link>
+            <Link href="/cookies" className="hover:text-white/70 transition-colors">{t("footer.cookies")}</Link>
+            <Link href="/impressum" className="hover:text-white/70 transition-colors">{t("footer.impressum")}</Link>
           </div>
         </div>
       </div>

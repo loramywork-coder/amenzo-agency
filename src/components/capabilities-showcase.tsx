@@ -82,14 +82,19 @@ function usePointerPosition(ref: React.RefObject<HTMLDivElement | null>) {
 /* ─── shared ─────────────────────────────────────────────────────── */
 
 function SectionDivider({ num, title, useCase }: { num: string; title: string; useCase: string }) {
+  const { t } = useLocale();
+  const titleKey = `cap.${num}.title` as never;
+  const useCaseKey = `cap.${num}.useCase` as never;
+  const localizedTitle = t(titleKey);
+  const localizedUseCase = t(useCaseKey);
   return (
     <div className="max-w-6xl mx-auto px-6 py-12 border-t border-white/[0.04]">
       <div className="flex items-center justify-between">
         <div>
           <p className="text-[9px] tracking-[0.5em] uppercase text-white/35 font-medium">{num}</p>
-          <h3 className="text-lg font-bold text-white/80 mt-1">{title}</h3>
+          <h3 className="text-lg font-bold text-white/80 mt-1">{localizedTitle === titleKey ? title : localizedTitle}</h3>
         </div>
-        <p className="text-[11px] text-white/25 max-w-xs text-right hidden md:block">{useCase}</p>
+        <p className="text-[11px] text-white/25 max-w-xs text-right hidden md:block">{localizedUseCase === useCaseKey ? useCase : localizedUseCase}</p>
       </div>
     </div>
   );
