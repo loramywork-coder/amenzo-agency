@@ -5,20 +5,32 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLocale } from "@/lib/i18n/locale-context";
+import type { TranslationKey } from "@/lib/i18n/dictionary";
 
 const projects = [
-  { num: "01", name: "Grand Harbour Hotel", category: "Hospitality", href: "/demos/hotel" },
-  { num: "02", name: "Porto Valletta", category: "Gastro", href: "/demos/restaurant" },
-  { num: "03", name: "Mediterranean Living", category: "Real Estate", href: "/demos/realestate" },
-  { num: "04", name: "Dr. Vella Dental", category: "Healthcare", href: "/demos/dental" },
-  { num: "05", name: "FitZone", category: "Fitness", href: "/demos/fitness" },
-  { num: "06", name: "Atelier Noir", category: "Art & Culture", href: "/demos/gallery" },
-  { num: "07", name: "Nova Space", category: "Space Tech", href: "/demos/startup" },
-  { num: "08", name: "Meridian Capital", category: "Fintech", href: "/demos/fintech" },
-  { num: "09", name: "Studio Ēlan", category: "Interior", href: "/demos/interior" },
+  { num: "01", name: "Grand Harbour Hotel", category: "Hospitality", catKey: "cat.hospitality" as const, href: "/demos/hotel" },
+  { num: "02", name: "Porto Valletta", category: "Gastro", catKey: "cat.gastro" as const, href: "/demos/restaurant" },
+  { num: "03", name: "Mediterranean Living", category: "Real Estate", catKey: "cat.realestate" as const, href: "/demos/realestate" },
+  { num: "04", name: "Dr. Vella Dental", category: "Healthcare", catKey: "cat.healthcare" as const, href: "/demos/dental" },
+  { num: "05", name: "FitZone", category: "Fitness", catKey: "cat.fitness" as const, href: "/demos/fitness" },
+  { num: "06", name: "Atelier Noir", category: "Art & Culture", catKey: "cat.artculture" as const, href: "/demos/gallery" },
+  { num: "07", name: "Nova Space", category: "Space Tech", catKey: "cat.spacetech" as const, href: "/demos/startup" },
+  { num: "08", name: "Meridian Capital", category: "Fintech", catKey: "cat.fintech" as const, href: "/demos/fintech" },
+  { num: "09", name: "Studio Ēlan", category: "Interior", catKey: "cat.interior" as const, href: "/demos/interior" },
 ];
 
-const categories = ["All", "Hospitality", "Gastro", "Real Estate", "Healthcare", "Fitness", "Art & Culture", "Space Tech", "Fintech", "Interior"];
+const categoryFilters: Array<{ id: string; labelKey: TranslationKey }> = [
+  { id: "All", labelKey: "work.filter.all" },
+  { id: "Hospitality", labelKey: "cat.hospitality" },
+  { id: "Gastro", labelKey: "cat.gastro" },
+  { id: "Real Estate", labelKey: "cat.realestate" },
+  { id: "Healthcare", labelKey: "cat.healthcare" },
+  { id: "Fitness", labelKey: "cat.fitness" },
+  { id: "Art & Culture", labelKey: "cat.artculture" },
+  { id: "Space Tech", labelKey: "cat.spacetech" },
+  { id: "Fintech", labelKey: "cat.fintech" },
+  { id: "Interior", labelKey: "cat.interior" },
+];
 
 export default function WorkPage() {
   const [filter, setFilter] = useState("All");
@@ -47,17 +59,17 @@ export default function WorkPage() {
       <section className="sticky top-20 z-30 py-4 backdrop-blur-md bg-[#0A0A0A]/60">
         <div className="container-wide">
           <div className="flex gap-6 overflow-x-auto scrollbar-hide pb-1">
-            {categories.map((cat) => (
+            {categoryFilters.map((cat) => (
               <button
-                key={cat}
-                onClick={() => setFilter(cat)}
+                key={cat.id}
+                onClick={() => setFilter(cat.id)}
                 className={`text-sm uppercase tracking-widest whitespace-nowrap transition-all duration-200 ${
-                  filter === cat
+                  filter === cat.id
                     ? "text-white underline underline-offset-4"
                     : "text-white/30 hover:text-white/60"
                 }`}
               >
-                {cat}
+                {t(cat.labelKey)}
               </button>
             ))}
           </div>
@@ -88,7 +100,7 @@ export default function WorkPage() {
                     {project.name}
                   </span>
                   <span className="text-sm uppercase tracking-widest text-white/30 group-hover:text-white/60 transition-colors duration-300 hidden sm:block mr-6">
-                    {project.category}
+                    {t(project.catKey)}
                   </span>
                   <ArrowUpRight
                     size={18}
@@ -100,7 +112,7 @@ export default function WorkPage() {
           </AnimatePresence>
 
           {filtered.length === 0 && (
-            <p className="text-center text-white/30 py-20 text-sm">No projects in this category yet.</p>
+            <p className="text-center text-white/30 py-20 text-sm">{t("work.none")}</p>
           )}
         </div>
       </section>
@@ -108,9 +120,9 @@ export default function WorkPage() {
       {/* Honest disclaimer */}
       <section className="py-16">
         <div className="max-w-2xl mx-auto text-center px-6">
-          <h3 className="text-lg font-bold text-white font-display">What You&apos;re Looking At</h3>
+          <h3 className="text-lg font-bold text-white font-display">{t("work.disclaim.title")}</h3>
           <p className="text-sm text-white/40 mt-3 leading-relaxed">
-            These are design showcases &mdash; fully interactive websites we built to demonstrate our capabilities across different industries. Each one is a complete, working site you can click through. Real client work is underway. Our first case study will be published here soon.
+            {t("work.disclaim.body")}
           </p>
         </div>
       </section>
@@ -119,20 +131,20 @@ export default function WorkPage() {
       <section className="py-24">
         <div className="text-center">
           <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-8">
-            Ready to be next?
+            {t("work.cta.title")}
           </h2>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/start-project"
               className="inline-block px-8 py-3.5 bg-white text-[#0A0A0A] text-sm font-medium uppercase tracking-wide rounded-full hover:bg-white/90 hover:scale-[1.02] transition-all duration-200"
             >
-              Start a Project
+              {t("cta.startProject")}
             </Link>
             <Link
               href="/pricing"
               className="inline-block px-8 py-3.5 border border-white/25 text-white/90 text-sm font-medium uppercase tracking-wide rounded-full hover:border-white hover:bg-white/5 transition-all duration-200"
             >
-              View Pricing
+              {t("cta.viewPricing")}
             </Link>
           </div>
         </div>

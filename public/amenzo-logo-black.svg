@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 160">
+  <g transform="translate(20 20) scale(0.234)">
+    <path d="M256 80 L420 400 L380 400 L256 140 L132 400 L92 400 Z" fill="#0A0A0A" opacity="0.9"/>
+    <path d="M256 160 L380 400 L345 400 L256 210 L167 400 L132 400 Z" fill="#0A0A0A" opacity="0.6"/>
+    <path d="M256 230 L345 400 L310 400 L256 280 L202 400 L167 400 Z" fill="#0A0A0A" opacity="0.35"/>
+  </g>
+  <text x="160" y="108" font-family="'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, Helvetica, Arial, sans-serif" font-size="68" font-weight="700" letter-spacing="17" fill="#0A0A0A">AMENZO</text>
+</svg>

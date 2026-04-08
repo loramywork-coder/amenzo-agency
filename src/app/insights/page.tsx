@@ -6,6 +6,7 @@ import { blogPosts } from "@/data/blog";
 import { Section } from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
 import { AnimateIn, StaggerContainer, StaggerItem } from "@/components/ui/motion";
+import { T } from "@/lib/i18n/T";
 
 export const metadata = generatePageMeta({
   title: "Web Design Blog — Tips & Guides for Businesses",
@@ -44,18 +45,17 @@ export default function InsightsPage() {
 
         <div className="container-wide relative z-10">
           <AnimateIn animation="fadeUp">
-            <p className="caption mb-4 text-violet">BLOG</p>
+            <p className="caption mb-4 text-violet"><T k="insights.eyebrowBlog" /></p>
           </AnimateIn>
           <AnimateIn animation="fadeUp" delay={0.1}>
             <h1 className="font-display text-5xl md:text-7xl font-bold text-text-primary leading-tight">
-              Insights &{" "}
-              <span className="gradient-text">Ideas</span>
+              <T k="insights.title.line1" />{" "}
+              <span className="gradient-text"><T k="insights.title.line2" /></span>
             </h1>
           </AnimateIn>
           <AnimateIn animation="fadeUp" delay={0.2}>
             <p className="mt-6 text-lg text-text-secondary max-w-xl">
-              Honest thinking on web design, development, and digital strategy.
-              No fluff. Just what works.
+              <T k="insights.subtitleLong" />
             </p>
           </AnimateIn>
           {/* SVG accent underline */}
@@ -129,7 +129,7 @@ export default function InsightsPage() {
 
                     <div className="mt-4 pt-4 border-t border-border">
                       <span className="text-sm font-medium text-violet group-hover:gap-2 inline-flex items-center gap-1 transition-all">
-                        Read Article
+                        <T k="insights.readArticle" />
                         <ArrowUpRight className="w-4 h-4" />
                       </span>
                     </div>
@@ -146,15 +146,14 @@ export default function InsightsPage() {
         <div className="text-center">
           <AnimateIn animation="fadeUp">
             <h2 className="font-display text-3xl md:text-5xl font-bold text-text-primary">
-              Want insights tailored to your business?
+              <T k="insights.cta.title" />
             </h2>
             <p className="mt-4 text-text-secondary text-lg max-w-xl mx-auto">
-              Book a free consultation and we&apos;ll audit your current digital
-              presence with actionable recommendations.
+              <T k="insights.cta.subtitle" />
             </p>
             <div className="mt-8">
               <Button href="/contact" variant="primary" size="lg" magnetic>
-                Get a Free Audit
+                <T k="insights.cta.button" />
               </Button>
             </div>
           </AnimateIn>

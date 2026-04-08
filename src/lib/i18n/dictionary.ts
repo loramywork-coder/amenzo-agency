@@ -736,6 +736,96 @@ export const dictionary = {
   "contact.brief.cta": { en: "Start Project Wizard", de: "Projekt-Wizard starten" },
   "contact.toast": { en: "Message sent successfully! We'll get back to you within 24 hours.", de: "Nachricht erfolgreich gesendet! Wir melden uns innerhalb von 24 Stunden." },
 
+  // Start project wizard
+  "wiz.step.about": { en: "About You", de: "Über Sie" },
+  "wiz.step.services": { en: "Services", de: "Leistungen" },
+  "wiz.step.details": { en: "Details", de: "Details" },
+  "wiz.step.inspiration": { en: "Inspiration", de: "Inspiration" },
+  "wiz.step.budget": { en: "Budget", de: "Budget" },
+  "wiz.step.package": { en: "Package", de: "Paket" },
+  "wiz.step.notes": { en: "Notes", de: "Notizen" },
+  "wiz.step.review": { en: "Review", de: "Überprüfung" },
+
+  "wiz.back": { en: "Back to Home", de: "Zurück zur Startseite" },
+  "wiz.continue": { en: "Continue", de: "Weiter" },
+  "wiz.previous": { en: "Back", de: "Zurück" },
+  "wiz.submit": { en: "Submit Brief", de: "Briefing senden" },
+  "wiz.submitting": { en: "Submitting...", de: "Wird gesendet …" },
+
+  "wiz.about.title": { en: "Tell us about you", de: "Erzählen Sie uns von sich" },
+  "wiz.about.subtitle": { en: "So we know who we're talking to", de: "Damit wir wissen, mit wem wir sprechen" },
+  "wiz.about.name": { en: "Your Name *", de: "Ihr Name *" },
+  "wiz.about.company": { en: "Company / Business Name", de: "Unternehmen / Firmenname" },
+  "wiz.about.email": { en: "Email *", de: "E-Mail *" },
+  "wiz.about.phone": { en: "Phone", de: "Telefon" },
+  "wiz.about.website": { en: "Current Website (if any)", de: "Aktuelle Website (falls vorhanden)" },
+  "wiz.about.industry": { en: "Industry", de: "Branche" },
+  "wiz.about.selectIndustry": { en: "Select your industry", de: "Wählen Sie Ihre Branche" },
+  "wiz.about.phName": { en: "John Doe", de: "Max Mustermann" },
+  "wiz.about.phCompany": { en: "Acme Ltd", de: "Mustermann GmbH" },
+  "wiz.about.phEmail": { en: "john@example.com", de: "name@firma.de" },
+
+  "wiz.services.title": { en: "What do you need?", de: "Was brauchen Sie?" },
+  "wiz.services.subtitle": { en: "Pick one or more services. You can always adjust later.", de: "Wählen Sie eine oder mehrere Leistungen. Sie können später jederzeit anpassen." },
+
+  "wiz.details.title": { en: "Project details", de: "Projektdetails" },
+  "wiz.details.subtitle": { en: "A few specifics help us scope accurately", de: "Ein paar Details helfen uns bei der genauen Kalkulation" },
+
+  "wiz.inspo.title": { en: "Inspiration", de: "Inspiration" },
+  "wiz.inspo.subtitle": { en: "Share links, styles, or references you love", de: "Teilen Sie Links, Stile oder Referenzen, die Ihnen gefallen" },
+
+  "wiz.budget.title": { en: "Timeline & Budget", de: "Zeitplan & Budget" },
+  "wiz.budget.subtitle": { en: "Help us plan resources and scope", de: "Helfen Sie uns, Ressourcen und Umfang zu planen" },
+  "wiz.budget.range": { en: "Budget range", de: "Budgetrahmen" },
+
+  "wiz.pkg.title": { en: "Build Your Package", de: "Ihr Paket zusammenstellen" },
+  "wiz.pkg.subtitle": { en: "Tailor the scope to what you actually need", de: "Stellen Sie den Umfang genau nach Ihren Bedürfnissen zusammen" },
+
+  "wiz.notes.title": { en: "Additional Notes", de: "Zusätzliche Notizen" },
+  "wiz.notes.subtitle": { en: "Anything else we should know?", de: "Gibt es sonst etwas, das wir wissen sollten?" },
+
+  "wiz.review.title": { en: "Review your brief", de: "Ihr Briefing überprüfen" },
+  "wiz.review.subtitle": { en: "Everything look right?", de: "Ist alles korrekt?" },
+
+  "wiz.done.title": { en: "Brief received!", de: "Briefing erhalten!" },
+  "wiz.done.subtitle": { en: "We'll review it and get back to you within one business day.", de: "Wir prüfen es und melden uns innerhalb eines Werktags bei Ihnen." },
+  "wiz.done.cta": { en: "Back to Home", de: "Zurück zur Startseite" },
+
+  // Work page extras
+  "work.filter.all": { en: "All", de: "Alle" },
+  "work.none": { en: "No projects in this category yet.", de: "Noch keine Projekte in dieser Kategorie." },
+  "work.disclaim.title": { en: "What You're Looking At", de: "Was Sie hier sehen" },
+  "work.disclaim.body": {
+    en: "These are design showcases — fully interactive websites we built to demonstrate our capabilities across different industries. Each one is a complete, working site you can click through. Real client work is underway. Our first case study will be published here soon.",
+    de: "Dies sind Design-Showcases — voll interaktive Websites, die wir gebaut haben, um unsere Fähigkeiten in verschiedenen Branchen zu demonstrieren. Jede ist eine vollständige, funktionierende Website, durch die Sie klicken können. Echte Kundenprojekte laufen. Unsere erste Case Study erscheint hier in Kürze.",
+  },
+  "work.cta.title": { en: "Ready to be next?", de: "Bereit, der Nächste zu sein?" },
+
+  // Insights page
+  "insights.eyebrow": { en: "Insights", de: "Einblicke" },
+  "insights.title": { en: "Insights", de: "Einblicke" },
+  "insights.subtitle": {
+    en: "Thoughts on web design, development, and running a modern digital studio.",
+    de: "Gedanken zu Webdesign, Entwicklung und dem Betrieb eines modernen digitalen Studios.",
+  },
+  "insights.readMore": { en: "Read more", de: "Weiterlesen" },
+  "insights.all": { en: "All", de: "Alle" },
+  "insights.minRead": { en: "min read", de: "Min. Lesezeit" },
+  "insights.eyebrowBlog": { en: "BLOG", de: "BLOG" },
+  "insights.title.line1": { en: "Insights &", de: "Einblicke &" },
+  "insights.title.line2": { en: "Ideas", de: "Ideen" },
+  "insights.subtitleLong": {
+    en: "Honest thinking on web design, development, and digital strategy. No fluff. Just what works.",
+    de: "Ehrliche Gedanken zu Webdesign, Entwicklung und digitaler Strategie. Kein Geschwafel. Nur was funktioniert.",
+  },
+  "insights.readArticle": { en: "Read Article", de: "Artikel lesen" },
+  "insights.cta.title": { en: "Want insights tailored to your business?", de: "Möchten Sie Einblicke speziell für Ihr Unternehmen?" },
+  "insights.cta.subtitle": {
+    en: "Book a free consultation and we'll audit your current digital presence with actionable recommendations.",
+    de: "Vereinbaren Sie eine kostenlose Beratung und wir prüfen Ihre aktuelle digitale Präsenz mit umsetzbaren Empfehlungen.",
+  },
+  "insights.cta.button": { en: "Get a Free Audit", de: "Kostenlosen Audit erhalten" },
+
   // Footer legal
   "footer.privacy": { en: "Privacy Policy", de: "Datenschutz" },
   "footer.terms": { en: "Terms", de: "AGB" },

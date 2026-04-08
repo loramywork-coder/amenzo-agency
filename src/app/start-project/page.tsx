@@ -27,6 +27,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { toast } from "sonner";
+import { useLocale } from "@/lib/i18n/locale-context";
 import {
   serviceOptions,
   budgetOptions,
@@ -54,14 +55,14 @@ const industryOptions = [
 ];
 
 const STEP_NAMES = [
-  { name: "About You", icon: User },
-  { name: "Services", icon: Layers },
-  { name: "Details", icon: FileText },
-  { name: "Inspiration", icon: Sparkles },
-  { name: "Budget", icon: CreditCard },
-  { name: "Package", icon: Package },
-  { name: "Notes", icon: MessageSquare },
-  { name: "Review", icon: CheckCircle2 },
+  { nameKey: "wiz.step.about" as const, icon: User },
+  { nameKey: "wiz.step.services" as const, icon: Layers },
+  { nameKey: "wiz.step.details" as const, icon: FileText },
+  { nameKey: "wiz.step.inspiration" as const, icon: Sparkles },
+  { nameKey: "wiz.step.budget" as const, icon: CreditCard },
+  { nameKey: "wiz.step.package" as const, icon: Package },
+  { nameKey: "wiz.step.notes" as const, icon: MessageSquare },
+  { nameKey: "wiz.step.review" as const, icon: CheckCircle2 },
 ];
 
 export default function StartProjectPage() {
@@ -79,6 +80,7 @@ export default function StartProjectPage() {
 }
 
 function StartProjectWizard() {
+  const { t } = useLocale();
   const searchParams = useSearchParams();
   const [step, setStep] = useState(1);
   const [submitted, setSubmitted] = useState(false);
@@ -296,10 +298,10 @@ function StartProjectWizard() {
 
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Button href="/work" variant="outline">
-              Browse Our Work
+              {t("nav.work")}
             </Button>
             <Button href="/" variant="ghost">
-              Back to Home
+              {t("wiz.done.cta")}
             </Button>
           </div>
         </motion.div>
@@ -358,7 +360,7 @@ function StartProjectWizard() {
                     <StepIcon size={12} />
                   )}
                 </span>
-                <span className="hidden sm:inline">{s.name}</span>
+                <span className="hidden sm:inline">{t(s.nameKey)}</span>
               </button>
             );
           })}
@@ -380,45 +382,45 @@ function StartProjectWizard() {
               {step === 1 && (
                 <div>
                   <StepTitle
-                    title="Tell us about you"
-                    subtitle="So we know who we're talking to"
+                    title={t("wiz.about.title")}
+                    subtitle={t("wiz.about.subtitle")}
                   />
                   <div className="space-y-6">
                     <FormField
-                      label="Your Name *"
+                      label={t("wiz.about.name")}
                       value={formData.name}
                       onChange={(v) => updateField("name", v)}
-                      placeholder="John Doe"
+                      placeholder={t("wiz.about.phName")}
                     />
                     <FormField
-                      label="Company / Business Name"
+                      label={t("wiz.about.company")}
                       value={formData.company}
                       onChange={(v) => updateField("company", v)}
-                      placeholder="Acme Ltd"
+                      placeholder={t("wiz.about.phCompany")}
                     />
                     <FormField
-                      label="Email *"
+                      label={t("wiz.about.email")}
                       type="email"
                       value={formData.email}
                       onChange={(v) => updateField("email", v)}
-                      placeholder="john@example.com"
+                      placeholder={t("wiz.about.phEmail")}
                     />
                     <FormField
-                      label="Phone"
+                      label={t("wiz.about.phone")}
                       type="tel"
                       value={formData.phone}
                       onChange={(v) => updateField("phone", v)}
                       placeholder="+31 62 831 8123"
                     />
                     <FormField
-                      label="Current Website (if any)"
+                      label={t("wiz.about.website")}
                       value={formData.website}
                       onChange={(v) => updateField("website", v)}
                       placeholder="https://example.com"
                     />
                     <div>
                       <label className="block text-sm font-medium text-white mb-2">
-                        Industry
+                        {t("wiz.about.industry")}
                       </label>
                       <select
                         value={formData.industry}
@@ -427,7 +429,7 @@ function StartProjectWizard() {
                         }
                         className="w-full px-4 py-3 bg-[#0a0a0a] border border-white/10 rounded-lg text-white focus:border-white/30 focus:outline-none transition-colors [&>option]:bg-[#0a0a0a] [&>option]:text-white"
                       >
-                        <option value="">Select your industry</option>
+                        <option value="">{t("wiz.about.selectIndustry")}</option>
                         {industryOptions.map((opt) => (
                           <option key={opt} value={opt}>
                             {opt}
@@ -890,7 +892,7 @@ function StartProjectWizard() {
             )}
           >
             <ArrowLeft size={16} />
-            Back
+            {t("wiz.previous")}
           </button>
 
           {/* Floating estimate */}
@@ -914,13 +916,13 @@ function StartProjectWizard() {
               disabled={!canProceed()}
               magnetic
             >
-              Continue
+              {t("wiz.continue")}
               <ArrowRight size={16} />
             </Button>
           ) : (
             <Button onClick={handleSubmit} magnetic>
               <Sparkles size={16} />
-              Submit Project Brief
+              {t("wiz.submit")}
             </Button>
           )}
         </div>
