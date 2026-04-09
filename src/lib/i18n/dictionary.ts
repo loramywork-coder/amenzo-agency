@@ -464,6 +464,7 @@ export const dictionary = {
   "cat.spacetech": { en: "Space Tech", de: "Raumfahrttechnik" },
   "cat.fintech": { en: "Fintech", de: "Fintech" },
   "cat.interior": { en: "Interior", de: "Innenarchitektur" },
+  "cat.wellness": { en: "Wellness", de: "Wellness" },
 
   // Project descriptions
   "proj.hotel.desc": { en: "10-page luxury hotel with virtual tours & booking", de: "10-seitiges Luxushotel mit virtuellen Touren & Buchung" },

@@ -17,6 +17,7 @@ const projects = [
   { num: "07", name: "Nova Space", category: "Space Tech", catKey: "cat.spacetech" as const, href: "/demos/startup" },
   { num: "08", name: "Meridian Capital", category: "Fintech", catKey: "cat.fintech" as const, href: "/demos/fintech" },
   { num: "09", name: "Studio Ēlan", category: "Interior", catKey: "cat.interior" as const, href: "/demos/interior" },
+  { num: "10", name: "Aura Beauty Studio", category: "Wellness", catKey: "cat.wellness" as const, href: "/demos/beauty" },
 ];
 
 const categoryFilters: Array<{ id: string; labelKey: TranslationKey }> = [
@@ -30,6 +31,7 @@ const categoryFilters: Array<{ id: string; labelKey: TranslationKey }> = [
   { id: "Space Tech", labelKey: "cat.spacetech" },
   { id: "Fintech", labelKey: "cat.fintech" },
   { id: "Interior", labelKey: "cat.interior" },
+  { id: "Wellness", labelKey: "cat.wellness" },
 ];
 
 export default function WorkPage() {
