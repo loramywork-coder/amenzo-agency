@@ -154,14 +154,14 @@ export function BeautyNav() {
       </nav>
 
       {open && (
-        <div className="fixed inset-0 z-40 flex flex-col items-center justify-center gap-7 px-6" style={{ background: C.dark }}>
+        <div className="fixed inset-0 z-40 flex flex-col items-center justify-center gap-10 px-6 pt-28 pb-16 overflow-y-auto" style={{ background: C.dark, lineHeight: 1.3 }}>
           {NAV.map((l) => (
             <Link
               key={l.href}
               href={l.href}
               onClick={() => setOpen(false)}
               className="text-4xl italic no-underline"
-              style={{ fontFamily: fHead, color: C.onDark }}
+              style={{ fontFamily: fHead, color: C.onDark, lineHeight: 1.2, paddingBottom: "0.1em" }}
             >
               {l.label}
             </Link>
@@ -169,7 +169,7 @@ export function BeautyNav() {
           <Link
             href="/demos/beauty/contact"
             onClick={() => setOpen(false)}
-            className="mt-5 inline-flex items-center px-8 py-3 text-[11px] tracking-[0.15em] uppercase no-underline rounded-full"
+            className="mt-6 inline-flex items-center px-8 py-3 text-[11px] tracking-[0.15em] uppercase no-underline rounded-full"
             style={{ background: C.gold, color: C.warmWhite, fontFamily: fBody, fontWeight: 600 }}
           >
             Book Now
