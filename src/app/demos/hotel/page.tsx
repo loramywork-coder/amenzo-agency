@@ -72,8 +72,8 @@ function Inner() {
               className="text-white max-w-5xl mx-auto"
               style={{
                 fontFamily: fHead,
-                fontSize: "clamp(56px, 10vw, 160px)",
-                lineHeight: 0.9,
+                fontSize: "clamp(44px, 7vw, 108px)",
+                lineHeight: 0.95,
                 fontWeight: 400,
                 letterSpacing: "-0.01em",
                 color: "#F7F1E8",

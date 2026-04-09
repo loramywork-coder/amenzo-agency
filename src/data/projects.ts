@@ -439,6 +439,44 @@ export const projects: Project[] = [
     demoSlug: "gallery",
     color: "#B8860B",
   },
+  {
+    slug: "aura-beauty-studio",
+    title: "Aura Beauty Studio",
+    client: "Aura Beauty Studio",
+    category: "Wellness",
+    categoryTag: "WELLNESS",
+    description:
+      "A warm-luxury website for Zurich's premier beauty destination. Bespoke facials, body treatments, and a studio that feels less like a spa and more like a ritual.",
+    challenge:
+      "A boutique beauty studio run by a former Parisian dermatologist was losing direct bookings to Instagram DMs. Their website — a generic beauty template — felt cold and clinical, nothing like the intimate, intentional experience clients had in person. They needed a digital front door that matched the warmth of the real one.",
+    approach:
+      "We spent two days inside the studio observing treatments, photographing textures, and mapping the client journey. The design direction emerged from there: organic minimalism, warm cream backgrounds instead of clinical white, muted gold accents, and an editorial typographic pairing (Cormorant Garamond + Plus Jakarta Sans) that reads more like a magazine than a booking form.",
+    solution:
+      "A five-page experience — homepage with a cinematic hero, a treatment menu organised by category with sticky navigation, a founder story, a filterable gallery with keyboard-navigable lightbox, and a contact page with a form, FAQ accordion, and embedded studio map. Every image was curated to honour each treatment. Every animation was tuned to feel like breath, not motion.",
+    results: [
+      "Cinematic Hero Section",
+      "12-Treatment Menu",
+      "Filterable Gallery + Lightbox",
+      "Animated Brand Stats",
+    ],
+    resultHighlight: "Warm Luxury · Editorial Type",
+    testimonial: {
+      quote:
+        "This is a design showcase demonstrating Amenzo's capabilities for wellness and beauty businesses.",
+      name: "Amenzo Design Team",
+      title: "Design Showcase",
+    },
+    techStack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion", "Vercel"],
+    image:
+      "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=3840&q=90",
+    images: [
+      "https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=3840&q=90",
+      "https://images.unsplash.com/photo-1617897903246-719242758050?w=3840&q=90",
+      "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=3840&q=90",
+    ],
+    demoSlug: "beauty",
+    color: "#B8956A",
+  },
 ];
 
 export const categories = [

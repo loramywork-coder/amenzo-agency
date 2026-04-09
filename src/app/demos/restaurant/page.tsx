@@ -55,15 +55,16 @@ function Inner() {
               className="max-w-5xl mx-auto"
               style={{
                 fontFamily: fHead,
-                fontSize: "clamp(56px, 10vw, 170px)",
-                lineHeight: 0.92,
-                fontWeight: 400,
-                letterSpacing: "-0.015em",
+                fontSize: "clamp(36px, 5.2vw, 78px)",
+                lineHeight: 1.05,
+                fontWeight: 500,
+                letterSpacing: "0.02em",
+                textTransform: "uppercase",
                 color: C.cream,
-                paddingBottom: "0.2em",
+                paddingBottom: "0.15em",
               }}
             >
-              Porto <em style={{ fontStyle: "italic", color: C.copper }}>Valletta</em>
+              Porto <span style={{ color: C.copper, fontWeight: 400 }}>Valletta</span>
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 18 }}
