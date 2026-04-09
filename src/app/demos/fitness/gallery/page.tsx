@@ -184,7 +184,7 @@ export default function GalleryPage() {
               className="fz-gallery-item"
             >
               <Image
-                src={unsplash(img.id, 800)}
+                src={unsplash(img.id)}
                 alt={img.alt}
                 width={600}
                 height={idx % 3 === 0 ? 450 : idx % 3 === 1 ? 360 : 400}
@@ -264,7 +264,7 @@ export default function GalleryPage() {
 
           <div onClick={(e) => e.stopPropagation()} style={{ position: "relative", maxWidth: "85vw", maxHeight: "80vh" }}>
             <Image
-              src={unsplash(IMAGES[lightbox].id, 1600)}
+              src={unsplash(IMAGES[lightbox].id)}
               alt={IMAGES[lightbox].alt}
               width={1400}
               height={900}
