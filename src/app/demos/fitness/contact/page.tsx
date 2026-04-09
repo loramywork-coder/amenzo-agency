@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { DemoBanner } from "@/components/demos/demo-banner";
 
 /* ── palette ── */
@@ -194,6 +195,15 @@ export default function ContactPage() {
         <p style={{ fontSize: 12, letterSpacing: "0.35em", textTransform: "uppercase", color: C.green, marginBottom: 16 }}>CONTACT</p>
         <h1 style={{ fontSize: 36, fontWeight: 700, margin: 0 }}>Get in Touch</h1>
       </section>
+
+      {/* Hero Banner */}
+      <section style={{ padding: "0 24px 48px", maxWidth: 1200, margin: "0 auto" }}>
+        <div style={{ position: "relative", width: "100%", aspectRatio: "21 / 9", overflow: "hidden", border: "2px solid #22C55E" }}>
+          <Image src="/images/fitness/contact-hero.jpg" alt="" fill priority className="object-cover" />
+          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(8,8,8,0) 40%, rgba(8,8,8,0.8) 100%)" }} />
+        </div>
+      </section>
+
 
       {/* ════════ SPLIT LAYOUT ════════ */}
       <section style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px 100px" }}>

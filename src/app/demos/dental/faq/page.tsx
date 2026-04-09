@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import Reveal from "@/components/demos/Reveal";
 import { DemoBanner } from "@/components/demos/demo-banner";
 import { ChevronDown } from "lucide-react";
@@ -280,6 +281,16 @@ export default function DentalFaqPage() {
             </h1>
           </Reveal>
         </div>
+      </section>
+
+      {/* Hero Image */}
+      <section style={{ padding: "0 24px 48px", maxWidth: 1000, margin: "0 auto" }}>
+        <Reveal type="fade" delay={0.3}>
+          <div style={{ position: "relative", width: "100%", aspectRatio: "21 / 9", borderRadius: 20, overflow: "hidden", border: `1px solid ${C.border}` }}>
+            <Image src="/images/dental/faq-hero.jpg" alt="" fill className="object-cover" />
+            <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(10,16,21,0) 40%, rgba(10,16,21,0.65) 100%)" }} />
+          </div>
+        </Reveal>
       </section>
 
       {/* ═══════ ACCORDION LIST ═══════ */}

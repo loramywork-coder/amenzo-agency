@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { DemoBanner } from "@/components/demos/demo-banner";
 import Reveal from "@/components/demos/Reveal";
@@ -22,6 +23,7 @@ const BORDER  = "#27272A";
 interface Trainer {
   name: string;
   initials: string;
+  image: string;
   credential: string;
   specialty: string;
   experience: string;
@@ -33,6 +35,7 @@ const TRAINERS: Trainer[] = [
   {
     name: "ALEX BORG",
     initials: "AB",
+    image: "/images/fitness/trainer-1.jpg",
     credential: "NSCA-CSCS",
     specialty: "HIIT & CONDITIONING",
     experience: "12 YEARS",
@@ -46,6 +49,7 @@ const TRAINERS: Trainer[] = [
   {
     name: "MIA GRECH",
     initials: "MG",
+    image: "/images/fitness/trainer-3.jpg",
     credential: "RYT-500",
     specialty: "YOGA & WELLNESS",
     experience: "8 YEARS",
@@ -59,6 +63,7 @@ const TRAINERS: Trainer[] = [
   {
     name: "DANNY VELLA",
     initials: "DV",
+    image: "/images/fitness/trainer-4.jpg",
     credential: "FORMER NATIONAL TEAM",
     specialty: "BOXING & COMBAT",
     experience: "15 YEARS",
@@ -72,6 +77,7 @@ const TRAINERS: Trainer[] = [
   {
     name: "LISA CAMILLERI",
     initials: "LC",
+    image: "/images/fitness/trainer-2.jpg",
     credential: "ACE CERTIFIED",
     specialty: "SPIN & CARDIO",
     experience: "6 YEARS",
@@ -233,6 +239,18 @@ export default function TrainersPage() {
         </Reveal>
       </section>
 
+      {/* ════════════ HERO BANNER ════════════ */}
+      <section className="px-6 pb-16 md:px-12 lg:px-20">
+        <div className="mx-auto max-w-6xl">
+          <Reveal>
+            <div style={{ position: "relative", width: "100%", aspectRatio: "21 / 9", overflow: "hidden", border: `2px solid ${GREEN}` }}>
+              <Image src="/images/fitness/trainers-hero.jpg" alt="" fill priority className="object-cover" />
+              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(8,8,8,0) 40%, rgba(8,8,8,0.8) 100%)" }} />
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
       {/* ════════════ TRAINER PROFILES ════════════ */}
       {TRAINERS.map((trainer, i) => (
         <section
@@ -243,23 +261,22 @@ export default function TrainersPage() {
           <div className="mx-auto max-w-5xl">
             <Reveal type={i % 2 === 0 ? "slide-left" : "slide-right"}>
               <div className={`flex flex-col items-center gap-12 md:flex-row ${i % 2 !== 0 ? "md:flex-row-reverse" : ""}`}>
-                {/* Initials circle */}
+                {/* Portrait */}
                 <div className="flex-shrink-0">
                   <motion.div
-                    initial={{ scale: 0.8, opacity: 0 }}
+                    initial={{ scale: 0.9, opacity: 0 }}
                     whileInView={{ scale: 1, opacity: 1 }}
                     viewport={{ once: true }}
-                    transition={{ type: "spring", stiffness: 100, damping: 12, delay: 0.2 }}
-                    className="flex items-center justify-center rounded-full text-[40px] font-black"
+                    transition={{ type: "spring", stiffness: 100, damping: 14, delay: 0.2 }}
                     style={{
-                      width: 100,
-                      height: 100,
+                      position: "relative",
+                      width: 260,
+                      height: 320,
                       border: `3px solid ${GREEN}`,
-                      color: GREEN,
-                      fontFamily: "var(--font-gym-display), sans-serif",
+                      overflow: "hidden",
                     }}
                   >
-                    {trainer.initials}
+                    <Image src={trainer.image} alt={trainer.name} fill className="object-cover" />
                   </motion.div>
                 </div>
 

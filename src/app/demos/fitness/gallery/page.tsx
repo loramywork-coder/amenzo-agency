@@ -26,22 +26,23 @@ const NAV_LINKS = [
   { label: "Contact", href: "/demos/fitness/contact" },
 ];
 
-/* ── gallery images (10 Unsplash gym images) ── */
+/* ── gallery images ── */
 const IMAGES = [
-  { id: "photo-1534438327276-14e5300c3a48", alt: "Main gym floor with weights" },
-  { id: "photo-1540497077202-7c8a3999166f", alt: "Group fitness class in action" },
-  { id: "photo-1571902943202-507ec2618e8f", alt: "Cardio zone with treadmills" },
-  { id: "photo-1593079831268-3381b0db4a77", alt: "Free weights and dumbbell rack" },
-  { id: "photo-1558611848-73f7eb4001a1", alt: "Boxing ring and heavy bags" },
-  { id: "photo-1576678927484-cc907957088c", alt: "Athlete training with ropes" },
-  { id: "photo-1574680096145-d05b474e2155", alt: "Yoga studio with natural light" },
-  { id: "photo-1596357395217-80de13130e92", alt: "Functional training zone" },
-  { id: "photo-1517836357463-d25dfeac3438", alt: "Spin studio setup" },
-  { id: "photo-1549060279-7e168fcee0c2", alt: "Recovery and stretching area" },
+  { id: "/images/fitness/gal-1.jpg", alt: "Main gym floor with weights" },
+  { id: "/images/fitness/class-hiit.jpg", alt: "Group fitness class in action" },
+  { id: "/images/fitness/gal-2.jpg", alt: "Cardio zone with treadmills" },
+  { id: "/images/fitness/gal-3.jpg", alt: "Free weights and dumbbell rack" },
+  { id: "/images/fitness/class-boxing.jpg", alt: "Boxing ring and heavy bags" },
+  { id: "/images/fitness/gal-4.jpg", alt: "Athlete training with ropes" },
+  { id: "/images/fitness/class-yoga.jpg", alt: "Yoga studio with natural light" },
+  { id: "/images/fitness/gal-5.jpg", alt: "Functional training zone" },
+  { id: "/images/fitness/class-spin.jpg", alt: "Spin studio setup" },
+  { id: "/images/fitness/gal-6.jpg", alt: "Recovery and stretching area" },
+  { id: "/images/fitness/gal-7.jpg", alt: "Locker room" },
+  { id: "/images/fitness/gal-8.jpg", alt: "Kettlebell workout" },
 ];
 
-const unsplash = (id: string, w = 800) =>
-  `https://images.unsplash.com/${id}?w=${w}&q=80&auto=format&fit=crop`;
+const unsplash = (id: string) => id;
 
 /* ── nav header ── */
 function NavHeader() {
@@ -155,6 +156,15 @@ export default function GalleryPage() {
         <p style={{ fontSize: 12, letterSpacing: "0.35em", textTransform: "uppercase", color: C.green, marginBottom: 16 }}>THE GYM</p>
         <h1 style={{ fontSize: 36, fontWeight: 700, margin: 0 }}>2,000 sqm of Pure Performance</h1>
       </section>
+
+      {/* Hero Banner */}
+      <section style={{ padding: "0 24px 48px", maxWidth: 1200, margin: "0 auto" }}>
+        <div style={{ position: "relative", width: "100%", aspectRatio: "21 / 9", overflow: "hidden", border: "2px solid #22C55E" }}>
+          <Image src="/images/fitness/gallery-hero.jpg" alt="" fill priority className="object-cover" />
+          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(8,8,8,0) 40%, rgba(8,8,8,0.8) 100%)" }} />
+        </div>
+      </section>
+
 
       {/* ════════ MASONRY GRID ════════ */}
       <section style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px 100px" }}>

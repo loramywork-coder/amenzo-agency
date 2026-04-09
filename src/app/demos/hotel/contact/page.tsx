@@ -1,563 +1,184 @@
 "use client";
 
-import { useState, useEffect, FormEvent } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import Link from "next/link";
-import Reveal from "@/components/demos/Reveal";
-import MagneticButton from "@/components/demos/MagneticButton";
+import Image from "next/image";
+import { useState } from "react";
+import { motion } from "framer-motion";
 import { DemoBanner } from "@/components/demos/demo-banner";
+import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import { C, fHead, fBody, fMono, Reveal, Rule, HotelNav, HotelFooter, HotelLangProvider, useHotelLang, tri, rooms } from "../_shared";
 
-/* ─── palette ─── */
-const C = {
-  bg: "#0C1220",
-  surface: "#141E30",
-  gold: "#C9A96E",
-  cream: "#F5F0E8",
-  muted: "#8A9AB5",
-  border: "#1E2D45",
-} as const;
-
-const fontDisplay = "'Cormorant Garamond', Georgia, serif";
-const fontBody = "Inter, system-ui, sans-serif";
-
-/* ─── nav links ─── */
-const NAV_LINKS = [
-  { label: "Rooms", href: "/demos/hotel" },
-  { label: "Events", href: "/demos/hotel/events" },
-  { label: "Contact", href: "/demos/hotel/contact" },
-];
-
-/* ─── room options ─── */
-const ROOM_TYPES = [
-  "Classic",
-  "Deluxe",
-  "Junior Suite",
-  "Grand Harbour Suite",
-  "Presidential",
-];
-
-/* ─── input style ─── */
-const inputStyle: React.CSSProperties = {
-  width: "100%",
-  padding: "14px 16px",
-  background: C.surface,
-  border: `1px solid ${C.border}`,
-  borderRadius: 4,
-  color: C.cream,
-  fontFamily: fontBody,
-  fontSize: 14,
-  outline: "none",
-  transition: "border-color 0.3s",
-};
-
-/* ═══════════════════════════════════════════
-   NAV HEADER
-   ═══════════════════════════════════════════ */
-function SiteHeader() {
-  const [scrolled, setScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
-
-  useEffect(() => {
-    const handler = () => setScrolled(window.scrollY > 40);
-    window.addEventListener("scroll", handler, { passive: true });
-    return () => window.removeEventListener("scroll", handler);
-  }, []);
-
-  useEffect(() => {
-    if (mobileOpen) document.body.style.overflow = "hidden";
-    else document.body.style.overflow = "";
-    return () => { document.body.style.overflow = ""; };
-  }, [mobileOpen]);
+function Inner() {
+  const { lang } = useHotelLang();
+  const [sent, setSent] = useState(false);
 
   return (
-    <>
-      <header
-        style={{
-          position: "fixed",
-          top: 40,
-          left: 0,
-          right: 0,
-          zIndex: 50,
-          padding: "0 24px",
-          height: 64,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          background: "transparent",
-          borderBottom: "none",
-          transition: "background 0.4s, border-color 0.4s",
-        }}
-      >
-        <Link href="/demos/hotel" style={{ textDecoration: "none" }}>
-          <div style={{ lineHeight: 1.1 }}>
-            <span style={{ display: "block", fontFamily: fontDisplay, fontWeight: 400, fontSize: 22, color: C.cream }}>Grand Harbour</span>
-            <span style={{ display: "block", fontFamily: fontDisplay, fontWeight: 300, fontSize: 12, color: C.gold, letterSpacing: "0.12em" }}>Hotel &amp; Spa</span>
-          </div>
-        </Link>
-
-        <nav style={{ display: "flex", alignItems: "center", gap: 32 }} className="hotel-desktop-nav">
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.label}
-              href={link.href}
-              style={{
-                fontFamily: fontBody, fontSize: 11, letterSpacing: "0.18em",
-                textTransform: "uppercase" as const, color: link.href === "/demos/hotel/contact" ? C.cream : "rgba(245,240,232,0.6)",
-                textDecoration: "none", transition: "color 0.25s",
-              }}
-              onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = C.cream; }}
-              onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = link.href === "/demos/hotel/contact" ? C.cream : "rgba(245,240,232,0.6)"; }}
-            >
-              {link.label}
-            </Link>
-          ))}
-          <Link
-            href="/demos/hotel/contact"
-            style={{
-              fontFamily: fontBody, fontSize: 11, fontWeight: 600, letterSpacing: "0.1em",
-              textTransform: "uppercase" as const, padding: "10px 22px", background: C.gold,
-              color: C.bg, textDecoration: "none", transition: "opacity 0.25s",
-            }}
-            onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.opacity = "0.85"; }}
-            onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.opacity = "1"; }}
-          >
-            Book Your Stay
-          </Link>
-        </nav>
-
-        <button
-          className="hotel-mobile-hamburger"
-          onClick={() => setMobileOpen(true)}
-          aria-label="Open menu"
-          style={{ display: "none", background: "none", border: "none", cursor: "pointer", flexDirection: "column" as const, gap: 5, padding: 8 }}
-        >
-          <span style={{ width: 24, height: 1.5, background: C.cream, display: "block" }} />
-          <span style={{ width: 24, height: 1.5, background: C.cream, display: "block" }} />
-          <span style={{ width: 16, height: 1.5, background: C.gold, display: "block" }} />
-        </button>
-      </header>
-
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            style={{
-              position: "fixed", inset: 0, zIndex: 200, background: C.bg,
-              display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 32,
-            }}
-          >
-            <button
-              onClick={() => setMobileOpen(false)}
-              aria-label="Close menu"
-              style={{ position: "absolute", top: 52, right: 24, background: "none", border: "none", color: C.cream, fontSize: 28, cursor: "pointer" }}
-            >
-              &times;
-            </button>
-            {NAV_LINKS.map((link, i) => (
-              <motion.div
-                key={link.label}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.08, duration: 0.4, ease: [0.25, 0.1, 0.25, 1] as const }}
-              >
-                <Link href={link.href} onClick={() => setMobileOpen(false)} style={{ fontFamily: fontDisplay, fontSize: 32, color: C.cream, textDecoration: "none" }}>
-                  {link.label}
-                </Link>
-              </motion.div>
-            ))}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: NAV_LINKS.length * 0.08, duration: 0.4, ease: [0.25, 0.1, 0.25, 1] as const }}
-            >
-              <Link
-                href="/demos/hotel/contact"
-                onClick={() => setMobileOpen(false)}
-                style={{
-                  fontFamily: fontBody, fontSize: 14, fontWeight: 600, letterSpacing: "0.1em",
-                  textTransform: "uppercase" as const, padding: "14px 36px", background: C.gold,
-                  color: C.bg, textDecoration: "none", display: "inline-block", marginTop: 16,
-                }}
-              >
-                Book Your Stay
-              </Link>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      <style>{`
-        .hotel-desktop-nav{display:flex!important;}
-        .hotel-mobile-hamburger{display:none!important;}
-        @media(max-width:899px){
-          .hotel-desktop-nav{display:none!important;}
-          .hotel-mobile-hamburger{display:flex!important;}
-        }
-      `}</style>
-    </>
-  );
-}
-
-/* ═══════════════════════════════════════════
-   FOOTER
-   ═══════════════════════════════════════════ */
-function SiteFooter() {
-  return (
-    <footer style={{ background: C.bg, borderTop: `1px solid rgba(201,169,110,0.12)`, padding: "64px 24px 48px" }}>
-      <div style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))", gap: 40 }}>
-        <div>
-          <h4 style={{ fontFamily: fontDisplay, fontSize: 24, fontWeight: 400, color: C.cream, marginBottom: 16 }}>Grand Harbour</h4>
-          <p style={{ color: C.muted, fontSize: 13, lineHeight: 1.8 }}>Valletta Waterfront<br />VLT 1971<br />Malta</p>
-        </div>
-        <div>
-          <h5 style={{ fontFamily: fontBody, fontSize: 12, fontWeight: 600, letterSpacing: "0.15em", textTransform: "uppercase" as const, color: C.gold, marginBottom: 16 }}>Quick Links</h5>
-          {[
-            { label: "Rooms & Suites", href: "/demos/hotel" },
-            { label: "Events", href: "/demos/hotel/events" },
-            { label: "Contact", href: "/demos/hotel/contact" },
-          ].map((link) => (
-            <Link key={link.label} href={link.href} style={{ display: "block", color: C.muted, fontSize: 13, marginBottom: 10, textDecoration: "none", transition: "color 0.3s" }}
-              onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = C.cream)}
-              onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = C.muted)}
-            >{link.label}</Link>
-          ))}
-        </div>
-        <div>
-          <h5 style={{ fontFamily: fontBody, fontSize: 12, fontWeight: 600, letterSpacing: "0.15em", textTransform: "uppercase" as const, color: C.gold, marginBottom: 16 }}>Contact</h5>
-          <p style={{ color: C.muted, fontSize: 13, lineHeight: 2.1 }}>+356 2124 0000<br />reservations@grandharbour.mt<br />concierge@grandharbour.mt</p>
-        </div>
-        <div>
-          <h5 style={{ fontFamily: fontBody, fontSize: 12, fontWeight: 600, letterSpacing: "0.15em", textTransform: "uppercase" as const, color: C.gold, marginBottom: 16 }}>Follow</h5>
-          {["Instagram", "Facebook", "Pinterest", "TripAdvisor"].map((s) => (
-            <p key={s} style={{ color: C.muted, fontSize: 13, marginBottom: 10, cursor: "pointer", transition: "color 0.3s" }}
-              onMouseEnter={(e) => ((e.target as HTMLElement).style.color = C.cream)}
-              onMouseLeave={(e) => ((e.target as HTMLElement).style.color = C.muted)}
-            >{s}</p>
-          ))}
-        </div>
-      </div>
-      <div style={{ maxWidth: 1100, margin: "48px auto 0", paddingTop: 24, borderTop: "1px solid rgba(201,169,110,0.08)", display: "flex", justifyContent: "space-between", flexWrap: "wrap" as const, gap: 12 }}>
-        <p style={{ color: C.muted, fontSize: 12 }}>&copy; {new Date().getFullYear()} Grand Harbour Hotel &amp; Spa. All rights reserved.</p>
-        <div className="flex gap-6">
-          {[
-            { label: "Privacy Policy", href: "/demos/hotel/privacy" },
-            { label: "Impressum", href: "/demos/hotel/impressum" },
-          ].map((t) => (
-            <Link key={t.label} href={t.href} style={{ color: C.muted, fontSize: 12, textDecoration: "none", transition: "color 0.3s" }}
-              onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = C.gold)}
-              onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = C.muted)}
-            >{t.label}</Link>
-          ))}
-        </div>
-      </div>
-    </footer>
-  );
-}
-
-/* ═══════════════════════════════════════════
-   TOAST
-   ═══════════════════════════════════════════ */
-function Toast({ message, visible, onClose }: { message: string; visible: boolean; onClose: () => void }) {
-  useEffect(() => {
-    if (visible) {
-      const t = setTimeout(onClose, 5000);
-      return () => clearTimeout(t);
-    }
-  }, [visible, onClose]);
-
-  return (
-    <AnimatePresence>
-      {visible && (
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 40 }}
-          transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
-          style={{
-            position: "fixed",
-            bottom: 32,
-            left: "50%",
-            transform: "translateX(-50%)",
-            zIndex: 300,
-            background: C.gold,
-            color: C.bg,
-            padding: "16px 32px",
-            borderRadius: 6,
-            fontFamily: fontBody,
-            fontSize: 14,
-            fontWeight: 600,
-            boxShadow: "0 8px 32px rgba(0,0,0,0.4)",
-            whiteSpace: "nowrap" as const,
-          }}
-        >
-          {message}
-        </motion.div>
-      )}
-    </AnimatePresence>
-  );
-}
-
-/* ═══════════════════════════════════════════════════════
-   MAIN COMPONENT
-   ═══════════════════════════════════════════════════════ */
-export default function HotelContactPage() {
-  const [showToast, setShowToast] = useState(false);
-
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    setShowToast(true);
-  };
-
-  return (
-    <div style={{ background: C.bg, color: C.cream, fontFamily: fontBody, paddingTop: 10 }}>
+    <div style={{ background: C.bg, color: C.dark, fontFamily: fBody }}>
       <DemoBanner />
-      <SiteHeader />
+      <HotelNav />
 
-      {/* ═══════════════════════════════════════
-          HERO
-          ═══════════════════════════════════════ */}
-      <section style={{ paddingTop: 160, paddingBottom: 60, textAlign: "center", position: "relative" }}>
-        <div style={{ position: "absolute", inset: 0, background: `linear-gradient(180deg, ${C.surface} 0%, ${C.bg} 100%)`, opacity: 0.5 }} />
-        <div style={{ position: "relative", zIndex: 1, maxWidth: 700, margin: "0 auto", padding: "0 24px" }}>
-          <Reveal type="fade" delay={0.1}>
-            <p style={{ fontFamily: fontBody, color: C.gold, letterSpacing: "0.35em", fontSize: 13, fontWeight: 500, textTransform: "uppercase" as const, marginBottom: 16 }}>
-              Reservations
-            </p>
-          </Reveal>
-          <Reveal type="slide-up" delay={0.25}>
-            <h1 style={{ fontFamily: fontDisplay, fontSize: 40, fontWeight: 300, lineHeight: 1.1, color: C.cream, margin: 0 }}>
-              Book Your Stay
-            </h1>
-          </Reveal>
+      <section className="relative w-full h-[50vh] min-h-[400px] overflow-hidden">
+        <Image src="/images/hotel/contact-reception.jpg" alt="" fill priority className="object-cover" />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(14,26,43,0.35) 0%, rgba(14,26,43,0.65) 100%)" }} />
+        <div className="absolute inset-0 flex items-end">
+          <div className="w-full px-6 md:px-10 pb-16">
+            <div className="max-w-[1500px] mx-auto">
+              <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.7, delay: 0.25 }} className="text-[10px] tracking-[0.4em] uppercase mb-5" style={{ color: "#D4B878", fontFamily: fMono }}>
+                — {tri("Reservations & enquiries", "Reservierungen & Anfragen", "Réservations & demandes", lang)}
+              </motion.p>
+              <motion.h1
+                initial={{ clipPath: "inset(100% 0 0 0)" }}
+                animate={{ clipPath: "inset(0% 0 0 0)" }}
+                transition={{ duration: 1, delay: 0.35, ease: [0.77, 0, 0.175, 1] }}
+                className="max-w-4xl"
+                style={{ fontFamily: fHead, fontSize: "clamp(52px, 9vw, 140px)", lineHeight: 0.92, fontWeight: 400, letterSpacing: "-0.015em", color: "#F7F1E8" , paddingBottom: "0.15em" }}
+              >
+                {tri("Reserve", "Reservieren", "Réserver", lang)}
+              </motion.h1>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════
-          SPLIT LAYOUT: FORM + CONTACT INFO
-          ═══════════════════════════════════════ */}
-      <section style={{ padding: "40px 24px 100px", maxWidth: 1100, margin: "0 auto" }}>
-        <div className="hotel-contact-grid" style={{ display: "grid", gap: 48 }}>
+      <section className="px-6 md:px-10 py-24 md:py-32">
+        <div className="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16">
+          {/* Form */}
+          <Reveal className="md:col-span-7">
+            <p className="text-[10px] tracking-[0.3em] uppercase mb-4" style={{ color: C.gold, fontFamily: fMono }}>
+              — {tri("Direct reservations", "Direktreservierung", "Réservations directes", lang)}
+            </p>
+            <h2 className="mb-8" style={{ fontFamily: fHead, fontSize: "clamp(32px, 4vw, 56px)", lineHeight: 1.02, fontWeight: 400, letterSpacing: "-0.01em", color: C.dark }}>
+              {tri("Write to us,", "Schreiben Sie uns,", "Écrivez-nous,", lang)}{" "}
+              <em style={{ fontStyle: "italic" }}>{tri("we reply within the hour.", "wir antworten innerhalb einer Stunde.", "nous répondons dans l'heure.", lang)}</em>
+            </h2>
 
-          {/* ─── LEFT: BOOKING FORM (55%) ─── */}
-          <Reveal type="slide-left" delay={0.1}>
-            <form onSubmit={handleSubmit} style={{ background: C.surface, border: `1px solid ${C.border}`, borderRadius: 6, padding: "40px 36px" }}>
-              <h2 style={{ fontFamily: fontDisplay, fontSize: 28, fontWeight: 400, color: C.cream, margin: "0 0 32px" }}>
-                Reservation Details
-              </h2>
-
-              {/* dates row */}
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 20 }}>
-                <div>
-                  <label style={{ display: "block", fontFamily: fontBody, fontSize: 11, letterSpacing: "0.12em", textTransform: "uppercase" as const, color: C.gold, marginBottom: 8, fontWeight: 500 }}>
-                    Check-in
-                  </label>
-                  <input type="date" defaultValue="2026-06-15" style={inputStyle}
-                    onFocus={(e) => { e.currentTarget.style.borderColor = "rgba(201,169,110,0.5)"; }}
-                    onBlur={(e) => { e.currentTarget.style.borderColor = C.border; }}
-                  />
-                </div>
-                <div>
-                  <label style={{ display: "block", fontFamily: fontBody, fontSize: 11, letterSpacing: "0.12em", textTransform: "uppercase" as const, color: C.gold, marginBottom: 8, fontWeight: 500 }}>
-                    Check-out
-                  </label>
-                  <input type="date" defaultValue="2026-06-20" style={inputStyle}
-                    onFocus={(e) => { e.currentTarget.style.borderColor = "rgba(201,169,110,0.5)"; }}
-                    onBlur={(e) => { e.currentTarget.style.borderColor = C.border; }}
-                  />
-                </div>
+            {sent ? (
+              <div className="p-10 text-center" style={{ background: "#EFE6D6" }}>
+                <p className="text-2xl italic mb-3" style={{ fontFamily: fHead, color: C.dark }}>
+                  {tri("Grazie.", "Grazie.", "Grazie.", lang)}
+                </p>
+                <p className="text-[13px]" style={{ color: C.muted, fontFamily: fMono }}>
+                  {tri("We will confirm within one hour during opening hours.", "Wir bestätigen innerhalb einer Stunde während der Öffnungszeiten.", "Nous confirmons dans l'heure pendant les heures d'ouverture.", lang)}
+                </p>
               </div>
-
-              {/* room type */}
-              <div style={{ marginBottom: 20 }}>
-                <label style={{ display: "block", fontFamily: fontBody, fontSize: 11, letterSpacing: "0.12em", textTransform: "uppercase" as const, color: C.gold, marginBottom: 8, fontWeight: 500 }}>
-                  Room Type
-                </label>
-                <select defaultValue="Classic" style={{ ...inputStyle, cursor: "pointer", appearance: "none" as const, backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238A9AB5' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E")`, backgroundRepeat: "no-repeat", backgroundPosition: "right 16px center" }}
-                  onFocus={(e) => { e.currentTarget.style.borderColor = "rgba(201,169,110,0.5)"; }}
-                  onBlur={(e) => { e.currentTarget.style.borderColor = C.border; }}
-                >
-                  {ROOM_TYPES.map((r) => (
-                    <option key={r} value={r} style={{ background: C.surface, color: C.cream }}>{r}</option>
-                  ))}
-                </select>
-              </div>
-
-              {/* adults + children */}
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 20 }}>
-                <div>
-                  <label style={{ display: "block", fontFamily: fontBody, fontSize: 11, letterSpacing: "0.12em", textTransform: "uppercase" as const, color: C.gold, marginBottom: 8, fontWeight: 500 }}>
-                    Adults
-                  </label>
-                  <select defaultValue="2" style={{ ...inputStyle, cursor: "pointer", appearance: "none" as const, backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238A9AB5' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E")`, backgroundRepeat: "no-repeat", backgroundPosition: "right 16px center" }}
-                    onFocus={(e) => { e.currentTarget.style.borderColor = "rgba(201,169,110,0.5)"; }}
-                    onBlur={(e) => { e.currentTarget.style.borderColor = C.border; }}
-                  >
-                    {[1, 2, 3, 4].map((n) => (
-                      <option key={n} value={n} style={{ background: C.surface, color: C.cream }}>{n}</option>
-                    ))}
-                  </select>
+            ) : (
+              <form onSubmit={(e) => { e.preventDefault(); setSent(true); }} className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                  <Field label={tri("Name", "Name", "Nom", lang)} required />
+                  <Field label={tri("Email", "E-Mail", "E-mail", lang)} type="email" required />
                 </div>
-                <div>
-                  <label style={{ display: "block", fontFamily: fontBody, fontSize: 11, letterSpacing: "0.12em", textTransform: "uppercase" as const, color: C.gold, marginBottom: 8, fontWeight: 500 }}>
-                    Children
-                  </label>
-                  <select defaultValue="0" style={{ ...inputStyle, cursor: "pointer", appearance: "none" as const, backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238A9AB5' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E")`, backgroundRepeat: "no-repeat", backgroundPosition: "right 16px center" }}
-                    onFocus={(e) => { e.currentTarget.style.borderColor = "rgba(201,169,110,0.5)"; }}
-                    onBlur={(e) => { e.currentTarget.style.borderColor = C.border; }}
-                  >
-                    {[0, 1, 2, 3].map((n) => (
-                      <option key={n} value={n} style={{ background: C.surface, color: C.cream }}>{n}</option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-
-              {/* divider */}
-              <div style={{ height: 1, background: C.border, margin: "28px 0" }} />
-
-              {/* name + email */}
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 20 }}>
-                <div>
-                  <label style={{ display: "block", fontFamily: fontBody, fontSize: 11, letterSpacing: "0.12em", textTransform: "uppercase" as const, color: C.gold, marginBottom: 8, fontWeight: 500 }}>
-                    Name *
-                  </label>
-                  <input type="text" required placeholder="Your full name" style={inputStyle}
-                    onFocus={(e) => { e.currentTarget.style.borderColor = "rgba(201,169,110,0.5)"; }}
-                    onBlur={(e) => { e.currentTarget.style.borderColor = C.border; }}
-                  />
-                </div>
-                <div>
-                  <label style={{ display: "block", fontFamily: fontBody, fontSize: 11, letterSpacing: "0.12em", textTransform: "uppercase" as const, color: C.gold, marginBottom: 8, fontWeight: 500 }}>
-                    Email *
-                  </label>
-                  <input type="email" required placeholder="your@email.com" style={inputStyle}
-                    onFocus={(e) => { e.currentTarget.style.borderColor = "rgba(201,169,110,0.5)"; }}
-                    onBlur={(e) => { e.currentTarget.style.borderColor = C.border; }}
-                  />
-                </div>
-              </div>
-
-              {/* phone */}
-              <div style={{ marginBottom: 20 }}>
-                <label style={{ display: "block", fontFamily: fontBody, fontSize: 11, letterSpacing: "0.12em", textTransform: "uppercase" as const, color: C.gold, marginBottom: 8, fontWeight: 500 }}>
-                  Phone *
-                </label>
-                <input type="tel" required placeholder="+356 ..." style={inputStyle}
-                  onFocus={(e) => { e.currentTarget.style.borderColor = "rgba(201,169,110,0.5)"; }}
-                  onBlur={(e) => { e.currentTarget.style.borderColor = C.border; }}
-                />
-              </div>
-
-              {/* special requests */}
-              <div style={{ marginBottom: 32 }}>
-                <label style={{ display: "block", fontFamily: fontBody, fontSize: 11, letterSpacing: "0.12em", textTransform: "uppercase" as const, color: C.gold, marginBottom: 8, fontWeight: 500 }}>
-                  Special Requests
-                </label>
-                <textarea rows={4} placeholder="Dietary requirements, celebrations, accessibility needs..." style={{ ...inputStyle, resize: "vertical" as const }}
-                  onFocus={(e) => { e.currentTarget.style.borderColor = "rgba(201,169,110,0.5)"; }}
-                  onBlur={(e) => { e.currentTarget.style.borderColor = C.border; }}
-                />
-              </div>
-
-              {/* submit */}
-              <MagneticButton>
-                <button
-                  type="submit"
-                  style={{
-                    width: "100%", padding: "16px 0", background: C.gold,
-                    color: C.bg, border: "none", borderRadius: 4,
-                    fontFamily: fontBody, fontSize: 13, fontWeight: 700,
-                    letterSpacing: "0.12em", textTransform: "uppercase" as const,
-                    cursor: "pointer", transition: "opacity 0.25s",
-                  }}
-                  onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.opacity = "0.85"; }}
-                  onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.opacity = "1"; }}
-                >
-                  Check Availability
-                </button>
-              </MagneticButton>
-            </form>
-          </Reveal>
-
-          {/* ─── RIGHT: CONTACT INFO (45%) ─── */}
-          <Reveal type="slide-right" delay={0.2}>
-            <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
-
-              {/* contact details card */}
-              <div style={{ background: C.surface, border: `1px solid ${C.border}`, borderRadius: 6, padding: "36px 32px" }}>
-                <h3 style={{ fontFamily: fontDisplay, fontSize: 24, fontWeight: 400, color: C.cream, margin: "0 0 28px" }}>
-                  Contact Details
-                </h3>
-
-                {[
-                  {
-                    label: "Phone",
-                    value: "+356 2124 0000",
-                    icon: "M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z",
-                  },
-                  {
-                    label: "Email",
-                    value: "reservations@grandharbour.mt",
-                    icon: "M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z",
-                  },
-                  {
-                    label: "Address",
-                    value: "Valletta Waterfront, VLT 1971, Malta",
-                    icon: "M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z M15 11a3 3 0 11-6 0 3 3 0 016 0z",
-                  },
-                ].map((item) => (
-                  <div key={item.label} style={{ display: "flex", gap: 16, marginBottom: 24 }}>
-                    <div style={{ width: 40, height: 40, borderRadius: "50%", background: "rgba(201,169,110,0.1)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                      <svg width={18} height={18} fill="none" stroke={C.gold} strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-                        <path d={item.icon} />
+                <Field label={tri("Phone", "Telefon", "Téléphone", lang)} type="tel" />
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+                  <Field label={tri("Arrival", "Anreise", "Arrivée", lang)} type="date" required />
+                  <Field label={tri("Departure", "Abreise", "Départ", lang)} type="date" required />
+                  <div>
+                    <label className="block text-[10px] tracking-[0.2em] uppercase mb-2" style={{ color: C.muted, fontFamily: fMono }}>
+                      {tri("Guests", "Gäste", "Personnes", lang)} *
+                    </label>
+                    <div className="relative">
+                      <select
+                        defaultValue="2"
+                        className="w-full bg-white outline-none appearance-none cursor-pointer"
+                        style={{
+                          border: `1px solid ${C.border}`,
+                          color: C.dark,
+                          fontFamily: fBody,
+                          height: 48,
+                          padding: "0 40px 0 14px",
+                          fontSize: 15,
+                        }}
+                      >
+                        {[1, 2, 3, 4, 5, 6].map((n) => (
+                          <option key={n} value={n}>
+                            {n} {n === 1 ? tri("guest", "Gast", "personne", lang) : tri("guests", "Gäste", "personnes", lang)}
+                          </option>
+                        ))}
+                      </select>
+                      <svg width="12" height="8" viewBox="0 0 12 8" fill="none" className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2" style={{ color: C.gold }}>
+                        <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
                     </div>
-                    <div>
-                      <p style={{ fontFamily: fontBody, fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase" as const, color: C.gold, margin: "0 0 4px", fontWeight: 500 }}>
-                        {item.label}
-                      </p>
-                      <p style={{ color: C.cream, fontSize: 15, margin: 0, lineHeight: 1.5 }}>
-                        {item.value}
-                      </p>
-                    </div>
                   </div>
-                ))}
-              </div>
-
-              {/* notes */}
-              <div style={{ background: C.surface, border: `1px solid ${C.border}`, borderRadius: 6, padding: "28px 32px" }}>
-                {[
-                  "Concierge available 24/7",
-                  "Complimentary airport transfer for suite bookings",
-                ].map((note, i) => (
-                  <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: 12, marginBottom: i === 0 ? 16 : 0 }}>
-                    <div style={{ width: 6, height: 6, borderRadius: "50%", background: C.gold, marginTop: 7, flexShrink: 0 }} />
-                    <p style={{ color: C.cream, fontSize: 14, lineHeight: 1.6, margin: 0 }}>{note}</p>
+                </div>
+                <div>
+                  <label className="block text-[10px] tracking-[0.2em] uppercase mb-2" style={{ color: C.muted, fontFamily: fMono }}>
+                    {tri("Room preference", "Zimmerwunsch", "Préférence de chambre", lang)}
+                  </label>
+                  <div className="relative">
+                    <select
+                      defaultValue=""
+                      className="w-full bg-white outline-none appearance-none cursor-pointer"
+                      style={{
+                        border: `1px solid ${C.border}`,
+                        color: C.dark,
+                        fontFamily: fBody,
+                        height: 48,
+                        padding: "0 40px 0 14px",
+                        fontSize: 15,
+                      }}
+                    >
+                      <option value="" disabled>{tri("Any room", "Egal", "Indifférent", lang)}</option>
+                      {rooms.map((r) => (
+                        <option key={r.slug} value={r.slug}>
+                          {tri(r.nameEn, r.nameDe, r.nameFr, lang)} — € {r.price}
+                        </option>
+                      ))}
+                    </select>
+                    <svg width="12" height="8" viewBox="0 0 12 8" fill="none" className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2" style={{ color: C.gold }}>
+                      <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
                   </div>
-                ))}
-              </div>
+                </div>
+                <div>
+                  <label className="block text-[10px] tracking-[0.2em] uppercase mb-2" style={{ color: C.muted, fontFamily: fMono }}>
+                    {tri("Anything we should know?", "Gibt es etwas, das wir wissen sollten?", "Quelque chose à savoir ?", lang)}
+                  </label>
+                  <textarea
+                    rows={4}
+                    className="w-full bg-white outline-none resize-none"
+                    style={{ border: `1px solid ${C.border}`, color: C.dark, fontFamily: fBody, padding: "12px 14px", fontSize: 15 }}
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="inline-flex items-center gap-3 px-10 py-4 text-[11px] tracking-[0.2em] uppercase transition-opacity hover:opacity-90"
+                  style={{ background: C.dark, color: C.bg, fontFamily: fBody, border: "none", fontWeight: 600 }}
+                >
+                  {tri("Send enquiry", "Anfrage senden", "Envoyer la demande", lang)} →
+                </button>
+              </form>
+            )}
+          </Reveal>
 
-              {/* map placeholder */}
-              <div style={{
-                background: C.surface, border: `1px solid ${C.border}`, borderRadius: 6,
-                height: 220, display: "flex", alignItems: "center", justifyContent: "center",
-                position: "relative", overflow: "hidden",
-              }}>
-                {/* grid pattern */}
-                <div style={{
-                  position: "absolute", inset: 0, opacity: 0.06,
-                  backgroundImage: `linear-gradient(${C.muted} 1px, transparent 1px), linear-gradient(90deg, ${C.muted} 1px, transparent 1px)`,
-                  backgroundSize: "40px 40px",
-                }} />
-                <div style={{ textAlign: "center", position: "relative", zIndex: 1 }}>
-                  <svg width={32} height={32} fill="none" stroke={C.gold} strokeWidth={1.2} viewBox="0 0 24 24" style={{ marginBottom: 12, opacity: 0.7 }}>
-                    <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" strokeLinecap="round" strokeLinejoin="round" />
-                    <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                  <p style={{ color: C.muted, fontSize: 13, margin: 0 }}>Valletta Waterfront, Malta</p>
+          {/* Sidebar */}
+          <Reveal delay={0.1} className="md:col-span-4 md:col-start-9">
+            <div className="p-8" style={{ background: "#EFE6D6" }}>
+              <p className="text-[10px] tracking-[0.3em] uppercase mb-6" style={{ color: C.gold, fontFamily: fMono }}>
+                — {tri("Find us", "Finden Sie uns", "Nous trouver", lang)}
+              </p>
+              <h3 className="mb-8" style={{ fontFamily: fHead, fontSize: 28, lineHeight: 1.1, color: C.dark }}>
+                Triq San Pawl 42<br />Valletta
+              </h3>
+              <div className="space-y-5 text-[13px]">
+                <div className="flex items-start gap-3">
+                  <MapPin size={14} className="mt-1 shrink-0" style={{ color: C.gold }} />
+                  <span style={{ color: C.dark }}>Triq San Pawl 42<br />Valletta VLT 1214<br />Malta</span>
+                </div>
+                <a href="tel:+35621223344" className="flex items-start gap-3 no-underline hover:opacity-70 transition-opacity">
+                  <Phone size={14} className="mt-1 shrink-0" style={{ color: C.gold }} />
+                  <span style={{ color: C.dark }}>+356 2122 3344</span>
+                </a>
+                <a href="mailto:stay@grandharbour.mt" className="flex items-start gap-3 no-underline hover:opacity-70 transition-opacity">
+                  <Mail size={14} className="mt-1 shrink-0" style={{ color: C.gold }} />
+                  <span style={{ color: C.dark }}>stay@grandharbour.mt</span>
+                </a>
+                <div className="pt-5 flex items-start gap-3" style={{ borderTop: `1px solid ${C.border}` }}>
+                  <Clock size={14} className="mt-1 shrink-0" style={{ color: C.gold }} />
+                  <div style={{ color: C.dark }}>
+                    <p className="font-semibold mb-1">{tri("Reception", "Rezeption", "Réception", lang)}</p>
+                    <p className="opacity-70">24 / 7</p>
+                    <p className="font-semibold mt-3 mb-1">{tri("Reservations", "Reservierungen", "Réservations", lang)}</p>
+                    <p className="opacity-70">{tri("Mon – Sun · 08:00 – 22:00", "Mo – So · 08:00 – 22:00", "Lun – Dim · 08h00 – 22h00", lang)}</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -565,31 +186,47 @@ export default function HotelContactPage() {
         </div>
       </section>
 
-      <SiteFooter />
+      {/* Map */}
+      <section className="w-full" style={{ height: 440 }}>
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2698.6!2d14.513!3d35.897!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzXCsDUzJzQ5LjAiTiAxNMKwMzAnNDcuMCJF!5e0!3m2!1sen!2smt!4v1700000000000"
+          width="100%"
+          height="100%"
+          style={{ border: 0, filter: "grayscale(0.3) sepia(0.1)" }}
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+          title="Grand Harbour Hotel"
+        />
+      </section>
 
-      <Toast
-        message="Thank you! We'll confirm availability within 24 hours."
-        visible={showToast}
-        onClose={() => setShowToast(false)}
-      />
-
-      <style>{`
-        .hotel-contact-grid {
-          grid-template-columns: 55fr 45fr;
-        }
-        @media (max-width: 768px) {
-          .hotel-contact-grid {
-            grid-template-columns: 1fr;
-          }
-        }
-        input[type="date"]::-webkit-calendar-picker-indicator {
-          filter: invert(0.7);
-          cursor: pointer;
-        }
-        input::placeholder, textarea::placeholder {
-          color: rgba(138,154,181,0.5);
-        }
-      `}</style>
+      <HotelFooter />
     </div>
   );
+}
+
+function Field({ label, type = "text", required }: { label: string; type?: string; required?: boolean }) {
+  return (
+    <div>
+      <label className="block text-[10px] tracking-[0.2em] uppercase mb-2" style={{ color: C.muted, fontFamily: fMono }}>
+        {label}{required && " *"}
+      </label>
+      <input
+        type={type}
+        required={required}
+        className="w-full bg-white outline-none"
+        style={{
+          border: `1px solid ${C.border}`,
+          color: C.dark,
+          fontFamily: fBody,
+          height: 48,
+          padding: "0 14px",
+          fontSize: 15,
+        }}
+      />
+    </div>
+  );
+}
+
+export default function HotelContactPage() {
+  return <HotelLangProvider><Inner /></HotelLangProvider>;
 }

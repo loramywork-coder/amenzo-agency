@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import Reveal from "@/components/demos/Reveal";
 import { DemoBanner } from "@/components/demos/demo-banner";
 import { Star, ExternalLink } from "lucide-react";
@@ -246,6 +247,12 @@ function SiteFooter() {
 /* ═══════════════════════════════════════════
    REVIEW CARD
    ═══════════════════════════════════════════ */
+const REVIEW_PORTRAITS = [
+  "/images/dental/review-1.jpg",
+  "/images/dental/review-2.jpg",
+  "/images/dental/review-3.jpg",
+];
+
 function ReviewCard({ review, index }: { review: typeof REVIEWS[number]; index: number }) {
   return (
     <Reveal type="slide-up" delay={0.05 * (index % 4)}>
@@ -277,13 +284,14 @@ function ReviewCard({ review, index }: { review: typeof REVIEWS[number]; index: 
         <div style={{ display: "flex", alignItems: "center", gap: 12, paddingTop: 8, borderTop: `1px solid ${C.border}` }}>
           <div
             style={{
-              width: 40, height: 40, borderRadius: "50%",
-              background: `${C.teal}15`,
-              display: "flex", alignItems: "center", justifyContent: "center",
-              fontSize: 14, fontWeight: 700, color: C.teal,
+              position: "relative",
+              width: 44, height: 44, borderRadius: "50%",
+              overflow: "hidden",
+              border: `1px solid ${C.teal}33`,
+              flexShrink: 0,
             }}
           >
-            {review.initials}
+            <Image src={REVIEW_PORTRAITS[index % REVIEW_PORTRAITS.length]} alt={review.name} fill className="object-cover" />
           </div>
           <div>
             <p style={{ fontSize: 14, fontWeight: 600, color: C.warmWhite, margin: 0 }}>{review.name}</p>
@@ -325,6 +333,16 @@ export default function DentalReviewsPage() {
             </p>
           </Reveal>
         </div>
+      </section>
+
+      {/* Hero Banner */}
+      <section style={{ padding: "0 24px 48px", maxWidth: 1200, margin: "0 auto" }}>
+        <Reveal type="fade" delay={0.35}>
+          <div style={{ position: "relative", width: "100%", aspectRatio: "21 / 9", borderRadius: 20, overflow: "hidden", border: `1px solid ${C.border}` }}>
+            <Image src="/images/dental/reviews-hero.jpg" alt="" fill className="object-cover" />
+            <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(10,16,21,0) 40%, rgba(10,16,21,0.7) 100%)" }} />
+          </div>
+        </Reveal>
       </section>
 
       {/* ═══════ REVIEW GRID ═══════ */}

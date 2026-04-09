@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { DemoBanner } from "@/components/demos/demo-banner";
 
 /* ── palette ── */
@@ -200,6 +201,15 @@ export default function ImpressumPage() {
           </p>
         </div>
       </section>
+
+      {/* Hero Banner */}
+      <section style={{ padding: "0 24px 48px", maxWidth: 1200, margin: "0 auto" }}>
+        <div style={{ position: "relative", width: "100%", aspectRatio: "21 / 9", overflow: "hidden", border: "2px solid #22C55E" }}>
+          <Image src="/images/fitness/impressum-hero.jpg" alt="" fill priority className="object-cover" />
+          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(8,8,8,0) 40%, rgba(8,8,8,0.8) 100%)" }} />
+        </div>
+      </section>
+
 
       {/* ════════ FOOTER ════════ */}
       <footer style={{ background: C.bg, borderTop: `1px solid ${C.border}`, padding: "48px 24px 32px" }}>

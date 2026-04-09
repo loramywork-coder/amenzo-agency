@@ -1,1698 +1,350 @@
 "use client";
 
-import Reveal from "@/components/demos/Reveal";
-import MagneticButton from "@/components/demos/MagneticButton";
-import { DemoBanner } from "@/components/demos/demo-banner";
-import { VideoHeroBg } from "@/components/video-hero-bg";
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useEffect, useRef, useCallback } from "react";
+import { motion } from "framer-motion";
+import { DemoBanner } from "@/components/demos/demo-banner";
+import { ArrowRight } from "lucide-react";
+import {
+  C, fHead, fBody, fMono, Reveal, Rule, Ornament,
+  HotelNav, HotelFooter, HotelLangProvider, useHotelLang, tri, rooms,
+} from "./_shared";
 
-/* ─── palette ─── */
-const C = {
-  bg: "#0C1220",
-  surface: "#141E30",
-  gold: "#C9A96E",
-  cream: "#F5F0E8",
-  muted: "#8A9AB5",
-  border: "#1E2D45",
-} as const;
+const pillars = [
+  {
+    num: "I.",
+    en: { title: "Two kitchens", body: "A harbourside fine-dining room and a rooftop bar that opens for sunset. Both led by chef Stefano Busuttil, formerly of Noma." },
+    de: { title: "Zwei Küchen", body: "Ein Feinschmeckerlokal am Hafen und eine Rooftop-Bar, die zum Sonnenuntergang öffnet. Beide geleitet von Chef Stefano Busuttil, ehemals Noma." },
+    fr: { title: "Deux cuisines", body: "Un restaurant gastronomique face au port et un bar panoramique ouvrant au coucher du soleil. Tous deux dirigés par le chef Stefano Busuttil, ancien Noma." },
+    img: "dining-restaurant.jpg",
+  },
+  {
+    num: "II.",
+    en: { title: "Rooftop spa", body: "Hammam, steam room, cold plunge, and a 14-metre rooftop pool facing the Three Cities. Open from 7am to midnight." },
+    de: { title: "Dach-Spa", body: "Hammam, Dampfbad, Kaltbecken und ein 14-Meter-Dachpool mit Blick auf die Drei Städte. Geöffnet von 7 bis Mitternacht." },
+    fr: { title: "Spa panoramique", body: "Hammam, sauna, bain froid et piscine de 14 mètres face aux Trois Cités. Ouvert de 7h à minuit." },
+    img: "spa-pool.jpg",
+  },
+  {
+    num: "III.",
+    en: { title: "Curated experiences", body: "Private yacht charters, dawn dives, vineyard visits, and cooking classes with our chef. All arranged through your personal concierge." },
+    de: { title: "Kuratierte Erlebnisse", body: "Private Yachtcharter, Morgentauchgänge, Weingutsbesuche und Kochkurse mit unserem Chef. Alles über Ihren persönlichen Concierge." },
+    fr: { title: "Expériences sur mesure", body: "Charter de yacht privé, plongées à l'aube, visites de vignobles et cours de cuisine avec notre chef. Arrangés par votre concierge personnel." },
+    img: "exp-yacht.jpg",
+  },
+];
 
-const fontDisplay = "'Cormorant Garamond', Georgia, serif";
-const fontBody = "Inter, system-ui, sans-serif";
-
-/* ─── unsplash helper ─── */
-const unsplash = (id: string, w = 1200) =>
-  `https://images.unsplash.com/${id}?w=${w}&q=80&auto=format&fit=crop`;
-
-/* ─── room preview data ─── */
-const roomPreviews = [
-  {
-    name: "Grand Harbour Suite",
-    price: 450,
-    img: "photo-1590490360182-c33d57733427",
-    beds: "1 King",
-    size: "85 m\u00B2",
-    view: "Harbour",
-    desc: "Panoramic views of the Grand Harbour with a private terrace, marble bathroom and living area.",
-  },
-  {
-    name: "Deluxe Sea View",
-    price: 280,
-    img: "photo-1582719478250-c89cae4dc85b",
-    beds: "1 King",
-    size: "45 m\u00B2",
-    view: "Sea",
-    desc: "Wake to the Mediterranean with floor-to-ceiling windows and a private balcony.",
-  },
-  {
-    name: "Presidential Suite",
-    price: 850,
-    img: "photo-1578683010236-d716f9a3f461",
-    beds: "1 King + Study",
-    size: "140 m\u00B2",
-    view: "Panoramic",
-    desc: "Our signature suite with private pool, butler service, and wraparound terrace.",
-  },
-] as const;
-
-/* ─── dining data ─── */
-const restaurants = [
-  {
-    name: "Harbour Grill",
-    desc: "Wood-fired steaks and the freshest catch, served with harbour views.",
-    hours: "Dinner — Tue–Sat 19:00–23:00",
-    img: "photo-1559339352-11d035aa65de",
-  },
-  {
-    name: "La Terrazza",
-    desc: "Casual Mediterranean cuisine on our sunlit rooftop terrace.",
-    hours: "Lunch & Dinner — Daily 12:00–22:00",
-    img: "photo-1555396273-367ea4eb4db5",
-  },
-  {
-    name: "Bar Azure",
-    desc: "Signature cocktails and small plates with panoramic sunset views.",
-    hours: "Daily 16:00–01:00",
-    img: "photo-1470337458703-46ad1756a187",
-  },
-] as const;
-
-/* ─── amenities data ─── */
-const amenities = [
-  {
-    icon: "M2 15c6.667-6 13.333 0 20-6M2 19c6.667-6 13.333 0 20-6",
-    title: "Infinity Pool",
-    desc: "Rooftop infinity pool with panoramic harbour views",
-  },
-  {
-    icon: "M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.582a.5.5 0 0 1 0 .962L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z",
-    title: "Wellness Spa",
-    desc: "Award-winning spa with thermal circuit and hammam",
-  },
-  {
-    icon: "M3 2h18v3H3zM3 5v6.5a5.5 5.5 0 005.5 5.5h.5v3h6v-3h.5a5.5 5.5 0 005.5-5.5V5",
-    title: "Fine Dining",
-    desc: "Three restaurants featuring Mediterranean cuisine",
-  },
-  {
-    icon: "M6.5 6.5h11M6.5 17.5h11M3 12h18M12 3v18",
-    title: "Fitness Centre",
-    desc: "State-of-the-art gym with personal trainers",
-  },
-  {
-    icon: "M7 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0-4 0M17 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0-4 0M5 17H3v-6l2-5h9l4 5h1a2 2 0 0 1 2 2v4h-2",
-    title: "Valet Parking",
-    desc: "Complimentary valet with electric charging",
-  },
-  {
-    icon: "M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01",
-    title: "High-Speed WiFi",
-    desc: "Complimentary fibre throughout the property",
-  },
-  {
-    icon: "M9 12h.01M12 12h.01M15 12h.01M3 7a4 4 0 014-4h10a4 4 0 014 4v5a4 4 0 01-4 4H7l-4 4V7z",
-    title: "Family Programme",
-    desc: "Kids club, babysitting and family experiences",
-  },
-  {
-    icon: "M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5",
-    title: "Concierge",
-    desc: "24-hour concierge for bespoke experiences",
-  },
-] as const;
-
-/* ─── testimonial data ─── */
-const testimonials = [
-  {
-    text: "An experience that transcends hospitality. Every detail curated to perfection.",
-    author: "Helena Cortez",
-    role: "Condé Nast Traveller",
-  },
-  {
-    text: "The spa alone is worth the journey. Malta’s finest hotel, without question.",
-    author: "James Whitfield",
-    role: "The Sunday Times",
-  },
-  {
-    text: "Grand Harbour redefined what luxury means to us. We return every year.",
-    author: "Sophia Laurent",
-    role: "Michelin Guide",
-  },
-] as const;
-
-/* ─── nav links ─── */
-const NAV_LINKS = [
-  { label: "Rooms", href: "/demos/hotel/rooms" },
-  { label: "Dining", href: "/demos/hotel/dining" },
-  { label: "Spa", href: "#spa" },
-  { label: "Experiences", href: "#amenities" },
-  { label: "Gallery", href: "#gallery" },
-  { label: "Events", href: "#events" },
-] as const;
-
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   NAV HEADER
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-function NavHeader() {
-  const [mobileOpen, setMobileOpen] = useState(false);
-
-  useEffect(() => {
-    if (mobileOpen) document.body.style.overflow = "hidden";
-    else document.body.style.overflow = "";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [mobileOpen]);
-
+function Inner() {
+  const { lang } = useHotelLang();
   return (
-    <>
-      <header
-        style={{
-          position: "fixed",
-          top: 40,
-          left: 0,
-          right: 0,
-          zIndex: 50,
-          padding: "8px 24px",
-          height: 80,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          background: "transparent",
-          borderBottom: "none",
-        }}
-      >
-        {/* Logo */}
-        <Link href="/demos/hotel" style={{ textDecoration: "none" }}>
-          <div style={{ lineHeight: 1.1, textShadow: "0 2px 12px rgba(0,0,0,0.6)" }}>
-            <span
-              style={{
-                display: "block",
-                fontFamily: fontDisplay,
-                fontWeight: 500,
-                fontSize: 28,
-                color: "#FFFFFF",
-                letterSpacing: "0.01em",
-              }}
-            >
-              Grand Harbour
-            </span>
-            <span
-              style={{
-                display: "block",
-                fontFamily: fontDisplay,
-                fontStyle: "italic",
-                fontWeight: 400,
-                fontSize: 16,
-                color: C.gold,
-                letterSpacing: "0.1em",
-                marginTop: 2,
-              }}
-            >
-              Hotel &amp; Spa
-            </span>
-            <span style={{ display: "block", fontSize: 9, color: C.gold, letterSpacing: "0.3em", marginTop: 5 }}>
-              ★ ★ ★ ★ ★
-            </span>
-          </div>
-        </Link>
-
-        {/* Hamburger menu — all screen sizes */}
-        <button
-          onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label="Toggle menu"
-          style={{
-            background: "none",
-            border: "none",
-            cursor: "pointer",
-            display: "flex",
-            flexDirection: "column",
-            gap: 5,
-            padding: 6,
-          }}
-        >
-          <span
-            style={{
-              width: 24,
-              height: 1.5,
-              background: C.cream,
-              transition: "transform 0.3s, opacity 0.3s",
-              transform: mobileOpen ? "rotate(45deg) translate(4px, 4px)" : "none",
-            }}
-          />
-          <span
-            style={{
-              width: 24,
-              height: 1.5,
-              background: C.cream,
-              opacity: mobileOpen ? 0 : 1,
-              transition: "opacity 0.3s",
-            }}
-          />
-          <span
-            style={{
-              width: 24,
-              height: 1.5,
-              background: C.cream,
-              transition: "transform 0.3s, opacity 0.3s",
-              transform: mobileOpen ? "rotate(-45deg) translate(4px, -4px)" : "none",
-            }}
-          />
-        </button>
-      </header>
-
-      {/* Mobile overlay */}
-      {mobileOpen && (
-        <div
-          style={{
-            position: "fixed",
-            inset: 0,
-            zIndex: 49,
-            background: "rgba(12,18,32,0.98)",
-            paddingTop: 140,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            gap: 28,
-          }}
-        >
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.label}
-              href={link.href}
-              onClick={() => setMobileOpen(false)}
-              style={{
-                fontFamily: fontDisplay,
-                fontSize: 28,
-                fontWeight: 300,
-                color: C.cream,
-                textDecoration: "none",
-              }}
-            >
-              {link.label}
-            </Link>
-          ))}
-          <Link
-            href="/demos/hotel/contact"
-            onClick={() => setMobileOpen(false)}
-            style={{
-              marginTop: 20,
-              fontFamily: fontBody,
-              fontSize: 13,
-              fontWeight: 600,
-              color: C.bg,
-              background: C.gold,
-              padding: "14px 40px",
-              letterSpacing: "0.1em",
-              textTransform: "uppercase",
-              textDecoration: "none",
-            }}
-          >
-            Book Your Stay
-          </Link>
-        </div>
-      )}
-    </>
-  );
-}
-
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   FOOTER
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-function SiteFooter() {
-  return (
-    <footer
-      style={{
-        background: C.bg,
-        borderTop: `1px solid ${C.border}`,
-        padding: "80px 24px 56px",
-      }}
-    >
-      <div
-        style={{
-          maxWidth: 1100,
-          margin: "0 auto",
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))",
-          gap: 40,
-        }}
-      >
-        {/* Brand */}
-        <div>
-          <h4
-            style={{
-              fontFamily: fontDisplay,
-              fontSize: 24,
-              fontWeight: 400,
-              color: C.cream,
-              marginBottom: 12,
-            }}
-          >
-            Grand Harbour
-          </h4>
-          <div style={{ display: "flex", gap: 4, marginBottom: 14 }}>
-            {Array.from({ length: 5 }).map((_, i) => (
-              <svg
-                key={i}
-                width="14"
-                height="14"
-                viewBox="0 0 24 24"
-                fill={C.gold}
-                stroke="none"
-              >
-                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26" />
-              </svg>
-            ))}
-          </div>
-          <p style={{ color: C.muted, fontSize: 13, lineHeight: 1.8 }}>
-            St. Barbara Bastion
-            <br />
-            Valletta VLT 1960, Malta
-          </p>
-        </div>
-
-        {/* Explore */}
-        <div>
-          <h5
-            style={{
-              fontFamily: fontBody,
-              fontSize: 12,
-              fontWeight: 600,
-              letterSpacing: "0.15em",
-              textTransform: "uppercase",
-              color: C.gold,
-              marginBottom: 16,
-            }}
-          >
-            Explore
-          </h5>
-          {[
-            { label: "Rooms & Suites", href: "/demos/hotel/rooms" },
-            { label: "Dining", href: "/demos/hotel/dining" },
-            { label: "Spa & Wellness", href: "#spa" },
-            { label: "Meetings & Events", href: "#events" },
-            { label: "Gallery", href: "#gallery" },
-          ].map((link) => (
-            <Link
-              key={link.label}
-              href={link.href}
-              style={{
-                display: "block",
-                color: C.muted,
-                fontSize: 13,
-                marginBottom: 10,
-                textDecoration: "none",
-                transition: "color 0.3s",
-              }}
-              onMouseEnter={(e) =>
-                ((e.target as HTMLElement).style.color = C.cream)
-              }
-              onMouseLeave={(e) =>
-                ((e.target as HTMLElement).style.color = C.muted)
-              }
-            >
-              {link.label}
-            </Link>
-          ))}
-        </div>
-
-        {/* Contact */}
-        <div>
-          <h5
-            style={{
-              fontFamily: fontBody,
-              fontSize: 12,
-              fontWeight: 600,
-              letterSpacing: "0.15em",
-              textTransform: "uppercase",
-              color: C.gold,
-              marginBottom: 16,
-            }}
-          >
-            Contact
-          </h5>
-          <p style={{ color: C.muted, fontSize: 13, lineHeight: 2.1 }}>
-            +356 2124 0000
-            <br />
-            reservations@grandharbour.mt
-            <br />
-            concierge@grandharbour.mt
-          </p>
-        </div>
-
-        {/* Follow */}
-        <div>
-          <h5
-            style={{
-              fontFamily: fontBody,
-              fontSize: 12,
-              fontWeight: 600,
-              letterSpacing: "0.15em",
-              textTransform: "uppercase",
-              color: C.gold,
-              marginBottom: 16,
-            }}
-          >
-            Follow
-          </h5>
-          {["Instagram", "Facebook", "Pinterest", "TripAdvisor"].map((s) => (
-            <p
-              key={s}
-              style={{
-                color: C.muted,
-                fontSize: 13,
-                marginBottom: 10,
-                cursor: "pointer",
-                transition: "color 0.3s",
-              }}
-              onMouseEnter={(e) =>
-                ((e.target as HTMLElement).style.color = C.cream)
-              }
-              onMouseLeave={(e) =>
-                ((e.target as HTMLElement).style.color = C.muted)
-              }
-            >
-              {s}
-            </p>
-          ))}
-        </div>
-      </div>
-
-      {/* bottom bar */}
-      <div
-        style={{
-          maxWidth: 1100,
-          margin: "48px auto 0",
-          paddingTop: 24,
-          borderTop: `1px solid ${C.border}`,
-          display: "flex",
-          justifyContent: "space-between",
-          flexWrap: "wrap",
-          gap: 12,
-        }}
-      >
-        <p style={{ color: C.muted, fontSize: 12 }}>
-          &copy; {new Date().getFullYear()} Grand Harbour Hotel &amp; Spa. All
-          rights reserved.
-        </p>
-        <div className="flex gap-6">
-          {["Privacy Policy", "Terms", "Accessibility"].map((t) => (
-            <span
-              key={t}
-              style={{
-                color: C.muted,
-                fontSize: 12,
-                cursor: "pointer",
-                transition: "color 0.3s",
-              }}
-              onMouseEnter={(e) =>
-                ((e.target as HTMLElement).style.color = C.gold)
-              }
-              onMouseLeave={(e) =>
-                ((e.target as HTMLElement).style.color = C.muted)
-              }
-            >
-              {t}
-            </span>
-          ))}
-        </div>
-      </div>
-    </footer>
-  );
-}
-
-/* ═══════════════════════════════════════════════════════
-   MAIN COMPONENT
-   ═══════════════════════════════════════════════════════ */
-export default function HotelPage() {
-  /* spa parallax offset */
-  const [scrollY, setScrollY] = useState(0);
-  useEffect(() => {
-    const handler = () => setScrollY(window.scrollY);
-    window.addEventListener("scroll", handler, { passive: true });
-    return () => window.removeEventListener("scroll", handler);
-  }, []);
-
-  /* testimonial rotation */
-  const [activeTestimonial, setActiveTestimonial] = useState(0);
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setActiveTestimonial((p) => (p + 1) % testimonials.length);
-    }, 6000);
-    return () => clearInterval(timer);
-  }, []);
-
-  return (
-    <div style={{ background: C.bg, color: C.cream, fontFamily: fontBody }}>
+    <div style={{ background: C.bg, color: C.dark, fontFamily: fBody }}>
       <DemoBanner />
-      <NavHeader />
+      <HotelNav />
 
-      {/* ═══════════════════════════════════════
-          SECTION 1 - HERO (100vh)
-          ═══════════════════════════════════════ */}
-      <section
-        style={{ position: "relative", minHeight: "100vh", overflow: "hidden", paddingTop: 40 }}
-      >
-        <VideoHeroBg src="/videos/demo-hotel.mp4" gradient="linear-gradient(to bottom, rgba(12,18,32,0.08) 0%, rgba(12,18,32,0.04) 35%, rgba(12,18,32,0.25) 65%, rgba(12,18,32,0.85) 92%)" startOpacity={0.8} />
-
-        {/* hero content */}
-        <div style={{ position: "relative", zIndex: 10, minHeight: "100vh" }} className="flex flex-col items-center justify-center text-center px-6" >
-          <Reveal type="fade" delay={0.2}>
-            <p
+      {/* HERO */}
+      <section className="relative w-full h-screen min-h-[720px] overflow-hidden">
+        <Image src="/images/hotel/hero.jpg" alt="Grand Harbour Hotel" fill priority className="object-cover" />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(14,26,43,0.25) 0%, rgba(14,26,43,0.5) 60%, rgba(14,26,43,0.8) 100%)" }} />
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="text-center px-6">
+            <motion.div
+              initial={{ opacity: 0, y: -14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.3 }}
+              className="mb-8 flex justify-center"
+              style={{ color: C.goldLight }}
+            >
+              <Ornament size={52} />
+            </motion.div>
+            <motion.p
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.4 }}
+              className="text-[11px] tracking-[0.5em] uppercase mb-8"
+              style={{ color: C.goldLight, fontFamily: fMono }}
+            >
+              — {tri("Valletta, Malta · Est. 1897", "Valletta, Malta · Seit 1897", "Valletta, Malte · Depuis 1897", lang)}
+            </motion.p>
+            <motion.h1
+              initial={{ clipPath: "inset(100% 0 0 0)" }}
+              animate={{ clipPath: "inset(0% 0 0 0)" }}
+              transition={{ duration: 1.1, delay: 0.55, ease: [0.77, 0, 0.175, 1] }}
+              className="text-white max-w-5xl mx-auto"
               style={{
-                fontFamily: fontBody,
-                color: C.gold,
-                letterSpacing: "0.35em",
-                fontSize: 13,
-                fontWeight: 500,
-                textTransform: "uppercase",
+                fontFamily: fHead,
+                fontSize: "clamp(56px, 10vw, 160px)",
+                lineHeight: 0.9,
+                fontWeight: 400,
+                letterSpacing: "-0.01em",
+                color: "#F7F1E8",
+                paddingBottom: "0.15em",
               }}
             >
-              Valletta, Malta
+              Grand{" "}
+              <em style={{ fontStyle: "italic", color: "#D4B878" }}>Harbour</em>
+              <br />
+              Hotel
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.85 }}
+              className="mt-10 max-w-xl mx-auto text-base md:text-lg leading-relaxed italic"
+              style={{ color: "rgba(247,241,232,0.85)", fontFamily: fHead, fontSize: "clamp(18px, 2vw, 22px)" }}
+            >
+              {tri(
+                "A small hotel on a small island with a very large view.",
+                "Ein kleines Hotel auf einer kleinen Insel — mit sehr grosser Aussicht.",
+                "Un petit hôtel sur une petite île, avec une très grande vue.",
+                lang
+              )}
+            </motion.p>
+            <motion.div
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 1.05 }}
+              className="mt-12 flex flex-col sm:flex-row justify-center gap-4"
+            >
+              <Link
+                href="/demos/hotel/rooms"
+                className="inline-flex items-center justify-center px-9 py-4 text-[11px] tracking-[0.2em] uppercase no-underline transition-opacity hover:opacity-90"
+                style={{ background: C.gold, color: C.bg, fontFamily: fBody, fontWeight: 600 }}
+              >
+                {tri("Discover Rooms", "Zimmer entdecken", "Découvrir les chambres", lang)}
+              </Link>
+              <Link
+                href="/demos/hotel/contact"
+                className="inline-flex items-center justify-center px-9 py-4 text-[11px] tracking-[0.2em] uppercase no-underline transition-all"
+                style={{ border: "1px solid rgba(247,241,232,0.4)", color: "#F7F1E8", fontFamily: fBody, fontWeight: 500 }}
+              >
+                {tri("Reserve a Stay", "Aufenthalt reservieren", "Réserver un séjour", lang)}
+              </Link>
+            </motion.div>
+          </div>
+        </div>
+
+        {/* Scroll cue */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-center" style={{ color: "rgba(247,241,232,0.6)" }}>
+          <p className="text-[9px] tracking-[0.3em] uppercase mb-2" style={{ fontFamily: fMono }}>{tri("Scroll", "Scrollen", "Défiler", lang)}</p>
+          <motion.div
+            animate={{ y: [0, 6, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            className="w-px h-8 mx-auto"
+            style={{ background: "rgba(247,241,232,0.35)" }}
+          />
+        </div>
+      </section>
+
+      {/* INTRO */}
+      <section className="px-6 md:px-10 py-28 md:py-40">
+        <div className="max-w-4xl mx-auto text-center">
+          <Reveal>
+            <p className="text-[10px] tracking-[0.4em] uppercase mb-6" style={{ color: C.gold, fontFamily: fMono }}>
+              — {tri("A house of thirty-eight rooms", "Ein Haus mit achtunddreissig Zimmern", "Une maison de trente-huit chambres", lang)}
             </p>
-          </Reveal>
-
-          <Reveal type="slide-up" delay={0.4}>
-            <h1
-              style={{
-                fontFamily: fontDisplay,
-                fontSize: "clamp(44px, 6vw, 72px)",
-                fontWeight: 300,
-                lineHeight: 1.05,
-                color: C.cream,
-                marginTop: 16,
-                marginBottom: 0,
-              }}
-            >
-              Grand Harbour
-            </h1>
-          </Reveal>
-
-          <Reveal type="slide-up" delay={0.55}>
             <h2
+              className="mb-10"
               style={{
-                fontFamily: fontDisplay,
-                fontSize: "clamp(26px, 3.8vw, 46px)",
-                fontWeight: 300,
-                lineHeight: 1.1,
-                color: C.cream,
-                marginTop: 0,
+                fontFamily: fHead,
+                fontSize: "clamp(36px, 5vw, 68px)",
+                lineHeight: 1.06,
+                fontWeight: 400,
+                color: C.dark,
+                letterSpacing: "-0.01em",
               }}
             >
-              Hotel &amp; Spa
+              {tri(
+                "We opened in 1897 as a traveller's inn on the harbour. We have kept the rooms small, the view large, and the staff on first-name terms ever since.",
+                "Wir eröffneten 1897 als Reisenden-Gasthof am Hafen. Seitdem halten wir die Zimmer klein, die Aussicht gross und das Personal per Du.",
+                "Nous avons ouvert en 1897 comme auberge de voyageurs sur le port. Depuis, nous gardons les chambres petites, la vue grande, et le personnel sur un pied d'égalité.",
+                lang
+              )}
             </h2>
+            <Rule />
           </Reveal>
+        </div>
+      </section>
 
-          {/* gold divider */}
-          <Reveal type="scale" delay={0.65}>
-            <div
-              style={{
-                width: 60,
-                height: 1,
-                background: C.gold,
-                margin: "28px auto",
-              }}
-            />
-          </Reveal>
-
-          <Reveal type="fade" delay={0.75}>
-            <p
-              style={{
-                fontFamily: fontBody,
-                color: C.muted,
-                fontSize: 15,
-                maxWidth: 460,
-                lineHeight: 1.75,
-              }}
-            >
-              A sanctuary of timeless elegance perched above Malta&rsquo;s storied
-              harbour. Where every sunset writes a new chapter.
-            </p>
-          </Reveal>
-
-          <Reveal type="slide-up" delay={0.9}>
-            <div className="flex gap-4 mt-8 flex-wrap justify-center">
-              <MagneticButton href="/demos/hotel/contact">
-                <span
-                  style={{
-                    display: "inline-block",
-                    padding: "14px 38px",
-                    background: C.gold,
-                    color: C.bg,
-                    fontFamily: fontBody,
-                    fontSize: 13,
-                    fontWeight: 600,
-                    letterSpacing: "0.1em",
-                    textTransform: "uppercase",
-                    cursor: "pointer",
-                  }}
-                >
-                  Reserve a Stay
-                </span>
-              </MagneticButton>
-              <MagneticButton href="/demos/hotel/rooms">
-                <span
-                  style={{
-                    display: "inline-block",
-                    padding: "14px 38px",
-                    border: `1px solid ${C.gold}`,
-                    color: C.gold,
-                    fontFamily: fontBody,
-                    fontSize: 13,
-                    fontWeight: 600,
-                    letterSpacing: "0.1em",
-                    textTransform: "uppercase",
-                    cursor: "pointer",
-                  }}
-                >
-                  Explore Suites
-                </span>
-              </MagneticButton>
+      {/* FEATURED ROOMS */}
+      <section className="px-6 md:px-10 py-20 md:py-28" style={{ background: "#EFE6D6" }}>
+        <div className="max-w-[1500px] mx-auto">
+          <Reveal>
+            <div className="flex items-end justify-between flex-wrap gap-6 mb-16">
+              <div>
+                <p className="text-[10px] tracking-[0.3em] uppercase mb-4" style={{ color: C.gold, fontFamily: fMono }}>
+                  — {tri("Rooms & Suites", "Zimmer & Suiten", "Chambres & Suites", lang)}
+                </p>
+                <h2 style={{ fontFamily: fHead, fontSize: "clamp(40px, 5.5vw, 80px)", lineHeight: 0.98, fontWeight: 400, letterSpacing: "-0.01em", color: C.dark , paddingBottom: "0.15em" }}>
+                  {tri("Four rooms,", "Vier Zimmer,", "Quatre chambres,", lang)}<br />
+                  <em style={{ fontStyle: "italic", color: C.gold }}>{tri("one harbour.", "ein Hafen.", "un port.", lang)}</em>
+                </h2>
+              </div>
+              <Link href="/demos/hotel/rooms" className="text-[11px] tracking-[0.15em] uppercase inline-flex items-center gap-2 no-underline" style={{ color: C.dark, fontFamily: fMono }}>
+                {tri("All rooms", "Alle Zimmer", "Toutes les chambres", lang)} <ArrowRight size={14} />
+              </Link>
             </div>
           </Reveal>
-        </div>
 
-        {/* scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2">
-          <span
-            style={{
-              fontSize: 10,
-              letterSpacing: "0.25em",
-              color: C.muted,
-              textTransform: "uppercase",
-            }}
-          >
-            Scroll
-          </span>
-          <div
-            style={{
-              width: 1,
-              height: 36,
-              background: `linear-gradient(to bottom, ${C.gold}, transparent)`,
-            }}
-          />
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════
-          SECTION 2 - WELCOME
-          ═══════════════════════════════════════ */}
-      <section
-        style={{
-          padding: "160px 24px",
-          maxWidth: 860,
-          margin: "0 auto",
-          textAlign: "center",
-        }}
-      >
-        <Reveal type="fade">
-          <p
-            style={{
-              fontFamily: fontDisplay,
-              fontStyle: "italic",
-              fontSize: "clamp(24px, 3.4vw, 32px)",
-              fontWeight: 300,
-              lineHeight: 1.55,
-              color: C.cream,
-            }}
-          >
-            &ldquo;True luxury is not opulence for its own sake, but the quiet art
-            of making every moment feel as though time has paused &mdash; just for
-            you.&rdquo;
-          </p>
-        </Reveal>
-
-        <Reveal type="scale" delay={0.2}>
-          <div
-            style={{
-              width: 40,
-              height: 1,
-              background: C.gold,
-              margin: "40px auto",
-            }}
-          />
-        </Reveal>
-
-        <Reveal type="slide-up" delay={0.3}>
-          <p
-            style={{
-              color: C.muted,
-              fontSize: 15,
-              lineHeight: 1.85,
-              maxWidth: 640,
-              margin: "0 auto",
-            }}
-          >
-            Nestled on the honey-coloured ramparts of Valletta, Grand Harbour Hotel
-            &amp; Spa is a 120-room refuge where Baroque grandeur meets contemporary
-            Mediterranean design. Since 1897, we have welcomed travellers seeking the
-            extraordinary &mdash; from our Michelin-starred kitchens to our cliff-edge
-            infinity pool, every detail is considered, every experience curated.
-          </p>
-        </Reveal>
-      </section>
-
-      {/* ═══════════════════════════════════════
-          SECTION 3 - ROOMS PREVIEW
-          ═══════════════════════════════════════ */}
-      <section
-        style={{ padding: "100px 24px 140px", maxWidth: 1300, margin: "0 auto" }}
-      >
-        <Reveal type="fade">
-          <p
-            style={{
-              textAlign: "center",
-              fontFamily: fontBody,
-              color: C.gold,
-              letterSpacing: "0.3em",
-              fontSize: 12,
-              fontWeight: 500,
-              textTransform: "uppercase",
-              marginBottom: 12,
-            }}
-          >
-            Accommodations
-          </p>
-        </Reveal>
-        <Reveal type="slide-up" delay={0.1}>
-          <h2
-            style={{
-              textAlign: "center",
-              fontFamily: fontDisplay,
-              fontSize: "clamp(32px, 4vw, 48px)",
-              fontWeight: 300,
-              color: C.cream,
-              marginBottom: 72,
-            }}
-          >
-            Rooms &amp; Suites
-          </h2>
-        </Reveal>
-
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
-            gap: 28,
-          }}
-          className="hotel-rooms-grid"
-        >
-          {roomPreviews.map((room, i) => (
-            <Reveal key={room.name} type="slide-up" delay={i * 0.12}>
-              <div
-                className="group"
-                style={{
-                  position: "relative",
-                  overflow: "hidden",
-                  borderRadius: 4,
-                  height: 540,
-                  cursor: "pointer",
-                }}
-              >
-                <Image
-                  src={unsplash(room.img, 900)}
-                  alt={room.name}
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-                {/* glass overlay */}
-                <div
-                  className="absolute inset-0 transition-all duration-500"
-                  style={{
-                    background:
-                      "linear-gradient(to top, rgba(12,18,32,0.92) 0%, rgba(12,18,32,0.3) 50%, rgba(12,18,32,0.08) 100%)",
-                  }}
-                />
-                {/* price badge */}
-                <div
-                  className="absolute top-4 right-4"
-                  style={{
-                    background: "rgba(201,169,110,0.92)",
-                    color: C.bg,
-                    fontFamily: fontBody,
-                    fontSize: 12,
-                    fontWeight: 700,
-                    padding: "6px 14px",
-                    letterSpacing: "0.05em",
-                    borderRadius: 2,
-                  }}
-                >
-                  from &euro;{room.price}/night
-                </div>
-                {/* room info */}
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <h3
-                    style={{
-                      fontFamily: fontDisplay,
-                      fontSize: 28,
-                      fontWeight: 400,
-                      color: C.cream,
-                      marginBottom: 8,
-                    }}
-                  >
-                    {room.name}
-                  </h3>
-                  <div
-                    className="flex gap-4 flex-wrap"
-                    style={{
-                      fontSize: 12,
-                      color: C.muted,
-                      marginBottom: 10,
-                      letterSpacing: "0.04em",
-                    }}
-                  >
-                    <span>{room.beds}</span>
-                    <span>&bull;</span>
-                    <span>{room.size}</span>
-                    <span>&bull;</span>
-                    <span>{room.view} View</span>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14">
+            {rooms.map((r, i) => (
+              <Reveal key={r.slug} delay={(i % 2) * 0.1}>
+                <Link href={`/demos/hotel/rooms/${r.slug}`} className="group block no-underline">
+                  <div className="relative aspect-[4/3] overflow-hidden mb-5">
+                    <Image
+                      src={`/images/hotel/${r.images[0]}`}
+                      alt={r.nameEn}
+                      fill
+                      className="object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-[1.03]"
+                    />
                   </div>
-                  {/* hover-reveal description */}
-                  <p
-                    className="transition-all duration-500 opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0"
-                    style={{
-                      color: C.muted,
-                      fontSize: 13,
-                      lineHeight: 1.65,
-                      maxWidth: 400,
-                    }}
-                  >
-                    {room.desc}
-                  </p>
-                </div>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-
-        <Reveal type="fade" delay={0.3}>
-          <div style={{ textAlign: "center", marginTop: 48 }}>
-            <Link
-              href="/demos/hotel/rooms"
-              style={{
-                fontFamily: fontBody,
-                fontSize: 13,
-                fontWeight: 600,
-                color: C.gold,
-                letterSpacing: "0.1em",
-                textTransform: "uppercase",
-                textDecoration: "none",
-                transition: "opacity 0.3s",
-              }}
-              onMouseEnter={(e) =>
-                ((e.target as HTMLElement).style.opacity = "0.7")
-              }
-              onMouseLeave={(e) =>
-                ((e.target as HTMLElement).style.opacity = "1")
-              }
-            >
-              View All Rooms &rarr;
-            </Link>
-          </div>
-        </Reveal>
-      </section>
-
-      {/* ═══════════════════════════════════════
-          SECTION 4 - DINING
-          ═══════════════════════════════════════ */}
-      <section
-        style={{ padding: "140px 24px", maxWidth: 1300, margin: "0 auto" }}
-      >
-        <Reveal type="fade">
-          <p
-            style={{
-              textAlign: "center",
-              fontFamily: fontBody,
-              color: C.gold,
-              letterSpacing: "0.3em",
-              fontSize: 12,
-              fontWeight: 500,
-              textTransform: "uppercase",
-              marginBottom: 14,
-            }}
-          >
-            Gastronomy
-          </p>
-        </Reveal>
-        <Reveal type="slide-up" delay={0.1}>
-          <h2
-            style={{
-              textAlign: "center",
-              fontFamily: fontDisplay,
-              fontSize: "clamp(32px, 4vw, 48px)",
-              fontWeight: 300,
-              color: C.cream,
-              marginBottom: 80,
-            }}
-          >
-            Dining &amp; Drinks
-          </h2>
-        </Reveal>
-
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fill, minmax(340px, 1fr))",
-            gap: 28,
-          }}
-        >
-          {restaurants.map((r, i) => (
-            <Reveal key={r.name} type="slide-up" delay={i * 0.15}>
-              <div
-                className="group"
-                style={{
-                  position: "relative",
-                  overflow: "hidden",
-                  borderRadius: 4,
-                  height: 520,
-                  cursor: "pointer",
-                }}
-              >
-                <Image
-                  src={unsplash(r.img, 800)}
-                  alt={r.name}
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-                <div
-                  className="absolute inset-0 transition-all duration-500"
-                  style={{
-                    background:
-                      "linear-gradient(to top, rgba(12,18,32,0.92) 0%, rgba(12,18,32,0.15) 60%)",
-                  }}
-                />
-                <div className="absolute inset-0 bg-black/0 transition-all duration-500 group-hover:bg-black/20" />
-                <div className="absolute bottom-0 left-0 right-0 p-8">
-                  <h3
-                    style={{
-                      fontFamily: fontDisplay,
-                      fontSize: 30,
-                      fontWeight: 400,
-                      color: C.cream,
-                      marginBottom: 12,
-                    }}
-                  >
-                    {r.name}
-                  </h3>
-                  <p
-                    className="transition-all duration-500 max-h-0 opacity-0 group-hover:max-h-20 group-hover:opacity-100"
-                    style={{
-                      color: C.muted,
-                      fontSize: 14,
-                      lineHeight: 1.75,
-                      marginBottom: 16,
-                      overflow: "hidden",
-                    }}
-                  >
-                    {r.desc}
-                  </p>
-                  <p
-                    style={{
-                      color: C.gold,
-                      fontSize: 12,
-                      letterSpacing: "0.12em",
-                      fontWeight: 500,
-                    }}
-                  >
-                    {r.hours}
-                  </p>
-                </div>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════
-          SECTION 5 - SPA CTA (full-width parallax)
-          ═══════════════════════════════════════ */}
-      <section
-        id="spa"
-        className="relative overflow-hidden"
-        style={{ height: "clamp(520px, 70vh, 720px)" }}
-      >
-        <div
-          className="absolute inset-0"
-          style={{
-            transform: `translateY(${scrollY * 0.12}px)`,
-            willChange: "transform",
-          }}
-        >
-          <Image
-            src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=1920&q=85"
-            alt="Spa treatment room"
-            fill
-            className="object-cover"
-            style={{ objectPosition: "center 30%" }}
-          />
-        </div>
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "linear-gradient(to right, rgba(12,18,32,0.88) 0%, rgba(12,18,32,0.45) 100%)",
-          }}
-        />
-        <div
-          className="relative z-10 flex flex-col justify-center h-full px-8 md:px-20"
-          style={{ maxWidth: 720 }}
-        >
-          <Reveal type="slide-left">
-            <p
-              style={{
-                fontFamily: fontBody,
-                color: C.gold,
-                letterSpacing: "0.3em",
-                fontSize: 12,
-                fontWeight: 500,
-                textTransform: "uppercase",
-                marginBottom: 16,
-              }}
-            >
-              The Spa
-            </p>
-          </Reveal>
-          <Reveal type="slide-left" delay={0.15}>
-            <h2
-              style={{
-                fontFamily: fontDisplay,
-                fontStyle: "italic",
-                fontSize: "clamp(36px, 5vw, 48px)",
-                fontWeight: 300,
-                lineHeight: 1.15,
-                color: C.cream,
-                marginBottom: 24,
-              }}
-            >
-              Serenity, Restored.
-            </h2>
-          </Reveal>
-          <Reveal type="fade" delay={0.3}>
-            <p
-              style={{
-                color: C.muted,
-                fontSize: 15,
-                lineHeight: 1.85,
-                maxWidth: 540,
-                marginBottom: 40,
-              }}
-            >
-              Descend into our subterranean sanctuary &mdash; a 1,200 m&sup2; world
-              of thermal pools, salt-stone hammams, and treatment rooms carved into
-              the ancient bastions. Our therapists blend Mediterranean botanicals with
-              time-honoured techniques to restore body and spirit.
-            </p>
-          </Reveal>
-          <Reveal type="slide-up" delay={0.45}>
-            <MagneticButton>
-              <span
-                style={{
-                  display: "inline-block",
-                  padding: "14px 38px",
-                  background: C.gold,
-                  color: C.bg,
-                  fontFamily: fontBody,
-                  fontSize: 13,
-                  fontWeight: 600,
-                  letterSpacing: "0.1em",
-                  textTransform: "uppercase",
-                  cursor: "pointer",
-                }}
-              >
-                View Treatments
-              </span>
-            </MagneticButton>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════
-          SECTION 6 - AMENITIES
-          ═══════════════════════════════════════ */}
-      <section id="amenities" style={{ padding: "140px 24px", background: C.surface }}>
-        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-          <Reveal type="fade">
-            <p
-              style={{
-                textAlign: "center",
-                fontFamily: fontBody,
-                color: C.gold,
-                letterSpacing: "0.3em",
-                fontSize: 12,
-                fontWeight: 500,
-                textTransform: "uppercase",
-                marginBottom: 12,
-              }}
-            >
-              Services
-            </p>
-          </Reveal>
-          <Reveal type="slide-up" delay={0.1}>
-            <h2
-              style={{
-                textAlign: "center",
-                fontFamily: fontDisplay,
-                fontSize: "clamp(32px, 4vw, 48px)",
-                fontWeight: 300,
-                color: C.cream,
-                marginBottom: 80,
-              }}
-            >
-              Hotel Amenities
-            </h2>
-          </Reveal>
-
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))",
-              gap: 28,
-            }}
-          >
-            {amenities.map((a, i) => (
-              <Reveal key={a.title} type="slide-up" delay={i * 0.07}>
-                <div
-                  style={{
-                    padding: "44px 32px",
-                    border: `1px solid rgba(201,169,110,0.15)`,
-                    borderRadius: 4,
-                    textAlign: "center",
-                    transition: "border-color 0.4s, background 0.4s",
-                    cursor: "default",
-                  }}
-                  onMouseEnter={(e) => {
-                    const el = e.currentTarget;
-                    el.style.borderColor = "rgba(201,169,110,0.45)";
-                    el.style.background = "rgba(201,169,110,0.05)";
-                  }}
-                  onMouseLeave={(e) => {
-                    const el = e.currentTarget;
-                    el.style.borderColor = "rgba(201,169,110,0.15)";
-                    el.style.background = "transparent";
-                  }}
-                >
-                  <div
-                    style={{
-                      width: 52,
-                      height: 52,
-                      margin: "0 auto 20px",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      border: `1px solid rgba(201,169,110,0.35)`,
-                      borderRadius: "50%",
-                    }}
-                  >
-                    <svg
-                      width="22"
-                      height="22"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke={C.gold}
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d={a.icon} />
-                    </svg>
+                  <div className="flex items-start justify-between gap-6">
+                    <div>
+                      <p className="text-[10px] tracking-[0.25em] uppercase mb-2" style={{ color: C.gold, fontFamily: fMono }}>
+                        — {r.num} · {r.view}
+                      </p>
+                      <h3 style={{ fontFamily: fHead, fontSize: "clamp(28px, 3vw, 44px)", lineHeight: 1.05, fontWeight: 400, color: C.dark }}>
+                        {tri(r.nameEn, r.nameDe, r.nameFr, lang)}
+                      </h3>
+                      <p className="mt-2 text-[14px] italic" style={{ color: C.muted, fontFamily: fHead }}>
+                        {tri(r.shortEn, r.shortDe, r.shortFr, lang)}
+                      </p>
+                    </div>
+                    <div className="text-right whitespace-nowrap">
+                      <p className="text-[10px] tracking-wider uppercase" style={{ color: C.muted, fontFamily: fMono }}>
+                        {tri("From", "Ab", "Dès", lang)}
+                      </p>
+                      <p style={{ fontFamily: fHead, fontSize: 22, color: C.gold, lineHeight: 1 }}>€ {r.price}</p>
+                      <p className="text-[9px] mt-1" style={{ color: C.muted, fontFamily: fMono }}>/ {tri("night", "Nacht", "nuit", lang)}</p>
+                    </div>
                   </div>
-                  <h3
-                    style={{
-                      fontFamily: fontDisplay,
-                      fontSize: 20,
-                      fontWeight: 400,
-                      color: C.cream,
-                      marginBottom: 8,
-                    }}
-                  >
-                    {a.title}
-                  </h3>
-                  <p style={{ color: C.muted, fontSize: 13, lineHeight: 1.65 }}>
-                    {a.desc}
-                  </p>
-                </div>
+                </Link>
               </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════
-          SECTION 7 - TESTIMONIALS
-          ═══════════════════════════════════════ */}
-      <section style={{ padding: "140px 24px", textAlign: "center" }}>
-        <Reveal type="fade">
-          <div style={{ maxWidth: 760, margin: "0 auto" }}>
-            {/* gold quote mark */}
-            <div
-              style={{
-                fontFamily: fontDisplay,
-                fontSize: 72,
-                color: C.gold,
-                lineHeight: 1,
-                marginBottom: 8,
-                opacity: 0.6,
-              }}
-            >
-              &ldquo;
-            </div>
-
-            <div style={{ position: "relative", minHeight: 140 }}>
-              {testimonials.map((t, i) => (
-                <div
-                  key={i}
-                  style={{
-                    position: i === activeTestimonial ? "relative" : "absolute",
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    opacity: i === activeTestimonial ? 1 : 0,
-                    transform:
-                      i === activeTestimonial
-                        ? "translateY(0)"
-                        : "translateY(12px)",
-                    transition: "opacity 0.8s ease, transform 0.8s ease",
-                  }}
-                >
-                  <p
-                    style={{
-                      fontFamily: fontDisplay,
-                      fontStyle: "italic",
-                      fontSize: "clamp(20px, 2.8vw, 28px)",
-                      fontWeight: 300,
-                      lineHeight: 1.6,
-                      color: C.cream,
-                      marginBottom: 28,
-                    }}
-                  >
-                    {t.text}
-                  </p>
-                  <p
-                    style={{
-                      fontSize: 14,
-                      fontWeight: 600,
-                      color: C.cream,
-                      marginBottom: 4,
-                    }}
-                  >
-                    {t.author}
-                  </p>
-                  <p
-                    style={{
-                      fontSize: 13,
-                      color: C.gold,
-                      letterSpacing: "0.06em",
-                    }}
-                  >
-                    {t.role}
-                  </p>
+      {/* PILLARS — alternating image/text */}
+      <section className="py-28 md:py-36">
+        <div className="max-w-[1500px] mx-auto">
+          {pillars.map((p, i) => {
+            const flipped = i % 2 === 1;
+            return (
+              <div key={p.num} className="px-6 md:px-10 py-12 md:py-20">
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-center">
+                  <Reveal className={`md:col-span-7 ${flipped ? "md:col-start-6 md:row-start-1" : ""}`}>
+                    <div className="relative aspect-[4/3]">
+                      <Image src={`/images/hotel/${p.img}`} alt={p.en.title} fill className="object-cover" />
+                    </div>
+                  </Reveal>
+                  <Reveal delay={0.1} className={`md:col-span-4 ${flipped ? "md:col-start-2 md:row-start-1" : "md:col-start-9"}`}>
+                    <p className="text-[10px] tracking-[0.3em] uppercase mb-4" style={{ color: C.gold, fontFamily: fMono }}>
+                      — {p.num}
+                    </p>
+                    <h3 className="mb-5" style={{ fontFamily: fHead, fontSize: "clamp(30px, 4vw, 52px)", lineHeight: 1, fontWeight: 400, letterSpacing: "-0.01em", color: C.dark }}>
+                      {tri(p.en.title, p.de.title, p.fr.title, lang)}
+                    </h3>
+                    <p className="text-[15px] leading-[1.85]" style={{ color: C.muted }}>
+                      {tri(p.en.body, p.de.body, p.fr.body, lang)}
+                    </p>
+                  </Reveal>
                 </div>
-              ))}
-            </div>
+              </div>
+            );
+          })}
+        </div>
+      </section>
 
-            {/* dots */}
-            <div
-              style={{
-                display: "flex",
-                gap: 10,
-                justifyContent: "center",
-                marginTop: 36,
-              }}
-            >
-              {testimonials.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setActiveTestimonial(i)}
-                  aria-label={`Show testimonial ${i + 1}`}
-                  style={{
-                    width: i === activeTestimonial ? 28 : 8,
-                    height: 8,
-                    borderRadius: 4,
-                    background:
-                      i === activeTestimonial
-                        ? C.gold
-                        : "rgba(201,169,110,0.3)",
-                    border: "none",
-                    cursor: "pointer",
-                    transition: "all 0.4s ease",
-                  }}
-                />
-              ))}
+      {/* HARBOUR STRIP */}
+      <section className="relative w-full h-[75vh] min-h-[520px] overflow-hidden">
+        <Image src="/images/hotel/harbour-view.jpg" alt="Grand Harbour view" fill className="object-cover" />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(14,26,43,0.2) 0%, rgba(14,26,43,0.55) 100%)" }} />
+        <div className="absolute inset-0 flex items-end">
+          <div className="w-full px-6 md:px-10 pb-16 md:pb-24">
+            <div className="max-w-[1500px] mx-auto text-center">
+              <Reveal>
+                <p className="text-[10px] tracking-[0.4em] uppercase mb-6" style={{ color: "#D4B878", fontFamily: fMono }}>
+                  — {tri("The location", "Der Ort", "L'emplacement", lang)}
+                </p>
+                <p className="max-w-3xl mx-auto italic" style={{ fontFamily: fHead, fontSize: "clamp(26px, 3.5vw, 44px)", lineHeight: 1.25, color: "#F7F1E8" }}>
+                  &ldquo;{tri(
+                    "Triq San Pawl is the oldest street in Valletta. Our front door has been on it since 1897 — and the view from the back has been there for a lot longer.",
+                    "Die Triq San Pawl ist die älteste Strasse Vallettas. Unsere Eingangstür ist seit 1897 dort — und der Blick von hinten schon deutlich länger.",
+                    "La Triq San Pawl est la plus ancienne rue de Valletta. Notre porte d'entrée y est depuis 1897 — et la vue à l'arrière depuis bien plus longtemps.",
+                    lang
+                  )}&rdquo;
+                </p>
+              </Reveal>
             </div>
           </div>
-        </Reveal>
-      </section>
-
-      {/* ═══════════════════════════════════════
-          SECTION 8 - LOCATION
-          ═══════════════════════════════════════ */}
-      <section style={{ padding: "140px 24px", background: C.surface }}>
-        <div
-          style={{
-            maxWidth: 1200,
-            margin: "0 auto",
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: 72,
-            alignItems: "center",
-          }}
-          className="hotel-location-grid"
-        >
-          {/* Map placeholder */}
-          <Reveal type="slide-left">
-            <div
-              style={{
-                aspectRatio: "4/3",
-                background: C.bg,
-                borderRadius: 4,
-                border: `1px solid ${C.border}`,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                overflow: "hidden",
-                position: "relative",
-              }}
-            >
-              {/* Decorative map pattern */}
-              <div style={{ textAlign: "center" }}>
-                <svg
-                  width="48"
-                  height="48"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke={C.gold}
-                  strokeWidth="1"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  style={{ opacity: 0.6, marginBottom: 16 }}
-                >
-                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                  <circle cx="12" cy="10" r="3" />
-                </svg>
-                <p
-                  style={{
-                    fontFamily: fontDisplay,
-                    fontSize: 20,
-                    color: C.cream,
-                    marginBottom: 4,
-                  }}
-                >
-                  Valletta, Malta
-                </p>
-                <p style={{ fontSize: 12, color: C.muted }}>
-                  35.8989&deg; N, 14.5146&deg; E
-                </p>
-              </div>
-            </div>
-          </Reveal>
-
-          {/* Travel info */}
-          <Reveal type="slide-right">
-            <div>
-              <p
-                style={{
-                  fontFamily: fontBody,
-                  color: C.gold,
-                  letterSpacing: "0.3em",
-                  fontSize: 12,
-                  fontWeight: 500,
-                  textTransform: "uppercase",
-                  marginBottom: 16,
-                }}
-              >
-                Getting Here
-              </p>
-              <h2
-                style={{
-                  fontFamily: fontDisplay,
-                  fontSize: "clamp(28px, 3.5vw, 40px)",
-                  fontWeight: 300,
-                  color: C.cream,
-                  marginBottom: 28,
-                }}
-              >
-                Your Journey Begins
-              </h2>
-              {[
-                {
-                  label: "Malta International Airport",
-                  detail: "20 minutes by private transfer",
-                },
-                {
-                  label: "Valletta Cruise Port",
-                  detail: "5 minutes by complimentary shuttle",
-                },
-                {
-                  label: "Sliema Ferry Terminal",
-                  detail: "10 minutes by water taxi",
-                },
-                {
-                  label: "Mdina (Old Capital)",
-                  detail: "25 minutes by chauffeur service",
-                },
-              ].map((item) => (
-                <div
-                  key={item.label}
-                  style={{
-                    padding: "16px 0",
-                    borderBottom: `1px solid ${C.border}`,
-                  }}
-                >
-                  <p
-                    style={{
-                      fontSize: 15,
-                      color: C.cream,
-                      fontWeight: 500,
-                      marginBottom: 4,
-                    }}
-                  >
-                    {item.label}
-                  </p>
-                  <p style={{ fontSize: 13, color: C.muted }}>
-                    {item.detail}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </Reveal>
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════
-          SECTION 9 - BOOKING CTA
-          ═══════════════════════════════════════ */}
-      <section
-        id="events"
-        className="relative overflow-hidden"
-        style={{ padding: "160px 24px", textAlign: "center" }}
-      >
-        {/* background image */}
-        <div className="absolute inset-0">
-          <Image
-            src={unsplash("photo-1566073771259-6a8506099945", 1920)}
-            alt="Hotel exterior at dusk"
-            fill
-            className="object-cover"
-            style={{ opacity: 0.2 }}
-          />
-        </div>
-        <div
-          className="absolute inset-0"
-          style={{
-            background: `linear-gradient(to bottom, ${C.bg} 0%, rgba(12,18,32,0.85) 50%, ${C.bg} 100%)`,
-          }}
-        />
-
-        <div className="relative z-10">
-          <Reveal type="fade">
-            <p
-              style={{
-                fontFamily: fontBody,
-                color: C.gold,
-                letterSpacing: "0.3em",
-                fontSize: 12,
-                fontWeight: 500,
-                textTransform: "uppercase",
-                marginBottom: 12,
-              }}
-            >
-              Reservations
+      {/* PRESS / RECOGNITION */}
+      <section className="px-6 md:px-10 py-24">
+        <div className="max-w-[1500px] mx-auto">
+          <Reveal>
+            <p className="text-[10px] tracking-[0.4em] uppercase mb-10 text-center" style={{ color: C.gold, fontFamily: fMono }}>
+              — {tri("Recognition", "Anerkennung", "Reconnaissance", lang)}
             </p>
-          </Reveal>
-          <Reveal type="slide-up" delay={0.1}>
-            <h2
-              style={{
-                fontFamily: fontDisplay,
-                fontSize: "clamp(36px, 5vw, 48px)",
-                fontWeight: 300,
-                color: C.cream,
-                marginBottom: 48,
-              }}
-            >
-              Begin Your Story
-            </h2>
-          </Reveal>
-
-          {/* mock booking bar */}
-          <Reveal type="slide-up" delay={0.2}>
-            <div
-              style={{
-                maxWidth: 920,
-                margin: "0 auto",
-                display: "flex",
-                flexWrap: "wrap",
-                gap: 0,
-                borderRadius: 4,
-                overflow: "hidden",
-              }}
-            >
+            <div className="flex flex-wrap items-center justify-center gap-x-14 gap-y-6 text-center">
               {[
-                {
-                  label: "Check-in",
-                  type: "date" as const,
-                  defaultVal: "2026-06-15",
-                },
-                {
-                  label: "Check-out",
-                  type: "date" as const,
-                  defaultVal: "2026-06-20",
-                },
-                {
-                  label: "Guests",
-                  type: "select" as const,
-                  defaultVal: "2",
-                },
-              ].map((field) => (
-                <div
-                  key={field.label}
-                  style={{
-                    flex: "1 1 200px",
-                    padding: "22px 24px",
-                    background: "rgba(201,169,110,0.06)",
-                    borderRight: "1px solid rgba(201,169,110,0.1)",
-                    textAlign: "left",
-                  }}
-                >
-                  <label
-                    style={{
-                      display: "block",
-                      fontSize: 11,
-                      letterSpacing: "0.15em",
-                      color: C.gold,
-                      textTransform: "uppercase",
-                      marginBottom: 8,
-                      fontWeight: 500,
-                    }}
-                  >
-                    {field.label}
-                  </label>
-                  {field.type === "select" ? (
-                    <select
-                      defaultValue={field.defaultVal}
-                      style={{
-                        width: "100%",
-                        background: "transparent",
-                        border: "none",
-                        color: C.cream,
-                        fontSize: 15,
-                        fontFamily: fontBody,
-                        outline: "none",
-                        cursor: "pointer",
-                      }}
-                    >
-                      {[1, 2, 3, 4, 5, 6].map((n) => (
-                        <option
-                          key={n}
-                          value={n}
-                          style={{ background: C.surface, color: C.cream }}
-                        >
-                          {n} {n === 1 ? "Guest" : "Guests"}
-                        </option>
-                      ))}
-                    </select>
-                  ) : (
-                    <input
-                      type="date"
-                      defaultValue={field.defaultVal}
-                      style={{
-                        width: "100%",
-                        background: "transparent",
-                        border: "none",
-                        color: C.cream,
-                        fontSize: 15,
-                        fontFamily: fontBody,
-                        outline: "none",
-                        cursor: "pointer",
-                      }}
-                    />
-                  )}
+                { pub: "Condé Nast Traveler", note: tri("Gold List · 2024", "Gold List · 2024", "Gold List · 2024", lang) },
+                { pub: "Travel + Leisure", note: tri("World's Best · 2023", "Worlds Best · 2023", "World's Best · 2023", lang) },
+                { pub: "Monocle", note: tri("Top 50 Europe · 2024", "Top 50 Europa · 2024", "Top 50 Europe · 2024", lang) },
+                { pub: "Financial Times", note: tri("Hotel of the Year · 2022", "Hotel des Jahres · 2022", "Hôtel de l'année · 2022", lang) },
+              ].map((p) => (
+                <div key={p.pub}>
+                  <p style={{ fontFamily: fHead, fontSize: "clamp(22px, 2.4vw, 32px)", fontStyle: "italic", color: C.dark, fontWeight: 400 }}>
+                    {p.pub}
+                  </p>
+                  <p className="text-[10px] tracking-wider uppercase mt-1" style={{ color: C.muted, fontFamily: fMono }}>
+                    {p.note}
+                  </p>
                 </div>
               ))}
-              <MagneticButton>
-                <button
-                  style={{
-                    flex: "1 1 180px",
-                    padding: "22px 40px",
-                    background: C.gold,
-                    color: C.bg,
-                    border: "none",
-                    fontFamily: fontBody,
-                    fontSize: 13,
-                    fontWeight: 700,
-                    letterSpacing: "0.12em",
-                    textTransform: "uppercase",
-                    cursor: "pointer",
-                    whiteSpace: "nowrap",
-                  }}
-                >
-                  Check Availability
-                </button>
-              </MagneticButton>
             </div>
           </Reveal>
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════
-          SECTION 10 - FOOTER
-          ═══════════════════════════════════════ */}
-      <SiteFooter />
+      {/* CTA */}
+      <section className="px-6 md:px-10 py-32" style={{ background: C.navy, color: "#F7F1E8" }}>
+        <div className="max-w-3xl mx-auto text-center">
+          <Reveal>
+            <div className="mb-8 flex justify-center" style={{ color: "#D4B878" }}>
+              <Ornament size={48} />
+            </div>
+            <h2 className="mb-8" style={{ fontFamily: fHead, fontSize: "clamp(40px, 6vw, 80px)", lineHeight: 1, fontWeight: 400, letterSpacing: "-0.01em", color: "#F7F1E8" }}>
+              {tri("Your room", "Ihr Zimmer", "Votre chambre", lang)}{" "}
+              <em style={{ fontStyle: "italic", color: "#D4B878" }}>
+                {tri("is waiting.", "wartet.", "vous attend.", lang)}
+              </em>
+            </h2>
+            <p className="max-w-md mx-auto text-[15px] leading-relaxed mb-10 opacity-80">
+              {tri(
+                "We reply to every enquiry within the hour. No booking platforms, no bots, no automated upsells.",
+                "Wir beantworten jede Anfrage innerhalb einer Stunde. Keine Plattformen, keine Bots, keine automatisierten Upsells.",
+                "Nous répondons à chaque demande dans l'heure. Pas de plateformes, pas de bots, pas d'automatismes.",
+                lang
+              )}
+            </p>
+            <Link
+              href="/demos/hotel/contact"
+              className="inline-flex items-center gap-3 px-10 py-4 text-[11px] tracking-[0.2em] uppercase no-underline transition-opacity hover:opacity-90"
+              style={{ background: "#D4B878", color: C.navy, fontFamily: fBody, fontWeight: 600 }}
+            >
+              {tri("Begin your stay", "Aufenthalt beginnen", "Commencer le séjour", lang)} →
+            </Link>
+          </Reveal>
+        </div>
+      </section>
 
-      {/* ═══════════ GLOBAL STYLES ═══════════ */}
-      <style jsx global>{`
-        @keyframes kenburns {
-          0% {
-            transform: scale(1) translate(0, 0);
-          }
-          100% {
-            transform: scale(1.12) translate(-1.5%, -1%);
-          }
-        }
-
-        .hotel-rooms-grid {
-          grid-template-columns: repeat(3, 1fr);
-        }
-        @media (max-width: 900px) {
-          .hotel-rooms-grid {
-            grid-template-columns: 1fr !important;
-          }
-        }
-
-        .hotel-location-grid {
-          grid-template-columns: 1fr 1fr;
-        }
-        @media (max-width: 768px) {
-          .hotel-location-grid {
-            grid-template-columns: 1fr !important;
-          }
-        }
-
-        input[type="date"]::-webkit-calendar-picker-indicator {
-          filter: invert(0.7);
-          cursor: pointer;
-        }
-      `}</style>
+      <HotelFooter />
     </div>
   );
+}
+
+export default function HotelHomePage() {
+  return <HotelLangProvider><Inner /></HotelLangProvider>;
 }

@@ -1,38 +1,12 @@
-import { Playfair_Display, DM_Sans } from "next/font/google";
+import type { Metadata } from "next";
 
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-heading",
-  weight: ["400", "500", "600", "700"],
-  style: ["normal", "italic"],
-});
+export const metadata: Metadata = {
+  title: "Porto Valletta — Contemporary Mediterranean, Valletta",
+  description:
+    "Porto Valletta is a fine-dining restaurant on the Valletta waterfront. A single tasting menu, six nights a week. Demo by Amenzo Studio.",
+  robots: { index: false, follow: false },
+};
 
-const dmSans = DM_Sans({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-body",
-  weight: ["400", "500", "700"],
-});
-
-export const metadata = { robots: { index: false, follow: false } };
-
-export default function RestaurantLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return (
-    <div
-      className={`${playfair.variable} ${dmSans.variable} min-h-screen`}
-      style={{
-        background: "#0A0A08",
-        color: "#F5E6D3",
-        fontFamily: "var(--font-body), system-ui, sans-serif",
-        scrollBehavior: "smooth",
-      }}
-    >
-      {children}
-    </div>
-  );
+export default function RestaurantLayout({ children }: { children: React.ReactNode }) {
+  return <>{children}</>;
 }

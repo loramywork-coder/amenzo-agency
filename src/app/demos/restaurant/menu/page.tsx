@@ -1,692 +1,165 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import Link from "next/link";
-import Reveal from "@/components/demos/Reveal";
+import Image from "next/image";
+import { motion } from "framer-motion";
 import { DemoBanner } from "@/components/demos/demo-banner";
+import { C, fHead, fBody, fMono, Reveal, Rule, RestaurantNav, RestaurantFooter, RestaurantLangProvider, useRestaurantLang, tri } from "../_shared";
 
-/* ─── palette ─── */
-const C = {
-  bg: "#0A0A08",
-  surface: "#121210",
-  gold: "#C9935A",
-  cream: "#F5E6D3",
-  muted: "#8A7E70",
-  border: "#2A2620",
-} as const;
+type Course = { num: string; title: { en: string; it: string; fr: string }; dish: { en: string; it: string; fr: string }; desc: { en: string; it: string; fr: string } };
 
-/* ─── fonts ─── */
-const fontDisplay =
-  "var(--font-heading), 'Playfair Display', Georgia, serif";
-const fontBody =
-  "var(--font-body), 'DM Sans', system-ui, sans-serif";
-
-/* ─── nav links ─── */
-const NAV_LINKS = [
-  { label: "Menu", href: "/demos/restaurant/menu" },
-  { label: "Wine", href: "/demos/restaurant/wine" },
-  { label: "Gallery", href: "/demos/restaurant/gallery" },
-  { label: "Private Events", href: "/demos/restaurant/private" },
-  { label: "About", href: "/demos/restaurant/about" },
+const courses: Course[] = [
+  {
+    num: "I.",
+    title: { en: "Aperitivo", it: "Aperitivo", fr: "Apéritif" },
+    dish: { en: "Gozo vermentino · olives · tuna belly", it: "Vermentino di Gozo · olive · ventresca di tonno", fr: "Vermentino de Gozo · olives · ventrèche de thon" },
+    desc: {
+      en: "A glass of vermentino from a single grower in Gozo, one hour off the vine when we bottle. A piece of ventresca from this morning. Olives cured in our kitchen.",
+      it: "Un bicchiere di vermentino da un solo produttore di Gozo, imbottigliato un'ora dopo la vendemmia. Un pezzo di ventresca di stamattina. Olive curate nella nostra cucina.",
+      fr: "Un verre de vermentino d'un seul vigneron de Gozo, embouteillé une heure après la récolte. Un morceau de ventrèche du matin. Olives confites dans notre cuisine.",
+    },
+  },
+  {
+    num: "II.",
+    title: { en: "First", it: "Primo", fr: "Entrée" },
+    dish: { en: "Hand-rolled ravioli · sheep's ricotta · brown butter", it: "Ravioli fatti a mano · ricotta di pecora · burro nocciola", fr: "Ravioli maison · ricotta de brebis · beurre noisette" },
+    desc: {
+      en: "The pasta is rolled by Rocco every afternoon at four. The ricotta comes from a farm in Għarb. The butter is browned to the edge of burning.",
+      it: "La pasta viene stesa da Rocco ogni pomeriggio alle quattro. La ricotta arriva da una fattoria di Għarb. Il burro viene fuso fino quasi a bruciare.",
+      fr: "Les pâtes sont étalées par Rocco chaque après-midi à quatre heures. La ricotta vient d'une ferme de Għarb. Le beurre est coloré presque jusqu'à brûler.",
+    },
+  },
+  {
+    num: "III.",
+    title: { en: "Sea", it: "Pesce", fr: "Poisson" },
+    dish: { en: "The catch, grilled over olive wood", it: "Pesce del giorno, alla griglia sul legno d'olivo", fr: "La pêche du jour, grillée au bois d'olivier" },
+    desc: {
+      en: "Whatever came in from Marsaxlokk this morning. Usually branzino, sometimes dentex, occasionally John Dory. One fish, salt, lemon, our oil. Nothing else.",
+      it: "Qualunque cosa arrivi stamattina da Marsaxlokk. Di solito branzino, talvolta dentice, a volte pesce San Pietro. Un pesce, sale, limone, il nostro olio. Niente altro.",
+      fr: "Ce qui est arrivé ce matin de Marsaxlokk. Souvent du loup, parfois du denti, occasionnellement de la saint-pierre. Un poisson, du sel, du citron, notre huile. Rien d'autre.",
+    },
+  },
+  {
+    num: "IV.",
+    title: { en: "Land", it: "Carne", fr: "Viande" },
+    dish: { en: "Braised rabbit · wild bay · local red", it: "Coniglio brasato · alloro · vino rosso locale", fr: "Lapin braisé · laurier · vin rouge local" },
+    desc: {
+      en: "Fenek — a traditional Maltese rabbit preparation — cooked slowly in clay with bay leaves, garlic, and a bottle of red from Meridiana.",
+      it: "Fenek — una preparazione tradizionale maltese — cotto lentamente in argilla con alloro, aglio e una bottiglia di rosso di Meridiana.",
+      fr: "Fenek — une préparation maltaise traditionnelle — cuit lentement dans l'argile avec laurier, ail et une bouteille de rouge de Meridiana.",
+    },
+  },
+  {
+    num: "V.",
+    title: { en: "Cheese", it: "Formaggi", fr: "Fromage" },
+    dish: { en: "Three Gozitan sheep's cheeses · carob · honey", it: "Tre formaggi di pecora gozitani · carrube · miele", fr: "Trois fromages de brebis gozitains · caroube · miel" },
+    desc: {
+      en: "A small board with three ages of gbejniet, our local sheep's cheese. With carob syrup made down the road and rock honey from Dingli.",
+      it: "Un piccolo tagliere con tre stagionature di gbejniet, il nostro formaggio di pecora locale. Con sciroppo di carruba fatto a pochi passi e miele roccioso di Dingli.",
+      fr: "Un petit plateau de trois âges de gbejniet, notre fromage de brebis local. Avec du sirop de caroube fait à deux pas et du miel de Dingli.",
+    },
+  },
+  {
+    num: "VI.",
+    title: { en: "Dessert", it: "Dolce", fr: "Dessert" },
+    dish: { en: "Almond semifreddo · rock honey", it: "Semifreddo alle mandorle · miele roccioso", fr: "Semifreddo aux amandes · miel de roche" },
+    desc: {
+      en: "Often almond. Always some form of honey. Sometimes a roasted fig. The dessert changes more than anything else on the menu.",
+      it: "Spesso mandorla. Sempre qualche forma di miele. A volte un fico arrostito. Il dolce è ciò che cambia più spesso.",
+      fr: "Souvent l'amande. Toujours du miel. Parfois une figue rôtie. Le dessert change plus que tout le reste du menu.",
+    },
+  },
 ];
 
-/* ─── menu tabs ─── */
-const TABS = [
-  "STARTERS",
-  "MAINS",
-  "PASTA & RISOTTO",
-  "DESSERTS",
-  "TASTING MENU",
-] as const;
-type Tab = (typeof TABS)[number];
-
-/* ─── dish type ─── */
-interface Dish {
-  name: string;
-  desc: string;
-  price: string;
-  tags?: string[];
-}
-
-/* ─── menu data ─── */
-const MENU: Record<Tab, Dish[]> = {
-  STARTERS: [
-    { name: "Yellowfin Tuna Tartare", desc: "Avocado mousse, yuzu gel, sesame tuile, shiso leaf", price: "\u20AC24", tags: ["GF"] },
-    { name: "Burrata & Heirloom Tomato", desc: "Aged balsamic reduction, basil oil, focaccia crisp", price: "\u20AC22", tags: ["V"] },
-    { name: "Seared Foie Gras", desc: "Brioche toast, fig compote, port wine reduction", price: "\u20AC28" },
-    { name: "Maltese Ftira Bruschetta", desc: "Sundried tomatoes, capers, fresh ricotta, kunserva", price: "\u20AC18", tags: ["V"] },
-    { name: "Beef Carpaccio", desc: "Black truffle, rocket, parmesan shavings, lemon oil", price: "\u20AC26", tags: ["GF"] },
-    { name: "Soup of the Day", desc: "Chef's seasonal selection, artisan bread", price: "\u20AC16", tags: ["V"] },
-    { name: "Octopus a la Plancha", desc: "Romesco sauce, fingerling potatoes, smoked paprika", price: "\u20AC27", tags: ["GF"] },
-    { name: "Crab & Prawn Bisque", desc: "Cognac cream, micro herbs, grissini", price: "\u20AC22", tags: ["GF"] },
-  ],
-  MAINS: [
-    { name: "Seared Sea Bass", desc: "Fennel puree, saffron beurre blanc, micro herbs", price: "\u20AC38", tags: ["GF"] },
-    { name: "Dry-Aged Ribeye 300g", desc: "Bone marrow butter, charred leek, red wine jus", price: "\u20AC52", tags: ["GF"] },
-    { name: "Lobster Thermidor", desc: "Cognac cream, gruyere gratin, baby spinach", price: "\u20AC56" },
-    { name: "Duck Breast", desc: "Cherry gastrique, fondant potato, root vegetables", price: "\u20AC42", tags: ["GF"] },
-    { name: "Lamb Rack", desc: "Herb crust, ratatouille, rosemary jus", price: "\u20AC48", tags: ["GF"] },
-    { name: "Pan-Roasted Monkfish", desc: "Saffron risotto, chorizo crumble, pea shoots", price: "\u20AC44" },
-    { name: "Wagyu Burger", desc: "Truffle aioli, aged cheddar, brioche bun, hand-cut fries", price: "\u20AC34" },
-    { name: "Vegan Mushroom Wellington", desc: "Wild mushroom duxelles, spinach, truffle cream", price: "\u20AC32", tags: ["V"] },
-  ],
-  "PASTA & RISOTTO": [
-    { name: "Black Truffle Risotto", desc: "Carnaroli rice, aged parmesan, truffle shavings", price: "\u20AC36", tags: ["V"] },
-    { name: "Lobster Linguine", desc: "Cherry tomato, chilli, garlic, white wine", price: "\u20AC42" },
-    { name: "Cacio e Pepe", desc: "Handmade tonnarelli, Pecorino Romano, black pepper", price: "\u20AC24", tags: ["V"] },
-    { name: "Squid Ink Tagliatelle", desc: "Seafood ragout, saffron emulsion, bottarga", price: "\u20AC34" },
-    { name: "Porcini Ravioli", desc: "Sage brown butter, toasted pine nuts, parmesan", price: "\u20AC28", tags: ["V"] },
-    { name: "Saffron Risotto ai Frutti di Mare", desc: "Prawns, mussels, clams, calamari, white wine", price: "\u20AC40" },
-  ],
-  DESSERTS: [
-    { name: "Tiramisu Deconstructed", desc: "Espresso foam, mascarpone cloud, cocoa tuile", price: "\u20AC18", tags: ["V"] },
-    { name: "Dark Chocolate Fondant", desc: "Salted caramel centre, vanilla bean gelato", price: "\u20AC20", tags: ["V"] },
-    { name: "Pistachio Panna Cotta", desc: "Raspberry coulis, candied pistachios, micro basil", price: "\u20AC16", tags: ["V", "GF"] },
-    { name: "Lemon Posset", desc: "Shortbread crumble, blueberry compote, meringue", price: "\u20AC15", tags: ["V"] },
-    { name: "Selection of Artisan Cheeses", desc: "Quince paste, honeycomb, oat crackers", price: "\u20AC22" },
-    { name: "Seasonal Sorbet Trio", desc: "Chef's selection of house-churned sorbets", price: "\u20AC14", tags: ["V", "GF"] },
-  ],
-  "TASTING MENU": [],
-};
-
-/* ─── unsplash helper ─── */
-const img = (id: string, w = 800, q = 80) =>
-  `https://images.unsplash.com/${id}?w=${w}&q=${q}&auto=format&fit=crop`;
-
-/* ━━━ NAV HEADER ━━━ */
-function NavHeader() {
-  const [scrolled, setScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  useEffect(() => {
-    if (mobileOpen) document.body.style.overflow = "hidden";
-    else document.body.style.overflow = "";
-    return () => { document.body.style.overflow = ""; };
-  }, [mobileOpen]);
-
+function Inner() {
+  const { lang } = useRestaurantLang();
   return (
-    <>
-      <header
-        style={{
-          position: "fixed",
-          top: 40,
-          left: 0,
-          right: 0,
-          zIndex: 50,
-          padding: "0 24px",
-          height: 64,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          background: "transparent",
-          borderBottom: "none",
-          transition: "background 0.4s, border-color 0.4s, backdrop-filter 0.4s",
-        }}
-      >
-        <Link href="/demos/restaurant" style={{ textDecoration: "none" }}>
-          <div style={{ lineHeight: 1.1 }}>
-            <span style={{ display: "block", fontFamily: fontDisplay, fontStyle: "italic", fontWeight: 600, fontSize: 20, color: C.cream }}>Porto</span>
-            <span style={{ display: "block", fontFamily: fontDisplay, fontStyle: "italic", fontWeight: 400, fontSize: 13, color: C.gold, letterSpacing: "0.08em" }}>Valletta</span>
-          </div>
-        </Link>
+    <div style={{ background: C.bg, color: C.cream, fontFamily: fBody }}>
+      <DemoBanner />
+      <RestaurantNav />
 
-        <nav style={{ display: "flex", alignItems: "center", gap: 32 }} className="rest-desktop-nav">
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.label}
-              href={link.href}
-              style={{
-                fontFamily: fontBody, fontSize: 11, letterSpacing: "0.18em",
-                textTransform: "uppercase", color: link.href === "/demos/restaurant/menu" ? C.cream : "rgba(245,230,211,0.6)",
-                textDecoration: "none", transition: "color 0.25s",
-              }}
-              onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = C.cream; }}
-              onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = link.href === "/demos/restaurant/menu" ? C.cream : "rgba(245,230,211,0.6)"; }}
-            >
-              {link.label}
-            </Link>
-          ))}
-          <Link
-            href="/demos/restaurant/contact"
-            style={{
-              fontFamily: fontBody, fontSize: 11, fontWeight: 600, letterSpacing: "0.1em",
-              textTransform: "uppercase", padding: "10px 22px", background: C.gold,
-              color: C.bg, textDecoration: "none", transition: "opacity 0.25s",
-            }}
-            onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.opacity = "0.85"; }}
-            onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.opacity = "1"; }}
-          >
-            Reserve a Table
-          </Link>
-        </nav>
-
-        <button
-          className="rest-mobile-hamburger"
-          onClick={() => setMobileOpen(true)}
-          aria-label="Open menu"
-          style={{ display: "none", background: "none", border: "none", cursor: "pointer", flexDirection: "column", gap: 5, padding: 8 }}
-        >
-          <span style={{ width: 24, height: 1.5, background: C.cream, display: "block" }} />
-          <span style={{ width: 24, height: 1.5, background: C.cream, display: "block" }} />
-          <span style={{ width: 16, height: 1.5, background: C.gold, display: "block" }} />
-        </button>
-      </header>
-
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            style={{
-              position: "fixed", inset: 0, zIndex: 200, background: C.bg,
-              display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 32,
-            }}
-          >
-            <button
-              onClick={() => setMobileOpen(false)}
-              aria-label="Close menu"
-              style={{ position: "absolute", top: 52, right: 24, background: "none", border: "none", color: C.cream, fontSize: 28, cursor: "pointer" }}
-            >
-              &times;
-            </button>
-            {NAV_LINKS.map((link, i) => (
-              <motion.div
-                key={link.label}
+      <section className="relative w-full h-[55vh] min-h-[440px] overflow-hidden">
+        <Image src="/images/restaurant/menu-book.jpg" alt="" fill priority className="object-cover" />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(11,9,8,0.35) 0%, rgba(11,9,8,0.75) 100%)" }} />
+        <div className="absolute inset-0 flex items-end">
+          <div className="w-full px-6 md:px-10 pb-16">
+            <div className="max-w-[1500px] mx-auto">
+              <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.7, delay: 0.25 }} className="text-[10px] tracking-[0.4em] uppercase mb-5" style={{ color: C.copper, fontFamily: fMono }}>
+                — {tri("Six courses · changes daily", "Sei portate · cambia ogni giorno", "Six plats · change chaque jour", lang)}
+              </motion.p>
+              <motion.h1
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.08, duration: 0.4, ease: [0.25, 0.1, 0.25, 1] as const }}
+                transition={{ duration: 0.9, delay: 0.35 }}
+                className="max-w-4xl"
+                style={{ fontFamily: fHead, fontSize: "clamp(52px, 9vw, 140px)", lineHeight: 0.92, fontWeight: 400, letterSpacing: "-0.015em", color: C.cream, paddingBottom: "0.15em" }}
               >
-                <Link href={link.href} onClick={() => setMobileOpen(false)} style={{ fontFamily: fontDisplay, fontStyle: "italic", fontSize: 32, color: C.cream, textDecoration: "none" }}>
-                  {link.label}
-                </Link>
-              </motion.div>
-            ))}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: NAV_LINKS.length * 0.08, duration: 0.4, ease: [0.25, 0.1, 0.25, 1] as const }}
-            >
-              <Link
-                href="/demos/restaurant/contact"
-                onClick={() => setMobileOpen(false)}
-                style={{
-                  fontFamily: fontBody, fontSize: 14, fontWeight: 600, letterSpacing: "0.1em",
-                  textTransform: "uppercase", padding: "14px 36px", background: C.gold,
-                  color: C.bg, textDecoration: "none", display: "inline-block", marginTop: 16,
-                }}
-              >
-                Reserve a Table
-              </Link>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      <style>{`
-        .rest-desktop-nav{display:flex!important;}
-        .rest-mobile-hamburger{display:none!important;}
-        @media(max-width:899px){
-          .rest-desktop-nav{display:none!important;}
-          .rest-mobile-hamburger{display:flex!important;}
-        }
-      `}</style>
-    </>
-  );
-}
-
-/* ━━━ FOOTER ━━━ */
-function SiteFooter() {
-  return (
-    <footer style={{ background: C.bg, borderTop: `1px solid ${C.border}`, padding: "60px 24px 40px" }}>
-      <div style={{ maxWidth: 1200, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 40, marginBottom: 48 }}>
-        <div>
-          <h3 style={{ fontFamily: fontDisplay, fontStyle: "italic", fontWeight: 600, fontSize: 24, color: C.cream, margin: "0 0 12px" }}>Porto Valletta</h3>
-          <p style={{ fontFamily: fontBody, fontSize: 14, lineHeight: 1.7, color: C.muted, margin: 0 }}>42 Strait Street<br />Valletta VLT 1432<br />Malta</p>
-        </div>
-        <div>
-          <h4 style={{ fontFamily: fontBody, fontSize: 12, letterSpacing: "0.2em", textTransform: "uppercase", color: C.gold, margin: "0 0 16px" }}>Navigate</h4>
-          {[
-            { label: "The Menu", href: "/demos/restaurant/menu" },
-            { label: "Wine List", href: "/demos/restaurant/wine" },
-            { label: "Private Dining", href: "/demos/restaurant/private" },
-            { label: "Gift Cards", href: "#" },
-            { label: "Careers", href: "#" },
-          ].map((link) => (
-            <Link key={link.label} href={link.href} style={{ display: "block", fontFamily: fontBody, fontSize: 14, color: "rgba(245,230,211,0.5)", textDecoration: "none", padding: "4px 0", transition: "color 0.25s" }}
-              onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = C.cream; }}
-              onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "rgba(245,230,211,0.5)"; }}
-            >{link.label}</Link>
-          ))}
-        </div>
-        <div>
-          <h4 style={{ fontFamily: fontBody, fontSize: 12, letterSpacing: "0.2em", textTransform: "uppercase", color: C.gold, margin: "0 0 16px" }}>Hours</h4>
-          <p style={{ fontFamily: fontBody, fontSize: 14, lineHeight: 1.8, color: "rgba(245,230,211,0.5)", margin: 0 }}>Tue &ndash; Sat: 12:00 &ndash; 23:00<br />Sunday Brunch: 11:00 &ndash; 15:00<br />Monday: Closed</p>
-        </div>
-        <div>
-          <h4 style={{ fontFamily: fontBody, fontSize: 12, letterSpacing: "0.2em", textTransform: "uppercase", color: C.gold, margin: "0 0 16px" }}>Contact</h4>
-          <p style={{ fontFamily: fontBody, fontSize: 14, lineHeight: 1.8, color: "rgba(245,230,211,0.5)", margin: 0 }}>+356 2124 5678<br />reservations@portovalletta.mt</p>
-        </div>
-      </div>
-      <div style={{ borderTop: `1px solid ${C.border}`, paddingTop: 24, display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "center", gap: 12 }}>
-        <p style={{ fontFamily: fontBody, fontSize: 13, color: "rgba(138,126,112,0.6)", margin: 0 }}>&copy; {new Date().getFullYear()} Porto Valletta. All rights reserved.</p>
-        <div style={{ display: "flex", gap: 20 }}>
-          <Link href="/demos/restaurant/privacy" style={{ fontFamily: fontBody, fontSize: 13, color: "rgba(138,126,112,0.4)", textDecoration: "none", transition: "color 0.25s" }}
-            onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = C.muted; }}
-            onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "rgba(138,126,112,0.4)"; }}
-          >Privacy</Link>
-          <Link href="/demos/restaurant/impressum" style={{ fontFamily: fontBody, fontSize: 13, color: "rgba(138,126,112,0.4)", textDecoration: "none", transition: "color 0.25s" }}
-            onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = C.muted; }}
-            onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "rgba(138,126,112,0.4)"; }}
-          >Impressum</Link>
-        </div>
-      </div>
-    </footer>
-  );
-}
-
-/* ━━━ DISH ROW COMPONENT ━━━ */
-function DishRow({ dish, index }: { dish: Dish; index: number }) {
-  return (
-    <Reveal type="fade" delay={index * 0.05}>
-      <div
-        style={{
-          display: "flex",
-          alignItems: "flex-start",
-          justifyContent: "space-between",
-          gap: 24,
-          padding: "24px 0",
-          borderBottom: `1px solid ${C.border}`,
-        }}
-      >
-        <div style={{ flex: 1 }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 6 }}>
-            <h3
-              style={{
-                fontFamily: fontDisplay,
-                fontWeight: 500,
-                fontSize: 18,
-                color: C.cream,
-                margin: 0,
-              }}
-            >
-              {dish.name}
-            </h3>
-            {dish.tags?.map((tag) => (
-              <span
-                key={tag}
-                style={{
-                  fontFamily: fontBody,
-                  fontSize: 10,
-                  letterSpacing: "0.05em",
-                  padding: "2px 8px",
-                  border: `1px solid ${C.border}`,
-                  color: C.muted,
-                  borderRadius: 2,
-                  lineHeight: "16px",
-                }}
-              >
-                {tag}
-              </span>
-            ))}
+                {tri("The", "Il", "Le", lang)} <em style={{ fontStyle: "italic", color: C.copper }}>{tri("Menu", "Menù", "Menu", lang)}</em>
+              </motion.h1>
+            </div>
           </div>
-          <p
-            style={{
-              fontFamily: fontBody,
-              fontSize: 12,
-              fontStyle: "italic",
-              lineHeight: 1.6,
-              color: "rgba(245,230,211,0.4)",
-              margin: 0,
-            }}
-          >
-            {dish.desc}
-          </p>
-        </div>
-        <span
-          style={{
-            fontFamily: fontDisplay,
-            fontSize: 18,
-            fontWeight: 500,
-            color: C.gold,
-            whiteSpace: "nowrap",
-            paddingTop: 2,
-          }}
-        >
-          {dish.price}
-        </span>
-      </div>
-    </Reveal>
-  );
-}
-
-/* ━━━ MENU PAGE ━━━ */
-export default function MenuPage() {
-  const [activeTab, setActiveTab] = useState<Tab>("STARTERS");
-
-  return (
-    <div
-      style={{
-        background: C.bg,
-        color: C.cream,
-        fontFamily: fontBody,
-        overflowX: "hidden",
-        minHeight: "100vh",
-      }}
-    >
-      <DemoBanner />
-      <NavHeader />
-
-      {/* Hero banner */}
-      <section
-        style={{
-          position: "relative",
-          paddingTop: 40,
-          height: "50vh",
-          minHeight: 340,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          overflow: "hidden",
-        }}
-      >
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            backgroundImage: `url(${img("photo-1414235077428-338989a2e8c0", 1920, 85)})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        />
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            background: "linear-gradient(to bottom, rgba(10,10,8,0.6) 0%, rgba(10,10,8,0.9) 100%)",
-          }}
-        />
-        <div style={{ position: "relative", zIndex: 2, textAlign: "center", padding: "0 24px" }}>
-          <Reveal type="fade" delay={0.2}>
-            <p
-              style={{
-                fontFamily: fontBody,
-                fontSize: 12,
-                letterSpacing: "0.35em",
-                textTransform: "uppercase",
-                color: C.gold,
-                marginBottom: 20,
-              }}
-            >
-              Porto Valletta
-            </p>
-          </Reveal>
-          <Reveal type="fade" delay={0.4}>
-            <h1
-              style={{
-                fontFamily: fontDisplay,
-                fontStyle: "italic",
-                fontWeight: 600,
-                fontSize: "clamp(40px, 7vw, 64px)",
-                color: C.cream,
-                margin: "0 0 16px",
-              }}
-            >
-              The Menu
-            </h1>
-          </Reveal>
-          <Reveal type="fade" delay={0.6}>
-            <motion.div
-              initial={{ width: 0 }}
-              animate={{ width: 40 }}
-              transition={{ duration: 0.8, delay: 0.8, ease: [0.25, 0.1, 0.25, 1] as const }}
-              style={{ height: 2, background: C.gold, margin: "0 auto" }}
-            />
-          </Reveal>
         </div>
       </section>
 
-      {/* Tabs + Content */}
-      <section style={{ background: C.bg }}>
-        <div style={{ maxWidth: 800, margin: "0 auto", padding: "60px 24px 120px" }}>
-          {/* Tab navigation */}
-          <div
-            style={{
-              display: "flex",
-              gap: 0,
-              borderBottom: `1px solid ${C.border}`,
-              marginBottom: 48,
-              overflowX: "auto",
-              scrollbarWidth: "none",
-            }}
-          >
-            <style>{`.rest-tabs::-webkit-scrollbar{display:none;}`}</style>
-            {TABS.map((tab) => (
-              <button
-                key={tab}
-                onClick={() => setActiveTab(tab)}
-                style={{
-                  fontFamily: fontBody,
-                  fontSize: 11,
-                  letterSpacing: "0.18em",
-                  textTransform: "uppercase",
-                  color: activeTab === tab ? C.gold : C.muted,
-                  background: "none",
-                  border: "none",
-                  borderBottom: activeTab === tab ? `2px solid ${C.gold}` : "2px solid transparent",
-                  padding: "16px 20px",
-                  cursor: "pointer",
-                  whiteSpace: "nowrap",
-                  transition: "color 0.25s, border-color 0.25s",
-                }}
-                onMouseEnter={(e) => {
-                  if (activeTab !== tab) (e.currentTarget as HTMLElement).style.color = C.cream;
-                }}
-                onMouseLeave={(e) => {
-                  if (activeTab !== tab) (e.currentTarget as HTMLElement).style.color = C.muted;
-                }}
-              >
-                {tab}
-              </button>
+      <section className="px-6 md:px-10 py-24 md:py-32">
+        <div className="max-w-3xl mx-auto">
+          <Reveal>
+            <div className="text-center mb-16">
+              <p className="text-[13px] leading-[1.8] italic mb-6" style={{ fontFamily: fHead, color: C.cream }}>
+                {tri(
+                  "We do not take orders. Everyone eats the same six courses, prepared the same way, delivered at the same pace.",
+                  "Non prendiamo ordinazioni. Tutti mangiano le stesse sei portate, preparate nello stesso modo, servite con lo stesso ritmo.",
+                  "Nous ne prenons pas de commandes. Tous mangent les six mêmes plats, préparés de la même manière, servis au même rythme.",
+                  lang
+                )}
+              </p>
+              <p className="text-[11px] tracking-[0.25em] uppercase" style={{ color: C.copper, fontFamily: fMono }}>
+                € 145 · {tri("Pairing", "Abbinamento", "Accord", lang)} € 85
+              </p>
+              <Rule className="mt-10" />
+            </div>
+          </Reveal>
+
+          <ol className="space-y-14">
+            {courses.map((c, i) => (
+              <Reveal key={c.num} delay={i * 0.05}>
+                <li className="grid grid-cols-12 gap-5" style={{ borderTop: `1px solid ${C.border}`, paddingTop: 28 }}>
+                  <span className="col-span-2 md:col-span-1 text-[20px] pt-1" style={{ color: C.copper, fontFamily: fHead }}>
+                    {c.num}
+                  </span>
+                  <div className="col-span-10 md:col-span-11">
+                    <p className="text-[10px] tracking-[0.25em] uppercase mb-3" style={{ color: C.copper, fontFamily: fMono }}>
+                      — {tri(c.title.en, c.title.it, c.title.fr, lang)}
+                    </p>
+                    <h3 className="italic mb-5" style={{ fontFamily: fHead, fontSize: "clamp(26px, 3.5vw, 42px)", lineHeight: 1.15, fontStyle: "italic", color: C.cream, paddingBottom: "0.1em" }}>
+                      {tri(c.dish.en, c.dish.it, c.dish.fr, lang)}
+                    </h3>
+                    <p className="text-[14px] leading-[1.85] max-w-xl" style={{ color: C.muted }}>
+                      {tri(c.desc.en, c.desc.it, c.desc.fr, lang)}
+                    </p>
+                  </div>
+                </li>
+              </Reveal>
             ))}
-          </div>
+          </ol>
 
-          {/* Tab content */}
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeTab}
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -16 }}
-              transition={{ duration: 0.35, ease: [0.25, 0.1, 0.25, 1] as const }}
-            >
-              {activeTab === "TASTING MENU" ? (
-                /* Tasting Menu Card */
-                <div
-                  style={{
-                    background: C.surface,
-                    border: `1px solid ${C.border}`,
-                    padding: "48px 40px",
-                    textAlign: "center",
-                  }}
-                >
-                  <p
-                    style={{
-                      fontFamily: fontBody,
-                      fontSize: 12,
-                      letterSpacing: "0.3em",
-                      textTransform: "uppercase",
-                      color: C.gold,
-                      marginBottom: 20,
-                    }}
-                  >
-                    Chef&apos;s Selection
-                  </p>
-                  <h2
-                    style={{
-                      fontFamily: fontDisplay,
-                      fontStyle: "italic",
-                      fontWeight: 600,
-                      fontSize: "clamp(28px, 4vw, 40px)",
-                      color: C.cream,
-                      margin: "0 0 12px",
-                    }}
-                  >
-                    THE JOURNEY
-                  </h2>
-                  <p
-                    style={{
-                      fontFamily: fontBody,
-                      fontSize: 14,
-                      color: C.muted,
-                      margin: "0 0 40px",
-                    }}
-                  >
-                    A seven-course odyssey through the Mediterranean
-                  </p>
-
-                  <motion.div
-                    initial={{ width: 0 }}
-                    whileInView={{ width: 40 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] as const }}
-                    style={{ height: 2, background: C.gold, margin: "0 auto 40px" }}
-                  />
-
-                  {[
-                    { course: "I", name: "Amuse-Bouche", desc: "Chef's daily inspiration" },
-                    { course: "II", name: "Ocean", desc: "Yellowfin tuna, citrus, avocado" },
-                    { course: "III", name: "Garden", desc: "Heirloom vegetables, black truffle" },
-                    { course: "IV", name: "Intermezzo", desc: "Champagne & elderflower granita" },
-                    { course: "V", name: "Land", desc: "Wagyu beef, seasonal accompaniment" },
-                    { course: "VI", name: "Cheese", desc: "Selection of European artisan cheeses" },
-                    { course: "VII", name: "Sweet", desc: "Chef's dessert creation" },
-                  ].map((item, i) => (
-                    <Reveal key={item.course} type="fade" delay={i * 0.08}>
-                      <div
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          gap: 20,
-                          padding: "16px 0",
-                          borderBottom: i < 6 ? `1px solid ${C.border}` : "none",
-                          textAlign: "left",
-                        }}
-                      >
-                        <span
-                          style={{
-                            fontFamily: fontDisplay,
-                            fontStyle: "italic",
-                            fontSize: 14,
-                            color: C.gold,
-                            minWidth: 28,
-                          }}
-                        >
-                          {item.course}
-                        </span>
-                        <div>
-                          <h4
-                            style={{
-                              fontFamily: fontDisplay,
-                              fontWeight: 500,
-                              fontSize: 16,
-                              color: C.cream,
-                              margin: "0 0 4px",
-                            }}
-                          >
-                            {item.name}
-                          </h4>
-                          <p
-                            style={{
-                              fontFamily: fontBody,
-                              fontSize: 12,
-                              fontStyle: "italic",
-                              color: "rgba(245,230,211,0.4)",
-                              margin: 0,
-                            }}
-                          >
-                            {item.desc}
-                          </p>
-                        </div>
-                      </div>
-                    </Reveal>
-                  ))}
-
-                  <div style={{ marginTop: 48, display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 32 }}>
-                    <div>
-                      <span style={{ fontFamily: fontDisplay, fontSize: 32, fontWeight: 600, color: C.gold }}>&euro;120</span>
-                      <p style={{ fontFamily: fontBody, fontSize: 12, color: C.muted, margin: "4px 0 0" }}>per person</p>
-                    </div>
-                    <div>
-                      <span style={{ fontFamily: fontDisplay, fontSize: 32, fontWeight: 600, color: C.gold }}>&euro;185</span>
-                      <p style={{ fontFamily: fontBody, fontSize: 12, color: C.muted, margin: "4px 0 0" }}>with wine pairing</p>
-                    </div>
-                  </div>
-
-                  <div style={{ marginTop: 40 }}>
-                    <Link href="/demos/restaurant/contact">
-                      <span
-                        style={{
-                          display: "inline-block",
-                          padding: "14px 40px",
-                          background: C.gold,
-                          color: C.bg,
-                          fontFamily: fontBody,
-                          fontSize: 14,
-                          fontWeight: 600,
-                          letterSpacing: "0.08em",
-                          textTransform: "uppercase",
-                          cursor: "pointer",
-                        }}
-                      >
-                        Reserve the Journey
-                      </span>
-                    </Link>
-                  </div>
-                </div>
-              ) : (
-                /* Regular menu items */
-                <div>
-                  {MENU[activeTab].map((dish, i) => (
-                    <DishRow key={dish.name} dish={dish} index={i} />
-                  ))}
-                </div>
+          <Reveal delay={0.3}>
+            <div className="mt-20 text-center text-[12px] tracking-wider uppercase italic" style={{ color: C.muted, fontFamily: fMono }}>
+              {tri(
+                "Vegetarian menu available on 48 hours' notice. Allergies & intolerances — please tell us on booking.",
+                "Menù vegetariano disponibile con 48 ore di preavviso. Allergie e intolleranze — diteci alla prenotazione.",
+                "Menu végétarien disponible avec 48 heures de préavis. Allergies et intolérances — signalez-les à la réservation.",
+                lang
               )}
-            </motion.div>
-          </AnimatePresence>
-
-          {/* Note */}
-          <Reveal type="fade" delay={0.2}>
-            <p
-              style={{
-                fontFamily: fontBody,
-                fontSize: 12,
-                fontStyle: "italic",
-                color: "rgba(245,230,211,0.3)",
-                textAlign: "center",
-                marginTop: 60,
-                lineHeight: 1.8,
-              }}
-            >
-              V &mdash; Vegetarian &ensp; GF &mdash; Gluten Free
-              <br />
-              Please inform your server of any allergies or dietary requirements.
-              <br />
-              All prices include VAT. A discretionary 10% service charge applies to parties of 6+.
-            </p>
+            </div>
           </Reveal>
         </div>
       </section>
 
-      <SiteFooter />
+      <RestaurantFooter />
     </div>
   );
+}
+
+export default function RestaurantMenuPage() {
+  return <RestaurantLangProvider><Inner /></RestaurantLangProvider>;
 }

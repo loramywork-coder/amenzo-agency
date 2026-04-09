@@ -1,908 +1,171 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
+import { motion } from "framer-motion";
 import { DemoBanner } from "@/components/demos/demo-banner";
+import { C, fHead, fBody, fMono, Reveal, Rule, RestaurantNav, RestaurantFooter, RestaurantLangProvider, useRestaurantLang, tri } from "../_shared";
 
-/* ─── palette ─── */
-const C = {
-  bg: "#0A0A08",
-  surface: "#121210",
-  gold: "#C9935A",
-  cream: "#F5E6D3",
-  muted: "#8A7E70",
-  border: "#2A2620",
-} as const;
-
-/* ─── font stacks (CSS variables from layout + fallbacks) ─── */
-const fontDisplay =
-  "var(--font-heading), 'Playfair Display', Georgia, serif";
-const fontBody = "var(--font-body), 'DM Sans', system-ui, sans-serif";
-
-/* ─── nav links ─── */
-const NAV_LINKS = [
-  { label: "Home", href: "/demos/restaurant" },
-  { label: "Menu", href: "/demos/restaurant" },
-  { label: "Contact", href: "/demos/restaurant/contact" },
-];
-
-/* ─── time slots ─── */
-const TIME_SLOTS = [
-  "18:30",
-  "19:00",
-  "19:30",
-  "20:00",
-  "20:30",
-  "21:00",
-  "21:30",
-  "22:00",
-];
-
-/* ─── initial form state ─── */
-interface FormData {
-  name: string;
-  email: string;
-  phone: string;
-  date: string;
-  time: string;
-  guests: string;
-  occasion: string;
-  requests: string;
+function Field({ label, children }: { label: string; children: React.ReactNode }) {
+  return (
+    <label className="block">
+      <span className="block text-[10px] tracking-[0.3em] uppercase mb-2" style={{ color: C.muted, fontFamily: fMono }}>{label}</span>
+      {children}
+    </label>
+  );
 }
 
-const INITIAL_FORM: FormData = {
-  name: "",
-  email: "",
-  phone: "",
-  date: "",
-  time: "19:00",
-  guests: "2",
-  occasion: "None",
-  requests: "",
+const inputStyle: React.CSSProperties = {
+  width: "100%",
+  height: 46,
+  background: "transparent",
+  border: `1px solid ${C.border}`,
+  color: C.cream,
+  fontFamily: fBody,
+  fontSize: 14,
+  padding: "0 14px",
+  outline: "none",
 };
 
-/* ━━━ PAGE ━━━ */
-export default function ContactPage() {
-  const [form, setForm] = useState<FormData>(INITIAL_FORM);
-  const [submitted, setSubmitted] = useState(false);
-  const [errors, setErrors] = useState<Partial<Record<keyof FormData, boolean>>>({});
-
-  const update = (field: keyof FormData, value: string) => {
-    setForm((prev) => ({ ...prev, [field]: value }));
-    setErrors((prev) => ({ ...prev, [field]: false }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const required: (keyof FormData)[] = [
-      "name",
-      "email",
-      "phone",
-      "date",
-      "time",
-      "guests",
-    ];
-    const newErrors: Partial<Record<keyof FormData, boolean>> = {};
-    let hasError = false;
-    for (const field of required) {
-      if (!form[field].trim()) {
-        newErrors[field] = true;
-        hasError = true;
-      }
-    }
-    if (hasError) {
-      setErrors(newErrors);
-      return;
-    }
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 5000);
-    setForm(INITIAL_FORM);
-  };
-
-  /* ─── shared input styles ─── */
-  const inputBase: React.CSSProperties = {
-    width: "100%",
-    padding: "12px 14px",
-    background: C.surface,
-    border: `1px solid ${C.border}`,
-    color: C.cream,
-    fontFamily: fontBody,
-    fontSize: 14,
-    borderRadius: 0,
-    outline: "none",
-    transition: "border-color 0.25s",
-  };
-
-  const labelStyle: React.CSSProperties = {
-    display: "block",
-    fontFamily: fontBody,
-    fontSize: 10,
-    letterSpacing: "0.15em",
-    textTransform: "uppercase" as const,
-    color: "rgba(201,147,90,0.6)",
-    marginBottom: 6,
-  };
+function Inner() {
+  const { lang } = useRestaurantLang();
+  const [sent, setSent] = useState(false);
 
   return (
-    <div
-      style={{
-        background: C.bg,
-        color: C.cream,
-        fontFamily: fontBody,
-        minHeight: "100vh",
-        overflowX: "hidden",
-      }}
-    >
+    <div style={{ background: C.bg, color: C.cream, fontFamily: fBody }}>
       <DemoBanner />
+      <RestaurantNav />
 
-      {/* ════════════ NAV HEADER ════════════ */}
-      <header
-        style={{
-          position: "fixed",
-          top: 40,
-          left: 0,
-          right: 0,
-          zIndex: 50,
-          background: "transparent",
-          borderBottom: "none",
-        }}
-      >
-        <div
-          style={{
-            maxWidth: 1200,
-            margin: "0 auto",
-            padding: "0 24px",
-            height: 60,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
-          <a
-            href="/demos/restaurant"
-            style={{
-              fontFamily: fontDisplay,
-              fontStyle: "italic",
-              fontWeight: 600,
-              fontSize: 20,
-              color: C.cream,
-              textDecoration: "none",
-            }}
-          >
-            Porto Valletta
-          </a>
-          <nav style={{ display: "flex", gap: 28 }}>
-            {NAV_LINKS.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                style={{
-                  fontFamily: fontBody,
-                  fontSize: 13,
-                  letterSpacing: "0.08em",
-                  textTransform: "uppercase",
-                  color: C.muted,
-                  textDecoration: "none",
-                  transition: "color 0.25s",
-                }}
-                onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLElement).style.color = C.cream;
-                }}
-                onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLElement).style.color = C.muted;
-                }}
+      <section className="relative w-full h-[45vh] min-h-[380px] overflow-hidden">
+        <Image src="/images/restaurant/table-candle.jpg" alt="" fill priority className="object-cover" />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(11,9,8,0.4) 0%, rgba(11,9,8,0.85) 100%)" }} />
+        <div className="absolute inset-0 flex items-end">
+          <div className="w-full px-6 md:px-10 pb-12">
+            <div className="max-w-[1500px] mx-auto">
+              <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.7, delay: 0.2 }} className="text-[10px] tracking-[0.4em] uppercase mb-5" style={{ color: C.copper, fontFamily: fMono }}>
+                — {tri("Seven nights a week", "Sette sere su sette", "Sept soirs sur sept", lang)}
+              </motion.p>
+              <motion.h1
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.9, delay: 0.3 }}
+                style={{ fontFamily: fHead, fontSize: "clamp(52px, 9vw, 140px)", lineHeight: 0.92, fontWeight: 400, letterSpacing: "-0.015em", color: C.cream, paddingBottom: "0.15em" }}
               >
-                {link.label}
-              </a>
-            ))}
-          </nav>
+                {tri("Reserve", "Prenota", "Réserver", lang)}
+              </motion.h1>
+            </div>
+          </div>
         </div>
-      </header>
-
-      {/* ════════════ HERO ════════════ */}
-      <section
-        style={{
-          paddingTop: 140,
-          paddingBottom: 80,
-          textAlign: "center",
-        }}
-      >
-        <p
-          style={{
-            fontFamily: fontBody,
-            fontSize: 12,
-            letterSpacing: "0.35em",
-            textTransform: "uppercase",
-            color: C.gold,
-            marginBottom: 16,
-          }}
-        >
-          RESERVATIONS
-        </p>
-        <h1
-          style={{
-            fontFamily: fontDisplay,
-            fontStyle: "italic",
-            fontWeight: 400,
-            fontSize: 40,
-            lineHeight: 1.2,
-            color: C.cream,
-            margin: 0,
-          }}
-        >
-          Join Us for an Evening
-        </h1>
-        <div
-          style={{
-            width: 50,
-            height: 2,
-            background: C.gold,
-            margin: "28px auto 0",
-          }}
-        />
       </section>
 
-      {/* ════════════ SPLIT LAYOUT ════════════ */}
-      <section style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px 120px" }}>
-        <style>{`
-          .rest-contact-grid{display:grid;grid-template-columns:1fr;gap:60px;}
-          @media(min-width:768px){.rest-contact-grid{grid-template-columns:55fr 45fr;gap:80px;}}
-        `}</style>
-        <div className="rest-contact-grid">
-          {/* ─── LEFT: RESERVATION FORM ─── */}
-          <form onSubmit={handleSubmit} style={{ position: "relative" }}>
-            {/* Success toast */}
-            {submitted && (
-              <div
-                style={{
-                  position: "fixed",
-                  top: 120,
-                  left: "50%",
-                  transform: "translateX(-50%)",
-                  zIndex: 60,
-                  background: C.gold,
-                  color: C.bg,
-                  fontFamily: fontBody,
-                  fontSize: 14,
-                  fontWeight: 600,
-                  padding: "14px 28px",
-                  boxShadow: "0 8px 32px rgba(0,0,0,0.4)",
-                }}
-              >
-                Thank you! We&apos;ll confirm within 2 hours.
-              </div>
-            )}
-
-            <style>{`
-              .rest-form-row{display:grid;grid-template-columns:1fr;gap:20px;margin-bottom:20px;}
-              @media(min-width:480px){.rest-form-2col{grid-template-columns:1fr 1fr;}}
-              .rest-input::placeholder{color:rgba(245,230,211,0.2);}
-              .rest-input:focus{border-color:rgba(201,147,90,0.5) !important;}
-            `}</style>
-
-            {/* Name + Email */}
-            <div className="rest-form-row rest-form-2col">
-              <div>
-                <label style={labelStyle}>Name *</label>
-                <input
-                  className="rest-input"
-                  type="text"
-                  placeholder="Full name"
-                  value={form.name}
-                  onChange={(e) => update("name", e.target.value)}
-                  style={{
-                    ...inputBase,
-                    borderColor: errors.name
-                      ? "rgba(201,80,80,0.6)"
-                      : C.border,
-                  }}
-                />
-              </div>
-              <div>
-                <label style={labelStyle}>Email *</label>
-                <input
-                  className="rest-input"
-                  type="email"
-                  placeholder="your@email.com"
-                  value={form.email}
-                  onChange={(e) => update("email", e.target.value)}
-                  style={{
-                    ...inputBase,
-                    borderColor: errors.email
-                      ? "rgba(201,80,80,0.6)"
-                      : C.border,
-                  }}
-                />
-              </div>
-            </div>
-
-            {/* Phone + Date */}
-            <div className="rest-form-row rest-form-2col">
-              <div>
-                <label style={labelStyle}>Phone *</label>
-                <input
-                  className="rest-input"
-                  type="tel"
-                  placeholder="+356 ..."
-                  value={form.phone}
-                  onChange={(e) => update("phone", e.target.value)}
-                  style={{
-                    ...inputBase,
-                    borderColor: errors.phone
-                      ? "rgba(201,80,80,0.6)"
-                      : C.border,
-                  }}
-                />
-              </div>
-              <div>
-                <label style={labelStyle}>Date *</label>
-                <input
-                  className="rest-input"
-                  type="date"
-                  value={form.date}
-                  onChange={(e) => update("date", e.target.value)}
-                  style={{
-                    ...inputBase,
-                    colorScheme: "dark",
-                    borderColor: errors.date
-                      ? "rgba(201,80,80,0.6)"
-                      : C.border,
-                  }}
-                />
-              </div>
-            </div>
-
-            {/* Time + Guests */}
-            <div className="rest-form-row rest-form-2col">
-              <div>
-                <label style={labelStyle}>Time *</label>
-                <select
-                  className="rest-input"
-                  value={form.time}
-                  onChange={(e) => update("time", e.target.value)}
-                  style={{
-                    ...inputBase,
-                    appearance: "none" as const,
-                    cursor: "pointer",
-                    borderColor: errors.time
-                      ? "rgba(201,80,80,0.6)"
-                      : C.border,
-                  }}
-                >
-                  {TIME_SLOTS.map((t) => (
-                    <option key={t} value={t} style={{ background: C.surface }}>
-                      {t}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <div>
-                <label style={labelStyle}>Guests *</label>
-                <select
-                  className="rest-input"
-                  value={form.guests}
-                  onChange={(e) => update("guests", e.target.value)}
-                  style={{
-                    ...inputBase,
-                    appearance: "none" as const,
-                    cursor: "pointer",
-                    borderColor: errors.guests
-                      ? "rgba(201,80,80,0.6)"
-                      : C.border,
-                  }}
-                >
-                  {Array.from({ length: 12 }, (_, i) => i + 1).map((n) => (
-                    <option key={n} value={String(n)} style={{ background: C.surface }}>
-                      {n} {n === 1 ? "guest" : "guests"}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </div>
-
-            {/* Occasion */}
-            <div className="rest-form-row">
-              <div>
-                <label style={labelStyle}>Occasion</label>
-                <select
-                  className="rest-input"
-                  value={form.occasion}
-                  onChange={(e) => update("occasion", e.target.value)}
-                  style={{
-                    ...inputBase,
-                    appearance: "none" as const,
-                    cursor: "pointer",
-                  }}
-                >
-                  {["None", "Birthday", "Anniversary", "Business", "Other"].map(
-                    (o) => (
-                      <option key={o} value={o} style={{ background: C.surface }}>
-                        {o}
-                      </option>
-                    )
-                  )}
-                </select>
-              </div>
-            </div>
-
-            {/* Special Requests */}
-            <div className="rest-form-row">
-              <div>
-                <label style={labelStyle}>Special Requests</label>
-                <textarea
-                  className="rest-input"
-                  rows={4}
-                  placeholder="Dietary requirements, seating preference, etc."
-                  value={form.requests}
-                  onChange={(e) => update("requests", e.target.value)}
-                  style={{
-                    ...inputBase,
-                    resize: "vertical" as const,
-                  }}
-                />
-              </div>
-            </div>
-
-            {/* Submit */}
-            <button
-              type="submit"
-              style={{
-                width: "100%",
-                padding: "16px",
-                background: C.gold,
-                color: C.bg,
-                fontFamily: fontBody,
-                fontSize: 14,
-                fontWeight: 700,
-                letterSpacing: "0.1em",
-                textTransform: "uppercase",
-                border: "none",
-                cursor: "pointer",
-                transition: "opacity 0.25s",
-              }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.opacity = "0.9";
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLElement).style.opacity = "1";
-              }}
-            >
-              Request Reservation
-            </button>
-          </form>
-
-          {/* ─── RIGHT: CONTACT INFO ─── */}
-          <div>
-            <h2
-              style={{
-                fontFamily: fontDisplay,
-                fontWeight: 400,
-                fontSize: 20,
-                color: C.cream,
-                margin: "0 0 28px",
-              }}
-            >
-              Get in Touch
+      <section className="px-6 md:px-10 py-24 md:py-32">
+        <div className="max-w-[1500px] mx-auto grid md:grid-cols-12 gap-12 md:gap-20">
+          <Reveal className="md:col-span-5">
+            <p className="text-[10px] tracking-[0.4em] uppercase mb-6" style={{ color: C.copper, fontFamily: fMono }}>
+              — {tri("Find us", "Dove siamo", "Nous trouver", lang)}
+            </p>
+            <h2 className="mb-8" style={{ fontFamily: fHead, fontSize: "clamp(32px, 4vw, 48px)", lineHeight: 1, fontWeight: 400, fontStyle: "italic", color: C.cream, paddingBottom: "0.1em" }}>
+              {tri("The door with no sign.", "La porta senza insegna.", "La porte sans enseigne.", lang)}
             </h2>
+            <Rule className="mb-10" />
 
-            {/* Phone */}
-            <div style={{ marginBottom: 20 }}>
-              <p
-                style={{
-                  fontFamily: fontBody,
-                  fontSize: 10,
-                  letterSpacing: "0.15em",
-                  textTransform: "uppercase",
-                  color: "rgba(201,147,90,0.6)",
-                  margin: "0 0 4px",
-                }}
-              >
-                Phone
-              </p>
-              <a
-                href="tel:+35621234567"
-                style={{
-                  fontFamily: fontBody,
-                  fontSize: 16,
-                  color: C.gold,
-                  textDecoration: "none",
-                  transition: "opacity 0.25s",
-                }}
-                onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLElement).style.opacity = "0.8";
-                }}
-                onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLElement).style.opacity = "1";
-                }}
-              >
-                +356 2123 4567
-              </a>
+            <div className="space-y-8 text-[14px] leading-[1.7]">
+              <div>
+                <p className="text-[10px] tracking-[0.3em] uppercase mb-2" style={{ color: C.muted, fontFamily: fMono }}>
+                  {tri("Address", "Indirizzo", "Adresse", lang)}
+                </p>
+                <p style={{ color: C.cream }}>12, Triq San Pawl<br />Valletta VLT 1212<br />Malta</p>
+              </div>
+              <div>
+                <p className="text-[10px] tracking-[0.3em] uppercase mb-2" style={{ color: C.muted, fontFamily: fMono }}>
+                  {tri("Hours", "Orari", "Horaires", lang)}
+                </p>
+                <p style={{ color: C.cream }}>
+                  {tri("Dinner · 19:00 — 23:00", "Cena · 19:00 — 23:00", "Dîner · 19h00 — 23h00", lang)}<br />
+                  {tri("Seven nights a week", "Sette sere su sette", "Sept soirs sur sept", lang)}
+                </p>
+              </div>
+              <div>
+                <p className="text-[10px] tracking-[0.3em] uppercase mb-2" style={{ color: C.muted, fontFamily: fMono }}>
+                  {tri("Direct", "Diretto", "Direct", lang)}
+                </p>
+                <p style={{ color: C.cream }}>+356 2122 0000<br />giulia@portovalletta.mt</p>
+              </div>
             </div>
+          </Reveal>
 
-            {/* Email */}
-            <div style={{ marginBottom: 20 }}>
-              <p
-                style={{
-                  fontFamily: fontBody,
-                  fontSize: 10,
-                  letterSpacing: "0.15em",
-                  textTransform: "uppercase",
-                  color: "rgba(201,147,90,0.6)",
-                  margin: "0 0 4px",
-                }}
-              >
-                Email
-              </p>
-              <a
-                href="mailto:reservations@portovalletta.com"
-                style={{
-                  fontFamily: fontBody,
-                  fontSize: 16,
-                  color: C.gold,
-                  textDecoration: "none",
-                  transition: "opacity 0.25s",
-                }}
-                onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLElement).style.opacity = "0.8";
-                }}
-                onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLElement).style.opacity = "1";
-                }}
-              >
-                reservations@portovalletta.com
-              </a>
+          <Reveal className="md:col-span-7">
+            <div className="p-8 md:p-12" style={{ background: C.surface, border: `1px solid ${C.border}` }}>
+              {sent ? (
+                <div className="py-16 text-center">
+                  <p className="text-[10px] tracking-[0.4em] uppercase mb-4" style={{ color: C.copper, fontFamily: fMono }}>
+                    — {tri("Grazie", "Grazie", "Merci", lang)}
+                  </p>
+                  <p className="italic text-[22px] leading-[1.5]" style={{ fontFamily: fHead, color: C.cream }}>
+                    {tri(
+                      "Giulia will write back within the day.",
+                      "Giulia vi risponderà entro la giornata.",
+                      "Giulia vous répondra dans la journée.",
+                      lang
+                    )}
+                  </p>
+                </div>
+              ) : (
+                <form onSubmit={(e) => { e.preventDefault(); setSent(true); }}>
+                  <p className="text-[10px] tracking-[0.4em] uppercase mb-8" style={{ color: C.copper, fontFamily: fMono }}>
+                    — {tri("Request a table", "Prenota un tavolo", "Réserver une table", lang)}
+                  </p>
+
+                  <div className="grid md:grid-cols-2 gap-6 mb-6">
+                    <Field label={tri("Name", "Nome", "Nom", lang)}>
+                      <input type="text" required style={inputStyle} />
+                    </Field>
+                    <Field label={tri("Email", "Email", "Email", lang)}>
+                      <input type="email" required style={inputStyle} />
+                    </Field>
+                  </div>
+
+                  <div className="grid md:grid-cols-3 gap-6 mb-6">
+                    <Field label={tri("Date", "Data", "Date", lang)}>
+                      <input type="date" required style={inputStyle} />
+                    </Field>
+                    <Field label={tri("Time", "Ora", "Heure", lang)}>
+                      <input type="time" required defaultValue="20:00" style={inputStyle} />
+                    </Field>
+                    <Field label={tri("Guests", "Ospiti", "Convives", lang)}>
+                      <div className="relative">
+                        <select required defaultValue="2" style={{ ...inputStyle, appearance: "none", padding: "0 40px 0 14px", cursor: "pointer" }}>
+                          {[1, 2, 3, 4, 5, 6, 7, 8].map((n) => <option key={n} value={n} style={{ background: C.surface }}>{n}</option>)}
+                        </select>
+                        <svg className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none" width="10" height="6" viewBox="0 0 10 6" fill="none">
+                          <path d="M1 1L5 5L9 1" stroke={C.copper} strokeWidth="1.2" />
+                        </svg>
+                      </div>
+                    </Field>
+                  </div>
+
+                  <Field label={tri("Occasion or allergies", "Occasione o allergie", "Occasion ou allergies", lang)}>
+                    <textarea rows={4} style={{ ...inputStyle, height: "auto", padding: "12px 14px", resize: "vertical" }} />
+                  </Field>
+
+                  <button type="submit" className="mt-8 w-full py-4 text-[11px] tracking-[0.3em] uppercase transition-opacity hover:opacity-90" style={{ background: C.copper, color: C.bg, fontFamily: fMono }}>
+                    {tri("Send request", "Invia richiesta", "Envoyer la demande", lang)}
+                  </button>
+                  <p className="mt-4 text-[11px] text-center" style={{ color: C.muted, fontFamily: fMono }}>
+                    {tri("We confirm by email within the day.", "Confermiamo via email entro la giornata.", "Nous confirmons par email dans la journée.", lang)}
+                  </p>
+                </form>
+              )}
             </div>
-
-            {/* Address */}
-            <div style={{ marginBottom: 20 }}>
-              <p
-                style={{
-                  fontFamily: fontBody,
-                  fontSize: 10,
-                  letterSpacing: "0.15em",
-                  textTransform: "uppercase",
-                  color: "rgba(201,147,90,0.6)",
-                  margin: "0 0 4px",
-                }}
-              >
-                Address
-              </p>
-              <p
-                style={{
-                  fontFamily: fontBody,
-                  fontSize: 16,
-                  color: C.cream,
-                  lineHeight: 1.7,
-                  margin: 0,
-                }}
-              >
-                42 Strait Street
-                <br />
-                Valletta VLT 1432
-                <br />
-                Malta
-              </p>
-            </div>
-
-            {/* Hours */}
-            <div style={{ marginBottom: 28 }}>
-              <p
-                style={{
-                  fontFamily: fontBody,
-                  fontSize: 10,
-                  letterSpacing: "0.15em",
-                  textTransform: "uppercase",
-                  color: "rgba(201,147,90,0.6)",
-                  margin: "0 0 4px",
-                }}
-              >
-                Opening Hours
-              </p>
-              <p
-                style={{
-                  fontFamily: fontBody,
-                  fontSize: 14,
-                  lineHeight: 1.8,
-                  color: C.muted,
-                  margin: 0,
-                }}
-              >
-                Tuesday &ndash; Saturday: 18:30 &ndash; 23:00
-                <br />
-                Sunday Brunch: 11:00 &ndash; 15:00
-                <br />
-                Monday: Closed
-              </p>
-            </div>
-
-            <p
-              style={{
-                fontFamily: fontBody,
-                fontStyle: "italic",
-                fontSize: 12,
-                color: "rgba(245,230,211,0.3)",
-                margin: "0 0 32px",
-              }}
-            >
-              For same-day reservations, please call directly.
-            </p>
-
-            {/* ─── Map placeholder ─── */}
-            <div
-              style={{
-                width: "100%",
-                aspectRatio: "16/10",
-                background: C.surface,
-                border: `1px solid ${C.border}`,
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: 12,
-              }}
-            >
-              {/* Pin icon */}
-              <svg
-                width="28"
-                height="28"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke={C.gold}
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                <circle cx="12" cy="10" r="3" />
-              </svg>
-              <span
-                style={{
-                  fontFamily: fontBody,
-                  fontSize: 11,
-                  letterSpacing: "0.1em",
-                  textTransform: "uppercase",
-                  color: C.muted,
-                }}
-              >
-                42 Strait Street, Valletta
-              </span>
-            </div>
-          </div>
+          </Reveal>
         </div>
       </section>
 
-      {/* ════════════ FOOTER ════════════ */}
-      <footer
-        style={{
-          background: C.bg,
-          borderTop: "1px solid rgba(201,147,90,0.1)",
-          padding: "60px 24px 40px",
-        }}
-      >
-        <div
-          style={{
-            maxWidth: 1200,
-            margin: "0 auto",
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-            gap: 40,
-            marginBottom: 48,
-          }}
-        >
-          {/* brand */}
-          <div>
-            <h3
-              style={{
-                fontFamily: fontDisplay,
-                fontStyle: "italic",
-                fontWeight: 600,
-                fontSize: 24,
-                color: C.cream,
-                margin: "0 0 12px",
-              }}
-            >
-              Porto Valletta
-            </h3>
-            <p
-              style={{
-                fontFamily: fontBody,
-                fontSize: 14,
-                lineHeight: 1.7,
-                color: C.muted,
-                margin: 0,
-              }}
-            >
-              42 Strait Street
-              <br />
-              Valletta VLT 1432
-              <br />
-              Malta
-            </p>
-          </div>
-
-          {/* nav */}
-          <div>
-            <h4
-              style={{
-                fontFamily: fontBody,
-                fontSize: 12,
-                letterSpacing: "0.2em",
-                textTransform: "uppercase",
-                color: C.gold,
-                margin: "0 0 16px",
-              }}
-            >
-              Navigate
-            </h4>
-            {["The Menu", "Wine List", "Private Dining", "Gift Cards", "Careers"].map(
-              (link) => (
-                <a
-                  key={link}
-                  href="#"
-                  style={{
-                    display: "block",
-                    fontFamily: fontBody,
-                    fontSize: 14,
-                    color: C.muted,
-                    textDecoration: "none",
-                    padding: "4px 0",
-                    transition: "color 0.25s",
-                  }}
-                  onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLElement).style.color = C.cream;
-                  }}
-                  onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLElement).style.color = C.muted;
-                  }}
-                >
-                  {link}
-                </a>
-              )
-            )}
-          </div>
-
-          {/* hours */}
-          <div>
-            <h4
-              style={{
-                fontFamily: fontBody,
-                fontSize: 12,
-                letterSpacing: "0.2em",
-                textTransform: "uppercase",
-                color: C.gold,
-                margin: "0 0 16px",
-              }}
-            >
-              Hours
-            </h4>
-            <p
-              style={{
-                fontFamily: fontBody,
-                fontSize: 14,
-                lineHeight: 1.8,
-                color: C.muted,
-                margin: 0,
-              }}
-            >
-              Tue &ndash; Sat: 12:00 &ndash; 23:00
-              <br />
-              Sunday Brunch: 11:00 &ndash; 15:00
-              <br />
-              Monday: Closed
-            </p>
-          </div>
-
-          {/* contact */}
-          <div>
-            <h4
-              style={{
-                fontFamily: fontBody,
-                fontSize: 12,
-                letterSpacing: "0.2em",
-                textTransform: "uppercase",
-                color: C.gold,
-                margin: "0 0 16px",
-              }}
-            >
-              Contact
-            </h4>
-            <p
-              style={{
-                fontFamily: fontBody,
-                fontSize: 14,
-                lineHeight: 1.8,
-                color: C.muted,
-                margin: 0,
-              }}
-            >
-              +356 2123 4567
-              <br />
-              reservations@portovalletta.com
-            </p>
-          </div>
-        </div>
-
-        {/* bottom bar */}
-        <div
-          style={{
-            borderTop: "1px solid rgba(201,147,90,0.08)",
-            paddingTop: 24,
-            display: "flex",
-            flexWrap: "wrap",
-            justifyContent: "space-between",
-            alignItems: "center",
-            gap: 12,
-          }}
-        >
-          <p
-            style={{
-              fontFamily: fontBody,
-              fontSize: 13,
-              color: "rgba(138,126,112,0.6)",
-              margin: 0,
-            }}
-          >
-            &copy; {new Date().getFullYear()} Porto Valletta. All rights reserved.
-          </p>
-          <div style={{ display: "flex", gap: 20 }}>
-            <a
-              href="/demos/restaurant/privacy"
-              style={{
-                fontFamily: fontBody,
-                fontSize: 13,
-                color: "rgba(138,126,112,0.4)",
-                textDecoration: "none",
-                transition: "color 0.25s",
-              }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.color = C.cream;
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLElement).style.color =
-                  "rgba(138,126,112,0.4)";
-              }}
-            >
-              Privacy
-            </a>
-            <a
-              href="/demos/restaurant/impressum"
-              style={{
-                fontFamily: fontBody,
-                fontSize: 13,
-                color: "rgba(138,126,112,0.4)",
-                textDecoration: "none",
-                transition: "color 0.25s",
-              }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.color = C.cream;
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLElement).style.color =
-                  "rgba(138,126,112,0.4)";
-              }}
-            >
-              Impressum
-            </a>
-            <p
-              style={{
-                fontFamily: fontBody,
-                fontSize: 13,
-                color: "rgba(138,126,112,0.4)",
-                margin: 0,
-              }}
-            >
-              Site by{" "}
-              <a
-                href="https://amenzo.co"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ color: C.gold, textDecoration: "none" }}
-              >
-                Amenzo
-              </a>
-            </p>
-          </div>
-        </div>
-      </footer>
+      <RestaurantFooter />
     </div>
   );
+}
+
+export default function RestaurantContactPage() {
+  return <RestaurantLangProvider><Inner /></RestaurantLangProvider>;
 }

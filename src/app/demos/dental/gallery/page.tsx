@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { DemoBanner } from "@/components/demos/demo-banner";
@@ -181,38 +182,52 @@ const TRANSFORMATIONS = [
   {
     procedure: "Porcelain Veneers",
     description: "Complete smile makeover with 10 ultra-thin porcelain veneers for a natural, radiant result.",
-    beforeColor: "#2D1F14",
-    afterColor: "#1A3A4A",
+    image: "/images/dental/gallery-5.jpg",
   },
   {
     procedure: "Professional Whitening",
     description: "In-office Zoom whitening achieving 6 shades brighter in a single 60-minute session.",
-    beforeColor: "#3B2E1A",
-    afterColor: "#1E3848",
+    image: "/images/dental/gallery-6.jpg",
   },
   {
     procedure: "Invisalign",
     description: "12-month clear aligner treatment correcting moderate crowding and bite alignment.",
-    beforeColor: "#2A1E2E",
-    afterColor: "#163040",
+    image: "/images/dental/service-ortho.jpg",
   },
   {
     procedure: "Dental Implants",
     description: "Single-tooth implant with custom zirconia crown replacing a missing upper premolar.",
-    beforeColor: "#1F2A1A",
-    afterColor: "#142E3E",
+    image: "/images/dental/service-implant.jpg",
   },
   {
     procedure: "Dental Crown",
     description: "Full porcelain crown restoring a fractured molar to full function and aesthetics.",
-    beforeColor: "#2E1A1A",
-    afterColor: "#1A2E42",
+    image: "/images/dental/gallery-4.jpg",
   },
   {
     procedure: "Composite Bonding",
     description: "Same-day composite bonding to close gaps and reshape chipped front teeth.",
-    beforeColor: "#1A2A1E",
-    afterColor: "#182C3C",
+    image: "/images/dental/gallery-1.jpg",
+  },
+  {
+    procedure: "Smile Restoration",
+    description: "Full-mouth restoration combining crowns, bridges, and whitening for a natural result.",
+    image: "/images/dental/gallery-7.jpg",
+  },
+  {
+    procedure: "Orthodontic Retention",
+    description: "Custom retainers keeping alignment perfect years after treatment completion.",
+    image: "/images/dental/gallery-8.jpg",
+  },
+  {
+    procedure: "Preventive Care",
+    description: "Six-month hygiene programmes preventing decay and keeping gums healthy for life.",
+    image: "/images/dental/service-prevention.jpg",
+  },
+  {
+    procedure: "Porcelain Crown",
+    description: "Single ceramic crown indistinguishable from surrounding natural teeth.",
+    image: "/images/dental/service-crown.jpg",
   },
 ];
 
@@ -262,99 +277,26 @@ export default function GalleryPage() {
                 }}
                 className="dental-gallery-card"
               >
-                {/* Before / After panels */}
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", height: 220 }}>
-                  {/* Before */}
+                {/* Image */}
+                <div style={{ position: "relative", width: "100%", height: 240 }}>
+                  <Image src={item.image} alt={item.procedure} fill className="object-cover" />
                   <div
                     style={{
-                      background: item.beforeColor,
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      gap: 8,
-                      position: "relative",
-                      borderRight: `1px solid ${C.border}`,
+                      position: "absolute",
+                      top: 12,
+                      right: 12,
+                      padding: "4px 10px",
+                      borderRadius: 6,
+                      background: `rgba(14,165,233,0.25)`,
+                      backdropFilter: "blur(8px)",
+                      fontSize: 11,
+                      fontWeight: 700,
+                      letterSpacing: "0.08em",
+                      textTransform: "uppercase",
+                      color: C.teal,
                     }}
                   >
-                    <div
-                      style={{
-                        position: "absolute",
-                        top: 12,
-                        left: 12,
-                        padding: "4px 10px",
-                        borderRadius: 6,
-                        background: "rgba(0,0,0,0.5)",
-                        backdropFilter: "blur(8px)",
-                        fontSize: 11,
-                        fontWeight: 700,
-                        letterSpacing: "0.08em",
-                        textTransform: "uppercase",
-                        color: C.mutedLight,
-                      }}
-                    >
-                      Before
-                    </div>
-                    <div
-                      style={{
-                        width: 64,
-                        height: 64,
-                        borderRadius: 12,
-                        background: `linear-gradient(135deg, ${item.beforeColor}, rgba(255,255,255,0.05))`,
-                        border: `1px solid rgba(255,255,255,0.08)`,
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}
-                    >
-                      <SmilePlus size={28} color={C.muted} strokeWidth={1.2} />
-                    </div>
-                  </div>
-
-                  {/* After */}
-                  <div
-                    style={{
-                      background: item.afterColor,
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      gap: 8,
-                      position: "relative",
-                    }}
-                  >
-                    <div
-                      style={{
-                        position: "absolute",
-                        top: 12,
-                        right: 12,
-                        padding: "4px 10px",
-                        borderRadius: 6,
-                        background: `rgba(14,165,233,0.2)`,
-                        backdropFilter: "blur(8px)",
-                        fontSize: 11,
-                        fontWeight: 700,
-                        letterSpacing: "0.08em",
-                        textTransform: "uppercase",
-                        color: C.teal,
-                      }}
-                    >
-                      After
-                    </div>
-                    <div
-                      style={{
-                        width: 64,
-                        height: 64,
-                        borderRadius: 12,
-                        background: `linear-gradient(135deg, ${C.tealDark}33, ${C.teal}22)`,
-                        border: `1px solid ${C.teal}33`,
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}
-                    >
-                      <SmilePlus size={28} color={C.teal} strokeWidth={1.2} />
-                    </div>
+                    Result
                   </div>
                 </div>
 

@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import Reveal from "@/components/demos/Reveal";
 import { DemoBanner } from "@/components/demos/demo-banner";
 
@@ -230,9 +231,16 @@ export default function DentalImpressumPage() {
           </p>
         </Reveal>
         <Reveal type="slide-up" delay={0.2}>
-          <h1 style={{ fontFamily: FONT, fontSize: 36, fontWeight: 800, lineHeight: 1.2, letterSpacing: "-0.03em", color: C.warmWhite, margin: "0 0 48px" }}>
+          <h1 style={{ fontFamily: FONT, fontSize: 36, fontWeight: 800, lineHeight: 1.2, letterSpacing: "-0.03em", color: C.warmWhite, margin: "0 0 32px" }}>
             Impressum
           </h1>
+        </Reveal>
+
+        <Reveal type="fade" delay={0.25}>
+          <div style={{ position: "relative", width: "100%", aspectRatio: "21 / 9", borderRadius: 16, overflow: "hidden", border: `1px solid ${C.border}`, marginBottom: 48 }}>
+            <Image src="/images/dental/impressum-banner.jpg" alt="" fill className="object-cover" />
+            <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(10,16,21,0) 40%, rgba(10,16,21,0.65) 100%)" }} />
+          </div>
         </Reveal>
 
         {/* Practice info */}

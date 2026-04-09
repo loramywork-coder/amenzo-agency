@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { DemoBanner } from "@/components/demos/demo-banner";
 import Reveal from "@/components/demos/Reveal";
@@ -210,6 +211,15 @@ export default function PricingPage() {
           </div>
         </Reveal>
       </section>
+
+      {/* Hero Banner */}
+      <section style={{ padding: "0 24px 48px", maxWidth: 1200, margin: "0 auto" }}>
+        <div style={{ position: "relative", width: "100%", aspectRatio: "21 / 9", overflow: "hidden", border: "2px solid #22C55E" }}>
+          <Image src="/images/fitness/pricing-hero.jpg" alt="" fill priority className="object-cover" />
+          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(8,8,8,0) 40%, rgba(8,8,8,0.8) 100%)" }} />
+        </div>
+      </section>
+
 
       {/* ════════════ PRICING CARDS ════════════ */}
       <section className="px-6 pb-28 md:px-12 lg:px-20" style={{ background: BG }}>

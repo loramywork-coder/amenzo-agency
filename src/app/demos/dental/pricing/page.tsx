@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { DemoBanner } from "@/components/demos/demo-banner";
@@ -260,6 +261,16 @@ export default function PricingPage() {
           <p style={{ fontSize: 17, lineHeight: 1.7, color: C.mutedLight, maxWidth: 560, margin: "0 auto" }}>
             No hidden fees, no surprises. Quality dental care at fair prices with flexible payment options.
           </p>
+        </Reveal>
+      </section>
+
+      {/* Hero Image */}
+      <section style={{ padding: "0 24px 48px", maxWidth: 1200, margin: "0 auto" }}>
+        <Reveal>
+          <div style={{ position: "relative", width: "100%", aspectRatio: "21 / 9", borderRadius: 20, overflow: "hidden", border: `1px solid ${C.border}` }}>
+            <Image src="/images/dental/pricing-hero.jpg" alt="" fill priority className="object-cover" />
+            <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(10,16,21,0) 40%, rgba(10,16,21,0.65) 100%)" }} />
+          </div>
         </Reveal>
       </section>
 

@@ -3,6 +3,7 @@
 import { useState, useEffect, FormEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import Reveal from "@/components/demos/Reveal";
 import { DemoBanner } from "@/components/demos/demo-banner";
 import { DemoToast, useDemoToast } from "@/components/demos/demo-toast";
@@ -290,6 +291,16 @@ export default function DentalContactPage() {
             </h1>
           </Reveal>
         </div>
+      </section>
+
+      {/* Hero Banner */}
+      <section style={{ padding: "0 24px 40px", maxWidth: 1200, margin: "0 auto" }}>
+        <Reveal type="fade" delay={0.3}>
+          <div style={{ position: "relative", width: "100%", aspectRatio: "21 / 9", borderRadius: 20, overflow: "hidden", border: `1px solid ${C.border}` }}>
+            <Image src="/images/dental/contact-hero.jpg" alt="" fill className="object-cover" />
+            <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(10,16,21,0) 40%, rgba(10,16,21,0.7) 100%)" }} />
+          </div>
+        </Reveal>
       </section>
 
       {/* ═══════ SPLIT: FORM + INFO ═══════ */}

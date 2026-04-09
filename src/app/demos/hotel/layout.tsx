@@ -1,17 +1,12 @@
-import { Cormorant_Garamond } from "next/font/google";
+import type { Metadata } from "next";
 
-const cormorant = Cormorant_Garamond({
-  subsets: ["latin"],
-  weight: ["300", "400", "600", "700"],
-  variable: "--font-hotel-display",
-});
+export const metadata: Metadata = {
+  title: "Grand Harbour Hotel — Luxury 5★ Hotel, Valletta",
+  description:
+    "An intimate 5-star harbourside hotel in Valletta, Malta. Historic rooms, two restaurants, rooftop spa. Demo by Amenzo Studio.",
+  robots: { index: false, follow: false },
+};
 
-export const metadata = { robots: { index: false, follow: false } };
-
-export default function Layout({ children }: { children: React.ReactNode }) {
-  return (
-    <div className={cormorant.variable} style={{ scrollBehavior: "smooth" }}>
-      {children}
-    </div>
-  );
+export default function HotelLayout({ children }: { children: React.ReactNode }) {
+  return <>{children}</>;
 }

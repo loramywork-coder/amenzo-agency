@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { DemoBanner } from "@/components/demos/demo-banner";
@@ -184,6 +185,7 @@ const TEAM_MEMBERS = [
     role: "Founder & Cosmetic Dentist",
     initials: "SV",
     experience: "15 years",
+    image: "/images/dental/team-1.jpg",
     bio: [
       "Dr. Sarah Vella founded our practice with a simple belief: that every person deserves to feel confident about their smile. With over 15 years of experience in cosmetic and general dentistry, she has helped thousands of patients transform not just their teeth, but their self-confidence.",
       "After completing her BDS at the University of Malta, Sarah pursued advanced training in cosmetic dentistry at the prestigious Eastman Dental Institute in London. She is a certified Invisalign provider and regularly attends international conferences to stay at the forefront of smile design techniques.",
@@ -202,6 +204,7 @@ const TEAM_MEMBERS = [
     role: "Implant Specialist",
     initials: "MC",
     experience: "10 years",
+    image: "/images/dental/team-2.jpg",
     bio: [
       "Dr. Mark Camilleri is our implant specialist, bringing over a decade of focused experience in dental implant surgery and restorative dentistry. His meticulous approach and gentle manner have made him one of the most respected implant dentists in Malta.",
       "Mark earned his MSc in Implant Dentistry from King's College London, one of the top dental schools in the world. He is a Fellow of the International Team for Implantology (ITI) and has placed over 2,000 implants throughout his career, using the latest guided surgery technology for precision and patient comfort.",
@@ -220,6 +223,7 @@ const TEAM_MEMBERS = [
     role: "Dental Hygienist",
     initials: "JB",
     experience: "8 years",
+    image: "/images/dental/team-3.jpg",
     bio: [
       "Jessica Borg is our dedicated dental hygienist, and she is the person who will help you maintain that beautiful, healthy smile between visits. With 8 years of experience, Jessica combines thoroughness with a gentle touch that puts even the most anxious patients at ease.",
       "Jessica graduated with a BSc in Dental Hygiene from the University of Malta and has since completed additional certifications in periodontal therapy and teeth whitening. She is passionate about preventive care and patient education, believing that a well-informed patient is a healthier patient.",
@@ -259,6 +263,16 @@ export default function TeamPage() {
         </Reveal>
       </section>
 
+      {/* Hero Banner */}
+      <section style={{ padding: "0 24px 48px", maxWidth: 1200, margin: "0 auto" }}>
+        <Reveal>
+          <div style={{ position: "relative", width: "100%", aspectRatio: "21 / 9", borderRadius: 20, overflow: "hidden", border: `1px solid ${C.border}` }}>
+            <Image src="/images/dental/team-hero.jpg" alt="" fill priority className="object-cover" />
+            <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(10,16,21,0) 40%, rgba(10,16,21,0.7) 100%)" }} />
+          </div>
+        </Reveal>
+      </section>
+
       {/* Team Profiles */}
       {TEAM_MEMBERS.map((member, idx) => {
         const isAlt = idx % 2 === 1;
@@ -282,25 +296,19 @@ export default function TeamPage() {
                     flexWrap: "wrap",
                   }}
                 >
-                  {/* Large initials circle */}
+                  {/* Portrait */}
                   <div
                     style={{
-                      width: 110,
-                      height: 110,
+                      position: "relative",
+                      width: 140,
+                      height: 140,
                       borderRadius: "50%",
-                      background: `linear-gradient(135deg, rgba(14,165,233,0.18), rgba(14,165,233,0.06))`,
-                      border: `3px solid rgba(14,165,233,0.25)`,
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      fontSize: 36,
-                      fontWeight: 800,
-                      color: C.teal,
-                      letterSpacing: "-0.02em",
+                      overflow: "hidden",
+                      border: `3px solid rgba(148,184,160,0.35)`,
                       flexShrink: 0,
                     }}
                   >
-                    {member.initials}
+                    <Image src={member.image} alt={member.name} fill className="object-cover" />
                   </div>
                   <div>
                     <h2 style={{ fontSize: "clamp(24px, 3.5vw, 32px)", fontWeight: 800, letterSpacing: "-0.02em", marginBottom: 4 }}>

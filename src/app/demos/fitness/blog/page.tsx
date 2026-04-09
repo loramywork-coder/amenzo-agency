@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { DemoBanner } from "@/components/demos/demo-banner";
 import Reveal from "@/components/demos/Reveal";
@@ -43,7 +44,7 @@ const ARTICLES: Article[] = [
       "You're putting in the hours but the results aren't showing. These common training errors could be sabotaging your progress without you even knowing it.",
     date: "Mar 28, 2026",
     readTime: "6 min read",
-    image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&q=80",
+    image: "/images/fitness/blog-1.jpg",
   },
   {
     title: "Meal Prep for Busy Professionals",
@@ -52,7 +53,7 @@ const ARTICLES: Article[] = [
       "No time to cook? No excuse. Master the art of weekly meal prep with these dead-simple strategies that take under two hours every Sunday.",
     date: "Mar 21, 2026",
     readTime: "8 min read",
-    image: "https://images.unsplash.com/photo-1547592180-85f173990554?w=600&q=80",
+    image: "/images/fitness/blog-2.jpg",
   },
   {
     title: "Why Rest Days Matter More Than You Think",
@@ -61,7 +62,7 @@ const ARTICLES: Article[] = [
       "Overtraining is real and it's destroying your results. The science behind strategic rest and how elite athletes use recovery to get stronger.",
     date: "Mar 14, 2026",
     readTime: "5 min read",
-    image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&q=80",
+    image: "/images/fitness/blog-3.jpg",
   },
   {
     title: "HIIT vs Steady State: The Final Answer",
@@ -70,7 +71,7 @@ const ARTICLES: Article[] = [
       "The debate ends here. We break down the research on both training styles so you can pick the right approach for your specific goals.",
     date: "Mar 7, 2026",
     readTime: "7 min read",
-    image: "https://images.unsplash.com/photo-1549060279-7e168fcee0c2?w=600&q=80",
+    image: "/images/fitness/blog-4.jpg",
   },
 ];
 
@@ -160,6 +161,15 @@ export default function BlogPage() {
           </div>
         </Reveal>
       </section>
+
+      {/* Hero Banner */}
+      <section style={{ padding: "0 24px 48px", maxWidth: 1200, margin: "0 auto" }}>
+        <div style={{ position: "relative", width: "100%", aspectRatio: "21 / 9", overflow: "hidden", border: "2px solid #22C55E" }}>
+          <Image src="/images/fitness/blog-hero.jpg" alt="" fill priority className="object-cover" />
+          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(8,8,8,0) 40%, rgba(8,8,8,0.8) 100%)" }} />
+        </div>
+      </section>
+
 
       {/* ════════════ ARTICLE GRID ════════════ */}
       <section className="px-6 pb-28 md:px-12 lg:px-20" style={{ background: BG }}>

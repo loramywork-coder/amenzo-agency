@@ -45,7 +45,7 @@ const CLASSES: GymClass[] = [
     difficulty: "Advanced",
     schedule: "Mon / Wed / Fri  6:00 AM",
     category: "HIIT",
-    image: "https://images.unsplash.com/photo-1549060279-7e168fcee0c2?w=600&q=80",
+    image: "/images/fitness/class-hiit.jpg",
   },
   {
     name: "YOGA FLOW",
@@ -55,7 +55,7 @@ const CLASSES: GymClass[] = [
     difficulty: "All Levels",
     schedule: "Tue / Thu  8:00 AM",
     category: "Yoga",
-    image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&q=80",
+    image: "/images/fitness/class-yoga.jpg",
   },
   {
     name: "BOXING FIT",
@@ -65,7 +65,7 @@ const CLASSES: GymClass[] = [
     difficulty: "Intermediate",
     schedule: "Mon / Wed  6:00 PM",
     category: "Boxing",
-    image: "https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?w=600&q=80",
+    image: "/images/fitness/class-boxing.jpg",
   },
   {
     name: "SPIN CYCLE",
@@ -75,7 +75,7 @@ const CLASSES: GymClass[] = [
     difficulty: "All Levels",
     schedule: "Daily  6:30 AM",
     category: "Cardio",
-    image: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=600&q=80",
+    image: "/images/fitness/class-spin.jpg",
   },
   {
     name: "STRENGTH LAB",
@@ -85,7 +85,7 @@ const CLASSES: GymClass[] = [
     difficulty: "Intermediate",
     schedule: "Tue / Thu  10:00 AM",
     category: "Strength",
-    image: "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=600&q=80",
+    image: "/images/fitness/gal-1.jpg",
   },
   {
     name: "CROSSFIT WOD",
@@ -95,7 +95,7 @@ const CLASSES: GymClass[] = [
     difficulty: "Advanced",
     schedule: "Mon / Wed / Fri  5:30 PM",
     category: "Functional",
-    image: "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=600&q=80",
+    image: "/images/fitness/class-crossfit.jpg",
   },
   {
     name: "PILATES CORE",
@@ -105,7 +105,7 @@ const CLASSES: GymClass[] = [
     difficulty: "Beginner",
     schedule: "Sat  9:00 AM",
     category: "Yoga",
-    image: "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600&q=80",
+    image: "/images/fitness/class-pilates.jpg",
   },
   {
     name: "FUNCTIONAL TRAINING",
@@ -115,7 +115,7 @@ const CLASSES: GymClass[] = [
     difficulty: "All Levels",
     schedule: "Tue / Thu / Sat  7:00 AM",
     category: "Functional",
-    image: "https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=600&q=80",
+    image: "/images/fitness/gal-8.jpg",
   },
 ];
 
@@ -281,6 +281,15 @@ export default function ClassesPage() {
           </div>
         </Reveal>
       </section>
+
+      {/* Hero Banner */}
+      <section style={{ padding: "0 24px 48px", maxWidth: 1200, margin: "0 auto" }}>
+        <div style={{ position: "relative", width: "100%", aspectRatio: "21 / 9", overflow: "hidden", border: "2px solid #22C55E" }}>
+          <Image src="/images/fitness/classes-hero.jpg" alt="" fill priority className="object-cover" />
+          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(8,8,8,0) 40%, rgba(8,8,8,0.8) 100%)" }} />
+        </div>
+      </section>
+
 
       {/* ════════════ FILTER TABS ════════════ */}
       <section className="px-6 md:px-12 lg:px-20" style={{ background: BG }}>

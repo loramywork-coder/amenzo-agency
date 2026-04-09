@@ -1,491 +1,148 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
-import Reveal from "@/components/demos/Reveal";
 import { DemoBanner } from "@/components/demos/demo-banner";
+import { C, fHead, fBody, fMono, Reveal, Rule, RestaurantNav, RestaurantFooter, RestaurantLangProvider, useRestaurantLang, tri } from "../_shared";
 
-/* ─── palette ─── */
-const C = {
-  bg: "#0A0A08",
-  surface: "#121210",
-  gold: "#C9935A",
-  cream: "#F5E6D3",
-  muted: "#8A7E70",
-  border: "#2A2620",
-} as const;
-
-/* ─── font stacks ─── */
-const fontDisplay = "var(--font-heading), 'Playfair Display', Georgia, serif";
-const fontBody = "var(--font-body), 'DM Sans', system-ui, sans-serif";
-
-/* ─── nav links ─── */
-const NAV_LINKS = [
-  { label: "Home", href: "/demos/restaurant" },
-  { label: "Menu", href: "/demos/restaurant/menu" },
-  { label: "Wine", href: "/demos/restaurant/wine" },
-  { label: "Gallery", href: "/demos/restaurant/gallery" },
-  { label: "About", href: "/demos/restaurant/about" },
-  { label: "Chef", href: "/demos/restaurant/chef" },
-  { label: "Contact", href: "/demos/restaurant/contact" },
+const timeline = [
+  { year: "2003", en: "Starts as a dishwasher at Le Calandre, Rubano.", it: "Inizia come lavapiatti a Le Calandre, Rubano.", fr: "Commence comme plongeur au Calandre, Rubano." },
+  { year: "2008", en: "Becomes chef de partie under Massimiliano Alajmo.", it: "Diventa chef de partie sotto Massimiliano Alajmo.", fr: "Devient chef de partie sous Massimiliano Alajmo." },
+  { year: "2012", en: "Joins Mugaritz in Spain under Andoni Luis Aduriz.", it: "Entra a Mugaritz in Spagna con Andoni Luis Aduriz.", fr: "Rejoint Mugaritz en Espagne auprès d'Andoni Luis Aduriz." },
+  { year: "2016", en: "Returns to Malta. Opens Porto Valletta with sixteen seats.", it: "Torna a Malta. Apre Porto Valletta con sedici coperti.", fr: "Rentre à Malte. Ouvre Porto Valletta avec seize couverts." },
+  { year: "2019", en: "One Michelin star. Refuses to expand.", it: "Una stella Michelin. Rifiuta di ingrandirsi.", fr: "Une étoile Michelin. Refuse de s'agrandir." },
+  { year: "2023", en: "Joined by sous-chef Elena Busuttil.", it: "Si unisce la sous-chef Elena Busuttil.", fr: "Rejoint par la sous-cheffe Elena Busuttil." },
 ];
 
-/* ─── career timeline ─── */
-const TIMELINE = [
-  {
-    year: "2004",
-    title: "Culinary Foundations in Rome",
-    description:
-      "Trained at the Accademia Italiana della Cucina under master chefs who instilled a reverence for simplicity, seasonal rhythm, and the discipline of classical technique.",
-  },
-  {
-    year: "2010",
-    title: "Michelin Star in London",
-    description:
-      "As Head Chef at Savour in Mayfair, Marco earned a Michelin star within two years, praised for bold Mediterranean flavours presented with exacting modern precision.",
-  },
-  {
-    year: "2015",
-    title: "Return to Malta",
-    description:
-      "Drawn by the pull of the island’s terroir and the memory of his grandmother’s kitchen, Marco returned home to build something deeply personal.",
-  },
-  {
-    year: "2017",
-    title: "Porto Valletta Opens",
-    description:
-      "On a quiet corner of Strait Street, Porto Valletta opened its doors. What began as a 28-seat dining room has since become one of Malta’s most celebrated tables.",
-  },
-];
-
-/* ─── signature dishes ─── */
-const SIGNATURE_DISHES = [
-  {
-    name: "Lampuki Crudo",
-    description:
-      "Thinly sliced dolphinfish cured in Gozitan sea salt, finished with blood orange, fennel pollen, and Arbequina olive oil from our partner farm in Siggiewi.",
-  },
-  {
-    name: "Slow-Braised Rabbit Ravioli",
-    description:
-      "Hand-rolled pasta filled with rabbit braised in red wine and bay leaf, served in a light saffron broth with shaved bottarga and crispy sage.",
-  },
-  {
-    name: "Carob & Honey Semifreddo",
-    description:
-      "A frozen dessert of local carob and wildflower honey, layered over a dark-chocolate soil with candied kumquat and Fleur de Sel.",
-  },
-];
-
-/* ━━━ PAGE COMPONENT ━━━ */
-export default function ChefPage() {
+function Inner() {
+  const { lang } = useRestaurantLang();
   return (
-    <div style={{ background: C.bg, color: C.cream, fontFamily: fontBody, overflowX: "hidden", paddingTop: 40 }}>
+    <div style={{ background: C.bg, color: C.cream, fontFamily: fBody }}>
       <DemoBanner />
+      <RestaurantNav />
 
-      {/* ─── Navigation Header ─── */}
-      <header style={{
-        position: "absolute", top: 40, left: 0, right: 0, zIndex: 50,
-        background: "transparent",
-        borderBottom: "none",
-      }}>
-        <div style={{
-          maxWidth: 1200, margin: "0 auto", padding: "0 24px",
-          display: "flex", alignItems: "center", justifyContent: "space-between",
-          height: 64,
-        }}>
-          <a href="/demos/restaurant" style={{ textDecoration: "none" }}>
-            <span style={{
-              fontFamily: fontDisplay, fontStyle: "italic", fontWeight: 600,
-              fontSize: 22, color: C.cream,
-            }}>
-              Porto Valletta
-            </span>
-          </a>
-          <style>{`
-            .chef-nav-links{display:none;gap:28px;align-items:center;}
-            @media(min-width:768px){.chef-nav-links{display:flex;}}
-          `}</style>
-          <nav className="chef-nav-links">
-            {NAV_LINKS.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                style={{
-                  fontFamily: fontBody, fontSize: 13, letterSpacing: "0.06em",
-                  textTransform: "uppercase", textDecoration: "none",
-                  color: link.href === "/demos/restaurant/chef" ? C.gold : C.muted,
-                  transition: "color 0.25s",
-                }}
-                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = C.cream; }}
-                onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLElement).style.color =
-                    link.href === "/demos/restaurant/chef" ? C.gold : C.muted;
-                }}
-              >
-                {link.label}
-              </a>
-            ))}
-          </nav>
+      <section className="pt-40 md:pt-48 px-6 md:px-10 pb-16">
+        <div className="max-w-[1500px] mx-auto">
+          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6 }} className="text-[10px] tracking-[0.4em] uppercase mb-6" style={{ color: C.copper, fontFamily: fMono }}>
+            — {tri("The chef", "Lo chef", "Le chef", lang)}
+          </motion.p>
+          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.1 }} className="max-w-5xl" style={{ fontFamily: fHead, fontSize: "clamp(52px, 9vw, 150px)", lineHeight: 0.92, fontWeight: 400, letterSpacing: "-0.02em", color: C.cream, paddingBottom: "0.15em" }}>
+            Rocco<br /><em style={{ fontStyle: "italic", color: C.copper }}>Barbaro.</em>
+          </motion.h1>
         </div>
-      </header>
-
-      {/* ─── Hero Section ─── */}
-      <section style={{
-        position: "relative",
-        paddingTop: 200, paddingBottom: 120,
-        textAlign: "center", padding: "200px 24px 120px",
-      }}>
-        {/* decorative line */}
-        <Reveal type="fade" delay={0.1}>
-          <div style={{
-            width: 1, height: 60, background: `linear-gradient(to bottom, transparent, ${C.gold})`,
-            margin: "0 auto 32px",
-          }} />
-        </Reveal>
-
-        <Reveal type="fade" delay={0.3}>
-          <p style={{
-            fontFamily: fontBody, fontSize: 12, letterSpacing: "0.35em",
-            textTransform: "uppercase", color: C.gold, marginBottom: 20,
-          }}>
-            Meet the Chef
-          </p>
-        </Reveal>
-
-        <Reveal type="fade" delay={0.5}>
-          <h1 style={{
-            fontFamily: fontDisplay, fontStyle: "italic", fontWeight: 500,
-            fontSize: "clamp(40px, 6vw, 64px)", lineHeight: 1.1, color: C.cream, margin: "0 0 12px",
-          }}>
-            Marco Azzopardi
-          </h1>
-        </Reveal>
-
-        <Reveal type="fade" delay={0.7}>
-          <p style={{
-            fontFamily: fontBody, fontSize: 14, letterSpacing: "0.2em",
-            textTransform: "uppercase", color: C.muted, margin: 0,
-          }}>
-            Executive Chef
-          </p>
-        </Reveal>
-
-        <motion.div
-          initial={{ width: 0 }}
-          animate={{ width: 50 }}
-          transition={{ duration: 1, delay: 0.9, ease: [0.25, 0.1, 0.25, 1] }}
-          style={{ height: 2, background: C.gold, margin: "36px auto 0" }}
-        />
       </section>
 
-      {/* ─── Philosophy Section ─── */}
-      <section style={{ background: C.surface }}>
-        <div style={{ maxWidth: 760, margin: "0 auto", padding: "100px 24px", textAlign: "center" }}>
-          <Reveal type="slide-up">
-            <p style={{
-              fontFamily: fontBody, fontSize: 12, letterSpacing: "0.3em",
-              textTransform: "uppercase", color: C.gold, marginBottom: 28,
-            }}>
-              Philosophy
-            </p>
+      <section className="px-6 md:px-10 py-20">
+        <div className="max-w-[1500px] mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16 items-start">
+          <Reveal className="md:col-span-5">
+            <div className="relative aspect-[4/5]">
+              <Image src="/images/restaurant/chef-portrait.jpg" alt="Rocco Barbaro" fill className="object-cover" />
+            </div>
           </Reveal>
-
-          <Reveal type="fade" delay={0.2}>
-            <blockquote style={{
-              fontFamily: fontDisplay, fontStyle: "italic", fontWeight: 400,
-              fontSize: "clamp(22px, 3vw, 30px)", lineHeight: 1.6,
-              color: "rgba(245,230,211,0.75)", margin: "0 0 36px",
-              borderLeft: "none",
-            }}>
-              &ldquo;Cooking is not about showing what you know. It is about listening &mdash; to the ingredient, to the season, to the person sitting at the table.&rdquo;
-            </blockquote>
-          </Reveal>
-
-          <Reveal type="fade" delay={0.35}>
-            <div style={{
-              width: 40, height: 1, background: C.gold, margin: "0 auto 36px",
-            }} />
-          </Reveal>
-
-          <Reveal type="slide-up" delay={0.4}>
-            <p style={{
-              fontFamily: fontBody, fontSize: 16, lineHeight: 1.85,
-              color: C.muted, margin: "0 0 20px", maxWidth: 600, marginLeft: "auto", marginRight: "auto",
-            }}>
-              Marco&apos;s approach is rooted in restraint. Every plate at Porto Valletta celebrates
-              the ingredient at its peak &mdash; never masked, never forced. He draws from the
-              classical Italian tradition but filters it through the lens of Malta&apos;s singular
-              terroir: island herbs, sun-ripened stone fruit, the daily catch from Marsaxlokk.
-            </p>
-          </Reveal>
-
-          <Reveal type="slide-up" delay={0.5}>
-            <p style={{
-              fontFamily: fontBody, fontSize: 16, lineHeight: 1.85,
-              color: C.muted, margin: 0, maxWidth: 600, marginLeft: "auto", marginRight: "auto",
-            }}>
-              His menus shift with the tide and the harvest. Nothing is permanent except the
-              commitment to honesty on the plate. It is this quiet discipline that has earned
-              Porto Valletta a devoted following among those who seek not spectacle, but truth.
-            </p>
+          <Reveal delay={0.1} className="md:col-span-6 md:col-start-7 md:pt-12">
+            <div className="space-y-6 text-[16px] leading-[1.9]" style={{ color: "rgba(242,233,216,0.8)" }}>
+              <p className="text-[22px] md:text-[26px] leading-[1.4] italic" style={{ fontFamily: fHead, color: C.cream }}>
+                {tri(
+                  "I do not cook for critics. I cook for the sixteen people in this room.",
+                  "Non cucino per i critici. Cucino per le sedici persone in questa sala.",
+                  "Je ne cuisine pas pour les critiques. Je cuisine pour les seize personnes dans cette salle.",
+                  lang
+                )}
+              </p>
+              <p>
+                {tri(
+                  "Rocco grew up in Puglia, in a village with four thousand people, at a kitchen table where his grandmother cooked for eleven. He left at seventeen to work at Le Calandre in Rubano, spent five years there, then joined Mugaritz under Andoni Luis Aduriz for four more. By the time he came back to the Mediterranean, he had worked twenty-three straight summers without a day off.",
+                  "Rocco è cresciuto in Puglia, in un paese di quattromila abitanti, a un tavolo da cucina dove sua nonna cucinava per undici. A diciassette anni parte per Le Calandre a Rubano, ci resta cinque anni, poi quattro anni a Mugaritz con Andoni Luis Aduriz. Quando tornò nel Mediterraneo aveva lavorato ventitré estati di fila senza un giorno libero.",
+                  "Rocco a grandi dans les Pouilles, dans un village de quatre mille habitants, à une table de cuisine où sa grand-mère cuisinait pour onze. Il est parti à dix-sept ans travailler au Calandre à Rubano, y est resté cinq ans, puis quatre ans à Mugaritz auprès d'Andoni Luis Aduriz. En revenant en Méditerranée, il avait travaillé vingt-trois étés d'affilée sans un jour de congé.",
+                  lang
+                )}
+              </p>
+              <p>
+                {tri(
+                  "Porto Valletta opened in a sixteen-seat room in 2016. The original rule — cook only what you can source within forty kilometres — has not changed. Neither has the menu structure: six courses, one seating, six nights a week.",
+                  "Porto Valletta ha aperto in una sala da sedici coperti nel 2016. La regola originale — cucinare solo ciò che trovi entro quaranta chilometri — non è cambiata. Né la struttura del menù: sei portate, un solo turno, sei sere a settimana.",
+                  "Porto Valletta a ouvert dans une salle de seize couverts en 2016. La règle originale — ne cuisiner que ce qu'on trouve à moins de quarante kilomètres — n'a pas changé. Ni la structure du menu : six plats, un seul service, six soirs par semaine.",
+                  lang
+                )}
+              </p>
+              <p>
+                {tri(
+                  "He still cooks every service himself. When he takes a night off, the restaurant closes.",
+                  "Ancora oggi cucina ogni servizio in prima persona. Quando si prende una sera libera, il ristorante chiude.",
+                  "Il cuisine encore chaque service lui-même. Quand il prend une soirée, le restaurant ferme.",
+                  lang
+                )}
+              </p>
+            </div>
           </Reveal>
         </div>
       </section>
 
-      {/* ─── Career Timeline ─── */}
-      <section style={{ maxWidth: 800, margin: "0 auto", padding: "100px 24px" }}>
-        <Reveal type="slide-up">
-          <p style={{
-            fontFamily: fontBody, fontSize: 12, letterSpacing: "0.3em",
-            textTransform: "uppercase", color: C.gold, marginBottom: 16, textAlign: "center",
-          }}>
-            The Journey
-          </p>
-        </Reveal>
-        <Reveal type="slide-up" delay={0.1}>
-          <h2 style={{
-            fontFamily: fontDisplay, fontStyle: "italic", fontWeight: 500,
-            fontSize: "clamp(28px, 4vw, 36px)", textAlign: "center", color: C.cream,
-            margin: "0 0 64px",
-          }}>
-            A Career Shaped by Place
-          </h2>
-        </Reveal>
-
-        <div style={{ position: "relative" }}>
-          {/* vertical line */}
-          <div style={{
-            position: "absolute", left: 20, top: 0, bottom: 0, width: 1,
-            background: `linear-gradient(to bottom, ${C.gold}, ${C.border})`,
-          }} />
-
-          {TIMELINE.map((item, i) => (
-            <Reveal key={item.year} type="slide-up" delay={i * 0.15}>
-              <div style={{
-                display: "flex", gap: 32, marginBottom: i < TIMELINE.length - 1 ? 52 : 0,
-                position: "relative",
-              }}>
-                {/* dot */}
-                <div style={{
-                  width: 40, minWidth: 40, display: "flex", justifyContent: "center", paddingTop: 4,
-                }}>
-                  <div style={{
-                    width: 11, height: 11, borderRadius: "50%",
-                    border: `2px solid ${C.gold}`,
-                    background: C.bg,
-                  }} />
-                </div>
-
-                {/* content */}
-                <div style={{ flex: 1 }}>
-                  <span style={{
-                    fontFamily: fontBody, fontSize: 13, fontWeight: 600,
-                    letterSpacing: "0.12em", color: C.gold,
-                  }}>
-                    {item.year}
-                  </span>
-                  <h3 style={{
-                    fontFamily: fontDisplay, fontWeight: 600, fontSize: 22,
-                    color: C.cream, margin: "8px 0 10px",
-                  }}>
-                    {item.title}
-                  </h3>
-                  <p style={{
-                    fontFamily: fontBody, fontSize: 15, lineHeight: 1.75,
-                    color: C.muted, margin: 0, maxWidth: 540,
-                  }}>
-                    {item.description}
-                  </p>
-                </div>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      {/* ─── Signature Dishes ─── */}
-      <section style={{ background: C.surface }}>
-        <div style={{ maxWidth: 1000, margin: "0 auto", padding: "100px 24px" }}>
-          <Reveal type="slide-up">
-            <p style={{
-              fontFamily: fontBody, fontSize: 12, letterSpacing: "0.3em",
-              textTransform: "uppercase", color: C.gold, marginBottom: 16, textAlign: "center",
-            }}>
-              From the Kitchen
+      {/* Team strip */}
+      <section className="px-6 md:px-10 py-28" style={{ background: C.surface }}>
+        <div className="max-w-[1500px] mx-auto">
+          <Reveal>
+            <p className="text-[10px] tracking-[0.3em] uppercase mb-6 text-center" style={{ color: C.copper, fontFamily: fMono }}>
+              — {tri("The team", "La squadra", "L'équipe", lang)}
             </p>
-          </Reveal>
-          <Reveal type="slide-up" delay={0.1}>
-            <h2 style={{
-              fontFamily: fontDisplay, fontStyle: "italic", fontWeight: 500,
-              fontSize: "clamp(28px, 4vw, 36px)", textAlign: "center", color: C.cream,
-              margin: "0 0 64px",
-            }}>
-              Signature Dishes
+            <h2 className="mb-14 text-center" style={{ fontFamily: fHead, fontSize: "clamp(36px, 5vw, 64px)", lineHeight: 1, fontWeight: 400, color: C.cream, paddingBottom: "0.1em" }}>
+              {tri("Just two hands,", "Solo due paia di mani,", "Juste deux paires de mains,", lang)}<br />
+              <em style={{ fontStyle: "italic", color: C.copper }}>{tri("one at the front.", "una in sala.", "une en salle.", lang)}</em>
             </h2>
           </Reveal>
-
-          <style>{`
-            .chef-dishes-grid{display:grid;grid-template-columns:1fr;gap:32px;}
-            @media(min-width:640px){.chef-dishes-grid{grid-template-columns:repeat(3,1fr);}}
-          `}</style>
-          <div className="chef-dishes-grid">
-            {SIGNATURE_DISHES.map((dish, i) => (
-              <Reveal key={dish.name} type="fade" delay={i * 0.15}>
-                <motion.div
-                  whileHover={{ y: -4 }}
-                  transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
-                  style={{
-                    padding: "40px 28px",
-                    background: C.bg,
-                    border: `1px solid ${C.border}`,
-                    borderRadius: 2,
-                    height: "100%",
-                    boxSizing: "border-box",
-                  }}
-                >
-                  {/* decorative number */}
-                  <span style={{
-                    fontFamily: fontDisplay, fontSize: 40, fontWeight: 300,
-                    color: "rgba(201,147,90,0.15)", lineHeight: 1, display: "block",
-                    marginBottom: 16,
-                  }}>
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <h3 style={{
-                    fontFamily: fontDisplay, fontStyle: "italic", fontWeight: 600,
-                    fontSize: 22, color: C.cream, margin: "0 0 14px",
-                  }}>
-                    {dish.name}
-                  </h3>
-                  <p style={{
-                    fontFamily: fontBody, fontSize: 14, lineHeight: 1.75,
-                    color: C.muted, margin: 0,
-                  }}>
-                    {dish.description}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-3xl mx-auto">
+            {[
+              { img: "sous-chef.jpg", name: "Elena Busuttil", roleEn: "Sous-chef", roleIt: "Sous-chef", roleFr: "Sous-cheffe" },
+              { img: "chef-portrait.jpg", name: "Rocco Barbaro", roleEn: "Chef & Owner", roleIt: "Chef e Proprietario", roleFr: "Chef & Propriétaire" },
+              { img: "sommelier.jpg", name: "Giulia Ferrara", roleEn: "Sommelier & Maître d'Hôtel", roleIt: "Sommelier e Maître", roleFr: "Sommelière & Maître d'Hôtel" },
+            ].map((m, i) => (
+              <Reveal key={m.name} delay={i * 0.08}>
+                <div>
+                  <div className="relative aspect-[4/5] mb-5">
+                    <Image src={`/images/restaurant/${m.img}`} alt={m.name} fill className="object-cover" />
+                  </div>
+                  <p style={{ fontFamily: fHead, fontSize: 22, color: C.cream, fontWeight: 400 }}>{m.name}</p>
+                  <p className="text-[10px] tracking-[0.2em] uppercase mt-1" style={{ color: C.copper, fontFamily: fMono }}>
+                    {tri(m.roleEn, m.roleIt, m.roleFr, lang)}
                   </p>
-                </motion.div>
+                </div>
               </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ─── Closing Quote ─── */}
-      <section style={{ maxWidth: 680, margin: "0 auto", padding: "100px 24px", textAlign: "center" }}>
-        <Reveal type="fade">
-          <div style={{
-            borderTop: `1px solid ${C.border}`,
-            borderBottom: `1px solid ${C.border}`,
-            padding: "48px 0",
-          }}>
-            <p style={{
-              fontFamily: fontDisplay, fontStyle: "italic", fontWeight: 400,
-              fontSize: "clamp(20px, 3vw, 28px)", lineHeight: 1.6,
-              color: "rgba(245,230,211,0.55)", margin: "0 0 20px",
-            }}>
-              &ldquo;The best dish I have ever made is always the next one. That is the only way to stay honest.&rdquo;
+      {/* Timeline */}
+      <section className="px-6 md:px-10 py-28">
+        <div className="max-w-3xl mx-auto">
+          <Reveal>
+            <p className="text-[10px] tracking-[0.3em] uppercase mb-6 text-center" style={{ color: C.copper, fontFamily: fMono }}>
+              — {tri("Timeline", "Cronologia", "Chronologie", lang)}
             </p>
-            <p style={{
-              fontFamily: fontBody, fontSize: 13, letterSpacing: "0.15em",
-              textTransform: "uppercase", color: C.gold, margin: 0,
-            }}>
-              &mdash; Marco Azzopardi
-            </p>
-          </div>
-        </Reveal>
+            <h2 className="mb-14 text-center" style={{ fontFamily: fHead, fontSize: "clamp(36px, 5vw, 60px)", lineHeight: 1, fontWeight: 400, color: C.cream, paddingBottom: "0.1em" }}>
+              {tri("Twenty years of", "Venti anni di", "Vingt ans de", lang)}{" "}
+              <em style={{ fontStyle: "italic", color: C.copper }}>{tri("kitchen.", "cucina.", "cuisine.", lang)}</em>
+            </h2>
+            <Rule className="mb-10" />
+          </Reveal>
+          {timeline.map((t, i) => (
+            <Reveal key={t.year} delay={i * 0.05}>
+              <div className="grid grid-cols-12 gap-5 py-5" style={{ borderBottom: `1px solid ${C.border}` }}>
+                <span className="col-span-2 md:col-span-1" style={{ color: C.copper, fontFamily: fMono, fontSize: 12 }}>— {t.year}</span>
+                <span className="col-span-10 md:col-span-11" style={{ fontFamily: fHead, fontSize: 20, lineHeight: 1.3, color: C.cream }}>
+                  {tri(t.en, t.it, t.fr, lang)}
+                </span>
+              </div>
+            </Reveal>
+          ))}
+        </div>
       </section>
 
-      {/* ─── Footer ─── */}
-      <footer style={{
-        background: C.bg,
-        borderTop: "1px solid rgba(201,147,90,0.1)",
-        padding: "60px 24px 40px",
-      }}>
-        <div style={{
-          maxWidth: 1200, margin: "0 auto",
-          display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-          gap: 40, marginBottom: 48,
-        }}>
-          <div>
-            <h3 style={{
-              fontFamily: fontDisplay, fontStyle: "italic", fontWeight: 600,
-              fontSize: 24, color: C.cream, margin: "0 0 12px",
-            }}>
-              Porto Valletta
-            </h3>
-            <p style={{ fontFamily: fontBody, fontSize: 14, lineHeight: 1.7, color: C.muted, margin: 0 }}>
-              42 Strait Street<br />
-              Valletta VLT 1432<br />
-              Malta
-            </p>
-          </div>
-          <div>
-            <h4 style={{
-              fontFamily: fontBody, fontSize: 12, letterSpacing: "0.2em", textTransform: "uppercase",
-              color: C.gold, margin: "0 0 16px",
-            }}>
-              Navigate
-            </h4>
-            {["The Menu", "Wine List", "Private Dining", "Gift Cards", "Careers"].map((link) => (
-              <a
-                key={link}
-                href="#"
-                style={{
-                  display: "block", fontFamily: fontBody, fontSize: 14,
-                  color: C.muted, textDecoration: "none", padding: "4px 0",
-                  transition: "color 0.25s",
-                }}
-                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = C.cream; }}
-                onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = C.muted; }}
-              >
-                {link}
-              </a>
-            ))}
-          </div>
-          <div>
-            <h4 style={{
-              fontFamily: fontBody, fontSize: 12, letterSpacing: "0.2em", textTransform: "uppercase",
-              color: C.gold, margin: "0 0 16px",
-            }}>
-              Hours
-            </h4>
-            <p style={{ fontFamily: fontBody, fontSize: 14, lineHeight: 1.8, color: C.muted, margin: 0 }}>
-              Tue &ndash; Sat: 18:00 &ndash; 23:00<br />
-              Sunday Brunch: 11:00 &ndash; 15:00<br />
-              Monday: Closed
-            </p>
-          </div>
-          <div>
-            <h4 style={{
-              fontFamily: fontBody, fontSize: 12, letterSpacing: "0.2em", textTransform: "uppercase",
-              color: C.gold, margin: "0 0 16px",
-            }}>
-              Contact
-            </h4>
-            <p style={{ fontFamily: fontBody, fontSize: 14, lineHeight: 1.8, color: C.muted, margin: 0 }}>
-              +356 2124 5678<br />
-              reservations@portovalletta.mt
-            </p>
-          </div>
-        </div>
-        <div style={{
-          borderTop: "1px solid rgba(201,147,90,0.08)",
-          paddingTop: 24,
-          display: "flex", flexWrap: "wrap", justifyContent: "space-between",
-          alignItems: "center", gap: 12,
-        }}>
-          <p style={{
-            fontFamily: fontBody, fontSize: 13, color: "rgba(138,126,112,0.6)", margin: 0,
-          }}>
-            &copy; {new Date().getFullYear()} Porto Valletta. All rights reserved.
-          </p>
-          <p style={{
-            fontFamily: fontBody, fontSize: 13, color: "rgba(138,126,112,0.4)", margin: 0,
-          }}>
-            Site by <a href="https://amenzo.co" target="_blank" rel="noopener noreferrer" style={{ color: C.gold, textDecoration: "none" }}>Amenzo</a>
-          </p>
-        </div>
-      </footer>
+      <RestaurantFooter />
     </div>
   );
+}
+
+export default function RestaurantChefPage() {
+  return <RestaurantLangProvider><Inner /></RestaurantLangProvider>;
 }

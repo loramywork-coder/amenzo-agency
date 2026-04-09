@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { DemoBanner } from "@/components/demos/demo-banner";
@@ -188,6 +189,7 @@ type ServiceCategory = {
   icon: React.ElementType;
   name: string;
   description: string;
+  image: string;
   included: string[];
   treatments: { name: string; duration: string; price: string }[];
 };
@@ -197,6 +199,7 @@ const SERVICE_CATEGORIES: ServiceCategory[] = [
     id: "general",
     icon: Shield,
     name: "General Dentistry",
+    image: "/images/dental/service-cleaning.jpg",
     description:
       "Your oral health is the foundation of a great smile. Our general dentistry services focus on prevention, early detection, and gentle treatment. From routine check-ups to more complex procedures, we take the time to explain everything and make sure you feel comfortable throughout your visit.",
     included: [
@@ -220,6 +223,7 @@ const SERVICE_CATEGORIES: ServiceCategory[] = [
     id: "cosmetic",
     icon: Sparkles,
     name: "Cosmetic Dentistry",
+    image: "/images/dental/service-whitening.jpg",
     description:
       "Transform your smile with treatments designed to enhance the natural beauty of your teeth. Whether you are looking for a subtle improvement or a complete smile makeover, Dr. Vella combines artistry with precision to deliver results that look and feel completely natural.",
     included: [
@@ -243,6 +247,7 @@ const SERVICE_CATEGORIES: ServiceCategory[] = [
     id: "implants",
     icon: HeartPulse,
     name: "Dental Implants",
+    image: "/images/dental/service-implant.jpg",
     description:
       "Missing teeth can affect your confidence and quality of life. Our implant solutions are designed to look, feel, and function just like your natural teeth. Dr. Camilleri brings over a decade of specialist experience to every implant case, using the latest guided surgery techniques for precision and comfort.",
     included: [
@@ -266,6 +271,7 @@ const SERVICE_CATEGORIES: ServiceCategory[] = [
     id: "orthodontics",
     icon: ScanLine,
     name: "Orthodontics",
+    image: "/images/dental/service-ortho.jpg",
     description:
       "Straighter teeth are healthier teeth. Our orthodontic options cater to all ages and lifestyles, from nearly invisible aligners to traditional braces. We create custom treatment plans using digital scanning technology, so you can see your predicted results before treatment even begins.",
     included: [
@@ -288,6 +294,7 @@ const SERVICE_CATEGORIES: ServiceCategory[] = [
     id: "emergency",
     icon: Siren,
     name: "Emergency Dentistry",
+    image: "/images/dental/service-emergency.jpg",
     description:
       "Dental emergencies do not wait, and neither do we. We offer same-day emergency appointments for toothaches, broken teeth, lost fillings, and other urgent dental issues. Our team is here to relieve your pain quickly and get you back to feeling yourself.",
     included: [
@@ -310,6 +317,7 @@ const SERVICE_CATEGORIES: ServiceCategory[] = [
     id: "children",
     icon: Baby,
     name: "Children's Dentistry",
+    image: "/images/dental/service-kids.jpg",
     description:
       "We believe every child deserves a positive experience at the dentist. Our gentle, patient approach helps your little ones feel safe and even excited about their dental visits. We focus on prevention, education, and building healthy habits that will last a lifetime.",
     included: [
@@ -354,6 +362,16 @@ export default function ServicesPage() {
         </Reveal>
       </section>
 
+      {/* Hero Banner */}
+      <section style={{ padding: "0 24px 48px", maxWidth: 1200, margin: "0 auto" }}>
+        <Reveal>
+          <div style={{ position: "relative", width: "100%", aspectRatio: "21 / 9", borderRadius: 20, overflow: "hidden", border: `1px solid ${C.border}` }}>
+            <Image src="/images/dental/services-hero.jpg" alt="" fill priority className="object-cover" />
+            <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(10,16,21,0) 40%, rgba(10,16,21,0.7) 100%)" }} />
+          </div>
+        </Reveal>
+      </section>
+
       {/* Service Sections */}
       {SERVICE_CATEGORIES.map((cat, idx) => {
         const Icon = cat.icon;
@@ -395,6 +413,12 @@ export default function ServicesPage() {
                 <p style={{ fontSize: 16, lineHeight: 1.8, color: C.mutedLight, marginBottom: 32, maxWidth: 720 }}>
                   {cat.description}
                 </p>
+              </Reveal>
+
+              <Reveal delay={0.12}>
+                <div style={{ position: "relative", width: "100%", aspectRatio: "16 / 9", borderRadius: 16, overflow: "hidden", marginBottom: 32, border: `1px solid ${C.border}` }}>
+                  <Image src={cat.image} alt={cat.name} fill className="object-cover" />
+                </div>
               </Reveal>
 
               {/* What's included */}

@@ -1,495 +1,163 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
-import Reveal from "@/components/demos/Reveal";
-import MagneticButton from "@/components/demos/MagneticButton";
 import { DemoBanner } from "@/components/demos/demo-banner";
+import { C, fHead, fBody, fMono, Reveal, Rule, RestaurantNav, RestaurantFooter, RestaurantLangProvider, useRestaurantLang, tri } from "../_shared";
 
-/* ─── palette ─── */
-const C = {
-  bg: "#0A0A08",
-  surface: "#121210",
-  gold: "#C9935A",
-  cream: "#F5E6D3",
-  muted: "#8A7E70",
-  border: "#2A2620",
-} as const;
+type Room = {
+  name: { en: string; it: string; fr: string };
+  seats: string;
+  standing: string;
+  blurb: { en: string; it: string; fr: string };
+  image: string;
+};
 
-/* ─── font stacks ─── */
-const fontDisplay = "var(--font-heading), 'Playfair Display', Georgia, serif";
-const fontBody = "var(--font-body), 'DM Sans', system-ui, sans-serif";
-
-/* ─── unsplash helper ─── */
-const img = (id: string, w = 800, q = 80) =>
-  `https://images.unsplash.com/${id}?w=${w}&q=${q}&auto=format&fit=crop`;
-
-/* ─── nav links ─── */
-const NAV_LINKS = [
-  { label: "Home", href: "/demos/restaurant" },
-  { label: "Menu", href: "/demos/restaurant/menu" },
-  { label: "Wine", href: "/demos/restaurant/wine" },
-  { label: "Gallery", href: "/demos/restaurant/gallery" },
-  { label: "Private Dining", href: "/demos/restaurant/private" },
-  { label: "About", href: "/demos/restaurant/about" },
-  { label: "Contact", href: "/demos/restaurant/contact" },
-];
-
-/* ─── spaces ─── */
-const SPACES = [
+const rooms: Room[] = [
   {
-    name: "The Vault",
-    capacity: "8–12 guests",
-    minSpend: "\u20AC600",
-    description: "An intimate stone-walled cellar beneath Strait Street, ideal for private celebrations and tastings. Candlelit ambience with a curated wine wall.",
-    image: img("photo-1559329007-40df8a9345d8", 800, 80),
+    name: { en: "The Cellar", it: "La Cantina", fr: "La Cave" },
+    seats: "14",
+    standing: "22",
+    blurb: {
+      en: "Stone vaults below the dining room. Single table, one candle per guest. For the quietest occasions.",
+      it: "Volte in pietra sotto la sala. Un unico tavolo, una candela per ospite. Per le occasioni più intime.",
+      fr: "Voûtes en pierre sous la salle. Une seule table, une bougie par convive. Pour les moments les plus intimes.",
+    },
+    image: "/images/restaurant/wine-cellar.jpg",
   },
   {
-    name: "The Terrace",
-    capacity: "20–30 guests",
-    minSpend: "\u20AC1,200",
-    description: "Our open-air rooftop terrace overlooking the Grand Harbour. Lantern-lit evenings with panoramic views of the Three Cities and Fort St Angelo.",
-    image: img("photo-1517248135467-4c7edcad34c4", 800, 80),
+    name: { en: "The Courtyard", it: "Il Cortile", fr: "La Cour" },
+    seats: "32",
+    standing: "55",
+    blurb: {
+      en: "Open to the sky in good weather, glass-covered in winter. Lemon trees along the walls.",
+      it: "Aperto al cielo col bel tempo, coperto in vetro d'inverno. Limoni lungo le pareti.",
+      fr: "Ouverte sur le ciel par beau temps, couverte en verre l'hiver. Citronniers le long des murs.",
+    },
+    image: "/images/restaurant/events-terrace.jpg",
   },
   {
-    name: "Full Buyout",
-    capacity: "Up to 60 guests",
-    minSpend: "\u20AC3,000",
-    description: "Exclusive use of the entire restaurant for the evening. Your event, your rules. Complete creative control over menu, music, and flow.",
-    image: img("photo-1414235077428-338989a2e8c0", 800, 80),
+    name: { en: "The Library", it: "La Biblioteca", fr: "La Bibliothèque" },
+    seats: "20",
+    standing: "30",
+    blurb: {
+      en: "Rocco's own cookbooks line the walls. A working fireplace from October through March.",
+      it: "I libri di cucina di Rocco rivestono le pareti. Un camino funzionante da ottobre a marzo.",
+      fr: "Les livres de cuisine de Rocco garnissent les murs. Cheminée allumée d'octobre à mars.",
+    },
+    image: "/images/restaurant/events-wedding.jpg",
   },
 ];
 
-/* ─── included items ─── */
-const INCLUDED = [
-  "Custom tasting menu designed with your chef",
-  "Dedicated sommelier for wine pairing",
-  "Private service team for the evening",
-  "Bespoke table settings and floral arrangements",
-  "Curated playlist or live acoustic set",
-];
-
-/* ─── event types ─── */
-const EVENT_TYPES = "Celebrations \u00b7 Corporate \u00b7 Wine tastings \u00b7 Weddings \u00b7 Birthdays \u00b7 Anniversaries";
-
-/* ━━━ PAGE COMPONENT ━━━ */
-export default function PrivateDiningPage() {
+function Inner() {
+  const { lang } = useRestaurantLang();
   return (
-    <div style={{ background: C.bg, color: C.cream, fontFamily: fontBody, overflowX: "hidden", paddingTop: 40 }}>
+    <div style={{ background: C.bg, color: C.cream, fontFamily: fBody }}>
       <DemoBanner />
+      <RestaurantNav />
 
-      {/* ─── Navigation Header ─── */}
-      <header style={{
-        position: "fixed", top: 40, left: 0, right: 0, zIndex: 50,
-        background: "transparent",
-        borderBottom: "none",
-      }}>
-        <div style={{
-          maxWidth: 1200, margin: "0 auto", padding: "0 24px",
-          display: "flex", alignItems: "center", justifyContent: "space-between",
-          height: 64,
-        }}>
-          <a href="/demos/restaurant" style={{ textDecoration: "none" }}>
-            <span style={{
-              fontFamily: fontDisplay, fontStyle: "italic", fontWeight: 600,
-              fontSize: 22, color: C.cream,
-            }}>
-              Porto Valletta
-            </span>
-          </a>
-          <style>{`
-            .rest-nav-links{display:none;gap:28px;align-items:center;}
-            @media(min-width:768px){.rest-nav-links{display:flex;}}
-          `}</style>
-          <nav className="rest-nav-links">
-            {NAV_LINKS.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                style={{
-                  fontFamily: fontBody, fontSize: 13, letterSpacing: "0.06em",
-                  textTransform: "uppercase", textDecoration: "none",
-                  color: link.href === "/demos/restaurant/private" ? C.gold : C.muted,
-                  transition: "color 0.25s",
-                }}
-                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = C.cream; }}
-                onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLElement).style.color =
-                    link.href === "/demos/restaurant/private" ? C.gold : C.muted;
-                }}
+      <section className="relative w-full h-[55vh] min-h-[440px] overflow-hidden">
+        <Image src="/images/restaurant/events-private.jpg" alt="" fill priority className="object-cover" />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(11,9,8,0.4) 0%, rgba(11,9,8,0.85) 100%)" }} />
+        <div className="absolute inset-0 flex items-end">
+          <div className="w-full px-6 md:px-10 pb-16">
+            <div className="max-w-[1500px] mx-auto">
+              <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.7, delay: 0.25 }} className="text-[10px] tracking-[0.4em] uppercase mb-5" style={{ color: C.copper, fontFamily: fMono }}>
+                — {tri("Three rooms · one kitchen", "Tre sale · una cucina", "Trois salles · une cuisine", lang)}
+              </motion.p>
+              <motion.h1
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.9, delay: 0.35 }}
+                className="max-w-4xl"
+                style={{ fontFamily: fHead, fontSize: "clamp(52px, 9vw, 140px)", lineHeight: 0.92, fontWeight: 400, letterSpacing: "-0.015em", color: C.cream, paddingBottom: "0.15em" }}
               >
-                {link.label}
-              </a>
-            ))}
-          </nav>
-        </div>
-      </header>
-
-      {/* ─── Hero Section ─── */}
-      <section style={{
-        position: "relative", minHeight: "70vh",
-        display: "flex", alignItems: "center", justifyContent: "center",
-        overflow: "hidden",
-      }}>
-        {/* background image */}
-        <motion.div
-          initial={{ scale: 1 }}
-          animate={{ scale: 1.05 }}
-          transition={{ duration: 20, ease: "linear", repeat: Infinity, repeatType: "reverse" }}
-          style={{
-            position: "absolute", inset: 0,
-            backgroundImage: `url(https://images.unsplash.com/photo-1525193612562-0ec53b0e5d7c?w=1920&q=85&auto=format&fit=crop)`,
-            backgroundSize: "cover", backgroundPosition: "center",
-          }}
-        />
-        {/* dark overlay */}
-        <div style={{
-          position: "absolute", inset: 0,
-          background: "linear-gradient(to bottom, rgba(10,10,8,0.6) 0%, rgba(10,10,8,0.8) 60%, rgba(10,10,8,0.98) 100%)",
-        }} />
-        {/* content */}
-        <div style={{
-          position: "relative", zIndex: 2, textAlign: "center",
-          padding: "160px 24px 100px",
-        }}>
-          <Reveal type="fade" delay={0.2}>
-            <p style={{
-              fontFamily: fontBody, fontSize: 12, letterSpacing: "0.35em",
-              textTransform: "uppercase", color: C.gold, marginBottom: 20,
-            }}>
-              Private Events
-            </p>
-          </Reveal>
-          <Reveal type="fade" delay={0.4}>
-            <h1 style={{
-              fontFamily: fontDisplay, fontStyle: "italic", fontWeight: 500,
-              fontSize: 48, lineHeight: 1.15, color: C.cream, margin: "0 0 24px",
-            }}>
-              Your Occasion. Our Stage.
-            </h1>
-          </Reveal>
-          <motion.div
-            initial={{ width: 0 }}
-            animate={{ width: 50 }}
-            transition={{ duration: 1, delay: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
-            style={{ height: 2, background: C.gold, margin: "0 auto" }}
-          />
+                {tri("Private", "Eventi", "Privé", lang)}
+              </motion.h1>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* ─── Spaces Section ─── */}
-      <section style={{ maxWidth: 1200, margin: "0 auto", padding: "100px 24px" }}>
-        <Reveal type="slide-up">
-          <p style={{
-            fontFamily: fontBody, fontSize: 12, letterSpacing: "0.3em",
-            textTransform: "uppercase", color: C.gold, marginBottom: 16, textAlign: "center",
-          }}>
-            Our Spaces
-          </p>
-        </Reveal>
-        <Reveal type="slide-up" delay={0.1}>
-          <h2 style={{
-            fontFamily: fontDisplay, fontStyle: "italic", fontWeight: 500,
-            fontSize: "clamp(28px, 4vw, 40px)", textAlign: "center", color: C.cream,
-            margin: "0 0 60px",
-          }}>
-            Three Settings, Endless Possibilities
-          </h2>
-        </Reveal>
+      <section className="px-6 md:px-10 py-24 md:py-32">
+        <div className="max-w-3xl mx-auto text-center">
+          <Reveal>
+            <p className="italic text-[18px] md:text-[22px] leading-[1.5] mb-8" style={{ fontFamily: fHead, color: C.cream }}>
+              {tri(
+                "Weddings, birthdays, deals closed and deals mourned. The menu is written for your evening; the wine comes up from the cellar two days before.",
+                "Matrimoni, compleanni, affari conclusi e affari piangíuti. Il menu è scritto per la vostra serata; il vino sale dalla cantina due giorni prima.",
+                "Mariages, anniversaires, contrats signés et contrats enterrés. Le menu est écrit pour votre soirée ; le vin remonte de la cave deux jours avant.",
+                lang
+              )}
+            </p>
+            <Rule />
+          </Reveal>
+        </div>
+      </section>
 
-        <style>{`
-          .rest-spaces-grid{display:grid;grid-template-columns:1fr;gap:32px;}
-          @media(min-width:768px){.rest-spaces-grid{grid-template-columns:repeat(3,1fr);}}
-        `}</style>
-        <div className="rest-spaces-grid">
-          {SPACES.map((space, i) => (
-            <Reveal key={space.name} type="fade" delay={i * 0.15}>
-              <motion.div
-                whileHover={{ y: -6 }}
-                transition={{ duration: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
-                style={{
-                  position: "relative", overflow: "hidden",
-                  background: C.surface, height: "100%",
-                  display: "flex", flexDirection: "column",
-                }}
-              >
-                {/* image with overlay */}
-                <div style={{ position: "relative", height: 220, overflow: "hidden" }}>
-                  <img
-                    src={space.image}
-                    alt={space.name}
-                    style={{
-                      width: "100%", height: "100%", objectFit: "cover", display: "block",
-                      transition: "transform 0.5s cubic-bezier(0.25,0.1,0.25,1)",
-                    }}
-                    onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.transform = "scale(1.05)"; }}
-                    onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.transform = "scale(1)"; }}
-                  />
-                  <div style={{
-                    position: "absolute", inset: 0,
-                    background: "linear-gradient(to top, rgba(10,10,8,0.7) 0%, transparent 60%)",
-                  }} />
-                  {/* capacity badge */}
-                  <span style={{
-                    position: "absolute", bottom: 16, left: 20,
-                    fontFamily: fontBody, fontSize: 12, letterSpacing: "0.1em",
-                    color: C.gold, textTransform: "uppercase",
-                  }}>
-                    {space.capacity}
-                  </span>
-                </div>
-
-                {/* text content */}
-                <div style={{ padding: "24px 20px 28px", flex: 1, display: "flex", flexDirection: "column" }}>
-                  <h3 style={{
-                    fontFamily: fontDisplay, fontWeight: 600, fontSize: 24,
-                    color: C.cream, margin: "0 0 12px",
-                  }}>
-                    {space.name}
-                  </h3>
-                  <p style={{
-                    fontFamily: fontBody, fontSize: 14, lineHeight: 1.7,
-                    color: C.muted, margin: "0 0 20px", flex: 1,
-                  }}>
-                    {space.description}
-                  </p>
-                  <div style={{
-                    display: "flex", alignItems: "center", justifyContent: "space-between",
-                    borderTop: `1px solid ${C.border}`, paddingTop: 16,
-                  }}>
-                    <span style={{
-                      fontFamily: fontBody, fontSize: 13, color: C.muted,
-                    }}>
-                      Min. spend: <span style={{ color: C.gold, fontWeight: 500 }}>{space.minSpend}</span>
-                    </span>
-                    <a
-                      href="/demos/restaurant/contact"
-                      style={{
-                        fontFamily: fontBody, fontSize: 13, letterSpacing: "0.08em",
-                        textTransform: "uppercase", textDecoration: "none",
-                        color: C.gold, transition: "color 0.25s",
-                      }}
-                      onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = C.cream; }}
-                      onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = C.gold; }}
-                    >
-                      Enquire &rarr;
-                    </a>
+      <section className="px-6 md:px-10 pb-24 md:pb-32">
+        <div className="max-w-[1500px] mx-auto space-y-24">
+          {rooms.map((r, i) => (
+            <Reveal key={r.name.en}>
+              <div className={`grid md:grid-cols-12 gap-10 md:gap-16 items-center ${i % 2 === 1 ? "md:[&>*:first-child]:order-2" : ""}`}>
+                <div className="md:col-span-7">
+                  <div className="relative w-full aspect-[4/3] overflow-hidden">
+                    <Image src={r.image} alt="" fill className="object-cover" />
                   </div>
                 </div>
-              </motion.div>
+                <div className="md:col-span-5">
+                  <p className="text-[10px] tracking-[0.4em] uppercase mb-4" style={{ color: C.copper, fontFamily: fMono }}>
+                    — 0{i + 1}
+                  </p>
+                  <h2 className="mb-6" style={{ fontFamily: fHead, fontSize: "clamp(36px, 5vw, 64px)", lineHeight: 1, fontWeight: 400, fontStyle: "italic", color: C.cream, paddingBottom: "0.1em" }}>
+                    {tri(r.name.en, r.name.it, r.name.fr, lang)}
+                  </h2>
+                  <div className="flex gap-8 mb-6 text-[11px] tracking-wider uppercase" style={{ color: C.muted, fontFamily: fMono }}>
+                    <div>
+                      <p>{tri("Seated", "Seduti", "Assis", lang)}</p>
+                      <p className="text-[24px] mt-1" style={{ color: C.copper, fontFamily: fHead, fontStyle: "italic" }}>{r.seats}</p>
+                    </div>
+                    <div>
+                      <p>{tri("Standing", "In piedi", "Debout", lang)}</p>
+                      <p className="text-[24px] mt-1" style={{ color: C.copper, fontFamily: fHead, fontStyle: "italic" }}>{r.standing}</p>
+                    </div>
+                  </div>
+                  <p className="text-[15px] leading-[1.7]" style={{ color: "rgba(242,233,216,0.7)" }}>
+                    {tri(r.blurb.en, r.blurb.it, r.blurb.fr, lang)}
+                  </p>
+                </div>
+              </div>
             </Reveal>
           ))}
         </div>
       </section>
 
-      {/* ─── What's Included ─── */}
-      <section style={{ background: C.surface }}>
-        <div style={{ maxWidth: 800, margin: "0 auto", padding: "100px 24px", textAlign: "center" }}>
-          <Reveal type="slide-up">
-            <p style={{
-              fontFamily: fontBody, fontSize: 12, letterSpacing: "0.3em",
-              textTransform: "uppercase", color: C.gold, marginBottom: 16,
-            }}>
-              Every Event Includes
+      <section className="px-6 md:px-10 py-24" style={{ background: C.surface }}>
+        <div className="max-w-3xl mx-auto text-center">
+          <Reveal>
+            <p className="text-[10px] tracking-[0.4em] uppercase mb-6" style={{ color: C.copper, fontFamily: fMono }}>
+              — {tri("How it works", "Come funziona", "Comment ça marche", lang)}
             </p>
-          </Reveal>
-          <Reveal type="slide-up" delay={0.1}>
-            <h2 style={{
-              fontFamily: fontDisplay, fontStyle: "italic", fontWeight: 500,
-              fontSize: "clamp(28px, 4vw, 36px)", color: C.cream,
-              margin: "0 0 48px",
-            }}>
-              What&apos;s Included
-            </h2>
-          </Reveal>
-
-          <div style={{ textAlign: "left", maxWidth: 520, margin: "0 auto" }}>
-            {INCLUDED.map((item, i) => (
-              <Reveal key={item} type="slide-up" delay={0.15 + i * 0.08}>
-                <div style={{
-                  display: "flex", alignItems: "flex-start", gap: 16,
-                  padding: "14px 0",
-                  borderBottom: i < INCLUDED.length - 1 ? `1px solid ${C.border}` : "none",
-                }}>
-                  <span style={{
-                    flexShrink: 0, width: 8, height: 8, marginTop: 6,
-                    background: C.gold, borderRadius: "50%",
-                  }} />
-                  <p style={{
-                    fontFamily: fontBody, fontSize: 15, lineHeight: 1.6,
-                    color: C.cream, margin: 0, opacity: 0.85,
-                  }}>
-                    {item}
-                  </p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ─── Event Types ─── */}
-      <section style={{ maxWidth: 800, margin: "0 auto", padding: "80px 24px", textAlign: "center" }}>
-        <Reveal type="fade">
-          <p style={{
-            fontFamily: fontBody, fontSize: 12, letterSpacing: "0.3em",
-            textTransform: "uppercase", color: C.gold, marginBottom: 20,
-          }}>
-            We Host
-          </p>
-        </Reveal>
-        <Reveal type="fade" delay={0.15}>
-          <p style={{
-            fontFamily: fontDisplay, fontStyle: "italic", fontWeight: 400,
-            fontSize: "clamp(18px, 3vw, 24px)", lineHeight: 1.6,
-            color: C.muted, margin: 0,
-          }}>
-            {EVENT_TYPES}
-          </p>
-        </Reveal>
-      </section>
-
-      {/* ─── CTA Section ─── */}
-      <section style={{
-        background: C.surface,
-        borderTop: `1px solid ${C.border}`,
-        borderBottom: `1px solid ${C.border}`,
-      }}>
-        <div style={{
-          maxWidth: 700, margin: "0 auto", padding: "100px 24px",
-          textAlign: "center",
-        }}>
-          <Reveal type="slide-up">
-            <h2 style={{
-              fontFamily: fontDisplay, fontStyle: "italic", fontWeight: 500,
-              fontSize: "clamp(28px, 4vw, 40px)", color: C.cream,
-              margin: "0 0 16px",
-            }}>
-              Tell Us About Your Event
-            </h2>
-          </Reveal>
-          <Reveal type="slide-up" delay={0.15}>
-            <p style={{
-              fontFamily: fontBody, fontSize: 16, lineHeight: 1.7,
-              color: C.muted, margin: "0 0 36px", maxWidth: 480, marginLeft: "auto", marginRight: "auto",
-            }}>
-              Share a few details and our events team will craft a bespoke proposal within 48 hours.
+            <p className="italic text-[17px] md:text-[20px] leading-[1.6] mb-10" style={{ fontFamily: fHead, color: C.cream }}>
+              {tri(
+                "Write to Giulia. Tell her the occasion, the number, and anything you'd rather not eat. She'll send back a menu within two days.",
+                "Scrivete a Giulia. Ditele l'occasione, il numero e ciò che preferite non mangiare. Vi risponderà con un menu entro due giorni.",
+                "Écrivez à Giulia. Dites-lui l'occasion, le nombre, ce que vous préférez éviter. Elle vous renverra un menu sous deux jours.",
+                lang
+              )}
             </p>
-          </Reveal>
-          <Reveal type="fade" delay={0.3}>
-            <MagneticButton href="/demos/restaurant/contact">
-              <span style={{
-                display: "inline-block", padding: "14px 40px",
-                background: C.gold, color: C.bg, fontFamily: fontBody,
-                fontSize: 14, fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase",
-                border: "none", cursor: "pointer",
-              }}>
-                Get in Touch
-              </span>
-            </MagneticButton>
+            <a href="/demos/restaurant/contact" className="inline-block px-10 py-4 text-[11px] tracking-[0.3em] uppercase" style={{ background: C.copper, color: C.bg, fontFamily: fMono }}>
+              {tri("Request a room", "Richiedi una sala", "Réserver une salle", lang)}
+            </a>
           </Reveal>
         </div>
       </section>
 
-      {/* ─── Footer ─── */}
-      <footer style={{
-        background: C.bg,
-        borderTop: "1px solid rgba(201,147,90,0.1)",
-        padding: "60px 24px 40px",
-      }}>
-        <div style={{
-          maxWidth: 1200, margin: "0 auto",
-          display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-          gap: 40, marginBottom: 48,
-        }}>
-          {/* brand */}
-          <div>
-            <h3 style={{
-              fontFamily: fontDisplay, fontStyle: "italic", fontWeight: 600,
-              fontSize: 24, color: C.cream, margin: "0 0 12px",
-            }}>
-              Porto Valletta
-            </h3>
-            <p style={{ fontFamily: fontBody, fontSize: 14, lineHeight: 1.7, color: C.muted, margin: 0 }}>
-              42 Strait Street<br />
-              Valletta VLT 1432<br />
-              Malta
-            </p>
-          </div>
-
-          {/* nav */}
-          <div>
-            <h4 style={{
-              fontFamily: fontBody, fontSize: 12, letterSpacing: "0.2em", textTransform: "uppercase",
-              color: C.gold, margin: "0 0 16px",
-            }}>
-              Navigate
-            </h4>
-            {["The Menu", "Wine List", "Private Dining", "Gift Cards", "Careers"].map((link) => (
-              <a
-                key={link}
-                href="#"
-                style={{
-                  display: "block", fontFamily: fontBody, fontSize: 14,
-                  color: C.muted, textDecoration: "none", padding: "4px 0",
-                  transition: "color 0.25s",
-                }}
-                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = C.cream; }}
-                onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = C.muted; }}
-              >
-                {link}
-              </a>
-            ))}
-          </div>
-
-          {/* hours */}
-          <div>
-            <h4 style={{
-              fontFamily: fontBody, fontSize: 12, letterSpacing: "0.2em", textTransform: "uppercase",
-              color: C.gold, margin: "0 0 16px",
-            }}>
-              Hours
-            </h4>
-            <p style={{ fontFamily: fontBody, fontSize: 14, lineHeight: 1.8, color: C.muted, margin: 0 }}>
-              Tue &ndash; Sat: 12:00 &ndash; 23:00<br />
-              Sunday Brunch: 11:00 &ndash; 15:00<br />
-              Monday: Closed
-            </p>
-          </div>
-
-          {/* contact */}
-          <div>
-            <h4 style={{
-              fontFamily: fontBody, fontSize: 12, letterSpacing: "0.2em", textTransform: "uppercase",
-              color: C.gold, margin: "0 0 16px",
-            }}>
-              Contact
-            </h4>
-            <p style={{ fontFamily: fontBody, fontSize: 14, lineHeight: 1.8, color: C.muted, margin: 0 }}>
-              +356 2124 5678<br />
-              reservations@portovalletta.mt
-            </p>
-          </div>
-        </div>
-
-        {/* bottom bar */}
-        <div style={{
-          borderTop: "1px solid rgba(201,147,90,0.08)",
-          paddingTop: 24,
-          display: "flex", flexWrap: "wrap", justifyContent: "space-between",
-          alignItems: "center", gap: 12,
-        }}>
-          <p style={{
-            fontFamily: fontBody, fontSize: 13, color: "rgba(138,126,112,0.6)", margin: 0,
-          }}>
-            &copy; {new Date().getFullYear()} Porto Valletta. All rights reserved.
-          </p>
-          <p style={{
-            fontFamily: fontBody, fontSize: 13, color: "rgba(138,126,112,0.4)", margin: 0,
-          }}>
-            Site by <a href="https://amenzo.co" target="_blank" rel="noopener noreferrer" style={{ color: C.gold, textDecoration: "none" }}>Amenzo</a>
-          </p>
-        </div>
-      </footer>
+      <RestaurantFooter />
     </div>
   );
+}
+
+export default function RestaurantPrivatePage() {
+  return <RestaurantLangProvider><Inner /></RestaurantLangProvider>;
 }
